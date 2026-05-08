@@ -20,30 +20,30 @@ use crate::apis::ContentType;
 #[async_trait]
 pub trait ImagesApi: Send + Sync {
 
-    /// POST /images/upload/complete
-    ///
-    /// Complete the upload process and create the image record using API key authentication
-    async fn complete_image_upload(&self,  params: CompleteImageUploadParams ) -> Result<models::Image, Error<CompleteImageUploadError>>;
-
     /// DELETE /images/{imageId}
     ///
     /// delete an image by marking it as deleted
-    async fn delete_image(&self,  params: DeleteImageParams ) -> Result<(), Error<DeleteImageError>>;
+    async fn delete(&self,  params: DeleteParams ) -> Result<(), Error<DeleteError>>;
 
     /// GET /images/{imageId}
     ///
     /// Retrieve an image by its ID for a specific project.
-    async fn get_image(&self,  params: GetImageParams ) -> Result<models::Image, Error<GetImageError>>;
-
-    /// POST /images/upload/init
-    ///
-    /// Initialize a presigned URL upload for an image file using API key authentication
-    async fn init_image_upload(&self,  params: InitImageUploadParams ) -> Result<models::ImageUploadInitResponse, Error<InitImageUploadError>>;
+    async fn get(&self,  params: GetParams ) -> Result<models::Image, Error<GetError>>;
 
     /// GET /images
     ///
     /// Retrieve all images for a specific project, with pagination and sorting.
-    async fn list_images(&self,  params: ListImagesParams ) -> Result<models::PaginationPaginatedResponseImage, Error<ListImagesError>>;
+    async fn list(&self,  params: ListParams ) -> Result<models::PaginationPaginatedResponseImage, Error<ListError>>;
+
+    /// POST /images/upload/complete
+    ///
+    /// Complete the upload process and create the image record using API key authentication
+    async fn upload_complete(&self,  params: UploadCompleteParams ) -> Result<models::Image, Error<UploadCompleteError>>;
+
+    /// POST /images/upload/init
+    ///
+    /// Initialize a presigned URL upload for an image file using API key authentication
+    async fn upload_init(&self,  params: UploadInitParams ) -> Result<models::ImageUploadInitResponse, Error<UploadInitError>>;
 }
 
 pub struct ImagesApiClient {
@@ -57,42 +57,26 @@ impl ImagesApiClient {
 }
 
 
-/// struct for passing parameters to the method [`ImagesApi::complete_image_upload`]
+/// struct for passing parameters to the method [`ImagesApi::delete`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct CompleteImageUploadParams {
-    /// Upload completion request
-    pub image_upload_complete_request: models::ImageUploadCompleteRequest
-}
-
-/// struct for passing parameters to the method [`ImagesApi::delete_image`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct DeleteImageParams {
+pub struct DeleteParams {
     /// Image ID
     pub image_id: String
 }
 
-/// struct for passing parameters to the method [`ImagesApi::get_image`]
+/// struct for passing parameters to the method [`ImagesApi::get`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct GetImageParams {
+pub struct GetParams {
     /// Image ID
     pub image_id: String
 }
 
-/// struct for passing parameters to the method [`ImagesApi::init_image_upload`]
+/// struct for passing parameters to the method [`ImagesApi::list`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct InitImageUploadParams {
-    /// Upload initialization request
-    pub image_upload_init_request: models::ImageUploadInitRequest
-}
-
-/// struct for passing parameters to the method [`ImagesApi::list_images`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct ListImagesParams {
+pub struct ListParams {
     /// Maximum number of items to return in a single request. <br> **Default:** `25`
     pub limit: Option<i32>,
     /// Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`
@@ -103,66 +87,29 @@ pub struct ListImagesParams {
     pub order: Option<String>
 }
 
+/// struct for passing parameters to the method [`ImagesApi::upload_complete`]
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+pub struct UploadCompleteParams {
+    /// Upload completion request
+    pub image_upload_complete_request: models::ImageUploadCompleteRequest
+}
+
+/// struct for passing parameters to the method [`ImagesApi::upload_init`]
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+pub struct UploadInitParams {
+    /// Upload initialization request
+    pub image_upload_init_request: models::ImageUploadInitRequest
+}
+
 
 #[async_trait]
 impl ImagesApi for ImagesApiClient {
-    /// Complete the upload process and create the image record using API key authentication
-    async fn complete_image_upload(&self,  params: CompleteImageUploadParams ) -> Result<models::Image, Error<CompleteImageUploadError>> {
-        
-        let CompleteImageUploadParams {
-            image_upload_complete_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/images/upload/complete", local_var_configuration.base_path);
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        local_var_req_builder = local_var_req_builder.json(&image_upload_complete_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::Image`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Image`")))),
-            }
-        } else {
-            let local_var_entity: Option<CompleteImageUploadError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
     /// delete an image by marking it as deleted
-    async fn delete_image(&self,  params: DeleteImageParams ) -> Result<(), Error<DeleteImageError>> {
+    async fn delete(&self,  params: DeleteParams ) -> Result<(), Error<DeleteError>> {
         
-        let DeleteImageParams {
+        let DeleteParams {
             image_id,
         } = params;
         
@@ -195,16 +142,16 @@ impl ImagesApi for ImagesApiClient {
         if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
             Ok(())
         } else {
-            let local_var_entity: Option<DeleteImageError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<DeleteError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
     }
 
     /// Retrieve an image by its ID for a specific project.
-    async fn get_image(&self,  params: GetImageParams ) -> Result<models::Image, Error<GetImageError>> {
+    async fn get(&self,  params: GetParams ) -> Result<models::Image, Error<GetError>> {
         
-        let GetImageParams {
+        let GetParams {
             image_id,
         } = params;
         
@@ -247,69 +194,16 @@ impl ImagesApi for ImagesApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Image`")))),
             }
         } else {
-            let local_var_entity: Option<GetImageError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    /// Initialize a presigned URL upload for an image file using API key authentication
-    async fn init_image_upload(&self,  params: InitImageUploadParams ) -> Result<models::ImageUploadInitResponse, Error<InitImageUploadError>> {
-        
-        let InitImageUploadParams {
-            image_upload_init_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/images/upload/init", local_var_configuration.base_path);
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        local_var_req_builder = local_var_req_builder.json(&image_upload_init_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::ImageUploadInitResponse`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::ImageUploadInitResponse`")))),
-            }
-        } else {
-            let local_var_entity: Option<InitImageUploadError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<GetError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
     }
 
     /// Retrieve all images for a specific project, with pagination and sorting.
-    async fn list_images(&self,  params: ListImagesParams ) -> Result<models::PaginationPaginatedResponseImage, Error<ListImagesError>> {
+    async fn list(&self,  params: ListParams ) -> Result<models::PaginationPaginatedResponseImage, Error<ListError>> {
         
-        let ListImagesParams {
+        let ListParams {
             limit,
             offset,
             sort,
@@ -367,7 +261,113 @@ impl ImagesApi for ImagesApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::PaginationPaginatedResponseImage`")))),
             }
         } else {
-            let local_var_entity: Option<ListImagesError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<ListError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    /// Complete the upload process and create the image record using API key authentication
+    async fn upload_complete(&self,  params: UploadCompleteParams ) -> Result<models::Image, Error<UploadCompleteError>> {
+        
+        let UploadCompleteParams {
+            image_upload_complete_request,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/images/upload/complete", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        local_var_req_builder = local_var_req_builder.json(&image_upload_complete_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::Image`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Image`")))),
+            }
+        } else {
+            let local_var_entity: Option<UploadCompleteError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    /// Initialize a presigned URL upload for an image file using API key authentication
+    async fn upload_init(&self,  params: UploadInitParams ) -> Result<models::ImageUploadInitResponse, Error<UploadInitError>> {
+        
+        let UploadInitParams {
+            image_upload_init_request,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/images/upload/init", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        local_var_req_builder = local_var_req_builder.json(&image_upload_init_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::ImageUploadInitResponse`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::ImageUploadInitResponse`")))),
+            }
+        } else {
+            let local_var_entity: Option<UploadInitError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -375,10 +375,10 @@ impl ImagesApi for ImagesApiClient {
 
 }
 
-/// struct for typed errors of method [`ImagesApi::complete_image_upload`]
+/// struct for typed errors of method [`ImagesApi::delete`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum CompleteImageUploadError {
+pub enum DeleteError {
     Status400(models::ErrorResponse),
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
@@ -387,10 +387,10 @@ pub enum CompleteImageUploadError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`ImagesApi::delete_image`]
+/// struct for typed errors of method [`ImagesApi::get`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum DeleteImageError {
+pub enum GetError {
     Status400(models::ErrorResponse),
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
@@ -399,10 +399,21 @@ pub enum DeleteImageError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`ImagesApi::get_image`]
+/// struct for typed errors of method [`ImagesApi::list`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetImageError {
+pub enum ListError {
+    Status400(models::ErrorResponse),
+    Status401(models::ErrorResponse),
+    Status403(models::ErrorResponse),
+    Status500(models::ErrorResponse),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`ImagesApi::upload_complete`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum UploadCompleteError {
     Status400(models::ErrorResponse),
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
@@ -411,21 +422,10 @@ pub enum GetImageError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`ImagesApi::init_image_upload`]
+/// struct for typed errors of method [`ImagesApi::upload_init`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum InitImageUploadError {
-    Status400(models::ErrorResponse),
-    Status401(models::ErrorResponse),
-    Status403(models::ErrorResponse),
-    Status500(models::ErrorResponse),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`ImagesApi::list_images`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ListImagesError {
+pub enum UploadInitError {
     Status400(models::ErrorResponse),
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),

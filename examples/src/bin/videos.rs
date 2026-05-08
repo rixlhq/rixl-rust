@@ -1,9 +1,5 @@
 use anyhow::{Context, Result};
-use rixl::apis::{
-    Api, ApiClient,
-    configuration::{ApiKey, Configuration},
-    videos_api::{GetVideoParams, ListVideosParams},
-};
+use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, videos};
 use std::{env, sync::Arc};
 
 #[tokio::main]
@@ -16,7 +12,7 @@ async fn main() -> Result<()> {
         ..Configuration::new()
     }));
 
-    let page = client.videos_api().list_videos(ListVideosParams::builder().build()).await?;
+    let page = client.videos().list(videos::ListParams::builder().build()).await?;
     let data = page.data.unwrap_or_default();
     println!("listed {} videos", data.len());
     for v in &data {
@@ -26,8 +22,8 @@ async fn main() -> Result<()> {
     }
 
     if let Ok(video_id) = env::var("VIDEO_ID") {
-        let v = client.videos_api()
-            .get_video(GetVideoParams::builder().video_id(video_id).build())
+        let v = client.videos()
+            .get(videos::GetParams::builder().video_id(video_id).build())
             .await?;
         if let Some(id) = &v.id {
             println!("video {id}");

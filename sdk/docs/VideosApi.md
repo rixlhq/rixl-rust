@@ -4,45 +4,45 @@ All URIs are relative to *https://api.rixl.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**complete_video_upload**](VideosApi.md#complete_video_upload) | **POST** /videos/upload/complete | Upload: Mark as complete
-[**delete_audio_track_by_id**](VideosApi.md#delete_audio_track_by_id) | **DELETE** /videos/{videoId}/audio-tracks/{trackId} | Delete audio track
+[**delete**](VideosApi.md#delete) | **DELETE** /videos/{videoId}/delete | Delete video
+[**delete_audio_track**](VideosApi.md#delete_audio_track) | **DELETE** /videos/{videoId}/audio-tracks/{trackId} | Delete audio track
 [**delete_audio_track_by_language**](VideosApi.md#delete_audio_track_by_language) | **DELETE** /videos/{videoId}/audio-tracks/language/{lang_code} | Delete audio track by language
 [**delete_audio_tracks**](VideosApi.md#delete_audio_tracks) | **DELETE** /videos/{videoId}/audio-tracks | Delete all audio tracks
 [**delete_chapters**](VideosApi.md#delete_chapters) | **DELETE** /videos/{videoId}/chapters | Delete video chapters
-[**delete_subtitle_by_id**](VideosApi.md#delete_subtitle_by_id) | **DELETE** /videos/{videoId}/subtitles/{subtitleId} | Delete subtitle
+[**delete_subtitle**](VideosApi.md#delete_subtitle) | **DELETE** /videos/{videoId}/subtitles/{subtitleId} | Delete subtitle
 [**delete_subtitle_by_language**](VideosApi.md#delete_subtitle_by_language) | **DELETE** /videos/{videoId}/subtitles/language/{lang_code} | Delete subtitle by language
 [**delete_subtitles**](VideosApi.md#delete_subtitles) | **DELETE** /videos/{videoId}/subtitles | Delete all subtitles
-[**delete_video**](VideosApi.md#delete_video) | **DELETE** /videos/{videoId}/delete | Delete video
-[**get_video**](VideosApi.md#get_video) | **GET** /videos/{videoId} | Get a video
-[**init_video_upload**](VideosApi.md#init_video_upload) | **POST** /videos/upload/init | Upload: Init
-[**list_video_languages**](VideosApi.md#list_video_languages) | **GET** /videos/languages | List available subtitle languages
-[**list_videos**](VideosApi.md#list_videos) | **GET** /videos | List videos for a project
+[**get**](VideosApi.md#get) | **GET** /videos/{videoId} | Get a video
+[**list**](VideosApi.md#list) | **GET** /videos | List videos for a project
+[**list_languages**](VideosApi.md#list_languages) | **GET** /videos/languages | List available subtitle languages
 [**replace_audio_tracks**](VideosApi.md#replace_audio_tracks) | **POST** /videos/{videoId}/audio-tracks | Bulk upsert video audio tracks
 [**replace_subtitles**](VideosApi.md#replace_subtitles) | **POST** /videos/{videoId}/subtitles | Bulk upsert video subtitles
 [**update_audio_track_by_language**](VideosApi.md#update_audio_track_by_language) | **PUT** /videos/{videoId}/audio-tracks/language/{lang_code} | Upsert video audio track
 [**update_chapters**](VideosApi.md#update_chapters) | **PUT** /videos/{videoId}/chapters | Update video chapters
 [**update_subtitle_by_language**](VideosApi.md#update_subtitle_by_language) | **PUT** /videos/{videoId}/subtitles/language/{lang_code} | Upsert video subtitle
-[**update_video_thumbnail**](VideosApi.md#update_video_thumbnail) | **PUT** /videos/{videoId}/thumbnail | Update video thumbnail
+[**update_thumbnail**](VideosApi.md#update_thumbnail) | **PUT** /videos/{videoId}/thumbnail | Update video thumbnail
+[**upload_complete**](VideosApi.md#upload_complete) | **POST** /videos/upload/complete | Upload: Mark as complete
+[**upload_init**](VideosApi.md#upload_init) | **POST** /videos/upload/init | Upload: Init
 
 
 
-## complete_video_upload
+## delete
 
-> models::Video complete_video_upload(video_upload_complete_request)
-Upload: Mark as complete
+> delete(video_id)
+Delete video
 
-Mark a video upload as complete after successful upload to storage using API key authentication
+Delete a video by its ID within a project
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**video_upload_complete_request** | [**VideoUploadCompleteRequest**](VideoUploadCompleteRequest.md) | Video upload completion request | [required] |
+**video_id** | **String** | Video ID | [required] |
 
 ### Return type
 
-[**models::Video**](Video.md)
+ (empty response body)
 
 ### Authorization
 
@@ -50,15 +50,15 @@ Name | Type | Description  | Required | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## delete_audio_track_by_id
+## delete_audio_track
 
-> models::AudioTrackDelete delete_audio_track_by_id(video_id, track_id)
+> models::AudioTrackDelete delete_audio_track(video_id, track_id)
 Delete audio track
 
 Remove an additional audio track from a video using API key authentication
@@ -178,9 +178,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## delete_subtitle_by_id
+## delete_subtitle
 
-> models::SubtitleDelete delete_subtitle_by_id(video_id, subtitle_id)
+> models::SubtitleDelete delete_subtitle(video_id, subtitle_id)
 Delete subtitle
 
 Remove a subtitle from a video using API key authentication
@@ -270,39 +270,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## delete_video
+## get
 
-> delete_video(video_id)
-Delete video
-
-Delete a video by its ID within a project
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**video_id** | **String** | Video ID | [required] |
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## get_video
-
-> models::Video get_video(video_id)
+> models::Video get(video_id)
 Get a video
 
 Retrieve a video by its ID for a specific project.
@@ -330,66 +300,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## init_video_upload
+## list
 
-> models::VideoUploadInitResponse init_video_upload(video_upload_init_request)
-Upload: Init
-
-Initialize a video upload and get presigned URLs for video and poster using API key authentication
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**video_upload_init_request** | [**VideoUploadInitRequest**](VideoUploadInitRequest.md) | Video upload initialization request | [required] |
-
-### Return type
-
-[**models::VideoUploadInitResponse**](github_com_rixlhq_api_internal_videos_handler_upload.InitResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## list_video_languages
-
-> Vec<models::SubtitleLanguageResponse> list_video_languages()
-List available subtitle languages
-
-Get list of supported languages for subtitles
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Vec<models::SubtitleLanguageResponse>**](internal_videos_handler_subtitles.languageResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## list_videos
-
-> models::PaginationPaginatedResponseVideo list_videos(limit, offset, sort, order)
+> models::PaginationPaginatedResponseVideo list(limit, offset, sort, order)
 List videos for a project
 
 Retrieve all videos for a specific project, with pagination and sorting.
@@ -411,6 +324,33 @@ Name | Type | Description  | Required | Notes
 ### Authorization
 
 [ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## list_languages
+
+> Vec<models::SubtitleLanguageResponse> list_languages()
+List available subtitle languages
+
+Get list of supported languages for subtitles
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Vec<models::SubtitleLanguageResponse>**](internal_videos_handler_subtitles.languageResponse.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -583,9 +523,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## update_video_thumbnail
+## update_thumbnail
 
-> models::Video update_video_thumbnail(video_id, thumbnail)
+> models::Video update_thumbnail(video_id, thumbnail)
 Update video thumbnail
 
 Update the thumbnail image for an existing video using API key authentication
@@ -609,6 +549,66 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## upload_complete
+
+> models::Video upload_complete(video_upload_complete_request)
+Upload: Mark as complete
+
+Mark a video upload as complete after successful upload to storage using API key authentication
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**video_upload_complete_request** | [**VideoUploadCompleteRequest**](VideoUploadCompleteRequest.md) | Video upload completion request | [required] |
+
+### Return type
+
+[**models::Video**](Video.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## upload_init
+
+> models::VideoUploadInitResponse upload_init(video_upload_init_request)
+Upload: Init
+
+Initialize a video upload and get presigned URLs for video and poster using API key authentication
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**video_upload_init_request** | [**VideoUploadInitRequest**](VideoUploadInitRequest.md) | Video upload initialization request | [required] |
+
+### Return type
+
+[**models::VideoUploadInitResponse**](github_com_rixlhq_api_internal_videos_handler_upload.InitResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

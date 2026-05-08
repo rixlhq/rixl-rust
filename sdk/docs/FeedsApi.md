@@ -4,15 +4,15 @@ All URIs are relative to *https://api.rixl.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_feed_post**](FeedsApi.md#get_feed_post) | **GET** /feeds/{feedId}/{postId} | Get a post
-[**list_feed_posts**](FeedsApi.md#list_feed_posts) | **GET** /feeds/{feedId} | List posts in a feed
-[**list_feed_posts_by_creator**](FeedsApi.md#list_feed_posts_by_creator) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
+[**get**](FeedsApi.md#get) | **GET** /feeds/{feedId}/{postId} | Get a post
+[**list**](FeedsApi.md#list) | **GET** /feeds/{feedId} | List posts in a feed
+[**list_by_creator**](FeedsApi.md#list_by_creator) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
 
 
 
-## get_feed_post
+## get
 
-> models::Post get_feed_post(feed_id, post_id)
+> models::Post get(feed_id, post_id)
 Get a post
 
 Retrieve a post from feed by its ID
@@ -41,9 +41,9 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## list_feed_posts
+## list
 
-> models::PaginationPaginatedResponsePost list_feed_posts(feed_id, limit, offset)
+> models::PaginationPaginatedResponsePost list(feed_id, limit, offset)
 List posts in a feed
 
 Retrieve posts in a feed, with pagination.
@@ -73,9 +73,9 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## list_feed_posts_by_creator
+## list_by_creator
 
-> models::PaginationPaginatedResponsePost list_feed_posts_by_creator(feed_id, creator_id, limit, offset)
+> models::PaginationPaginatedResponsePost list_by_creator(feed_id, creator_id, limit, offset)
 List posts by creator
 
 Retrieve posts in a feed by a specific creator, with pagination.

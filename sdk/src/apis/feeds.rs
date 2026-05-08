@@ -23,17 +23,17 @@ pub trait FeedsApi: Send + Sync {
     /// GET /feeds/{feedId}/{postId}
     ///
     /// Retrieve a post from feed by its ID
-    async fn get_feed_post(&self,  params: GetFeedPostParams ) -> Result<models::Post, Error<GetFeedPostError>>;
+    async fn get(&self,  params: GetParams ) -> Result<models::Post, Error<GetError>>;
 
     /// GET /feeds/{feedId}
     ///
     /// Retrieve posts in a feed, with pagination.
-    async fn list_feed_posts(&self,  params: ListFeedPostsParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsError>>;
+    async fn list(&self,  params: ListParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListError>>;
 
     /// GET /feeds/{feedId}/creators/{creatorId}
     ///
     /// Retrieve posts in a feed by a specific creator, with pagination.
-    async fn list_feed_posts_by_creator(&self,  params: ListFeedPostsByCreatorParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsByCreatorError>>;
+    async fn list_by_creator(&self,  params: ListByCreatorParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListByCreatorError>>;
 }
 
 pub struct FeedsApiClient {
@@ -47,20 +47,20 @@ impl FeedsApiClient {
 }
 
 
-/// struct for passing parameters to the method [`FeedsApi::get_feed_post`]
+/// struct for passing parameters to the method [`FeedsApi::get`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct GetFeedPostParams {
+pub struct GetParams {
     /// Feed ID
     pub feed_id: String,
     /// Post ID
     pub post_id: String
 }
 
-/// struct for passing parameters to the method [`FeedsApi::list_feed_posts`]
+/// struct for passing parameters to the method [`FeedsApi::list`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct ListFeedPostsParams {
+pub struct ListParams {
     /// Feed ID
     pub feed_id: String,
     /// Maximum number of items to return in a single request. <br> **Default:** `25`
@@ -69,10 +69,10 @@ pub struct ListFeedPostsParams {
     pub offset: Option<i32>
 }
 
-/// struct for passing parameters to the method [`FeedsApi::list_feed_posts_by_creator`]
+/// struct for passing parameters to the method [`FeedsApi::list_by_creator`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct ListFeedPostsByCreatorParams {
+pub struct ListByCreatorParams {
     /// Feed ID
     pub feed_id: String,
     /// Creator ID
@@ -87,9 +87,9 @@ pub struct ListFeedPostsByCreatorParams {
 #[async_trait]
 impl FeedsApi for FeedsApiClient {
     /// Retrieve a post from feed by its ID
-    async fn get_feed_post(&self,  params: GetFeedPostParams ) -> Result<models::Post, Error<GetFeedPostError>> {
+    async fn get(&self,  params: GetParams ) -> Result<models::Post, Error<GetError>> {
         
-        let GetFeedPostParams {
+        let GetParams {
             feed_id,
             post_id,
         } = params;
@@ -125,16 +125,16 @@ impl FeedsApi for FeedsApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Post`")))),
             }
         } else {
-            let local_var_entity: Option<GetFeedPostError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<GetError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
     }
 
     /// Retrieve posts in a feed, with pagination.
-    async fn list_feed_posts(&self,  params: ListFeedPostsParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsError>> {
+    async fn list(&self,  params: ListParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListError>> {
         
-        let ListFeedPostsParams {
+        let ListParams {
             feed_id,
             limit,
             offset,
@@ -177,16 +177,16 @@ impl FeedsApi for FeedsApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`")))),
             }
         } else {
-            let local_var_entity: Option<ListFeedPostsError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<ListError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
     }
 
     /// Retrieve posts in a feed by a specific creator, with pagination.
-    async fn list_feed_posts_by_creator(&self,  params: ListFeedPostsByCreatorParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsByCreatorError>> {
+    async fn list_by_creator(&self,  params: ListByCreatorParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListByCreatorError>> {
         
-        let ListFeedPostsByCreatorParams {
+        let ListByCreatorParams {
             feed_id,
             creator_id,
             limit,
@@ -230,7 +230,7 @@ impl FeedsApi for FeedsApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`")))),
             }
         } else {
-            let local_var_entity: Option<ListFeedPostsByCreatorError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<ListByCreatorError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -238,28 +238,28 @@ impl FeedsApi for FeedsApiClient {
 
 }
 
-/// struct for typed errors of method [`FeedsApi::get_feed_post`]
+/// struct for typed errors of method [`FeedsApi::get`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetFeedPostError {
+pub enum GetError {
     Status400(models::ErrorResponse),
     Status404(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`FeedsApi::list_feed_posts`]
+/// struct for typed errors of method [`FeedsApi::list`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum ListFeedPostsError {
+pub enum ListError {
     Status400(models::ErrorResponse),
     Status500(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`FeedsApi::list_feed_posts_by_creator`]
+/// struct for typed errors of method [`FeedsApi::list_by_creator`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum ListFeedPostsByCreatorError {
+pub enum ListByCreatorError {
     Status400(models::ErrorResponse),
     Status500(models::ErrorResponse),
     UnknownValue(serde_json::Value),

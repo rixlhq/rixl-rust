@@ -111,45 +111,45 @@ impl From<&str> for ContentType {
     }
 }
 
-pub mod feeds_api;
-pub mod images_api;
-pub mod videos_api;
+pub mod feeds;
+pub mod images;
+pub mod videos;
 
 pub mod configuration;
 
 use std::sync::Arc;
 
 pub trait Api {
-    fn feeds_api(&self) -> &dyn feeds_api::FeedsApi;
-    fn images_api(&self) -> &dyn images_api::ImagesApi;
-    fn videos_api(&self) -> &dyn videos_api::VideosApi;
+    fn feeds(&self) -> &dyn feeds::FeedsApi;
+    fn images(&self) -> &dyn images::ImagesApi;
+    fn videos(&self) -> &dyn videos::VideosApi;
 }
 
 pub struct ApiClient {
-    feeds_api: Box<dyn feeds_api::FeedsApi>,
-    images_api: Box<dyn images_api::ImagesApi>,
-    videos_api: Box<dyn videos_api::VideosApi>,
+    feeds: Box<dyn feeds::FeedsApi>,
+    images: Box<dyn images::ImagesApi>,
+    videos: Box<dyn videos::VideosApi>,
 }
 
 impl ApiClient {
     pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
         Self {
-            feeds_api: Box::new(feeds_api::FeedsApiClient::new(configuration.clone())),
-            images_api: Box::new(images_api::ImagesApiClient::new(configuration.clone())),
-            videos_api: Box::new(videos_api::VideosApiClient::new(configuration.clone())),
+            feeds: Box::new(feeds::FeedsApiClient::new(configuration.clone())),
+            images: Box::new(images::ImagesApiClient::new(configuration.clone())),
+            videos: Box::new(videos::VideosApiClient::new(configuration.clone())),
         }
     }
 }
 
 impl Api for ApiClient {
-    fn feeds_api(&self) -> &dyn feeds_api::FeedsApi {
-        self.feeds_api.as_ref()
+    fn feeds(&self) -> &dyn feeds::FeedsApi {
+        self.feeds.as_ref()
     }
-    fn images_api(&self) -> &dyn images_api::ImagesApi {
-        self.images_api.as_ref()
+    fn images(&self) -> &dyn images::ImagesApi {
+        self.images.as_ref()
     }
-    fn videos_api(&self) -> &dyn videos_api::VideosApi {
-        self.videos_api.as_ref()
+    fn videos(&self) -> &dyn videos::VideosApi {
+        self.videos.as_ref()
     }
 }
 

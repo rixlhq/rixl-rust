@@ -1,9 +1,5 @@
 use anyhow::{Context, Result};
-use rixl::apis::{
-    Api, ApiClient,
-    configuration::{ApiKey, Configuration},
-    feeds_api::GetFeedPostParams,
-};
+use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, feeds};
 use std::{env, sync::Arc};
 
 #[tokio::main]
@@ -18,8 +14,8 @@ async fn main() -> Result<()> {
         ..Configuration::new()
     }));
 
-    let post = client.feeds_api()
-        .get_feed_post(GetFeedPostParams::builder().feed_id(feed_id).post_id(post_id).build())
+    let post = client.feeds()
+        .get(feeds::GetParams::builder().feed_id(feed_id).post_id(post_id).build())
         .await?;
     if let Some(id) = &post.id {
         println!("post {id}");

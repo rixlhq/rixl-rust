@@ -30,33 +30,33 @@ All URIs are relative to *https://api.rixl.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FeedsApi* | [**get_feed_post**](docs/FeedsApi.md#get_feed_post) | **GET** /feeds/{feedId}/{postId} | Get a post
-*FeedsApi* | [**list_feed_posts**](docs/FeedsApi.md#list_feed_posts) | **GET** /feeds/{feedId} | List posts in a feed
-*FeedsApi* | [**list_feed_posts_by_creator**](docs/FeedsApi.md#list_feed_posts_by_creator) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
-*ImagesApi* | [**complete_image_upload**](docs/ImagesApi.md#complete_image_upload) | **POST** /images/upload/complete | Upload: Mark as complete
-*ImagesApi* | [**delete_image**](docs/ImagesApi.md#delete_image) | **DELETE** /images/{imageId} | Delete image
-*ImagesApi* | [**get_image**](docs/ImagesApi.md#get_image) | **GET** /images/{imageId} | Get image
-*ImagesApi* | [**init_image_upload**](docs/ImagesApi.md#init_image_upload) | **POST** /images/upload/init | Upload: Init
-*ImagesApi* | [**list_images**](docs/ImagesApi.md#list_images) | **GET** /images | List images for a project
-*VideosApi* | [**complete_video_upload**](docs/VideosApi.md#complete_video_upload) | **POST** /videos/upload/complete | Upload: Mark as complete
-*VideosApi* | [**delete_audio_track_by_id**](docs/VideosApi.md#delete_audio_track_by_id) | **DELETE** /videos/{videoId}/audio-tracks/{trackId} | Delete audio track
+*FeedsApi* | [**get**](docs/FeedsApi.md#get) | **GET** /feeds/{feedId}/{postId} | Get a post
+*FeedsApi* | [**list**](docs/FeedsApi.md#list) | **GET** /feeds/{feedId} | List posts in a feed
+*FeedsApi* | [**list_by_creator**](docs/FeedsApi.md#list_by_creator) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
+*ImagesApi* | [**delete**](docs/ImagesApi.md#delete) | **DELETE** /images/{imageId} | Delete image
+*ImagesApi* | [**get**](docs/ImagesApi.md#get) | **GET** /images/{imageId} | Get image
+*ImagesApi* | [**list**](docs/ImagesApi.md#list) | **GET** /images | List images for a project
+*ImagesApi* | [**upload_complete**](docs/ImagesApi.md#upload_complete) | **POST** /images/upload/complete | Upload: Mark as complete
+*ImagesApi* | [**upload_init**](docs/ImagesApi.md#upload_init) | **POST** /images/upload/init | Upload: Init
+*VideosApi* | [**delete**](docs/VideosApi.md#delete) | **DELETE** /videos/{videoId}/delete | Delete video
+*VideosApi* | [**delete_audio_track**](docs/VideosApi.md#delete_audio_track) | **DELETE** /videos/{videoId}/audio-tracks/{trackId} | Delete audio track
 *VideosApi* | [**delete_audio_track_by_language**](docs/VideosApi.md#delete_audio_track_by_language) | **DELETE** /videos/{videoId}/audio-tracks/language/{lang_code} | Delete audio track by language
 *VideosApi* | [**delete_audio_tracks**](docs/VideosApi.md#delete_audio_tracks) | **DELETE** /videos/{videoId}/audio-tracks | Delete all audio tracks
 *VideosApi* | [**delete_chapters**](docs/VideosApi.md#delete_chapters) | **DELETE** /videos/{videoId}/chapters | Delete video chapters
-*VideosApi* | [**delete_subtitle_by_id**](docs/VideosApi.md#delete_subtitle_by_id) | **DELETE** /videos/{videoId}/subtitles/{subtitleId} | Delete subtitle
+*VideosApi* | [**delete_subtitle**](docs/VideosApi.md#delete_subtitle) | **DELETE** /videos/{videoId}/subtitles/{subtitleId} | Delete subtitle
 *VideosApi* | [**delete_subtitle_by_language**](docs/VideosApi.md#delete_subtitle_by_language) | **DELETE** /videos/{videoId}/subtitles/language/{lang_code} | Delete subtitle by language
 *VideosApi* | [**delete_subtitles**](docs/VideosApi.md#delete_subtitles) | **DELETE** /videos/{videoId}/subtitles | Delete all subtitles
-*VideosApi* | [**delete_video**](docs/VideosApi.md#delete_video) | **DELETE** /videos/{videoId}/delete | Delete video
-*VideosApi* | [**get_video**](docs/VideosApi.md#get_video) | **GET** /videos/{videoId} | Get a video
-*VideosApi* | [**init_video_upload**](docs/VideosApi.md#init_video_upload) | **POST** /videos/upload/init | Upload: Init
-*VideosApi* | [**list_video_languages**](docs/VideosApi.md#list_video_languages) | **GET** /videos/languages | List available subtitle languages
-*VideosApi* | [**list_videos**](docs/VideosApi.md#list_videos) | **GET** /videos | List videos for a project
+*VideosApi* | [**get**](docs/VideosApi.md#get) | **GET** /videos/{videoId} | Get a video
+*VideosApi* | [**list**](docs/VideosApi.md#list) | **GET** /videos | List videos for a project
+*VideosApi* | [**list_languages**](docs/VideosApi.md#list_languages) | **GET** /videos/languages | List available subtitle languages
 *VideosApi* | [**replace_audio_tracks**](docs/VideosApi.md#replace_audio_tracks) | **POST** /videos/{videoId}/audio-tracks | Bulk upsert video audio tracks
 *VideosApi* | [**replace_subtitles**](docs/VideosApi.md#replace_subtitles) | **POST** /videos/{videoId}/subtitles | Bulk upsert video subtitles
 *VideosApi* | [**update_audio_track_by_language**](docs/VideosApi.md#update_audio_track_by_language) | **PUT** /videos/{videoId}/audio-tracks/language/{lang_code} | Upsert video audio track
 *VideosApi* | [**update_chapters**](docs/VideosApi.md#update_chapters) | **PUT** /videos/{videoId}/chapters | Update video chapters
 *VideosApi* | [**update_subtitle_by_language**](docs/VideosApi.md#update_subtitle_by_language) | **PUT** /videos/{videoId}/subtitles/language/{lang_code} | Upsert video subtitle
-*VideosApi* | [**update_video_thumbnail**](docs/VideosApi.md#update_video_thumbnail) | **PUT** /videos/{videoId}/thumbnail | Update video thumbnail
+*VideosApi* | [**update_thumbnail**](docs/VideosApi.md#update_thumbnail) | **PUT** /videos/{videoId}/thumbnail | Update video thumbnail
+*VideosApi* | [**upload_complete**](docs/VideosApi.md#upload_complete) | **POST** /videos/upload/complete | Upload: Mark as complete
+*VideosApi* | [**upload_init**](docs/VideosApi.md#upload_init) | **POST** /videos/upload/init | Upload: Init
 
 
 ## Documentation For Models

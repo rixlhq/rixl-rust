@@ -20,15 +20,15 @@ use crate::apis::ContentType;
 #[async_trait]
 pub trait VideosApi: Send + Sync {
 
-    /// POST /videos/upload/complete
+    /// DELETE /videos/{videoId}/delete
     ///
-    /// Mark a video upload as complete after successful upload to storage using API key authentication
-    async fn complete_video_upload(&self,  params: CompleteVideoUploadParams ) -> Result<models::Video, Error<CompleteVideoUploadError>>;
+    /// Delete a video by its ID within a project
+    async fn delete(&self,  params: DeleteParams ) -> Result<(), Error<DeleteError>>;
 
     /// DELETE /videos/{videoId}/audio-tracks/{trackId}
     ///
     /// Remove an additional audio track from a video using API key authentication
-    async fn delete_audio_track_by_id(&self,  params: DeleteAudioTrackByIdParams ) -> Result<models::AudioTrackDelete, Error<DeleteAudioTrackByIdError>>;
+    async fn delete_audio_track(&self,  params: DeleteAudioTrackParams ) -> Result<models::AudioTrackDelete, Error<DeleteAudioTrackError>>;
 
     /// DELETE /videos/{videoId}/audio-tracks/language/{lang_code}
     ///
@@ -48,7 +48,7 @@ pub trait VideosApi: Send + Sync {
     /// DELETE /videos/{videoId}/subtitles/{subtitleId}
     ///
     /// Remove a subtitle from a video using API key authentication
-    async fn delete_subtitle_by_id(&self,  params: DeleteSubtitleByIdParams ) -> Result<models::SubtitleDelete, Error<DeleteSubtitleByIdError>>;
+    async fn delete_subtitle(&self,  params: DeleteSubtitleParams ) -> Result<models::SubtitleDelete, Error<DeleteSubtitleError>>;
 
     /// DELETE /videos/{videoId}/subtitles/language/{lang_code}
     ///
@@ -60,30 +60,20 @@ pub trait VideosApi: Send + Sync {
     /// Remove all subtitles from a video using API key authentication
     async fn delete_subtitles(&self,  params: DeleteSubtitlesParams ) -> Result<models::SubtitleDelete, Error<DeleteSubtitlesError>>;
 
-    /// DELETE /videos/{videoId}/delete
-    ///
-    /// Delete a video by its ID within a project
-    async fn delete_video(&self,  params: DeleteVideoParams ) -> Result<(), Error<DeleteVideoError>>;
-
     /// GET /videos/{videoId}
     ///
     /// Retrieve a video by its ID for a specific project.
-    async fn get_video(&self,  params: GetVideoParams ) -> Result<models::Video, Error<GetVideoError>>;
-
-    /// POST /videos/upload/init
-    ///
-    /// Initialize a video upload and get presigned URLs for video and poster using API key authentication
-    async fn init_video_upload(&self,  params: InitVideoUploadParams ) -> Result<models::VideoUploadInitResponse, Error<InitVideoUploadError>>;
-
-    /// GET /videos/languages
-    ///
-    /// Get list of supported languages for subtitles
-    async fn list_video_languages(&self, ) -> Result<Vec<models::SubtitleLanguageResponse>, Error<ListVideoLanguagesError>>;
+    async fn get(&self,  params: GetParams ) -> Result<models::Video, Error<GetError>>;
 
     /// GET /videos
     ///
     /// Retrieve all videos for a specific project, with pagination and sorting.
-    async fn list_videos(&self,  params: ListVideosParams ) -> Result<models::PaginationPaginatedResponseVideo, Error<ListVideosError>>;
+    async fn list(&self,  params: ListParams ) -> Result<models::PaginationPaginatedResponseVideo, Error<ListError>>;
+
+    /// GET /videos/languages
+    ///
+    /// Get list of supported languages for subtitles
+    async fn list_languages(&self, ) -> Result<Vec<models::SubtitleLanguageResponse>, Error<ListLanguagesError>>;
 
     /// POST /videos/{videoId}/audio-tracks
     ///
@@ -113,7 +103,17 @@ pub trait VideosApi: Send + Sync {
     /// PUT /videos/{videoId}/thumbnail
     ///
     /// Update the thumbnail image for an existing video using API key authentication
-    async fn update_video_thumbnail(&self,  params: UpdateVideoThumbnailParams ) -> Result<models::Video, Error<UpdateVideoThumbnailError>>;
+    async fn update_thumbnail(&self,  params: UpdateThumbnailParams ) -> Result<models::Video, Error<UpdateThumbnailError>>;
+
+    /// POST /videos/upload/complete
+    ///
+    /// Mark a video upload as complete after successful upload to storage using API key authentication
+    async fn upload_complete(&self,  params: UploadCompleteParams ) -> Result<models::Video, Error<UploadCompleteError>>;
+
+    /// POST /videos/upload/init
+    ///
+    /// Initialize a video upload and get presigned URLs for video and poster using API key authentication
+    async fn upload_init(&self,  params: UploadInitParams ) -> Result<models::VideoUploadInitResponse, Error<UploadInitError>>;
 }
 
 pub struct VideosApiClient {
@@ -127,18 +127,18 @@ impl VideosApiClient {
 }
 
 
-/// struct for passing parameters to the method [`VideosApi::complete_video_upload`]
+/// struct for passing parameters to the method [`VideosApi::delete`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct CompleteVideoUploadParams {
-    /// Video upload completion request
-    pub video_upload_complete_request: models::VideoUploadCompleteRequest
+pub struct DeleteParams {
+    /// Video ID
+    pub video_id: String
 }
 
-/// struct for passing parameters to the method [`VideosApi::delete_audio_track_by_id`]
+/// struct for passing parameters to the method [`VideosApi::delete_audio_track`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct DeleteAudioTrackByIdParams {
+pub struct DeleteAudioTrackParams {
     /// Video ID
     pub video_id: String,
     /// Audio Track ID
@@ -171,10 +171,10 @@ pub struct DeleteChaptersParams {
     pub video_id: String
 }
 
-/// struct for passing parameters to the method [`VideosApi::delete_subtitle_by_id`]
+/// struct for passing parameters to the method [`VideosApi::delete_subtitle`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct DeleteSubtitleByIdParams {
+pub struct DeleteSubtitleParams {
     /// Video ID
     pub video_id: String,
     /// Subtitle ID
@@ -199,34 +199,18 @@ pub struct DeleteSubtitlesParams {
     pub video_id: String
 }
 
-/// struct for passing parameters to the method [`VideosApi::delete_video`]
+/// struct for passing parameters to the method [`VideosApi::get`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct DeleteVideoParams {
+pub struct GetParams {
     /// Video ID
     pub video_id: String
 }
 
-/// struct for passing parameters to the method [`VideosApi::get_video`]
+/// struct for passing parameters to the method [`VideosApi::list`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct GetVideoParams {
-    /// Video ID
-    pub video_id: String
-}
-
-/// struct for passing parameters to the method [`VideosApi::init_video_upload`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct InitVideoUploadParams {
-    /// Video upload initialization request
-    pub video_upload_init_request: models::VideoUploadInitRequest
-}
-
-/// struct for passing parameters to the method [`VideosApi::list_videos`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct ListVideosParams {
+pub struct ListParams {
     /// Maximum number of items to return in a single request. <br> **Default:** `25`
     pub limit: Option<i32>,
     /// Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`
@@ -303,24 +287,40 @@ pub struct UpdateSubtitleByLanguageParams {
     pub label: Option<String>
 }
 
-/// struct for passing parameters to the method [`VideosApi::update_video_thumbnail`]
+/// struct for passing parameters to the method [`VideosApi::update_thumbnail`]
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "bon", derive(::bon::Builder))]
-pub struct UpdateVideoThumbnailParams {
+pub struct UpdateThumbnailParams {
     /// Video ID
     pub video_id: String,
     /// Thumbnail image file (max 5MB, image/_*)
     pub thumbnail: std::path::PathBuf
 }
 
+/// struct for passing parameters to the method [`VideosApi::upload_complete`]
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+pub struct UploadCompleteParams {
+    /// Video upload completion request
+    pub video_upload_complete_request: models::VideoUploadCompleteRequest
+}
+
+/// struct for passing parameters to the method [`VideosApi::upload_init`]
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+pub struct UploadInitParams {
+    /// Video upload initialization request
+    pub video_upload_init_request: models::VideoUploadInitRequest
+}
+
 
 #[async_trait]
 impl VideosApi for VideosApiClient {
-    /// Mark a video upload as complete after successful upload to storage using API key authentication
-    async fn complete_video_upload(&self,  params: CompleteVideoUploadParams ) -> Result<models::Video, Error<CompleteVideoUploadError>> {
+    /// Delete a video by its ID within a project
+    async fn delete(&self,  params: DeleteParams ) -> Result<(), Error<DeleteError>> {
         
-        let CompleteVideoUploadParams {
-            video_upload_complete_request,
+        let DeleteParams {
+            video_id,
         } = params;
         
 
@@ -328,8 +328,8 @@ impl VideosApi for VideosApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/videos/upload/complete", local_var_configuration.base_path);
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+        let local_var_uri_str = format!("{}/videos/{videoId}/delete", local_var_configuration.base_path, videoId=crate::apis::urlencode(video_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
@@ -342,37 +342,26 @@ impl VideosApi for VideosApiClient {
             };
             local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
         };
-        local_var_req_builder = local_var_req_builder.json(&video_upload_complete_request);
 
         let local_var_req = local_var_req_builder.build()?;
         let local_var_resp = local_var_client.execute(local_var_req).await?;
 
         let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
         let local_var_content = local_var_resp.text().await?;
 
         if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::Video`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Video`")))),
-            }
+            Ok(())
         } else {
-            let local_var_entity: Option<CompleteVideoUploadError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<DeleteError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
     }
 
     /// Remove an additional audio track from a video using API key authentication
-    async fn delete_audio_track_by_id(&self,  params: DeleteAudioTrackByIdParams ) -> Result<models::AudioTrackDelete, Error<DeleteAudioTrackByIdError>> {
+    async fn delete_audio_track(&self,  params: DeleteAudioTrackParams ) -> Result<models::AudioTrackDelete, Error<DeleteAudioTrackError>> {
         
-        let DeleteAudioTrackByIdParams {
+        let DeleteAudioTrackParams {
             video_id,
             track_id,
         } = params;
@@ -416,7 +405,7 @@ impl VideosApi for VideosApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AudioTrackDelete`")))),
             }
         } else {
-            let local_var_entity: Option<DeleteAudioTrackByIdError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<DeleteAudioTrackError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -580,9 +569,9 @@ impl VideosApi for VideosApiClient {
     }
 
     /// Remove a subtitle from a video using API key authentication
-    async fn delete_subtitle_by_id(&self,  params: DeleteSubtitleByIdParams ) -> Result<models::SubtitleDelete, Error<DeleteSubtitleByIdError>> {
+    async fn delete_subtitle(&self,  params: DeleteSubtitleParams ) -> Result<models::SubtitleDelete, Error<DeleteSubtitleError>> {
         
-        let DeleteSubtitleByIdParams {
+        let DeleteSubtitleParams {
             video_id,
             subtitle_id,
         } = params;
@@ -626,7 +615,7 @@ impl VideosApi for VideosApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::SubtitleDelete`")))),
             }
         } else {
-            let local_var_entity: Option<DeleteSubtitleByIdError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<DeleteSubtitleError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -737,52 +726,10 @@ impl VideosApi for VideosApiClient {
         }
     }
 
-    /// Delete a video by its ID within a project
-    async fn delete_video(&self,  params: DeleteVideoParams ) -> Result<(), Error<DeleteVideoError>> {
-        
-        let DeleteVideoParams {
-            video_id,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/videos/{videoId}/delete", local_var_configuration.base_path, videoId=crate::apis::urlencode(video_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            Ok(())
-        } else {
-            let local_var_entity: Option<DeleteVideoError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
     /// Retrieve a video by its ID for a specific project.
-    async fn get_video(&self,  params: GetVideoParams ) -> Result<models::Video, Error<GetVideoError>> {
+    async fn get(&self,  params: GetParams ) -> Result<models::Video, Error<GetError>> {
         
-        let GetVideoParams {
+        let GetParams {
             video_id,
         } = params;
         
@@ -825,109 +772,16 @@ impl VideosApi for VideosApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Video`")))),
             }
         } else {
-            let local_var_entity: Option<GetVideoError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    /// Initialize a video upload and get presigned URLs for video and poster using API key authentication
-    async fn init_video_upload(&self,  params: InitVideoUploadParams ) -> Result<models::VideoUploadInitResponse, Error<InitVideoUploadError>> {
-        
-        let InitVideoUploadParams {
-            video_upload_init_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/videos/upload/init", local_var_configuration.base_path);
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        local_var_req_builder = local_var_req_builder.json(&video_upload_init_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::VideoUploadInitResponse`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::VideoUploadInitResponse`")))),
-            }
-        } else {
-            let local_var_entity: Option<InitVideoUploadError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    /// Get list of supported languages for subtitles
-    async fn list_video_languages(&self, ) -> Result<Vec<models::SubtitleLanguageResponse>, Error<ListVideoLanguagesError>> {
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/videos/languages", local_var_configuration.base_path);
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::SubtitleLanguageResponse&gt;`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `Vec&lt;models::SubtitleLanguageResponse&gt;`")))),
-            }
-        } else {
-            let local_var_entity: Option<ListVideoLanguagesError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<GetError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
     }
 
     /// Retrieve all videos for a specific project, with pagination and sorting.
-    async fn list_videos(&self,  params: ListVideosParams ) -> Result<models::PaginationPaginatedResponseVideo, Error<ListVideosError>> {
+    async fn list(&self,  params: ListParams ) -> Result<models::PaginationPaginatedResponseVideo, Error<ListError>> {
         
-        let ListVideosParams {
+        let ListParams {
             limit,
             offset,
             sort,
@@ -985,7 +839,47 @@ impl VideosApi for VideosApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::PaginationPaginatedResponseVideo`")))),
             }
         } else {
-            let local_var_entity: Option<ListVideosError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<ListError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    /// Get list of supported languages for subtitles
+    async fn list_languages(&self, ) -> Result<Vec<models::SubtitleLanguageResponse>, Error<ListLanguagesError>> {
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/videos/languages", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::SubtitleLanguageResponse&gt;`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `Vec&lt;models::SubtitleLanguageResponse&gt;`")))),
+            }
+        } else {
+            let local_var_entity: Option<ListLanguagesError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -1292,9 +1186,9 @@ impl VideosApi for VideosApiClient {
     }
 
     /// Update the thumbnail image for an existing video using API key authentication
-    async fn update_video_thumbnail(&self,  params: UpdateVideoThumbnailParams ) -> Result<models::Video, Error<UpdateVideoThumbnailError>> {
+    async fn update_thumbnail(&self,  params: UpdateThumbnailParams ) -> Result<models::Video, Error<UpdateThumbnailError>> {
         
-        let UpdateVideoThumbnailParams {
+        let UpdateThumbnailParams {
             video_id,
             thumbnail,
         } = params;
@@ -1341,7 +1235,113 @@ impl VideosApi for VideosApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Video`")))),
             }
         } else {
-            let local_var_entity: Option<UpdateVideoThumbnailError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<UpdateThumbnailError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    /// Mark a video upload as complete after successful upload to storage using API key authentication
+    async fn upload_complete(&self,  params: UploadCompleteParams ) -> Result<models::Video, Error<UploadCompleteError>> {
+        
+        let UploadCompleteParams {
+            video_upload_complete_request,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/videos/upload/complete", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        local_var_req_builder = local_var_req_builder.json(&video_upload_complete_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::Video`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Video`")))),
+            }
+        } else {
+            let local_var_entity: Option<UploadCompleteError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    /// Initialize a video upload and get presigned URLs for video and poster using API key authentication
+    async fn upload_init(&self,  params: UploadInitParams ) -> Result<models::VideoUploadInitResponse, Error<UploadInitError>> {
+        
+        let UploadInitParams {
+            video_upload_init_request,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/videos/upload/init", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        local_var_req_builder = local_var_req_builder.json(&video_upload_init_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::VideoUploadInitResponse`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::VideoUploadInitResponse`")))),
+            }
+        } else {
+            let local_var_entity: Option<UploadInitError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -1349,10 +1349,10 @@ impl VideosApi for VideosApiClient {
 
 }
 
-/// struct for typed errors of method [`VideosApi::complete_video_upload`]
+/// struct for typed errors of method [`VideosApi::delete`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum CompleteVideoUploadError {
+pub enum DeleteError {
     Status400(models::ErrorResponse),
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
@@ -1361,10 +1361,10 @@ pub enum CompleteVideoUploadError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`VideosApi::delete_audio_track_by_id`]
+/// struct for typed errors of method [`VideosApi::delete_audio_track`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum DeleteAudioTrackByIdError {
+pub enum DeleteAudioTrackError {
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
     Status404(models::ErrorResponse),
@@ -1397,10 +1397,10 @@ pub enum DeleteChaptersError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`VideosApi::delete_subtitle_by_id`]
+/// struct for typed errors of method [`VideosApi::delete_subtitle`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum DeleteSubtitleByIdError {
+pub enum DeleteSubtitleError {
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
     Status404(models::ErrorResponse),
@@ -1422,10 +1422,10 @@ pub enum DeleteSubtitlesError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`VideosApi::delete_video`]
+/// struct for typed errors of method [`VideosApi::get`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum DeleteVideoError {
+pub enum GetError {
     Status400(models::ErrorResponse),
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
@@ -1434,22 +1434,10 @@ pub enum DeleteVideoError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`VideosApi::get_video`]
+/// struct for typed errors of method [`VideosApi::list`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetVideoError {
-    Status400(models::ErrorResponse),
-    Status401(models::ErrorResponse),
-    Status403(models::ErrorResponse),
-    Status404(models::ErrorResponse),
-    Status500(models::ErrorResponse),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`VideosApi::init_video_upload`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum InitVideoUploadError {
+pub enum ListError {
     Status400(models::ErrorResponse),
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
@@ -1457,21 +1445,10 @@ pub enum InitVideoUploadError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`VideosApi::list_video_languages`]
+/// struct for typed errors of method [`VideosApi::list_languages`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum ListVideoLanguagesError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`VideosApi::list_videos`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ListVideosError {
-    Status400(models::ErrorResponse),
-    Status401(models::ErrorResponse),
-    Status403(models::ErrorResponse),
-    Status500(models::ErrorResponse),
+pub enum ListLanguagesError {
     UnknownValue(serde_json::Value),
 }
 
@@ -1515,14 +1492,37 @@ pub enum UpdateSubtitleByLanguageError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`VideosApi::update_video_thumbnail`]
+/// struct for typed errors of method [`VideosApi::update_thumbnail`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum UpdateVideoThumbnailError {
+pub enum UpdateThumbnailError {
     Status400(models::ErrorResponse),
     Status401(models::ErrorResponse),
     Status403(models::ErrorResponse),
     Status404(models::ErrorResponse),
+    Status500(models::ErrorResponse),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`VideosApi::upload_complete`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum UploadCompleteError {
+    Status400(models::ErrorResponse),
+    Status401(models::ErrorResponse),
+    Status403(models::ErrorResponse),
+    Status404(models::ErrorResponse),
+    Status500(models::ErrorResponse),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`VideosApi::upload_init`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum UploadInitError {
+    Status400(models::ErrorResponse),
+    Status401(models::ErrorResponse),
+    Status403(models::ErrorResponse),
     Status500(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
