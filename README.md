@@ -14,7 +14,7 @@ Requires Rust 1.75+ and `tokio`. The `bon` builder feature is on by default.
 ## Quick start
 
 ```rust
-use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, images};
+use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, images_api};
 use std::sync::Arc;
 
 #[tokio::main]
@@ -25,8 +25,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         ..Configuration::new()
     }));
 
-    let page = client.images()
-        .list(images::ListParams::builder().limit(50).build())
+    let page = client.images_api()
+        .list(images_api::ListParams::builder().limit(50).build())
         .await?;
 
     for img in page.data.unwrap_or_default() {
@@ -36,7 +36,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-`ApiClient` holds one `Configuration` (auth + base URL) and exposes per-tag clients via `.feeds()`, `.images()`, `.videos()`. Each method takes a single `Params` struct built with the `bon` builder.
+`ApiClient` holds one `Configuration` (auth + base URL) and exposes per-tag clients via `.feeds_api()`, `.images_api()`, `.videos_api()`. Each method takes a single `Params` struct built with the `bon` builder.
 
 ## Auth
 
@@ -61,8 +61,8 @@ See [examples/src/bin/auth.rs](examples/src/bin/auth.rs) for a full client-crede
 ```rust
 use rixl::apis::feeds;
 
-let page = client.feeds().list(feeds::ListParams::builder().feed_id(feed_id).build()).await?;
-let post = client.feeds().get(feeds::GetParams::builder().feed_id(feed_id).post_id(post_id).build()).await?;
+let page = client.feeds_api().list(feeds_api::ListParams::builder().feed_id(feed_id).build()).await?;
+let post = client.feeds_api().get(feeds_api::GetParams::builder().feed_id(feed_id).post_id(post_id).build()).await?;
 ```
 
 ## Images
@@ -70,9 +70,9 @@ let post = client.feeds().get(feeds::GetParams::builder().feed_id(feed_id).post_
 ```rust
 use rixl::apis::images;
 
-let page = client.images().list(images::ListParams::builder().build()).await?;
-let img  = client.images().get(images::GetParams::builder().image_id(image_id).build()).await?;
-client.images().delete(images::DeleteParams::builder().image_id(image_id).build()).await?;
+let page = client.images_api().list(images_api::ListParams::builder().build()).await?;
+let img  = client.images_api().get(images_api::GetParams::builder().image_id(image_id).build()).await?;
+client.images_api().delete(images_api::DeleteParams::builder().image_id(image_id).build()).await?;
 ```
 
 Upload (init → PUT bytes → complete):
@@ -81,8 +81,8 @@ Upload (init → PUT bytes → complete):
 use rixl::apis::images;
 use rixl::models::{ImageUploadInitRequest, ImageUploadCompleteRequest};
 
-let init = client.images()
-    .upload_init(images::UploadInitParams::builder()
+let init = client.images_api()
+    .upload_init(images_api::UploadInitParams::builder()
         .image_upload_init_request(ImageUploadInitRequest {
             name: Some("photo.jpg".into()),
             format: Some("jpeg".into()),
@@ -90,8 +90,8 @@ let init = client.images()
         .build())
     .await?;
 // PUT bytes to init.presigned_url, then:
-let img = client.images()
-    .upload_complete(images::UploadCompleteParams::builder()
+let img = client.images_api()
+    .upload_complete(images_api::UploadCompleteParams::builder()
         .image_upload_complete_request(ImageUploadCompleteRequest {
             image_id: init.image_id,
             attached_to_video: Some(false),
@@ -105,8 +105,8 @@ let img = client.images()
 ```rust
 use rixl::apis::videos;
 
-let page  = client.videos().list(videos::ListParams::builder().build()).await?;
-let video = client.videos().get(videos::GetParams::builder().video_id(video_id).build()).await?;
+let page  = client.videos_api().list(videos_api::ListParams::builder().build()).await?;
+let video = client.videos_api().get(videos_api::GetParams::builder().video_id(video_id).build()).await?;
 ```
 
 Upload returns presigned URLs for both the video and a poster image — see [examples/src/bin/upload_video.rs](examples/src/bin/upload_video.rs).
@@ -119,8 +119,8 @@ use rixl::apis::images;
 let mut offset = 0;
 let limit = 50;
 loop {
-    let page = client.images()
-        .list(images::ListParams::builder().limit(limit).offset(offset).build())
+    let page = client.images_api()
+        .list(images_api::ListParams::builder().limit(limit).offset(offset).build())
         .await?;
     let data = page.data.unwrap_or_default();
     for img in &data { /* ... */ }
@@ -137,7 +137,7 @@ API methods return `Result<T, rixl::apis::Error<E>>`. `Error::ResponseError` car
 ```rust
 use rixl::apis::Error;
 
-match client.images().get(images::GetParams::builder().image_id(id).build()).await {
+match client.images_api().get(images_api::GetParams::builder().image_id(id).build()).await {
     Ok(img) => println!("{:?}", img),
     Err(Error::ResponseError(e)) => eprintln!("HTTP {}: {}", e.status, e.content),
     Err(e) => return Err(e.into()),
@@ -163,7 +163,7 @@ brew install openapi-generator openjdk
 ./gen.sh
 ```
 
-`gen.sh` fetches the upstream OpenAPI spec, runs `openapi-generator generate` with [config.yaml](config.yaml), and post-processes the output via [post-fix.py](post-fix.py) — which (a) drops the `_api` suffix from per-tag accessors so callers write `client.videos()` instead of `client.videos_api()`, and (b) patches a known openapi-generator template bug on required multipart file params.
+`gen.sh` fetches the upstream OpenAPI spec, runs `openapi-generator generate` with [config.yaml](config.yaml), and post-processes the output via [post-fix.py](post-fix.py) — which (a) drops the `_api` suffix from per-tag accessors so callers write `client.videos_api()` instead of `client.videos_api()`, and (b) patches a known openapi-generator template bug on required multipart file params.
 
 `--skip-validate-spec` is required because the spec uses tag-namespaced operationIds (`list`/`get`/`delete` repeated across tags), which is per-spec-section unique but not globally unique.
 

@@ -1,6 +1,6 @@
 // Upload flow: init -> PUT bytes to the presigned URL -> complete.
 use anyhow::{anyhow, Context, Result};
-use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, images};
+use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, images_api};
 use rixl::models::{ImageUploadCompleteRequest, ImageUploadInitRequest};
 use std::{env, sync::Arc};
 
@@ -18,9 +18,9 @@ async fn main() -> Result<()> {
 
     let body = reqwest::get(SAMPLE_IMAGE_URL).await?.bytes().await?;
 
-    let init = client.images()
+    let init = client.images_api()
         .upload_init(
-            images::UploadInitParams::builder()
+            images_api::UploadInitParams::builder()
                 .image_upload_init_request(ImageUploadInitRequest {
                     name: Some("sample.jpg".into()),
                     format: Some("jpeg".into()),
@@ -33,9 +33,9 @@ async fn main() -> Result<()> {
 
     put_bytes(&presigned, body.to_vec(), "image/jpeg").await?;
 
-    let img = client.images()
+    let img = client.images_api()
         .upload_complete(
-            images::UploadCompleteParams::builder()
+            images_api::UploadCompleteParams::builder()
                 .image_upload_complete_request(ImageUploadCompleteRequest {
                     image_id: Some(image_id),
                     attached_to_video: Some(false),

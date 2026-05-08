@@ -1,6 +1,6 @@
 // Init returns two presigned URLs — one for the video, one for the poster image.
 use anyhow::{anyhow, Context, Result};
-use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, videos};
+use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, videos_api};
 use rixl::models::{VideoUploadCompleteRequest, VideoUploadInitRequest};
 use std::{env, sync::Arc};
 
@@ -20,9 +20,9 @@ async fn main() -> Result<()> {
     let video = reqwest::get(SAMPLE_VIDEO_URL).await?.bytes().await?;
     let poster = reqwest::get(SAMPLE_POSTER_URL).await?.bytes().await?;
 
-    let init = client.videos()
+    let init = client.videos_api()
         .upload_init(
-            videos::UploadInitParams::builder()
+            videos_api::UploadInitParams::builder()
                 .video_upload_init_request(VideoUploadInitRequest {
                     file_name: "sample.mp4".into(),
                     image_format: Some("jpeg".into()),
@@ -38,9 +38,9 @@ async fn main() -> Result<()> {
     put_bytes(&video_url, video.to_vec(), "video/mp4").await?;
     put_bytes(&poster_url, poster.to_vec(), "image/jpeg").await?;
 
-    let v = client.videos()
+    let v = client.videos_api()
         .upload_complete(
-            videos::UploadCompleteParams::builder()
+            videos_api::UploadCompleteParams::builder()
                 .video_upload_complete_request(VideoUploadCompleteRequest {
                     video_id: Some(video_id),
                 })

@@ -1,5 +1,5 @@
 use anyhow::{Context, Result};
-use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, images};
+use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, images_api};
 use std::{env, sync::Arc};
 
 #[tokio::main]
@@ -12,7 +12,7 @@ async fn main() -> Result<()> {
         ..Configuration::new()
     }));
 
-    let page = client.images().list(images::ListParams::builder().build()).await?;
+    let page = client.images_api().list(images_api::ListParams::builder().build()).await?;
     let data = page.data.unwrap_or_default();
     println!("listed {} images", data.len());
     for img in &data {
@@ -22,8 +22,8 @@ async fn main() -> Result<()> {
     }
 
     if let Ok(image_id) = env::var("IMAGE_ID") {
-        let img = client.images()
-            .get(images::GetParams::builder().image_id(image_id).build())
+        let img = client.images_api()
+            .get(images_api::GetParams::builder().image_id(image_id).build())
             .await?;
         if let (Some(id), Some(w), Some(h)) = (&img.id, img.width, img.height) {
             println!("image {id}: {w}x{h}");

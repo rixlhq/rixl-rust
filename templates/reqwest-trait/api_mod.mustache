@@ -1,5 +1,8 @@
 use std::error;
 use std::fmt;
+{{#withAWSV4Signature}}
+use aws_sigv4;
+{{/withAWSV4Signature}}
 
 #[derive(Debug, Clone)]
 pub struct ResponseContent<T> {
@@ -11,18 +14,36 @@ pub struct ResponseContent<T> {
 #[derive(Debug)]
 pub enum Error<T> {
     Reqwest(reqwest::Error),
+    {{#supportMiddleware}}
+    ReqwestMiddleware(reqwest_middleware::Error),
+    {{/supportMiddleware}}
     Serde(serde_json::Error),
     Io(std::io::Error),
     ResponseError(ResponseContent<T>),
+    {{#withAWSV4Signature}}
+    AWSV4SignatureError(aws_sigv4::http_request::Error),
+    {{/withAWSV4Signature}}
+    {{#supportTokenSource}}
+    TokenSource(Box<dyn std::error::Error + Send + Sync>),
+    {{/supportTokenSource}}
 }
 
 impl <T> fmt::Display for Error<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let (module, e) = match self {
             Error::Reqwest(e) => ("reqwest", e.to_string()),
+            {{#supportMiddleware}}
+            Error::ReqwestMiddleware(e) => ("reqwest-middleware", e.to_string()),
+            {{/supportMiddleware}}
             Error::Serde(e) => ("serde", e.to_string()),
             Error::Io(e) => ("IO", e.to_string()),
             Error::ResponseError(e) => ("response", format!("status code {}", e.status)),
+            {{#withAWSV4Signature}}
+            Error::AWSV4SignatureError(e) => ("aws v4 signature", e.to_string()),
+            {{/withAWSV4Signature}}
+            {{#supportTokenSource}}
+            Error::TokenSource(e) => ("token source failure", e.to_string()),
+            {{/supportTokenSource}}
         };
         write!(f, "error in {}: {}", module, e)
     }
@@ -32,9 +53,18 @@ impl <T: fmt::Debug> error::Error for Error<T> {
     fn source(&self) -> Option<&(dyn error::Error + 'static)> {
         Some(match self {
             Error::Reqwest(e) => e,
+            {{#supportMiddleware}}
+            Error::ReqwestMiddleware(e) => e,
+            {{/supportMiddleware}}
             Error::Serde(e) => e,
             Error::Io(e) => e,
             Error::ResponseError(_) => return None,
+            {{#withAWSV4Signature}}
+            Error::AWSV4SignatureError(_) => return None,
+            {{/withAWSV4Signature}}
+            {{#supportTokenSource}}
+            Error::TokenSource(e) => &**e,
+            {{/supportTokenSource}}
         })
     }
 }
@@ -45,6 +75,14 @@ impl <T> From<reqwest::Error> for Error<T> {
     }
 }
 
+{{#supportMiddleware}}
+impl<T> From<reqwest_middleware::Error> for Error<T> {
+    fn from(e: reqwest_middleware::Error) -> Self {
+        Error::ReqwestMiddleware(e)
+    }
+}
+
+{{/supportMiddleware}}
 impl <T> From<serde_json::Error> for Error<T> {
     fn from(e: serde_json::Error) -> Self {
         Error::Serde(e)
@@ -111,46 +149,88 @@ impl From<&str> for ContentType {
     }
 }
 
-pub mod feeds_api;
-pub mod images_api;
-pub mod videos_api;
+{{#apiInfo}}
+{{#apis}}
+pub mod {{{classFilename}}};
+{{/apis}}
+{{/apiInfo}}
 
 pub mod configuration;
 
+{{#topLevelApiClient}}
 use std::sync::Arc;
 
 pub trait Api {
-    fn feeds_api(&self) -> &dyn feeds_api::FeedsApi;
-    fn images_api(&self) -> &dyn images_api::ImagesApi;
-    fn videos_api(&self) -> &dyn videos_api::VideosApi;
+    {{#apiInfo}}
+    {{#apis}}
+    fn {{{classFilename}}}(&self) -> &dyn {{{classFilename}}}::{{classname}};
+    {{/apis}}
+    {{/apiInfo}}
 }
 
 pub struct ApiClient {
-    feeds_api: Box<dyn feeds_api::FeedsApi>,
-    images_api: Box<dyn images_api::ImagesApi>,
-    videos_api: Box<dyn videos_api::VideosApi>,
+    {{#apiInfo}}
+    {{#apis}}
+    {{{classFilename}}}: Box<dyn {{{classFilename}}}::{{classname}}>,
+    {{/apis}}
+    {{/apiInfo}}
 }
 
 impl ApiClient {
     pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
         Self {
-            feeds_api: Box::new(feeds_api::FeedsApiClient::new(configuration.clone())),
-            images_api: Box::new(images_api::ImagesApiClient::new(configuration.clone())),
-            videos_api: Box::new(videos_api::VideosApiClient::new(configuration.clone())),
+            {{#apiInfo}}
+            {{#apis}}
+            {{{classFilename}}}: Box::new({{{classFilename}}}::{{classname}}Client::new(configuration.clone())),
+            {{/apis}}
+            {{/apiInfo}}
         }
     }
 }
 
 impl Api for ApiClient {
-    fn feeds_api(&self) -> &dyn feeds_api::FeedsApi {
-        self.feeds_api.as_ref()
+    {{#apiInfo}}
+    {{#apis}}
+    fn {{{classFilename}}}(&self) -> &dyn {{{classFilename}}}::{{classname}} {
+        self.{{{classFilename}}}.as_ref()
     }
-    fn images_api(&self) -> &dyn images_api::ImagesApi {
-        self.images_api.as_ref()
-    }
-    fn videos_api(&self) -> &dyn videos_api::VideosApi {
-        self.videos_api.as_ref()
+    {{/apis}}
+    {{/apiInfo}}
+}
+
+{{#mockall}}
+#[cfg(feature = "mockall")]
+pub struct MockApiClient {
+    {{#apiInfo}}
+    {{#apis}}
+    pub {{{classFilename}}}_mock: {{{classFilename}}}::Mock{{classname}},
+    {{/apis}}
+    {{/apiInfo}}
+}
+
+#[cfg(feature = "mockall")]
+impl MockApiClient {
+    pub fn new() -> Self {
+        Self {
+            {{#apiInfo}}
+            {{#apis}}
+            {{{classFilename}}}_mock: {{{classFilename}}}::Mock{{classname}}::new(),
+            {{/apis}}
+            {{/apiInfo}}
+        }
     }
 }
 
+#[cfg(feature = "mockall")]
+impl Api for MockApiClient {
+    {{#apiInfo}}
+    {{#apis}}
+    fn {{{classFilename}}}(&self) -> &dyn {{{classFilename}}}::{{classname}} {
+        &self.{{{classFilename}}}_mock
+    }
+    {{/apis}}
+    {{/apiInfo}}
+}
+{{/mockall}}
 
+{{/topLevelApiClient}}

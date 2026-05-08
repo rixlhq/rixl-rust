@@ -13,11 +13,9 @@ openapi-generator generate \
   -g rust \
   -o sdk \
   -c config.yaml \
+  -t templates \
   --skip-validate-spec
 
 # Enable the bon builder feature by default — better DX for callers.
 sed -i '' 's/^default = \["native-tls"\]$/default = ["native-tls", "bon"]/' sdk/Cargo.toml
 rm -f sdk/.travis.yml
-
-# Fix openapi-generator reqwest-trait template bug for required multipart file params.
-python3 post-fix.py sdk/src/apis
