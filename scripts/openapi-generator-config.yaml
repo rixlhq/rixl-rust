@@ -1,0 +1,17 @@
+packageName: rixl
+packageVersion: 0.1.0
+library: reqwest
+
+modelNameMappings:
+  "github_com_rixlhq_api_db_sqlc.PlanType": "PlanType"
+  "github_com_rixlhq_api_db_sqlc.VideoQuality": "VideoQuality"
+  "github_com_rixlhq_api_internal_errors.ErrorResponse": "ErrorResponse"
+  "github_com_rixlhq_api_internal_videos.VideoResponse": "VideoResponse"
+  "github_com_rixlhq_api_internal_videos_handler_upload.CompleteRequest": "VideoUploadCompleteRequest"
+  "github_com_rixlhq_api_internal_videos_handler_upload.InitResponse": "VideoUploadInitResponse"
+  "github_com_rixlhq_api_internal_videos_types.ChapterInput": "ChapterInput"
+  "internal_images_handler.completeRequest": "ImageUploadCompleteRequest"
+  "internal_images_handler.initResponse": "ImageUploadInitResponse"
+  "internal_images_handler.uploadInitRequest": "ImageUploadInitRequest"
+  "internal_videos_handler_subtitles.languageResponse": "SubtitleLanguageResponse"
+  "pagination.Pagination": "Pagination"
