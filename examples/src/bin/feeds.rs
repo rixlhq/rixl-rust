@@ -18,7 +18,7 @@ async fn main() -> Result<()> {
     }));
 
     let page = client.feeds_api()
-        .list_feed_posts(ListFeedPostsParams::builder().feed_id(&feed_id).build())
+        .list_feed_posts(ListFeedPostsParams::builder().feed_id(feed_id.clone()).build())
         .await?;
     let data = page.data.unwrap_or_default();
     println!("feed {feed_id} — {} posts", data.len());

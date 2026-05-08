@@ -1021,7 +1021,7 @@ impl VideosApi for VideosApiClient {
             local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
         };
         let mut local_var_form = reqwest::multipart::Form::new();
-        if let Some(ref path) = files {
+        for path in &files {
             local_var_form = local_var_form.file("files", path.as_os_str()).await?;
         }
         local_var_form = local_var_form.text("labels", labels.to_string());
@@ -1083,7 +1083,7 @@ impl VideosApi for VideosApiClient {
             local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
         };
         let mut local_var_form = reqwest::multipart::Form::new();
-        if let Some(ref path) = files {
+        for path in &files {
             local_var_form = local_var_form.file("files", path.as_os_str()).await?;
         }
         local_var_form = local_var_form.text("labels", labels.to_string());
@@ -1145,9 +1145,7 @@ impl VideosApi for VideosApiClient {
             local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
         };
         let mut local_var_form = reqwest::multipart::Form::new();
-        if let Some(ref path) = file {
-            local_var_form = local_var_form.file("file", path.as_os_str()).await?;
-        }
+        local_var_form = local_var_form.file("file", file.as_os_str()).await?;
         if let Some(local_var_param_value) = label {
             local_var_form = local_var_form.text("label", local_var_param_value.to_string());
         }
@@ -1262,9 +1260,7 @@ impl VideosApi for VideosApiClient {
             local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
         };
         let mut local_var_form = reqwest::multipart::Form::new();
-        if let Some(ref path) = file {
-            local_var_form = local_var_form.file("file", path.as_os_str()).await?;
-        }
+        local_var_form = local_var_form.file("file", file.as_os_str()).await?;
         if let Some(local_var_param_value) = label {
             local_var_form = local_var_form.text("label", local_var_param_value.to_string());
         }
@@ -1323,9 +1319,7 @@ impl VideosApi for VideosApiClient {
             local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
         };
         let mut local_var_form = reqwest::multipart::Form::new();
-        if let Some(ref path) = thumbnail {
-            local_var_form = local_var_form.file("thumbnail", path.as_os_str()).await?;
-        }
+        local_var_form = local_var_form.file("thumbnail", thumbnail.as_os_str()).await?;
         local_var_req_builder = local_var_req_builder.multipart(local_var_form);
 
         let local_var_req = local_var_req_builder.build()?;
