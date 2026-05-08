@@ -2,15 +2,19 @@
 //   API key:    RIXL_API_KEY=...
 //   Client JWT: RIXL_CLIENT_ID=..., RIXL_CLIENT_SECRET=..., RIXL_PROJECT_ID=..., RIXL_SUBJECT=...
 use anyhow::{anyhow, Context, Result};
-use rixl::apis::{configuration::{ApiKey, Configuration}, images_api};
+use rixl::apis::{
+    Api, ApiClient,
+    configuration::{ApiKey, Configuration},
+    images_api::ListImagesParams,
+};
 use serde_json::json;
-use std::env;
+use std::{env, sync::Arc};
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let config = build_config().await?;
+    let client = ApiClient::new(Arc::new(build_config().await?));
 
-    let page = images_api::list_images(&config, None, None, None, None).await?;
+    let page = client.images_api().list_images(ListImagesParams::builder().build()).await?;
     let n = page.data.unwrap_or_default().len();
     println!("auth ok — listed {n} images");
 
