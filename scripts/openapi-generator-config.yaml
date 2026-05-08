@@ -1,6 +1,9 @@
 packageName: rixl
 packageVersion: 0.1.0
-library: reqwest
+library: reqwest-trait
+useSingleRequestParameter: true
+useBonBuilder: true
+topLevelApiClient: true
 
 modelNameMappings:
   "github_com_rixlhq_api_db_sqlc.PlanType": "PlanType"

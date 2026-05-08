@@ -116,3 +116,41 @@ pub mod images_api;
 pub mod videos_api;
 
 pub mod configuration;
+
+use std::sync::Arc;
+
+pub trait Api {
+    fn feeds_api(&self) -> &dyn feeds_api::FeedsApi;
+    fn images_api(&self) -> &dyn images_api::ImagesApi;
+    fn videos_api(&self) -> &dyn videos_api::VideosApi;
+}
+
+pub struct ApiClient {
+    feeds_api: Box<dyn feeds_api::FeedsApi>,
+    images_api: Box<dyn images_api::ImagesApi>,
+    videos_api: Box<dyn videos_api::VideosApi>,
+}
+
+impl ApiClient {
+    pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
+        Self {
+            feeds_api: Box::new(feeds_api::FeedsApiClient::new(configuration.clone())),
+            images_api: Box::new(images_api::ImagesApiClient::new(configuration.clone())),
+            videos_api: Box::new(videos_api::VideosApiClient::new(configuration.clone())),
+        }
+    }
+}
+
+impl Api for ApiClient {
+    fn feeds_api(&self) -> &dyn feeds_api::FeedsApi {
+        self.feeds_api.as_ref()
+    }
+    fn images_api(&self) -> &dyn images_api::ImagesApi {
+        self.images_api.as_ref()
+    }
+    fn videos_api(&self) -> &dyn videos_api::VideosApi {
+        self.videos_api.as_ref()
+    }
+}
+
+

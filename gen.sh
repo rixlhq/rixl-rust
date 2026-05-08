@@ -13,3 +13,7 @@ openapi-generator generate \
   -g rust \
   -o sdk \
   -c scripts/openapi-generator-config.yaml
+
+# Enable the bon builder feature by default — better DX for callers.
+sed -i '' 's/^default = \["native-tls"\]$/default = ["native-tls", "bon"]/' sdk/Cargo.toml
+rm -f sdk/.travis.yml

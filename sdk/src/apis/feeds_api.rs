@@ -9,13 +9,236 @@
  */
 
 
+use async_trait::async_trait;
 use reqwest;
+use std::sync::Arc;
 use serde::{Deserialize, Serialize, de::Error as _};
 use crate::{apis::ResponseContent, models};
-use super::{Error, configuration, ContentType};
+use super::{Error, configuration};
+use crate::apis::ContentType;
+
+#[async_trait]
+pub trait FeedsApi: Send + Sync {
+
+    /// GET /feeds/{feedId}/{postId}
+    ///
+    /// Retrieve a post from feed by its ID
+    async fn get_feed_post(&self,  params: GetFeedPostParams ) -> Result<models::Post, Error<GetFeedPostError>>;
+
+    /// GET /feeds/{feedId}
+    ///
+    /// Retrieve posts in a feed, with pagination.
+    async fn list_feed_posts(&self,  params: ListFeedPostsParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsError>>;
+
+    /// GET /feeds/{feedId}/creators/{creatorId}
+    ///
+    /// Retrieve posts in a feed by a specific creator, with pagination.
+    async fn list_feed_posts_by_creator(&self,  params: ListFeedPostsByCreatorParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsByCreatorError>>;
+}
+
+pub struct FeedsApiClient {
+    configuration: Arc<configuration::Configuration>
+}
+
+impl FeedsApiClient {
+    pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
+        Self { configuration }
+    }
+}
 
 
-/// struct for typed errors of method [`get_feed_post`]
+/// struct for passing parameters to the method [`FeedsApi::get_feed_post`]
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+pub struct GetFeedPostParams {
+    /// Feed ID
+    pub feed_id: String,
+    /// Post ID
+    pub post_id: String
+}
+
+/// struct for passing parameters to the method [`FeedsApi::list_feed_posts`]
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+pub struct ListFeedPostsParams {
+    /// Feed ID
+    pub feed_id: String,
+    /// Maximum number of items to return in a single request. <br> **Default:** `25`
+    pub limit: Option<i32>,
+    /// Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`
+    pub offset: Option<i32>
+}
+
+/// struct for passing parameters to the method [`FeedsApi::list_feed_posts_by_creator`]
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+pub struct ListFeedPostsByCreatorParams {
+    /// Feed ID
+    pub feed_id: String,
+    /// Creator ID
+    pub creator_id: String,
+    /// Maximum number of items to return in a single request. <br> **Default:** `25`
+    pub limit: Option<i32>,
+    /// Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`
+    pub offset: Option<i32>
+}
+
+
+#[async_trait]
+impl FeedsApi for FeedsApiClient {
+    /// Retrieve a post from feed by its ID
+    async fn get_feed_post(&self,  params: GetFeedPostParams ) -> Result<models::Post, Error<GetFeedPostError>> {
+        
+        let GetFeedPostParams {
+            feed_id,
+            post_id,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/feeds/{feedId}/{postId}", local_var_configuration.base_path, feedId=crate::apis::urlencode(feed_id), postId=crate::apis::urlencode(post_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::Post`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::Post`")))),
+            }
+        } else {
+            let local_var_entity: Option<GetFeedPostError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    /// Retrieve posts in a feed, with pagination.
+    async fn list_feed_posts(&self,  params: ListFeedPostsParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsError>> {
+        
+        let ListFeedPostsParams {
+            feed_id,
+            limit,
+            offset,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/feeds/{feedId}", local_var_configuration.base_path, feedId=crate::apis::urlencode(feed_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+        if let Some(ref param_value) = limit {
+            local_var_req_builder = local_var_req_builder.query(&[("limit", &param_value.to_string())]);
+        }
+        if let Some(ref param_value) = offset {
+            local_var_req_builder = local_var_req_builder.query(&[("offset", &param_value.to_string())]);
+        }
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`")))),
+            }
+        } else {
+            let local_var_entity: Option<ListFeedPostsError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    /// Retrieve posts in a feed by a specific creator, with pagination.
+    async fn list_feed_posts_by_creator(&self,  params: ListFeedPostsByCreatorParams ) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsByCreatorError>> {
+        
+        let ListFeedPostsByCreatorParams {
+            feed_id,
+            creator_id,
+            limit,
+            offset,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/feeds/{feedId}/creators/{creatorId}", local_var_configuration.base_path, feedId=crate::apis::urlencode(feed_id), creatorId=crate::apis::urlencode(creator_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+        if let Some(ref param_value) = limit {
+            local_var_req_builder = local_var_req_builder.query(&[("limit", &param_value.to_string())]);
+        }
+        if let Some(ref param_value) = offset {
+            local_var_req_builder = local_var_req_builder.query(&[("offset", &param_value.to_string())]);
+        }
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`")))),
+            }
+        } else {
+            let local_var_entity: Option<ListFeedPostsByCreatorError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+}
+
+/// struct for typed errors of method [`FeedsApi::get_feed_post`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetFeedPostError {
@@ -24,7 +247,7 @@ pub enum GetFeedPostError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`list_feed_posts`]
+/// struct for typed errors of method [`FeedsApi::list_feed_posts`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListFeedPostsError {
@@ -33,142 +256,12 @@ pub enum ListFeedPostsError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`list_feed_posts_by_creator`]
+/// struct for typed errors of method [`FeedsApi::list_feed_posts_by_creator`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListFeedPostsByCreatorError {
     Status400(models::ErrorResponse),
     Status500(models::ErrorResponse),
     UnknownValue(serde_json::Value),
-}
-
-
-/// Retrieve a post from feed by its ID
-pub async fn get_feed_post(configuration: &configuration::Configuration, feed_id: &str, post_id: &str) -> Result<models::Post, Error<GetFeedPostError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_feed_id = feed_id;
-    let p_path_post_id = post_id;
-
-    let uri_str = format!("{}/feeds/{feedId}/{postId}", configuration.base_path, feedId=crate::apis::urlencode(p_path_feed_id), postId=crate::apis::urlencode(p_path_post_id));
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::Post`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::Post`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<GetFeedPostError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Retrieve posts in a feed, with pagination.
-pub async fn list_feed_posts(configuration: &configuration::Configuration, feed_id: &str, limit: Option<i32>, offset: Option<i32>) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_feed_id = feed_id;
-    let p_query_limit = limit;
-    let p_query_offset = offset;
-
-    let uri_str = format!("{}/feeds/{feedId}", configuration.base_path, feedId=crate::apis::urlencode(p_path_feed_id));
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref param_value) = p_query_limit {
-        req_builder = req_builder.query(&[("limit", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_query_offset {
-        req_builder = req_builder.query(&[("offset", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<ListFeedPostsError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Retrieve posts in a feed by a specific creator, with pagination.
-pub async fn list_feed_posts_by_creator(configuration: &configuration::Configuration, feed_id: &str, creator_id: &str, limit: Option<i32>, offset: Option<i32>) -> Result<models::PaginationPaginatedResponsePost, Error<ListFeedPostsByCreatorError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_feed_id = feed_id;
-    let p_path_creator_id = creator_id;
-    let p_query_limit = limit;
-    let p_query_offset = offset;
-
-    let uri_str = format!("{}/feeds/{feedId}/creators/{creatorId}", configuration.base_path, feedId=crate::apis::urlencode(p_path_feed_id), creatorId=crate::apis::urlencode(p_path_creator_id));
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref param_value) = p_query_limit {
-        req_builder = req_builder.query(&[("limit", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_query_offset {
-        req_builder = req_builder.query(&[("offset", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::PaginationPaginatedResponsePost`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<ListFeedPostsByCreatorError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
 }
 

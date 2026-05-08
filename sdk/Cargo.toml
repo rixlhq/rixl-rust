@@ -11,11 +11,11 @@ serde = { version = "^1.0", features = ["derive"] }
 serde_json = "^1.0"
 serde_repr = "^0.1"
 url = "^2.5"
-tokio = { version = "^1.46.0", features = ["fs"] }
-tokio-util = { version = "^0.7", features = ["codec"] }
+async-trait = "^0.1"
 reqwest = { version = "^0.13", default-features = false, features = ["json", "multipart", "stream", "query", "form"] }
-
+bon = { version = "2.3", optional = true }
 [features]
-default = ["native-tls"]
+default = ["native-tls", "bon"]
 native-tls = ["reqwest/native-tls"]
 rustls = ["reqwest/rustls"]
+bon = ["dep:bon"]
