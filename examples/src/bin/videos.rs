@@ -7,7 +7,6 @@ async fn main() -> Result<()> {
     let api_key = env::var("RIXL_API_KEY").context("missing RIXL_API_KEY")?;
 
     let client = ApiClient::new(Arc::new(Configuration {
-        base_path: "https://api.rixl.com".into(),
         api_key: Some(ApiKey { prefix: None, key: api_key }),
         ..Configuration::new()
     }));

@@ -9,7 +9,6 @@ async fn main() -> Result<()> {
     let post_id = env::var("RIXL_POST_ID").context("missing RIXL_POST_ID")?;
 
     let client = ApiClient::new(Arc::new(Configuration {
-        base_path: "https://api.rixl.com".into(),
         api_key: Some(ApiKey { prefix: None, key: api_key }),
         ..Configuration::new()
     }));

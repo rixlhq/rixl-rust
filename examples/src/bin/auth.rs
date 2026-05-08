@@ -18,11 +18,8 @@ async fn main() -> Result<()> {
 }
 
 async fn build_config() -> Result<Configuration> {
-    let base_path = "https://api.rixl.com".to_string();
-
     if let Ok(key) = env::var("RIXL_API_KEY") {
         return Ok(Configuration {
-            base_path,
             api_key: Some(ApiKey { prefix: None, key }),
             ..Configuration::new()
         });
@@ -36,7 +33,6 @@ async fn build_config() -> Result<Configuration> {
 
     let token = mint_token(&client_id, &client_secret, &subject, &project_id).await?;
     Ok(Configuration {
-        base_path,
         bearer_access_token: Some(token),
         ..Configuration::new()
     })

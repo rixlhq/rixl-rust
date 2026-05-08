@@ -8,7 +8,6 @@ async fn main() -> Result<()> {
     let feed_id = env::var("RIXL_FEED_ID").context("missing RIXL_FEED_ID")?;
 
     let client = ApiClient::new(Arc::new(Configuration {
-        base_path: "https://api.rixl.com".into(),
         api_key: Some(ApiKey { prefix: None, key: api_key }),
         ..Configuration::new()
     }));
