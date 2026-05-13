@@ -1,5 +1,6 @@
-/target
-Cargo.lock
+**/target/
+**/debug/
+
 openapi.yaml
 sdk/.openapi-generator/
 
@@ -7,6 +8,7 @@ sdk/.openapi-generator/
 .vscode/*
 !.vscode/extensions.json
 .idea
+*.iml
 .DS_Store
 *.suo
 *.ntvs*

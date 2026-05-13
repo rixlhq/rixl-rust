@@ -2,6 +2,11 @@
 
 *.lock            linguist-generated=true
 
+# Rust files
+*.rs text diff=rust
+*.toml text diff=toml
+Cargo.lock text
+
 *.bash            text eol=lf
 *.bat             text eol=crlf
 *.cmd             text eol=crlf
