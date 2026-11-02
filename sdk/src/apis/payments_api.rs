@@ -98,36 +98,31 @@ impl PaymentsApiClient {
 
 
 /// struct for passing parameters to the method [`PaymentsApi::calculate_generic_tax`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CalculateGenericTaxParams {
     pub billing_v1_calculate_generic_tax_request: models::BillingV1CalculateGenericTaxRequest
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::calculate_tax`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CalculateTaxParams {
     pub billing_v1_calculate_tax_request: models::BillingV1CalculateTaxRequest
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::create_checkout_session`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateCheckoutSessionParams {
     pub billing_v1_create_checkout_session_request: models::BillingV1CreateCheckoutSessionRequest
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::create_setup_intent`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateSetupIntentParams {
     pub billing_v1_create_setup_intent_request: models::BillingV1CreateSetupIntentRequest
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::delete_payment_method`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePaymentMethodParams {
     /// The payment_method_id path parameter.
     pub payment_method_id: String,
@@ -136,32 +131,28 @@ pub struct DeletePaymentMethodParams {
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::get_billing_address`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetBillingAddressParams {
     /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::get_payment_method_from_payment_intent`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPaymentMethodFromPaymentIntentParams {
     /// The payment_intent_id query parameter.
     pub payment_intent_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::get_payment_method_from_setup_intent`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPaymentMethodFromSetupIntentParams {
     /// The setup_intent_id query parameter.
     pub setup_intent_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::list_payment_methods`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPaymentMethodsParams {
     /// The org_id query parameter.
     pub org_id: Option<String>,
@@ -170,22 +161,19 @@ pub struct ListPaymentMethodsParams {
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::upgrade_subscription`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpgradeSubscriptionParams {
     pub billing_v1_upgrade_subscription_request: models::BillingV1UpgradeSubscriptionRequest
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::upsert_billing_address`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpsertBillingAddressParams {
     pub billing_v1_upsert_billing_address_request: models::BillingV1UpsertBillingAddressRequest
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::upsert_payment_method`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpsertPaymentMethodParams {
     pub billing_v1_upsert_payment_method_request: models::BillingV1UpsertPaymentMethodRequest
 }

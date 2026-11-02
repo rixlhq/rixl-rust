@@ -58,8 +58,7 @@ impl SubtitlesApiClient {
 
 
 /// struct for passing parameters to the method [`SubtitlesApi::create_subtitle_upload`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateSubtitleUploadParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -69,8 +68,7 @@ pub struct CreateSubtitleUploadParams {
 }
 
 /// struct for passing parameters to the method [`SubtitlesApi::delete_all_subtitles`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteAllSubtitlesParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -79,8 +77,7 @@ pub struct DeleteAllSubtitlesParams {
 }
 
 /// struct for passing parameters to the method [`SubtitlesApi::delete_subtitle`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteSubtitleParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -91,8 +88,7 @@ pub struct DeleteSubtitleParams {
 }
 
 /// struct for passing parameters to the method [`SubtitlesApi::delete_subtitles_by_language`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteSubtitlesByLanguageParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -103,8 +99,7 @@ pub struct DeleteSubtitlesByLanguageParams {
 }
 
 /// struct for passing parameters to the method [`SubtitlesApi::list_subtitles`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListSubtitlesParams {
     /// The video_id path parameter.
     pub video_id: String

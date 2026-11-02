@@ -58,8 +58,7 @@ impl ImagesApiClient {
 
 
 /// struct for passing parameters to the method [`ImagesApi::create_image_upload`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateImageUploadParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -67,8 +66,7 @@ pub struct CreateImageUploadParams {
 }
 
 /// struct for passing parameters to the method [`ImagesApi::delete_image`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteImageParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -77,16 +75,14 @@ pub struct DeleteImageParams {
 }
 
 /// struct for passing parameters to the method [`ImagesApi::get_image`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetImageParams {
     /// The image_id path parameter.
     pub image_id: String
 }
 
 /// struct for passing parameters to the method [`ImagesApi::list_images`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListImagesParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -101,8 +97,7 @@ pub struct ListImagesParams {
 }
 
 /// struct for passing parameters to the method [`ImagesApi::update_image_visibility`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateImageVisibilityParams {
     /// The project_id path parameter.
     pub project_id: String,

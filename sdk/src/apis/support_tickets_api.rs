@@ -73,8 +73,7 @@ impl SupportTicketsApiClient {
 
 
 /// struct for passing parameters to the method [`SupportTicketsApi::add_ticket_message`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct AddTicketMessageParams {
     /// The ticket_id path parameter.
     pub ticket_id: String,
@@ -82,31 +81,27 @@ pub struct AddTicketMessageParams {
 }
 
 /// struct for passing parameters to the method [`SupportTicketsApi::close_ticket`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CloseTicketParams {
     /// The ticket_id path parameter.
     pub ticket_id: String
 }
 
 /// struct for passing parameters to the method [`SupportTicketsApi::create_ticket`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateTicketParams {
     pub support_v1_create_ticket_request: models::SupportV1CreateTicketRequest
 }
 
 /// struct for passing parameters to the method [`SupportTicketsApi::get_ticket`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTicketParams {
     /// The ticket_id path parameter.
     pub ticket_id: String
 }
 
 /// struct for passing parameters to the method [`SupportTicketsApi::list_tickets`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListTicketsParams {
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -117,8 +112,7 @@ pub struct ListTicketsParams {
 }
 
 /// struct for passing parameters to the method [`SupportTicketsApi::list_topics`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListTopicsParams {
     /// The category_id query parameter.
     pub category_id: Option<String>,
@@ -127,8 +121,7 @@ pub struct ListTopicsParams {
 }
 
 /// struct for passing parameters to the method [`SupportTicketsApi::list_topics2`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListTopics2Params {
     /// The category_id path parameter.
     pub category_id: String,

@@ -53,8 +53,7 @@ impl ChaptersApiClient {
 
 
 /// struct for passing parameters to the method [`ChaptersApi::delete_video_chapter`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteVideoChapterParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -65,8 +64,7 @@ pub struct DeleteVideoChapterParams {
 }
 
 /// struct for passing parameters to the method [`ChaptersApi::get_video_chapters`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetVideoChaptersParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -75,8 +73,7 @@ pub struct GetVideoChaptersParams {
 }
 
 /// struct for passing parameters to the method [`ChaptersApi::update_video_chapters`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateVideoChaptersParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -86,8 +83,7 @@ pub struct UpdateVideoChaptersParams {
 }
 
 /// struct for passing parameters to the method [`ChaptersApi::update_video_chapters2`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateVideoChapters2Params {
     /// The project_id path parameter.
     pub project_id: String,

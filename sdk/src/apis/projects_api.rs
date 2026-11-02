@@ -78,8 +78,7 @@ impl ProjectsApiClient {
 
 
 /// struct for passing parameters to the method [`ProjectsApi::create_project`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateProjectParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -87,8 +86,7 @@ pub struct CreateProjectParams {
 }
 
 /// struct for passing parameters to the method [`ProjectsApi::delete_project`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteProjectParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -97,8 +95,7 @@ pub struct DeleteProjectParams {
 }
 
 /// struct for passing parameters to the method [`ProjectsApi::get_project`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetProjectParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -107,16 +104,14 @@ pub struct GetProjectParams {
 }
 
 /// struct for passing parameters to the method [`ProjectsApi::list_projects`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListProjectsParams {
     /// The org_id path parameter.
     pub org_id: String
 }
 
 /// struct for passing parameters to the method [`ProjectsApi::move_project`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct MoveProjectParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -126,8 +121,7 @@ pub struct MoveProjectParams {
 }
 
 /// struct for passing parameters to the method [`ProjectsApi::remove_custom_domain`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RemoveCustomDomainParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -136,8 +130,7 @@ pub struct RemoveCustomDomainParams {
 }
 
 /// struct for passing parameters to the method [`ProjectsApi::set_custom_domain`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SetCustomDomainParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -147,8 +140,7 @@ pub struct SetCustomDomainParams {
 }
 
 /// struct for passing parameters to the method [`ProjectsApi::update_project_name`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateProjectNameParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -158,8 +150,7 @@ pub struct UpdateProjectNameParams {
 }
 
 /// struct for passing parameters to the method [`ProjectsApi::update_video_quality`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateVideoQualityParams {
     /// The org_id path parameter.
     pub org_id: String,

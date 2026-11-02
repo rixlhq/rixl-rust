@@ -58,8 +58,7 @@ impl FeedsApiClient {
 
 
 /// struct for passing parameters to the method [`FeedsApi::create_feed`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateFeedParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -67,8 +66,7 @@ pub struct CreateFeedParams {
 }
 
 /// struct for passing parameters to the method [`FeedsApi::delete_feed`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteFeedParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -77,8 +75,7 @@ pub struct DeleteFeedParams {
 }
 
 /// struct for passing parameters to the method [`FeedsApi::get_feed`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetFeedParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -87,8 +84,7 @@ pub struct GetFeedParams {
 }
 
 /// struct for passing parameters to the method [`FeedsApi::list_feeds`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListFeedsParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -99,8 +95,7 @@ pub struct ListFeedsParams {
 }
 
 /// struct for passing parameters to the method [`FeedsApi::update_feed`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateFeedParams {
     /// The project_id path parameter.
     pub project_id: String,

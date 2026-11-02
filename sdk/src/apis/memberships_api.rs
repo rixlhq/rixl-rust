@@ -133,16 +133,14 @@ impl MembershipsApiClient {
 
 
 /// struct for passing parameters to the method [`MembershipsApi::accept_invitation`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct AcceptInvitationParams {
     /// The token path parameter.
     pub token: String
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::cancel_invitation`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CancelInvitationParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -151,8 +149,7 @@ pub struct CancelInvitationParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::check_membership`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CheckMembershipParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -161,16 +158,14 @@ pub struct CheckMembershipParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::decline_invitation`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeclineInvitationParams {
     /// The token path parameter.
     pub token: String
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::get_internal_membership_info`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetInternalMembershipInfoParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -179,8 +174,7 @@ pub struct GetInternalMembershipInfoParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::invite_member`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct InviteMemberParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -188,8 +182,7 @@ pub struct InviteMemberParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::leave_organization`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct LeaveOrganizationParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -198,8 +191,7 @@ pub struct LeaveOrganizationParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::list_membership_applications`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListMembershipApplicationsParams {
     /// The user.user_id query parameter.
     pub user_user_id: Option<String>,
@@ -212,8 +204,7 @@ pub struct ListMembershipApplicationsParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::list_memberships`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListMembershipsParams {
     /// The user.user_id query parameter.
     pub user_user_id: Option<String>,
@@ -226,8 +217,7 @@ pub struct ListMembershipsParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::list_organization_members`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListOrganizationMembersParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -238,8 +228,7 @@ pub struct ListOrganizationMembersParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::reactivate_member`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ReactivateMemberParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -248,8 +237,7 @@ pub struct ReactivateMemberParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::remove_member`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RemoveMemberParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -258,8 +246,7 @@ pub struct RemoveMemberParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::resend_invitation`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ResendInvitationParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -267,8 +254,7 @@ pub struct ResendInvitationParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::respond_to_membership_application`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RespondToMembershipApplicationParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -276,8 +262,7 @@ pub struct RespondToMembershipApplicationParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::suspend_member`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SuspendMemberParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -286,15 +271,13 @@ pub struct SuspendMemberParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::update_active_membership`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateActiveMembershipParams {
     pub auth_v1_update_active_membership_request: models::AuthV1UpdateActiveMembershipRequest
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::update_member_role`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateMemberRoleParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -304,8 +287,7 @@ pub struct UpdateMemberRoleParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::update_membership_state`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateMembershipStateParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -313,8 +295,7 @@ pub struct UpdateMembershipStateParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::update_org_name`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateOrgNameParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -322,8 +303,7 @@ pub struct UpdateOrgNameParams {
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::update_org_username`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateOrgUsernameParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,

@@ -38,8 +38,7 @@ impl EventsApiClient {
 
 
 /// struct for passing parameters to the method [`EventsApi::track_events`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct TrackEventsParams {
     pub analytics_v1_track_events_request: models::AnalyticsV1TrackEventsRequest
 }

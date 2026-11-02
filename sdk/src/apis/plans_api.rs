@@ -43,16 +43,14 @@ impl PlansApiClient {
 
 
 /// struct for passing parameters to the method [`PlansApi::get_plan`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPlanParams {
     /// string.prefix = \"price_\" 
     pub plan_id: String
 }
 
 /// struct for passing parameters to the method [`PlansApi::list_plans`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPlansParams {
     /// The currency query parameter.
     pub currency: Option<String>,

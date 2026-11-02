@@ -43,8 +43,7 @@ impl InvoicesApiClient {
 
 
 /// struct for passing parameters to the method [`InvoicesApi::list_invoices`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListInvoicesParams {
     /// The org_id query parameter.
     pub org_id: Option<String>,
@@ -55,8 +54,7 @@ pub struct ListInvoicesParams {
 }
 
 /// struct for passing parameters to the method [`InvoicesApi::update_invoice_status`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateInvoiceStatusParams {
     /// The invoice_id path parameter.
     pub invoice_id: String,

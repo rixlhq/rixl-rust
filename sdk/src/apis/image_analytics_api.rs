@@ -43,8 +43,7 @@ impl ImageAnalyticsApiClient {
 
 
 /// struct for passing parameters to the method [`ImageAnalyticsApi::get_image_stats`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetImageStatsParams {
     /// The image_id path parameter.
     pub image_id: String,
@@ -55,8 +54,7 @@ pub struct GetImageStatsParams {
 }
 
 /// struct for passing parameters to the method [`ImageAnalyticsApi::get_top_images`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTopImagesParams {
     /// The limit query parameter.
     pub limit: Option<i32>,

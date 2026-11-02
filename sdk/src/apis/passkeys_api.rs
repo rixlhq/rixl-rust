@@ -73,8 +73,7 @@ impl PasskeysApiClient {
 
 
 /// struct for passing parameters to the method [`PasskeysApi::delete_passkey`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePasskeyParams {
     /// The id path parameter.
     pub id: String,
@@ -83,44 +82,38 @@ pub struct DeletePasskeyParams {
 }
 
 /// struct for passing parameters to the method [`PasskeysApi::list_passkeys`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPasskeysParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PasskeysApi::passkey_login_begin`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct PasskeyLoginBeginParams {
     pub body: serde_json::Value
 }
 
 /// struct for passing parameters to the method [`PasskeysApi::passkey_login_finish`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct PasskeyLoginFinishParams {
     pub auth_v1_passkey_login_finish_request: models::AuthV1PasskeyLoginFinishRequest
 }
 
 /// struct for passing parameters to the method [`PasskeysApi::passkey_register_begin`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct PasskeyRegisterBeginParams {
     pub auth_v1_passkey_register_begin_request: models::AuthV1PasskeyRegisterBeginRequest
 }
 
 /// struct for passing parameters to the method [`PasskeysApi::passkey_register_finish`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct PasskeyRegisterFinishParams {
     pub auth_v1_passkey_register_finish_request: models::AuthV1PasskeyRegisterFinishRequest
 }
 
 /// struct for passing parameters to the method [`PasskeysApi::rename_passkey`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RenamePasskeyParams {
     /// The id path parameter.
     pub id: String,
@@ -128,8 +121,7 @@ pub struct RenamePasskeyParams {
 }
 
 /// struct for passing parameters to the method [`PasskeysApi::verify_passkey_for_login`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct VerifyPasskeyForLoginParams {
     pub auth_v1_verify_passkey_for_login_request: models::AuthV1VerifyPasskeyForLoginRequest
 }

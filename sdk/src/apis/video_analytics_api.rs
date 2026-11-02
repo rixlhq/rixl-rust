@@ -43,8 +43,7 @@ impl VideoAnalyticsApiClient {
 
 
 /// struct for passing parameters to the method [`VideoAnalyticsApi::get_top_videos`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTopVideosParams {
     /// The limit query parameter.
     pub limit: Option<i32>,
@@ -55,8 +54,7 @@ pub struct GetTopVideosParams {
 }
 
 /// struct for passing parameters to the method [`VideoAnalyticsApi::get_video_stats`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetVideoStatsParams {
     /// The video_id path parameter.
     pub video_id: String,

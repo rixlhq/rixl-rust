@@ -43,15 +43,13 @@ impl SessionsApiClient {
 
 
 /// struct for passing parameters to the method [`SessionsApi::logout`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct LogoutParams {
     pub auth_v1_logout_request: models::AuthV1LogoutRequest
 }
 
 /// struct for passing parameters to the method [`SessionsApi::refresh_token`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RefreshTokenParams {
     pub auth_v1_refresh_token_request: models::AuthV1RefreshTokenRequest
 }

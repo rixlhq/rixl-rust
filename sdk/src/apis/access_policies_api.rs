@@ -83,8 +83,7 @@ impl AccessPoliciesApiClient {
 
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::attach_policy`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct AttachPolicyParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -94,8 +93,7 @@ pub struct AttachPolicyParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::create_policy`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreatePolicyParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -103,8 +101,7 @@ pub struct CreatePolicyParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::delete_policy`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePolicyParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -113,8 +110,7 @@ pub struct DeletePolicyParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::detach_policy`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DetachPolicyParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -123,8 +119,7 @@ pub struct DetachPolicyParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::get_policy`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPolicyParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -133,8 +128,7 @@ pub struct GetPolicyParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_permission_registry`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPermissionRegistryParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -147,8 +141,7 @@ pub struct ListPermissionRegistryParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_policies`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPoliciesParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -157,8 +150,7 @@ pub struct ListPoliciesParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_policy_attachments`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPolicyAttachmentsParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -167,8 +159,7 @@ pub struct ListPolicyAttachmentsParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_user_policies`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListUserPoliciesParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -177,8 +168,7 @@ pub struct ListUserPoliciesParams {
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::update_policy`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdatePolicyParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,

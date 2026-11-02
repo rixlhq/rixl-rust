@@ -84,10 +84,7 @@ impl {{classname}}Client {
 {{#allParams}}
 {{#-first}}
 /// struct for passing parameters to the method [`{{{classname}}}::{{operationId}}`]
-#[derive(Clone, Debug)]
-{{#useBonBuilder}}
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
-{{/useBonBuilder}}
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct {{{operationIdCamelCase}}}Params {
 {{/-first}}
     {{#description}}

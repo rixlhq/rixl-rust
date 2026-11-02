@@ -118,22 +118,19 @@ impl DashboardsApiClient {
 
 
 /// struct for passing parameters to the method [`DashboardsApi::batch_query_chart`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct BatchQueryChartParams {
     pub analytics_v1_batch_chart_query_request: models::AnalyticsV1BatchChartQueryRequest
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::create_dashboard`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateDashboardParams {
     pub analytics_v1_create_dashboard_request: models::AnalyticsV1CreateDashboardRequest
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::create_widget`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateWidgetParams {
     /// The dashboard_id path parameter.
     pub dashboard_id: String,
@@ -143,8 +140,7 @@ pub struct CreateWidgetParams {
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::delete_dashboard`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteDashboardParams {
     /// The id path parameter.
     pub id: String,
@@ -153,8 +149,7 @@ pub struct DeleteDashboardParams {
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::delete_widget`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteWidgetParams {
     /// The id path parameter.
     pub id: String,
@@ -163,8 +158,7 @@ pub struct DeleteWidgetParams {
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::export_dashboard`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ExportDashboardParams {
     /// The dashboard_id path parameter.
     pub dashboard_id: String,
@@ -172,16 +166,14 @@ pub struct ExportDashboardParams {
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::get_dashboard`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDashboardParams {
     /// The id path parameter.
     pub id: String
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::get_dashboard_stats`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDashboardStatsParams {
     /// The time_start query parameter.
     pub time_start: String,
@@ -208,22 +200,19 @@ pub struct GetDashboardStatsParams {
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::get_filter_options`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetFilterOptionsParams {
     pub analytics_v1_get_filter_options_request: models::AnalyticsV1GetFilterOptionsRequest
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::get_scope_tree`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetScopeTreeParams {
     pub analytics_v1_get_scope_tree_request: models::AnalyticsV1GetScopeTreeRequest
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::list_dashboards`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListDashboardsParams {
     /// The page_size query parameter.
     pub page_size: Option<i32>,
@@ -232,23 +221,20 @@ pub struct ListDashboardsParams {
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::query_chart`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct QueryChartParams {
     pub analytics_v1_chart_query_request: models::AnalyticsV1ChartQueryRequest
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::set_default_dashboard`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SetDefaultDashboardParams {
     /// The id path parameter.
     pub id: String
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::update_dashboard`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateDashboardParams {
     /// The id path parameter.
     pub id: String,
@@ -256,8 +242,7 @@ pub struct UpdateDashboardParams {
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::update_dashboard_layout`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateDashboardLayoutParams {
     /// The dashboard_id path parameter.
     pub dashboard_id: String,
@@ -265,8 +250,7 @@ pub struct UpdateDashboardLayoutParams {
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::update_widget`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateWidgetParams {
     /// The id path parameter.
     pub id: String,

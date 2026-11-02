@@ -43,15 +43,13 @@ impl PlatformAuthApiClient {
 
 
 /// struct for passing parameters to the method [`PlatformAuthApi::exchange_api_key`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ExchangeApiKeyParams {
     pub platformauth_v1_exchange_api_key_request: models::PlatformauthV1ExchangeApiKeyRequest
 }
 
 /// struct for passing parameters to the method [`PlatformAuthApi::refresh_platform_token`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RefreshPlatformTokenParams {
     pub platformauth_v1_refresh_platform_token_request: models::PlatformauthV1RefreshPlatformTokenRequest
 }

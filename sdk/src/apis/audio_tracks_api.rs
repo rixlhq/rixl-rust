@@ -58,8 +58,7 @@ impl AudioTracksApiClient {
 
 
 /// struct for passing parameters to the method [`AudioTracksApi::create_audio_track_upload`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateAudioTrackUploadParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -69,8 +68,7 @@ pub struct CreateAudioTrackUploadParams {
 }
 
 /// struct for passing parameters to the method [`AudioTracksApi::delete_all_audio_tracks`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteAllAudioTracksParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -79,8 +77,7 @@ pub struct DeleteAllAudioTracksParams {
 }
 
 /// struct for passing parameters to the method [`AudioTracksApi::delete_audio_track`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteAudioTrackParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -91,8 +88,7 @@ pub struct DeleteAudioTrackParams {
 }
 
 /// struct for passing parameters to the method [`AudioTracksApi::delete_audio_tracks_by_language`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteAudioTracksByLanguageParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -103,8 +99,7 @@ pub struct DeleteAudioTracksByLanguageParams {
 }
 
 /// struct for passing parameters to the method [`AudioTracksApi::list_audio_tracks`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListAudioTracksParams {
     /// The video_id path parameter.
     pub video_id: String
