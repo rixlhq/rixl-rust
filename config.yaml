@@ -5,7 +5,7 @@ useSingleRequestParameter: true
 useBonBuilder: true
 topLevelApiClient: true
 licenseInfo: MIT
-infoEmail: Maksim Sosnovskii <maksim@rixl.com>
+infoEmail: Max Sosnovsky <maksim@rixl.com>
 appDescription: Official Rust SDK for the Rixl API platform
 repositoryUrl: https://github.com/rixlhq/rixl-rust
 homePageUrl: https://rixl.com

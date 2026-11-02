@@ -18,8 +18,8 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
+      release_created: ${{ steps.release.outputs['sdk--release_created'] }}
+      tag_name: ${{ steps.release.outputs['sdk--tag_name'] }}
     steps:
       - uses: googleapis/release-please-action@v5
         id: release
@@ -33,6 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release-please.outputs.tag_name }}
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
