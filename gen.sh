@@ -13,13 +13,16 @@ curl -fsSL \
 # it, dotted path params break format!, and a oneOf with array and null variants
 # generates an invalid enum. Value without oneOf becomes serde_json::Value.
 # Dropping the proto package from operationIds keeps method names short.
+# The spec declares security schemes but applies them to no operation, so the
+# generator would omit credentials from every request.
 yq -i '
   .servers = [{"url": "https://api.rixl.com"}] |
   del(.. | select(tag == "!!map") | .not) |
   .components.schemas["google.protobuf.Value"] |= del(.oneOf) |
   .paths |= with_entries(.key |= sub("\{(\w+)\.(\w+)\}"; "{${1}_${2}}")) |
   (.paths[][].parameters[]? | select(.in == "path") | .name) |= sub("\."; "_") |
-  (.paths[][].operationId | select(. != null)) |= sub("^.*\."; "")
+  (.paths[][].operationId | select(. != null)) |= sub("^.*\."; "") |
+  (.paths[][] | select(tag == "!!map" and has("operationId"))).security = [{"Bearer": []}, {"ApiKeyAuth": []}]
 ' openapi.yaml
 
 # Preserve existing crate version if sdk/Cargo.toml exists
