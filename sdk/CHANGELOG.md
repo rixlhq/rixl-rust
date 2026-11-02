@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/rixlhq/rixl-rust/compare/v1.0.1...v1.1.0) (2026-11-02)
+
+
+### Features
+
+* use rustls and bon by default without feature flags ([c08bb8f](https://github.com/rixlhq/rixl-rust/commit/c08bb8f7b158242ae8b57a3715281ac1388f17ae))
+
 ## [1.0.1](https://github.com/rixlhq/rixl-rust/compare/v1.0.0...v1.0.1) (2026-11-02)
 
 
