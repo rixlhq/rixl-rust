@@ -63,8 +63,7 @@ impl CustomDomainsApiClient {
 
 
 /// struct for passing parameters to the method [`CustomDomainsApi::check_domain_verification`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CheckDomainVerificationParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -73,8 +72,7 @@ pub struct CheckDomainVerificationParams {
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::create_domain_verification`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateDomainVerificationParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,
@@ -82,8 +80,7 @@ pub struct CreateDomainVerificationParams {
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::get_domain_auto_join`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDomainAutoJoinParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -92,8 +89,7 @@ pub struct GetDomainAutoJoinParams {
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::get_domain_status`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDomainStatusParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -102,8 +98,7 @@ pub struct GetDomainStatusParams {
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::remove_domain`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RemoveDomainParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -112,8 +107,7 @@ pub struct RemoveDomainParams {
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::set_domain_auto_join`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SetDomainAutoJoinParams {
     /// The user.org_id path parameter.
     pub user_org_id: String,

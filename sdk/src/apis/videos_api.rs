@@ -58,8 +58,7 @@ impl VideosApiClient {
 
 
 /// struct for passing parameters to the method [`VideosApi::create_video_upload`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateVideoUploadParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -67,8 +66,7 @@ pub struct CreateVideoUploadParams {
 }
 
 /// struct for passing parameters to the method [`VideosApi::delete_video`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteVideoParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -77,16 +75,14 @@ pub struct DeleteVideoParams {
 }
 
 /// struct for passing parameters to the method [`VideosApi::get_video`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetVideoParams {
     /// The video_id path parameter.
     pub video_id: String
 }
 
 /// struct for passing parameters to the method [`VideosApi::list_videos`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListVideosParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -101,8 +97,7 @@ pub struct ListVideosParams {
 }
 
 /// struct for passing parameters to the method [`VideosApi::update_video_visibility`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateVideoVisibilityParams {
     /// The project_id path parameter.
     pub project_id: String,

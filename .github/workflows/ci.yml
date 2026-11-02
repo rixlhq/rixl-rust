@@ -36,11 +36,8 @@ jobs:
       - name: Clippy
         run: cargo clippy -p rixl-examples --all-targets --locked --no-deps -- -D warnings
 
-      - name: Build with native-tls
+      - name: Build
         run: cargo build --workspace --all-targets --locked
-
-      - name: Build with rustls
-        run: cargo build -p rixl --no-default-features --features rustls,bon --locked
 
       - name: Run tests
         run: cargo test --workspace --locked

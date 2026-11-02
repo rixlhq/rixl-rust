@@ -63,16 +63,14 @@ impl UsageApiClient {
 
 
 /// struct for passing parameters to the method [`UsageApi::get_bandwidth_usage`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetBandwidthUsageParams {
     /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsageApi::get_bandwidth_usage_history`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetBandwidthUsageHistoryParams {
     /// The org_id query parameter.
     pub org_id: Option<String>,
@@ -81,16 +79,14 @@ pub struct GetBandwidthUsageHistoryParams {
 }
 
 /// struct for passing parameters to the method [`UsageApi::get_storage_usage`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetStorageUsageParams {
     /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsageApi::get_storage_usage_history`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetStorageUsageHistoryParams {
     /// The org_id query parameter.
     pub org_id: Option<String>,
@@ -99,16 +95,14 @@ pub struct GetStorageUsageHistoryParams {
 }
 
 /// struct for passing parameters to the method [`UsageApi::refresh_bandwidth_usage`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RefreshBandwidthUsageParams {
     /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsageApi::refresh_storage_usage`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RefreshStorageUsageParams {
     /// The org_id query parameter.
     pub org_id: Option<String>

@@ -38,10 +38,11 @@ $OPENAPI_GENERATOR generate \
   ${CURRENT_VERSION:+--additional-properties "packageVersion=${CURRENT_VERSION}"} \
   --skip-validate-spec
 
-# Enable the bon builder feature by default — better DX for callers.
-sed -i.bak 's/^default = \["native-tls"\]$/default = ["native-tls", "bon"]/' sdk/Cargo.toml
-# Ensure readme, keywords, and categories are present in sdk/Cargo.toml
-sed -i.bak 's/^edition = "2021"$/edition = "2021"\nreadme = "README.md"\nkeywords = ["rixl", "sdk", "api"]\ncategories = ["api-bindings", "web-programming"]/' sdk/Cargo.toml
+# Configure reqwest with rustls, bon as direct dependency, and metadata
+sed -i.bak 's/^reqwest = .*/reqwest = { version = "^0.13", default-features = false, features = ["rustls", "json", "multipart", "stream", "query", "form"] }/' sdk/Cargo.toml
+sed -i.bak 's/^bon = .*/bon = "2.3"/' sdk/Cargo.toml
+sed -i.bak '/^\[features\]/,$d' sdk/Cargo.toml
+sed -i.bak 's/^edition = \"2021\"$/edition = \"2021\"\\nreadme = \"README.md\"\\nkeywords = [\"rixl\", \"sdk\", \"api\"]\\ncategories = [\"api-bindings\", \"web-programming\"]/' sdk/Cargo.toml
 rm -f sdk/Cargo.toml.bak
 
 # Enum query params already carry the models:: prefix the template adds.

@@ -15,19 +15,7 @@ Add `rixl` to your `Cargo.toml`:
 rixl = "1.0"
 ```
 
-Requires Rust 1.75+ and `tokio`. The `bon` builder and `native-tls` features are enabled by default.
-
-### Features
-
-- `default = ["native-tls", "bon"]`
-- `rustls`: Use `rustls` instead of `native-tls` for TLS connections.
-- `bon`: Fluent builder pattern for all API requests.
-
-To use `rustls`:
-```toml
-[dependencies]
-rixl = { version = "1.0", default-features = false, features = ["rustls", "bon"] }
-```
+Requires Rust 1.75+ and `tokio`. Built with pure-Rust `rustls` (zero OpenSSL/C system dependencies) and the fluent `bon` builder out-of-the-box.
 
 ## Quick start
 

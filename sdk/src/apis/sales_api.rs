@@ -38,8 +38,7 @@ impl SalesApiClient {
 
 
 /// struct for passing parameters to the method [`SalesApi::contact_sales`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ContactSalesParams {
     pub billing_v1_contact_sales_request: models::BillingV1ContactSalesRequest
 }

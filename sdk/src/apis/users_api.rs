@@ -63,46 +63,40 @@ impl UsersApiClient {
 
 
 /// struct for passing parameters to the method [`UsersApi::create_avatar_upload`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateAvatarUploadParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsersApi::get_user`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetUserParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsersApi::get_user_info`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetUserInfoParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsersApi::update_name`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateNameParams {
     pub auth_v1_update_name_request: models::AuthV1UpdateNameRequest
 }
 
 /// struct for passing parameters to the method [`UsersApi::update_user_avatar`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateUserAvatarParams {
     pub auth_v1_update_user_avatar_request: models::AuthV1UpdateUserAvatarRequest
 }
 
 /// struct for passing parameters to the method [`UsersApi::update_username`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateUsernameParams {
     pub auth_v1_update_username_request: models::AuthV1UpdateUsernameRequest
 }

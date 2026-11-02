@@ -43,8 +43,7 @@ impl HeatmapsApiClient {
 
 
 /// struct for passing parameters to the method [`HeatmapsApi::get_hot_segments`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetHotSegmentsParams {
     /// The video_id path parameter.
     pub video_id: String,
@@ -55,8 +54,7 @@ pub struct GetHotSegmentsParams {
 }
 
 /// struct for passing parameters to the method [`HeatmapsApi::get_video_heatmap`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetVideoHeatmapParams {
     /// The video_id path parameter.
     pub video_id: String,

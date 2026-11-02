@@ -83,8 +83,7 @@ impl WebhooksApiClient {
 
 
 /// struct for passing parameters to the method [`WebhooksApi::create_endpoint`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateEndpointParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -92,8 +91,7 @@ pub struct CreateEndpointParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::delete_endpoint`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteEndpointParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -102,8 +100,7 @@ pub struct DeleteEndpointParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::get_endpoint`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetEndpointParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -112,8 +109,7 @@ pub struct GetEndpointParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::list_endpoint_attempts`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListEndpointAttemptsParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -126,8 +122,7 @@ pub struct ListEndpointAttemptsParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::list_endpoints`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListEndpointsParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -138,8 +133,7 @@ pub struct ListEndpointsParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::list_events`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListEventsParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -150,8 +144,7 @@ pub struct ListEventsParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::replay_event`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ReplayEventParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -162,8 +155,7 @@ pub struct ReplayEventParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::rotate_endpoint_secret`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RotateEndpointSecretParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -172,8 +164,7 @@ pub struct RotateEndpointSecretParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::send_test_event`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SendTestEventParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -182,8 +173,7 @@ pub struct SendTestEventParams {
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::update_endpoint`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateEndpointParams {
     /// The project_id path parameter.
     pub project_id: String,

@@ -43,8 +43,7 @@ impl PostAnalyticsApiClient {
 
 
 /// struct for passing parameters to the method [`PostAnalyticsApi::get_post_stats`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPostStatsParams {
     /// The post_id path parameter.
     pub post_id: String,
@@ -55,8 +54,7 @@ pub struct GetPostStatsParams {
 }
 
 /// struct for passing parameters to the method [`PostAnalyticsApi::get_top_posts`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTopPostsParams {
     /// The limit query parameter.
     pub limit: Option<i32>,

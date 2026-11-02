@@ -48,15 +48,13 @@ impl ImageConversionApiClient {
 
 
 /// struct for passing parameters to the method [`ImageConversionApi::mark_image_failed`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct MarkImageFailedParams {
     pub images_v1_mark_image_failed_request: models::ImagesV1MarkImageFailedRequest
 }
 
 /// struct for passing parameters to the method [`ImageConversionApi::mark_image_processed`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct MarkImageProcessedParams {
     pub images_v1_mark_image_processed_request: models::ImagesV1MarkImageProcessedRequest
 }

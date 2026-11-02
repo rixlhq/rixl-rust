@@ -78,65 +78,56 @@ impl EmailApiClient {
 
 
 /// struct for passing parameters to the method [`EmailApi::add_email`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct AddEmailParams {
     pub auth_v1_add_email_request: models::AuthV1AddEmailRequest
 }
 
 /// struct for passing parameters to the method [`EmailApi::get_user_email_status`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetUserEmailStatusParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`EmailApi::initiate_email_change`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct InitiateEmailChangeParams {
     pub auth_v1_initiate_email_change_request: models::AuthV1InitiateEmailChangeRequest
 }
 
 /// struct for passing parameters to the method [`EmailApi::login`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct LoginParams {
     pub auth_v1_login_request: models::AuthV1LoginRequest
 }
 
 /// struct for passing parameters to the method [`EmailApi::register`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RegisterParams {
     pub auth_v1_register_request: models::AuthV1RegisterRequest
 }
 
 /// struct for passing parameters to the method [`EmailApi::resend_verification`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ResendVerificationParams {
     pub auth_v1_resend_verification_request: models::AuthV1ResendVerificationRequest
 }
 
 /// struct for passing parameters to the method [`EmailApi::reset_password`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ResetPasswordParams {
     pub auth_v1_reset_password_request: models::AuthV1ResetPasswordRequest
 }
 
 /// struct for passing parameters to the method [`EmailApi::send_password_reset`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SendPasswordResetParams {
     pub auth_v1_send_password_reset_request: models::AuthV1SendPasswordResetRequest
 }
 
 /// struct for passing parameters to the method [`EmailApi::verify_email`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct VerifyEmailParams {
     pub auth_v1_verify_email_request: models::AuthV1VerifyEmailRequest
 }

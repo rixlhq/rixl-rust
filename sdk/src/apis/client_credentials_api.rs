@@ -53,15 +53,13 @@ impl ClientCredentialsApiClient {
 
 
 /// struct for passing parameters to the method [`ClientCredentialsApi::create_client_credential`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateClientCredentialParams {
     pub clientauth_v1_create_client_credential_request: models::ClientauthV1CreateClientCredentialRequest
 }
 
 /// struct for passing parameters to the method [`ClientCredentialsApi::list_client_credentials`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListClientCredentialsParams {
     /// The org_id query parameter.
     pub org_id: Option<String>,
@@ -72,15 +70,13 @@ pub struct ListClientCredentialsParams {
 }
 
 /// struct for passing parameters to the method [`ClientCredentialsApi::mint_client_token`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct MintClientTokenParams {
     pub clientauth_v1_mint_client_token_request: models::ClientauthV1MintClientTokenRequest
 }
 
 /// struct for passing parameters to the method [`ClientCredentialsApi::revoke_client_credential`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RevokeClientCredentialParams {
     /// The credential_id path parameter.
     pub credential_id: String,

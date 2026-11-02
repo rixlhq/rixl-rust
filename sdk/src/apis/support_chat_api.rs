@@ -43,8 +43,7 @@ impl SupportChatApiClient {
 
 
 /// struct for passing parameters to the method [`SupportChatApi::list_chat_messages`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListChatMessagesParams {
     /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.
     pub after: Option<chrono::DateTime<chrono::FixedOffset>>,
@@ -53,8 +52,7 @@ pub struct ListChatMessagesParams {
 }
 
 /// struct for passing parameters to the method [`SupportChatApi::send_chat_message`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SendChatMessageParams {
     pub support_v1_send_chat_message_request: models::SupportV1SendChatMessageRequest
 }

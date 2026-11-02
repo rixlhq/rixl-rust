@@ -43,15 +43,13 @@ impl VideoConversionApiClient {
 
 
 /// struct for passing parameters to the method [`VideoConversionApi::mark_video_failed`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct MarkVideoFailedParams {
     pub videos_v1_mark_video_failed_request: models::VideosV1MarkVideoFailedRequest
 }
 
 /// struct for passing parameters to the method [`VideoConversionApi::mark_video_processed`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct MarkVideoProcessedParams {
     pub videos_v1_mark_video_processed_request: models::VideosV1MarkVideoProcessedRequest
 }

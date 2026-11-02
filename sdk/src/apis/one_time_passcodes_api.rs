@@ -63,47 +63,41 @@ impl OneTimePasscodesApiClient {
 
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::delete_otp`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteOtpParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::get_otp_status`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetOtpStatusParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::regenerate_backup_codes`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RegenerateBackupCodesParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::setup_otp`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SetupOtpParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::verify_otp`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct VerifyOtpParams {
     pub auth_v1_verify_otp_request: models::AuthV1VerifyOtpRequest
 }
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::verify_totp_for_login`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct VerifyTotpForLoginParams {
     pub auth_v1_verify_totp_for_login_request: models::AuthV1VerifyTotpForLoginRequest
 }

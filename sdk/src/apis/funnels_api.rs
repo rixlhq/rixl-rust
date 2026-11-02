@@ -43,15 +43,13 @@ impl FunnelsApiClient {
 
 
 /// struct for passing parameters to the method [`FunnelsApi::get_funnel_analytics`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetFunnelAnalyticsParams {
     pub analytics_v1_funnel_request: models::AnalyticsV1FunnelRequest
 }
 
 /// struct for passing parameters to the method [`FunnelsApi::get_retention_analytics`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetRetentionAnalyticsParams {
     pub analytics_v1_get_retention_request: models::AnalyticsV1GetRetentionRequest
 }

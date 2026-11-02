@@ -43,8 +43,7 @@ impl FeedAnalyticsApiClient {
 
 
 /// struct for passing parameters to the method [`FeedAnalyticsApi::get_feed_stats`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetFeedStatsParams {
     /// The feed_id path parameter.
     pub feed_id: String,
@@ -55,8 +54,7 @@ pub struct GetFeedStatsParams {
 }
 
 /// struct for passing parameters to the method [`FeedAnalyticsApi::get_top_feeds`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTopFeedsParams {
     /// The limit query parameter.
     pub limit: Option<i32>,

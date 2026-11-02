@@ -88,8 +88,7 @@ impl PostsApiClient {
 
 
 /// struct for passing parameters to the method [`PostsApi::create_post`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreatePostParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -99,8 +98,7 @@ pub struct CreatePostParams {
 }
 
 /// struct for passing parameters to the method [`PostsApi::create_post_upload`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreatePostUploadParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -110,8 +108,7 @@ pub struct CreatePostUploadParams {
 }
 
 /// struct for passing parameters to the method [`PostsApi::delete_post`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePostParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -122,8 +119,7 @@ pub struct DeletePostParams {
 }
 
 /// struct for passing parameters to the method [`PostsApi::delete_post2`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePost2Params {
     /// The project_id path parameter.
     pub project_id: String,
@@ -134,8 +130,7 @@ pub struct DeletePost2Params {
 }
 
 /// struct for passing parameters to the method [`PostsApi::get_post`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPostParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -146,8 +141,7 @@ pub struct GetPostParams {
 }
 
 /// struct for passing parameters to the method [`PostsApi::get_post2`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPost2Params {
     /// The project_id path parameter.
     pub project_id: String,
@@ -158,8 +152,7 @@ pub struct GetPost2Params {
 }
 
 /// struct for passing parameters to the method [`PostsApi::get_post3`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPost3Params {
     /// Populated from feed-scoped routes; the handler resolves by post_id, so this  is used only for path binding / optional validation.
     pub feed_id: String,
@@ -170,8 +163,7 @@ pub struct GetPost3Params {
 }
 
 /// struct for passing parameters to the method [`PostsApi::list_posts`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPostsParams {
     /// The project_id path parameter.
     pub project_id: String,
@@ -186,8 +178,7 @@ pub struct ListPostsParams {
 }
 
 /// struct for passing parameters to the method [`PostsApi::list_posts2`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPosts2Params {
     /// The project_id path parameter.
     pub project_id: String,
@@ -202,8 +193,7 @@ pub struct ListPosts2Params {
 }
 
 /// struct for passing parameters to the method [`PostsApi::list_posts3`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPosts3Params {
     /// The feed_id path parameter.
     pub feed_id: String,
@@ -218,8 +208,7 @@ pub struct ListPosts3Params {
 }
 
 /// struct for passing parameters to the method [`PostsApi::list_posts4`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPosts4Params {
     /// The feed_id path parameter.
     pub feed_id: String,

@@ -58,8 +58,7 @@ impl ApiKeysApiClient {
 
 
 /// struct for passing parameters to the method [`ApiKeysApi::create_api_key`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateApiKeyParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -67,8 +66,7 @@ pub struct CreateApiKeyParams {
 }
 
 /// struct for passing parameters to the method [`ApiKeysApi::delete_api_key`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteApiKeyParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -77,8 +75,7 @@ pub struct DeleteApiKeyParams {
 }
 
 /// struct for passing parameters to the method [`ApiKeysApi::list_api_keys`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListApiKeysParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -89,8 +86,7 @@ pub struct ListApiKeysParams {
 }
 
 /// struct for passing parameters to the method [`ApiKeysApi::rotate_api_key`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct RotateApiKeyParams {
     /// The org_id path parameter.
     pub org_id: String,
@@ -99,8 +95,7 @@ pub struct RotateApiKeyParams {
 }
 
 /// struct for passing parameters to the method [`ApiKeysApi::update_api_key`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateApiKeyParams {
     /// The org_id path parameter.
     pub org_id: String,

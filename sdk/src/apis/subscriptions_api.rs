@@ -58,31 +58,27 @@ impl SubscriptionsApiClient {
 
 
 /// struct for passing parameters to the method [`SubscriptionsApi::cancel_subscription`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CancelSubscriptionParams {
     /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`SubscriptionsApi::create_subscription`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateSubscriptionParams {
     pub billing_v1_create_subscription_request: models::BillingV1CreateSubscriptionRequest
 }
 
 /// struct for passing parameters to the method [`SubscriptionsApi::get_subscription`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetSubscriptionParams {
     /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`SubscriptionsApi::get_subscription_history`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetSubscriptionHistoryParams {
     /// The org_id query parameter.
     pub org_id: Option<String>,
@@ -93,8 +89,7 @@ pub struct GetSubscriptionHistoryParams {
 }
 
 /// struct for passing parameters to the method [`SubscriptionsApi::reactivate_subscription`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ReactivateSubscriptionParams {
     /// The org_id query parameter.
     pub org_id: Option<String>

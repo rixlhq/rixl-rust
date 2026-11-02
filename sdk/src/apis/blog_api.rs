@@ -58,39 +58,34 @@ impl BlogApiClient {
 
 
 /// struct for passing parameters to the method [`BlogApi::get_blog_subscription`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetBlogSubscriptionParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`BlogApi::send_blog_broadcast`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SendBlogBroadcastParams {
     pub auth_v1_send_blog_broadcast_request: models::AuthV1SendBlogBroadcastRequest
 }
 
 /// struct for passing parameters to the method [`BlogApi::subscribe_blog`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct SubscribeBlogParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`BlogApi::unsubscribe_blog`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UnsubscribeBlogParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`BlogApi::unsubscribe_blog_by_email`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct UnsubscribeBlogByEmailParams {
     pub auth_v1_unsubscribe_blog_by_email_request: models::AuthV1UnsubscribeBlogByEmailRequest
 }

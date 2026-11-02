@@ -48,15 +48,13 @@ impl SocialProvidersApiClient {
 
 
 /// struct for passing parameters to the method [`SocialProvidersApi::connect_provider`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ConnectProviderParams {
     pub auth_v1_connect_provider_request: models::AuthV1ConnectProviderRequest
 }
 
 /// struct for passing parameters to the method [`SocialProvidersApi::disconnect_provider`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct DisconnectProviderParams {
     /// The provider path parameter.
     pub provider: String,
@@ -65,8 +63,7 @@ pub struct DisconnectProviderParams {
 }
 
 /// struct for passing parameters to the method [`SocialProvidersApi::list_providers`]
-#[derive(Clone, Debug)]
-#[cfg_attr(feature = "bon", derive(::bon::Builder))]
+#[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListProvidersParams {
     /// The user_id query parameter.
     pub user_id: Option<String>
