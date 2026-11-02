@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/rixlhq/rixl-rust/compare/v1.0.0...v1.0.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* update crate installation and documentation in README ([6ac5ecb](https://github.com/rixlhq/rixl-rust/commit/6ac5ecb859a64fed42962c93a8d8f2aedc63e3b7))
+
 ## [1.0.0](https://github.com/rixlhq/rixl-rust/compare/v0.1.0...v1.0.0) (2026-11-02)
 
 

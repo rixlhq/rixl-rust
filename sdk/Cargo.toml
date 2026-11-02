@@ -1,6 +1,6 @@
 [package]
 name = "rixl"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Max Sosnovsky <maksim@rixl.com>"]
 description = "Official Rust SDK for the Rixl API platform"
 license = "MIT"
