@@ -22,6 +22,12 @@ yq -i '
   (.paths[][].operationId | select(. != null)) |= sub("^.*\."; "")
 ' openapi.yaml
 
+# Preserve existing crate version if sdk/Cargo.toml exists
+CURRENT_VERSION=""
+if [ -f sdk/Cargo.toml ]; then
+  CURRENT_VERSION=$(sed -n 's/^version = "\(.*\)"/\1/p' sdk/Cargo.toml | head -n1)
+fi
+
 rm -rf sdk
 $OPENAPI_GENERATOR generate \
   -i openapi.yaml \
@@ -29,10 +35,13 @@ $OPENAPI_GENERATOR generate \
   -o sdk \
   -c config.yaml \
   -t templates \
+  ${CURRENT_VERSION:+--additional-properties "packageVersion=${CURRENT_VERSION}"} \
   --skip-validate-spec
 
 # Enable the bon builder feature by default — better DX for callers.
 sed -i.bak 's/^default = \["native-tls"\]$/default = ["native-tls", "bon"]/' sdk/Cargo.toml
+# Ensure readme, keywords, and categories are present in sdk/Cargo.toml
+sed -i.bak 's/^edition = "2021"$/edition = "2021"\nreadme = "README.md"\nkeywords = ["rixl", "sdk", "api"]\ncategories = ["api-bindings", "web-programming"]/' sdk/Cargo.toml
 rm -f sdk/Cargo.toml.bak
 
 # Enum query params already carry the models:: prefix the template adds.
