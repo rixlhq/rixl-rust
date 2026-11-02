@@ -1,15 +1,33 @@
-# rixl-rust
+# rixl
 
-Rust client for the [RIXL](https://rixl.com) API.
+[![Crates.io](https://img.shields.io/crates/v/rixl.svg)](https://crates.io/crates/rixl)
+[![Documentation](https://docs.rs/rixl/badge.svg)](https://docs.rs/rixl)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Official Rust SDK for the [RIXL](https://rixl.com) API platform.
 
 ## Install
 
+Add `rixl` to your `Cargo.toml`:
+
 ```toml
 [dependencies]
-rixl = "0.1"
+rixl = "1.0"
 ```
 
-Requires Rust 1.75+ and `tokio`. The `bon` builder feature is on by default.
+Requires Rust 1.75+ and `tokio`. The `bon` builder and `native-tls` features are enabled by default.
+
+### Features
+
+- `default = ["native-tls", "bon"]`
+- `rustls`: Use `rustls` instead of `native-tls` for TLS connections.
+- `bon`: Fluent builder pattern for all API requests.
+
+To use `rustls`:
+```toml
+[dependencies]
+rixl = { version = "1.0", default-features = false, features = ["rustls", "bon"] }
+```
 
 ## Quick start
 

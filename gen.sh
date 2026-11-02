@@ -48,3 +48,6 @@ rm -f sdk/Cargo.toml.bak
 find sdk/src/apis -name '*.rs' -exec sed -i.bak 's/models::models::/models::/g' {} +
 find sdk/src/apis -name '*.bak' -delete
 rm -f sdk/.travis.yml
+
+# Replace generated sdk/README.md with the root curated README.md
+cp README.md sdk/README.md
