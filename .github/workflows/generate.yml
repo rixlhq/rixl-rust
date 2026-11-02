@@ -1,0 +1,46 @@
+name: Generate SDK
+
+on:
+  repository_dispatch:
+    types: [regenerate-sdk]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+env:
+  OPENAPI_GENERATOR_VERSION: 7.22.0
+  # Keep rustup state inside the mise data dir so the mise-action cache
+  # restores the full Rust toolchain (not just mise's install marker).
+  MISE_RUSTUP_HOME: /home/runner/.local/share/mise/rustup
+  MISE_CARGO_HOME: /home/runner/.local/share/mise/cargo
+
+jobs:
+  generate-sdk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.BUILD_GITHUB_TOKEN }}
+
+      - uses: jdx/mise-action@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install openapi-generator
+        run: curl -fsSL "https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$OPENAPI_GENERATOR_VERSION/openapi-generator-cli-$OPENAPI_GENERATOR_VERSION.jar" -o "$RUNNER_TEMP/openapi-generator.jar"
+
+      - name: Generate
+        run: OPENAPI_GENERATOR="java -jar $RUNNER_TEMP/openapi-generator.jar" ./gen.sh
+
+      - name: Build
+        run: cargo build --workspace --all-targets
+
+      - uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "feat(sdk): regenerate based on latest OpenAPI spec"
+          file_pattern: "sdk/* Cargo.lock"
