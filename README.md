@@ -26,10 +26,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }));
 
     let page = client.images_api()
-        .list(images_api::ListParams::builder().limit(50).build())
+        .list_images(images_api::ListImagesParams::builder()
+            .project_id(std::env::var("RIXL_PROJECT_ID")?)
+            .pagination_limit(50)
+            .build())
         .await?;
 
-    for img in page.data.unwrap_or_default() {
+    for img in page.images.unwrap_or_default() {
         if let Some(id) = &img.id { println!("{id}"); }
     }
     Ok(())
@@ -47,7 +50,7 @@ Configuration {
     ..Configuration::new()
 }
 
-// Bearer token (e.g. minted via /clientauth/token)
+// Bearer token (e.g. from `client_credentials_api().mint_client_token`)
 Configuration {
     bearer_access_token: Some(token),
     ..Configuration::new()
@@ -56,57 +59,64 @@ Configuration {
 
 See [examples/src/bin/auth.rs](examples/src/bin/auth.rs) for a full client-credentials JWT flow.
 
-## Feeds
+## Posts
 
 ```rust
-use rixl::apis::feeds;
+use rixl::apis::posts_api;
 
-let page = client.feeds_api().list(feeds_api::ListParams::builder().feed_id(feed_id).build()).await?;
-let post = client.feeds_api().get(feeds_api::GetParams::builder().feed_id(feed_id).post_id(post_id).build()).await?;
+let page = client.posts_api()
+    .list_posts(posts_api::ListPostsParams::builder().project_id(project_id).feed_id(feed_id).build())
+    .await?;
+let resp = client.posts_api()
+    .get_post(posts_api::GetPostParams::builder().project_id(project_id).post_id(post_id).build())
+    .await?;
 ```
 
 ## Images
 
 ```rust
-use rixl::apis::images;
+use rixl::apis::images_api;
 
-let page = client.images_api().list(images_api::ListParams::builder().build()).await?;
-let img  = client.images_api().get(images_api::GetParams::builder().image_id(image_id).build()).await?;
-client.images_api().delete(images_api::DeleteParams::builder().image_id(image_id).build()).await?;
+let page = client.images_api()
+    .list_images(images_api::ListImagesParams::builder().project_id(project_id).build())
+    .await?;
+let resp = client.images_api()
+    .get_image(images_api::GetImageParams::builder().image_id(image_id).build())
+    .await?;
+client.images_api()
+    .delete_image(images_api::DeleteImageParams::builder().image_id(image_id).build())
+    .await?;
 ```
 
-Upload (init → PUT bytes → complete):
+Upload (create the upload, then PUT the bytes):
 
 ```rust
-use rixl::apis::images;
-use rixl::models::{ImageUploadInitRequest, ImageUploadCompleteRequest};
+use rixl::apis::images_api;
+use rixl::models::CreateImageUploadRequest;
 
-let init = client.images_api()
-    .upload_init(images_api::UploadInitParams::builder()
-        .image_upload_init_request(ImageUploadInitRequest {
+let upload = client.images_api()
+    .create_image_upload(images_api::CreateImageUploadParams::builder()
+        .project_id(project_id)
+        .create_image_upload_request(CreateImageUploadRequest {
             name: Some("photo.jpg".into()),
-            format: Some("jpeg".into()),
+            ..CreateImageUploadRequest::new()
         })
         .build())
     .await?;
-// PUT bytes to init.presigned_url, then:
-let img = client.images_api()
-    .upload_complete(images_api::UploadCompleteParams::builder()
-        .image_upload_complete_request(ImageUploadCompleteRequest {
-            image_id: init.image_id,
-            attached_to_video: Some(false),
-        })
-        .build())
-    .await?;
+// PUT bytes to upload.upload_url
 ```
 
 ## Videos
 
 ```rust
-use rixl::apis::videos;
+use rixl::apis::videos_api;
 
-let page  = client.videos_api().list(videos_api::ListParams::builder().build()).await?;
-let video = client.videos_api().get(videos_api::GetParams::builder().video_id(video_id).build()).await?;
+let page = client.videos_api()
+    .list_videos(videos_api::ListVideosParams::builder().project_id(project_id).build())
+    .await?;
+let resp = client.videos_api()
+    .get_video(videos_api::GetVideoParams::builder().video_id(video_id).build())
+    .await?;
 ```
 
 Upload returns presigned URLs for both the video and a poster image — see [examples/src/bin/upload_video.rs](examples/src/bin/upload_video.rs).
@@ -114,18 +124,21 @@ Upload returns presigned URLs for both the video and a poster image — see [exa
 ## Pagination
 
 ```rust
-use rixl::apis::images;
+use rixl::apis::images_api;
 
 let mut offset = 0;
 let limit = 50;
 loop {
     let page = client.images_api()
-        .list(images_api::ListParams::builder().limit(limit).offset(offset).build())
+        .list_images(images_api::ListImagesParams::builder()
+            .project_id(project_id.clone())
+            .pagination_limit(limit)
+            .pagination_offset(offset)
+            .build())
         .await?;
-    let data = page.data.unwrap_or_default();
+    let data = page.images.unwrap_or_default();
     for img in &data { /* ... */ }
-    let total = page.pagination.and_then(|p| p.total).unwrap_or(0);
-    if offset + data.len() as i32 >= total { break; }
+    if (data.len() as i32) < limit { break; }
     offset += limit;
 }
 ```
@@ -137,7 +150,7 @@ API methods return `Result<T, rixl::apis::Error<E>>`. `Error::ResponseError` car
 ```rust
 use rixl::apis::Error;
 
-match client.images_api().get(images_api::GetParams::builder().image_id(id).build()).await {
+match client.images_api().get_image(images_api::GetImageParams::builder().image_id(id).build()).await {
     Ok(img) => println!("{:?}", img),
     Err(Error::ResponseError(e)) => eprintln!("HTTP {}: {}", e.status, e.content),
     Err(e) => return Err(e.into()),
@@ -150,6 +163,7 @@ Runnable demos in [examples/src/bin/](examples/src/bin):
 
 ```bash
 export RIXL_API_KEY=<key>
+export RIXL_PROJECT_ID=<project>
 cargo run -p rixl-examples --bin images
 cargo run -p rixl-examples --bin upload_video
 ```
@@ -158,14 +172,14 @@ Available bins: `images`, `feeds`, `videos`, `posts`, `auth`, `upload_image`, `u
 
 ## Regenerating the SDK
 
+The SDK regenerates automatically when `openapi.yaml` changes upstream. To run it locally:
+
 ```bash
-brew install openapi-generator openjdk
+brew install openapi-generator openjdk yq
 ./gen.sh
 ```
 
-`gen.sh` fetches the upstream OpenAPI spec, runs `openapi-generator generate` with [config.yaml](config.yaml), and post-processes the output via [post-fix.py](post-fix.py) — which (a) drops the `_api` suffix from per-tag accessors so callers write `client.videos_api()` instead of `client.videos_api()`, and (b) patches a known openapi-generator template bug on required multipart file params.
-
-`--skip-validate-spec` is required because the spec uses tag-namespaced operationIds (`list`/`get`/`delete` repeated across tags), which is per-spec-section unique but not globally unique.
+`gen.sh` fetches the upstream OpenAPI spec, adapts the shapes `openapi-generator`'s Rust target can't handle, and generates `sdk/` with [config.yaml](config.yaml). Set `OPENAPI_GENERATOR` to use a different generator command.
 
 ## Issues
 

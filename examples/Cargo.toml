@@ -9,4 +9,3 @@ rixl = { path = "../sdk" }
 reqwest = { version = "0.13", default-features = false, features = ["rustls", "json"] }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 anyhow = "1"
-serde_json = "1"
