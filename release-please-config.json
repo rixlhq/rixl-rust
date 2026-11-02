@@ -6,7 +6,10 @@
     "packages": {
         "sdk": {
             "package-name": "rixl",
-            "changelog-path": "CHANGELOG.md"
+            "changelog-path": "CHANGELOG.md",
+            "extra-files": [
+                "Cargo.lock"
+            ]
         }
     }
 }
