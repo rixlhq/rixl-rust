@@ -1,6 +1,9 @@
 // Upload flow: init -> PUT bytes to the presigned URL -> complete.
 use anyhow::{anyhow, Context, Result};
-use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, images_api};
+use rixl::apis::{
+    configuration::{ApiKey, Configuration},
+    images_api, Api, ApiClient,
+};
 use rixl::models::{ImageUploadCompleteRequest, ImageUploadInitRequest};
 use std::{env, sync::Arc};
 
@@ -11,13 +14,17 @@ async fn main() -> Result<()> {
     let api_key = env::var("RIXL_API_KEY").context("missing RIXL_API_KEY")?;
 
     let client = ApiClient::new(Arc::new(Configuration {
-        api_key: Some(ApiKey { prefix: None, key: api_key }),
+        api_key: Some(ApiKey {
+            prefix: None,
+            key: api_key,
+        }),
         ..Configuration::new()
     }));
 
     let body = reqwest::get(SAMPLE_IMAGE_URL).await?.bytes().await?;
 
-    let init = client.images_api()
+    let init = client
+        .images_api()
         .upload_init(
             images_api::UploadInitParams::builder()
                 .image_upload_init_request(ImageUploadInitRequest {
@@ -32,7 +39,8 @@ async fn main() -> Result<()> {
 
     put_bytes(&presigned, body.to_vec(), "image/jpeg").await?;
 
-    let img = client.images_api()
+    let img = client
+        .images_api()
         .upload_complete(
             images_api::UploadCompleteParams::builder()
                 .image_upload_complete_request(ImageUploadCompleteRequest {
@@ -57,7 +65,11 @@ async fn put_bytes(url: &str, body: Vec<u8>, content_type: &str) -> Result<()> {
         .send()
         .await?;
     if !resp.status().is_success() {
-        return Err(anyhow!("PUT: {}: {}", resp.status(), resp.text().await.unwrap_or_default()));
+        return Err(anyhow!(
+            "PUT: {}: {}",
+            resp.status(),
+            resp.text().await.unwrap_or_default()
+        ));
     }
     Ok(())
 }

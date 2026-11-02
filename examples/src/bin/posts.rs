@@ -1,5 +1,8 @@
 use anyhow::{Context, Result};
-use rixl::apis::{Api, ApiClient, configuration::{ApiKey, Configuration}, feeds_api};
+use rixl::apis::{
+    configuration::{ApiKey, Configuration},
+    feeds_api, Api, ApiClient,
+};
 use std::{env, sync::Arc};
 
 #[tokio::main]
@@ -9,12 +12,21 @@ async fn main() -> Result<()> {
     let post_id = env::var("RIXL_POST_ID").context("missing RIXL_POST_ID")?;
 
     let client = ApiClient::new(Arc::new(Configuration {
-        api_key: Some(ApiKey { prefix: None, key: api_key }),
+        api_key: Some(ApiKey {
+            prefix: None,
+            key: api_key,
+        }),
         ..Configuration::new()
     }));
 
-    let post = client.feeds_api()
-        .get(feeds_api::GetParams::builder().feed_id(feed_id).post_id(post_id).build())
+    let post = client
+        .feeds_api()
+        .get(
+            feeds_api::GetParams::builder()
+                .feed_id(feed_id)
+                .post_id(post_id)
+                .build(),
+        )
         .await?;
     if let Some(id) = &post.id {
         println!("post {id}");
