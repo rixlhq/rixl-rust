@@ -45,7 +45,7 @@ $OPENAPI_GENERATOR generate \
 sed -i.bak 's/^reqwest = .*/reqwest = { version = "^0.13", default-features = false, features = ["rustls", "json", "multipart", "stream", "query", "form"] }/' sdk/Cargo.toml
 sed -i.bak 's/^bon = .*/bon = "2.3"/' sdk/Cargo.toml
 sed -i.bak '/^\[features\]/,$d' sdk/Cargo.toml
-sed -i.bak 's/^edition = \"2021\"$/edition = \"2021\"\\nreadme = \"README.md\"\\nkeywords = [\"rixl\", \"sdk\", \"api\"]\\ncategories = [\"api-bindings\", \"web-programming\"]/' sdk/Cargo.toml
+perl -pi -e 's/^edition = "2021"$/edition = "2021"\nreadme = "README.md"\nkeywords = ["rixl", "sdk", "api"]\ncategories = ["api-bindings", "web-programming"]/' sdk/Cargo.toml
 rm -f sdk/Cargo.toml.bak
 
 # Enum query params already carry the models:: prefix the template adds.
