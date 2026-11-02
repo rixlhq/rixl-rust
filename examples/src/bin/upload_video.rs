@@ -1,10 +1,10 @@
-// Init returns two presigned URLs — one for the video, one for the poster image.
+// Creating the upload returns two presigned URLs — one for the video, one for the poster image.
 use anyhow::{anyhow, Context, Result};
 use rixl::apis::{
     configuration::{ApiKey, Configuration},
     videos_api, Api, ApiClient,
 };
-use rixl::models::{VideoUploadCompleteRequest, VideoUploadInitRequest};
+use rixl::models::CreateVideoUploadRequest;
 use std::{env, sync::Arc};
 
 const SAMPLE_VIDEO_URL: &str = "https://download.samplelib.com/mp4/sample-5s.mp4";
@@ -13,6 +13,7 @@ const SAMPLE_POSTER_URL: &str = "https://picsum.photos/seed/rixl/800/600.jpg";
 #[tokio::main]
 async fn main() -> Result<()> {
     let api_key = env::var("RIXL_API_KEY").context("missing RIXL_API_KEY")?;
+    let project_id = env::var("RIXL_PROJECT_ID").context("missing RIXL_PROJECT_ID")?;
 
     let client = ApiClient::new(Arc::new(Configuration {
         api_key: Some(ApiKey {
@@ -25,42 +26,29 @@ async fn main() -> Result<()> {
     let video = reqwest::get(SAMPLE_VIDEO_URL).await?.bytes().await?;
     let poster = reqwest::get(SAMPLE_POSTER_URL).await?.bytes().await?;
 
-    let init = client
+    let upload = client
         .videos_api()
-        .upload_init(
-            videos_api::UploadInitParams::builder()
-                .video_upload_init_request(VideoUploadInitRequest {
-                    file_name: "sample.mp4".into(),
-                    image_format: Some("jpeg".into()),
-                    video_quality: None,
+        .create_video_upload(
+            videos_api::CreateVideoUploadParams::builder()
+                .project_id(project_id)
+                .create_video_upload_request(CreateVideoUploadRequest {
+                    name: Some("sample.mp4".into()),
+                    ..CreateVideoUploadRequest::new()
                 })
                 .build(),
         )
         .await?;
-    let video_id = init.video_id.clone().context("init: missing video_id")?;
-    let video_url = init
-        .video_presigned_url
-        .context("init: missing video_presigned_url")?;
-    let poster_url = init
-        .poster_presigned_url
-        .context("init: missing poster_presigned_url")?;
+    let video_id = upload.video_id.context("upload: missing video_id")?;
+    let video_url = upload
+        .video_upload_url
+        .context("upload: missing video_upload_url")?;
+    let poster_url = upload
+        .poster_upload_url
+        .context("upload: missing poster_upload_url")?;
 
     put_bytes(&video_url, video.to_vec(), "video/mp4").await?;
     put_bytes(&poster_url, poster.to_vec(), "image/jpeg").await?;
-
-    let v = client
-        .videos_api()
-        .upload_complete(
-            videos_api::UploadCompleteParams::builder()
-                .video_upload_complete_request(VideoUploadCompleteRequest {
-                    video_id: Some(video_id),
-                })
-                .build(),
-        )
-        .await?;
-    if let Some(id) = &v.id {
-        println!("uploaded: {id}");
-    }
+    println!("uploaded: {video_id}");
 
     Ok(())
 }

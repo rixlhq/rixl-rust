@@ -1,10 +1,10 @@
-// Upload flow: init -> PUT bytes to the presigned URL -> complete.
+// Upload flow: create the upload -> PUT bytes to the presigned URL.
 use anyhow::{anyhow, Context, Result};
 use rixl::apis::{
     configuration::{ApiKey, Configuration},
     images_api, Api, ApiClient,
 };
-use rixl::models::{ImageUploadCompleteRequest, ImageUploadInitRequest};
+use rixl::models::CreateImageUploadRequest;
 use std::{env, sync::Arc};
 
 const SAMPLE_IMAGE_URL: &str = "https://picsum.photos/seed/rixl/800/600.jpg";
@@ -12,6 +12,7 @@ const SAMPLE_IMAGE_URL: &str = "https://picsum.photos/seed/rixl/800/600.jpg";
 #[tokio::main]
 async fn main() -> Result<()> {
     let api_key = env::var("RIXL_API_KEY").context("missing RIXL_API_KEY")?;
+    let project_id = env::var("RIXL_PROJECT_ID").context("missing RIXL_PROJECT_ID")?;
 
     let client = ApiClient::new(Arc::new(Configuration {
         api_key: Some(ApiKey {
@@ -23,36 +24,23 @@ async fn main() -> Result<()> {
 
     let body = reqwest::get(SAMPLE_IMAGE_URL).await?.bytes().await?;
 
-    let init = client
+    let upload = client
         .images_api()
-        .upload_init(
-            images_api::UploadInitParams::builder()
-                .image_upload_init_request(ImageUploadInitRequest {
+        .create_image_upload(
+            images_api::CreateImageUploadParams::builder()
+                .project_id(project_id)
+                .create_image_upload_request(CreateImageUploadRequest {
                     name: Some("sample.jpg".into()),
-                    format: Some("jpeg".into()),
+                    ..CreateImageUploadRequest::new()
                 })
                 .build(),
         )
         .await?;
-    let image_id = init.image_id.context("init: missing image_id")?;
-    let presigned = init.presigned_url.context("init: missing presigned_url")?;
+    let image_id = upload.image_id.context("upload: missing image_id")?;
+    let upload_url = upload.upload_url.context("upload: missing upload_url")?;
 
-    put_bytes(&presigned, body.to_vec(), "image/jpeg").await?;
-
-    let img = client
-        .images_api()
-        .upload_complete(
-            images_api::UploadCompleteParams::builder()
-                .image_upload_complete_request(ImageUploadCompleteRequest {
-                    image_id: Some(image_id),
-                    attached_to_video: Some(false),
-                })
-                .build(),
-        )
-        .await?;
-    if let (Some(id), Some(w), Some(h)) = (&img.id, img.width, img.height) {
-        println!("uploaded: {id} {w}x{h}");
-    }
+    put_bytes(&upload_url, body.to_vec(), "image/jpeg").await?;
+    println!("uploaded: {image_id}");
 
     Ok(())
 }
