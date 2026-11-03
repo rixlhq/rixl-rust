@@ -1,6 +1,6 @@
 [package]
 name = "rixl"
-version = "1.1.0"
+version = "1.2.0"
 authors = ["Max Sosnovsky <maksim@rixl.com>"]
 description = "Customer-facing REST API for the Rixl platform. Provides video and image upload, processing, delivery, and analytics with edge validation of API keys (X-API-Key) and bearer tokens (Authorization)."
 license = "MIT"
