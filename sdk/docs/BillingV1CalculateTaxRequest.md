@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **plan_name** | **String** |  | 
 **amount** | Option<**f64**> |  | [optional]
 **currency** | **String** |  | 
-**billing_cycle** | Option<[**models::BillingV1BillingCycle**](BillingV1BillingCycle.md)> | enum.defined_only = true  | [optional]
+**billing_cycle** | Option<[**models::BillingV1BillingCycle**](BillingV1BillingCycle.md)> |  | [optional]
 **interval_count** | Option<**String**> |  | [optional]
 **billing_address** | Option<[**models::BillingV1BillingAddress**](BillingV1BillingAddress.md)> |  | [optional]
 **line_items** | Option<[**Vec<models::BillingV1TaxLineItem>**](BillingV1TaxLineItem.md)> |  | [optional]

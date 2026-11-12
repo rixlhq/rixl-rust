@@ -20,7 +20,7 @@ ListChatMessages
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **after** | Option<**chrono::DateTime<chrono::FixedOffset>**> | A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC. |  |
-**limit** | Option<**i32**> | The limit query parameter. |  |
+**limit** | Option<**i32**> |  |  |
 
 ### Return type
 

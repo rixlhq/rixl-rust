@@ -65,46 +65,38 @@ impl UsageApiClient {
 /// struct for passing parameters to the method [`UsageApi::get_bandwidth_usage`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetBandwidthUsageParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsageApi::get_bandwidth_usage_history`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetBandwidthUsageHistoryParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>,
-    /// The days query parameter.
     pub days: Option<i32>
 }
 
 /// struct for passing parameters to the method [`UsageApi::get_storage_usage`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetStorageUsageParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsageApi::get_storage_usage_history`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetStorageUsageHistoryParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>,
-    /// The days query parameter.
     pub days: Option<i32>
 }
 
 /// struct for passing parameters to the method [`UsageApi::refresh_bandwidth_usage`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RefreshBandwidthUsageParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsageApi::refresh_storage_usage`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RefreshStorageUsageParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
@@ -467,6 +459,7 @@ impl UsageApi for UsageApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetBandwidthUsageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -474,6 +467,7 @@ pub enum GetBandwidthUsageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetBandwidthUsageHistoryError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -481,6 +475,7 @@ pub enum GetBandwidthUsageHistoryError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetStorageUsageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -488,6 +483,7 @@ pub enum GetStorageUsageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetStorageUsageHistoryError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -495,6 +491,7 @@ pub enum GetStorageUsageHistoryError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RefreshBandwidthUsageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -502,6 +499,7 @@ pub enum RefreshBandwidthUsageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RefreshStorageUsageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

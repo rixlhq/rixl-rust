@@ -19,7 +19,6 @@ pub struct CreatePostUploadRequest {
     pub creator_id: Option<String>,
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "content_type", skip_serializing_if = "Option::is_none")]
     pub content_type: Option<models::CommonV1MediaType>,
     #[serde(rename = "file_name", skip_serializing_if = "Option::is_none")]

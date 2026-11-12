@@ -17,7 +17,6 @@ pub struct VideosV1UpdateVideoVisibilityRequest {
     pub project_id: Option<String>,
     #[serde(rename = "video_id", skip_serializing_if = "Option::is_none")]
     pub video_id: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "visibility", skip_serializing_if = "Option::is_none")]
     pub visibility: Option<models::CommonV1Visibility>,
 }

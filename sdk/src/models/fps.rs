@@ -11,17 +11,16 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct Verified {
-    #[serde(rename = "verified", skip_serializing_if = "Option::is_none")]
-    pub verified: Option<Box<models::AuthV1VerifiedDomain>>,
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum Fps {
+    Number(f64),
+    String(String),
 }
 
-impl Verified {
-    pub fn new() -> Verified {
-        Verified {
-            verified: None,
-        }
+impl Default for Fps {
+    fn default() -> Self {
+        Self::Number(Default::default())
     }
 }
 

@@ -142,8 +142,8 @@ DeletePaymentMethod
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**payment_method_id** | **String** | The payment_method_id path parameter. | [required] |
-**org_id** | Option<**String**> | The org_id query parameter. |  |
+**payment_method_id** | **String** |  | [required] |
+**org_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -171,7 +171,7 @@ GetBillingAddress
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
+**org_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -224,7 +224,7 @@ GetPaymentMethodFromPaymentIntent
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**payment_intent_id** | Option<**String**> | The payment_intent_id query parameter. |  |
+**payment_intent_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -252,7 +252,7 @@ GetPaymentMethodFromSetupIntent
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**setup_intent_id** | Option<**String**> | The setup_intent_id query parameter. |  |
+**setup_intent_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -280,8 +280,8 @@ ListPaymentMethods
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
-**refresh** | Option<**bool**> | The refresh query parameter. |  |
+**org_id** | Option<**String**> |  |  |
+**refresh** | Option<**bool**> |  |  |
 
 ### Return type
 

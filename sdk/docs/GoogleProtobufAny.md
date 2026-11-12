@@ -1,10 +1,10 @@
-# Engagement
+# GoogleProtobufAny
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**engagement** | Option<[**models::AnalyticsV1EngagementEvent**](AnalyticsV1EngagementEvent.md)> |  | [optional]
+**at_type** | Option<**String**> | A URL/resource name that uniquely identifies the type of the serialized message. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

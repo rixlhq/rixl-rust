@@ -15,7 +15,6 @@ use serde::{Deserialize, Serialize};
 pub struct AnalyticsV1ContentViewEvent {
     #[serde(rename = "content_id", skip_serializing_if = "Option::is_none")]
     pub content_id: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "content_type", skip_serializing_if = "Option::is_none")]
     pub content_type: Option<models::AnalyticscommonV1MediaType>,
     #[serde(rename = "feed_id", skip_serializing_if = "Option::is_none")]
@@ -45,7 +44,6 @@ pub struct AnalyticsV1ContentViewEvent {
     pub subtitle_language: Option<String>,
     #[serde(rename = "audio_language", skip_serializing_if = "Option::is_none")]
     pub audio_language: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "quality", skip_serializing_if = "Option::is_none")]
     pub quality: Option<models::AnalyticscommonV1VideoQuality>,
 }

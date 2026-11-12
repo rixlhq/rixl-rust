@@ -22,8 +22,8 @@ CreateAudioTrackUpload
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
 **create_track_upload_request** | [**CreateTrackUploadRequest**](CreateTrackUploadRequest.md) |  | [required] |
 
 ### Return type
@@ -52,8 +52,8 @@ DeleteAllAudioTracks
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -81,9 +81,9 @@ DeleteAudioTrack
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
-**track_id** | **String** | The track_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
+**track_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -111,9 +111,9 @@ DeleteAudioTracksByLanguage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
-**language_code** | **String** | The language_code path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
+**language_code** | **String** |  | [required] |
 
 ### Return type
 
@@ -141,7 +141,7 @@ ListAudioTracks
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**video_id** | **String** | The video_id path parameter. | [required] |
+**video_id** | **String** |  | [required] |
 
 ### Return type
 

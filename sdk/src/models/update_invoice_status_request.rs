@@ -13,7 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UpdateInvoiceStatusRequest {
-    /// enum.defined_only = true 
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::BillingV1InvoiceStatus>,
 }

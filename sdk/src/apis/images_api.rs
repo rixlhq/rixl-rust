@@ -60,7 +60,6 @@ impl ImagesApiClient {
 /// struct for passing parameters to the method [`ImagesApi::create_image_upload`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateImageUploadParams {
-    /// The project_id path parameter.
     pub project_id: String,
     pub create_image_upload_request: models::CreateImageUploadRequest
 }
@@ -68,40 +67,32 @@ pub struct CreateImageUploadParams {
 /// struct for passing parameters to the method [`ImagesApi::delete_image`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteImageParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The image_id path parameter.
     pub image_id: String
 }
 
 /// struct for passing parameters to the method [`ImagesApi::get_image`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetImageParams {
-    /// The image_id path parameter.
     pub image_id: String
 }
 
 /// struct for passing parameters to the method [`ImagesApi::list_images`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListImagesParams {
-    /// The project_id path parameter.
     pub project_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
     /// Number of items to skip before collecting the result set.
     pub pagination_offset: Option<i32>,
-    /// The sort_field query parameter.
     pub sort_field: Option<String>,
-    /// The sort_direction query parameter.
     pub sort_direction: Option<String>
 }
 
 /// struct for passing parameters to the method [`ImagesApi::update_image_visibility`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateImageVisibilityParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The image_id path parameter.
     pub image_id: String,
     pub update_image_visibility_request: models::UpdateImageVisibilityRequest
 }
@@ -407,6 +398,7 @@ impl ImagesApi for ImagesApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateImageUploadError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -414,6 +406,7 @@ pub enum CreateImageUploadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteImageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -421,6 +414,7 @@ pub enum DeleteImageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetImageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -428,6 +422,7 @@ pub enum GetImageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListImagesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -435,6 +430,7 @@ pub enum ListImagesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateImageVisibilityError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

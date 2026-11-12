@@ -13,7 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UpdateVideoVisibilityRequest {
-    /// enum.defined_only = true 
     #[serde(rename = "visibility", skip_serializing_if = "Option::is_none")]
     pub visibility: Option<models::CommonV1Visibility>,
 }

@@ -15,7 +15,6 @@ use serde::{Deserialize, Serialize};
 pub struct BillingV1UpdateInvoiceStatusRequest {
     #[serde(rename = "invoice_id")]
     pub invoice_id: String,
-    /// enum.defined_only = true 
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::BillingV1InvoiceStatus>,
 }

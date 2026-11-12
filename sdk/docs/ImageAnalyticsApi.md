@@ -19,9 +19,9 @@ GetImageStats
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**image_id** | **String** | The image_id path parameter. | [required] |
-**range_start** | Option<**String**> | The range.start query parameter. |  |
-**range_end** | Option<**String**> | The range.end query parameter. |  |
+**image_id** | **String** |  | [required] |
+**range_start** | Option<**String**> |  |  |
+**range_end** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -49,9 +49,9 @@ GetTopImages
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**limit** | Option<**i32**> | The limit query parameter. |  |
-**range_start** | Option<**String**> | The range.start query parameter. |  |
-**range_end** | Option<**String**> | The range.end query parameter. |  |
+**limit** | Option<**i32**> |  |  |
+**range_start** | Option<**String**> |  |  |
+**range_end** | Option<**String**> |  |  |
 
 ### Return type
 

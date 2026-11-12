@@ -17,7 +17,6 @@ pub struct ProjectV1UpdateVideoQualityRequest {
     pub project_id: Option<String>,
     #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
     pub org_id: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "video_quality")]
     pub video_quality: models::CommonV1VideoQuality,
 }

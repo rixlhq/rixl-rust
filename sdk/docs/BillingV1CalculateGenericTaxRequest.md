@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **org_id** | Option<**String**> |  | [optional]
-**amount** | Option<**String**> |  | [optional]
+**amount** | Option<**String**> | int64.gt = 0  | [optional]
 **currency** | **String** |  | 
 **billing_address** | Option<[**models::BillingV1BillingAddress**](BillingV1BillingAddress.md)> |  | [optional]
 **line_items** | Option<[**Vec<models::BillingV1TaxLineItem>**](BillingV1TaxLineItem.md)> |  | [optional]

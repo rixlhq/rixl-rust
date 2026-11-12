@@ -124,39 +124,32 @@ pub struct CreateSetupIntentParams {
 /// struct for passing parameters to the method [`PaymentsApi::delete_payment_method`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePaymentMethodParams {
-    /// The payment_method_id path parameter.
     pub payment_method_id: String,
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::get_billing_address`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetBillingAddressParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::get_payment_method_from_payment_intent`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPaymentMethodFromPaymentIntentParams {
-    /// The payment_intent_id query parameter.
     pub payment_intent_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::get_payment_method_from_setup_intent`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPaymentMethodFromSetupIntentParams {
-    /// The setup_intent_id query parameter.
     pub setup_intent_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PaymentsApi::list_payment_methods`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPaymentMethodsParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>,
-    /// The refresh query parameter.
     pub refresh: Option<bool>
 }
 
@@ -912,6 +905,7 @@ impl PaymentsApi for PaymentsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CalculateGenericTaxError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -919,6 +913,7 @@ pub enum CalculateGenericTaxError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CalculateTaxError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -926,6 +921,7 @@ pub enum CalculateTaxError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateCheckoutSessionError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -933,6 +929,7 @@ pub enum CreateCheckoutSessionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateSetupIntentError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -940,6 +937,7 @@ pub enum CreateSetupIntentError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeletePaymentMethodError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -947,6 +945,7 @@ pub enum DeletePaymentMethodError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetBillingAddressError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -954,6 +953,7 @@ pub enum GetBillingAddressError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetBillingConfigError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -961,6 +961,7 @@ pub enum GetBillingConfigError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPaymentMethodFromPaymentIntentError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -968,6 +969,7 @@ pub enum GetPaymentMethodFromPaymentIntentError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPaymentMethodFromSetupIntentError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -975,6 +977,7 @@ pub enum GetPaymentMethodFromSetupIntentError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPaymentMethodsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -982,6 +985,7 @@ pub enum ListPaymentMethodsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpgradeSubscriptionError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -989,6 +993,7 @@ pub enum UpgradeSubscriptionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpsertBillingAddressError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -996,6 +1001,7 @@ pub enum UpsertBillingAddressError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpsertPaymentMethodError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

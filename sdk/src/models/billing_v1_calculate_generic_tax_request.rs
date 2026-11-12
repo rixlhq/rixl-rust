@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 pub struct BillingV1CalculateGenericTaxRequest {
     #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
     pub org_id: Option<String>,
+    /// int64.gt = 0 
     #[serde(rename = "amount", skip_serializing_if = "Option::is_none")]
     pub amount: Option<String>,
     #[serde(rename = "currency")]

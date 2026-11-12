@@ -173,6 +173,7 @@ impl VideoConversionApi for VideoConversionApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum MarkVideoFailedError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -180,6 +181,7 @@ pub enum MarkVideoFailedError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum MarkVideoProcessedError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

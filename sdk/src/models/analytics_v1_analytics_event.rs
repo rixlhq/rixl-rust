@@ -11,32 +11,34 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// AnalyticsV1AnalyticsEvent : At most one of `session_start`, `content_view`, `engagement`, `interaction`, `error` may be set.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AnalyticsV1AnalyticsEvent {
     /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.
     #[serde(rename = "timestamp", skip_serializing_if = "Option::is_none")]
     pub timestamp: Option<chrono::DateTime<chrono::FixedOffset>>,
+    #[serde(rename = "session_start", skip_serializing_if = "Option::is_none")]
+    pub session_start: Option<Box<models::AnalyticsV1SessionStartEvent>>,
     #[serde(rename = "content_view", skip_serializing_if = "Option::is_none")]
     pub content_view: Option<Box<models::AnalyticsV1ContentViewEvent>>,
     #[serde(rename = "engagement", skip_serializing_if = "Option::is_none")]
     pub engagement: Option<Box<models::AnalyticsV1EngagementEvent>>,
-    #[serde(rename = "error", skip_serializing_if = "Option::is_none")]
-    pub error: Option<Box<models::AnalyticsV1ErrorEvent>>,
     #[serde(rename = "interaction", skip_serializing_if = "Option::is_none")]
     pub interaction: Option<Box<models::AnalyticsV1InteractionEvent>>,
-    #[serde(rename = "session_start", skip_serializing_if = "Option::is_none")]
-    pub session_start: Option<Box<models::AnalyticsV1SessionStartEvent>>,
+    #[serde(rename = "error", skip_serializing_if = "Option::is_none")]
+    pub error: Option<Box<models::AnalyticsV1ErrorEvent>>,
 }
 
 impl AnalyticsV1AnalyticsEvent {
+    /// At most one of `session_start`, `content_view`, `engagement`, `interaction`, `error` may be set.
     pub fn new() -> AnalyticsV1AnalyticsEvent {
         AnalyticsV1AnalyticsEvent {
             timestamp: None,
+            session_start: None,
             content_view: None,
             engagement: None,
-            error: None,
             interaction: None,
-            session_start: None,
+            error: None,
         }
     }
 }

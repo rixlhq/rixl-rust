@@ -28,8 +28,8 @@ CreatePost
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**feed_id** | **String** | The feed_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**feed_id** | **String** |  | [required] |
 **create_post_request** | [**CreatePostRequest**](CreatePostRequest.md) |  | [required] |
 
 ### Return type
@@ -58,8 +58,8 @@ CreatePostUpload
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**feed_id** | **String** | The feed_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**feed_id** | **String** |  | [required] |
 **create_post_upload_request** | [**CreatePostUploadRequest**](CreatePostUploadRequest.md) |  | [required] |
 
 ### Return type
@@ -88,8 +88,8 @@ DeletePost
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**post_id** | **String** | The post_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**post_id** | **String** |  | [required] |
 **feed_id** | Option<**String**> | feed_id is accepted from the feed-scoped delete path but not used by the  backend (deletion is keyed by post_id). |  |
 
 ### Return type
@@ -118,9 +118,9 @@ DeletePost
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **feed_id** | **String** | feed_id is accepted from the feed-scoped delete path but not used by the  backend (deletion is keyed by post_id). | [required] |
-**post_id** | **String** | The post_id path parameter. | [required] |
+**post_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -148,8 +148,8 @@ GetPost
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**post_id** | **String** | The post_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**post_id** | **String** |  | [required] |
 **feed_id** | Option<**String**> | Populated from feed-scoped routes; the handler resolves by post_id, so this  is used only for path binding / optional validation. |  |
 
 ### Return type
@@ -178,9 +178,9 @@ GetPost
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **feed_id** | **String** | Populated from feed-scoped routes; the handler resolves by post_id, so this  is used only for path binding / optional validation. | [required] |
-**post_id** | **String** | The post_id path parameter. | [required] |
+**post_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -209,8 +209,8 @@ GetPost
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **feed_id** | **String** | Populated from feed-scoped routes; the handler resolves by post_id, so this  is used only for path binding / optional validation. | [required] |
-**post_id** | **String** | The post_id path parameter. | [required] |
-**project_id** | Option<**String**> | The project_id query parameter. |  |
+**post_id** | **String** |  | [required] |
+**project_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -238,11 +238,11 @@ ListPosts
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**feed_id** | **String** | The feed_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**feed_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
-**creator_id** | Option<**String**> | The creator_id query parameter. |  |
+**creator_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -270,9 +270,9 @@ ListPosts
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**feed_id** | **String** | The feed_id path parameter. | [required] |
-**creator_id** | **String** | The creator_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**feed_id** | **String** |  | [required] |
+**creator_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
 
@@ -302,11 +302,11 @@ ListPosts
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**feed_id** | **String** | The feed_id path parameter. | [required] |
-**project_id** | Option<**String**> | The project_id query parameter. |  |
+**feed_id** | **String** |  | [required] |
+**project_id** | Option<**String**> |  |  |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
-**creator_id** | Option<**String**> | The creator_id query parameter. |  |
+**creator_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -334,9 +334,9 @@ ListPosts
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**feed_id** | **String** | The feed_id path parameter. | [required] |
-**creator_id** | **String** | The creator_id path parameter. | [required] |
-**project_id** | Option<**String**> | The project_id query parameter. |  |
+**feed_id** | **String** |  | [required] |
+**creator_id** | **String** |  | [required] |
+**project_id** | Option<**String**> |  |  |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
 

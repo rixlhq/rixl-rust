@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | Option<**String**> |  | [optional]
 **poster_id** | Option<**String**> |  | [optional]
-**duration** | Option<**f64**> |  | [optional]
+**duration** | Option<[**models::Duration**](Duration.md)> |  | [optional]
 **width** | Option<**i32**> |  | [optional]
 **height** | Option<**i32**> |  | [optional]
 **codec** | Option<**String**> |  | [optional]

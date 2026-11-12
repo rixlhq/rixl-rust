@@ -16,7 +16,7 @@ pub struct VideosV1UpdateVideoDataRequest {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
     #[serde(rename = "duration", skip_serializing_if = "Option::is_none")]
-    pub duration: Option<f64>,
+    pub duration: Option<Box<models::Duration>>,
     #[serde(rename = "width", skip_serializing_if = "Option::is_none")]
     pub width: Option<i32>,
     #[serde(rename = "height", skip_serializing_if = "Option::is_none")]

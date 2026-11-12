@@ -11,17 +11,16 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct Error {
-    #[serde(rename = "error", skip_serializing_if = "Option::is_none")]
-    pub error: Option<Box<models::AnalyticsV1ErrorEvent>>,
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum Duration {
+    Number(f64),
+    String(String),
 }
 
-impl Error {
-    pub fn new() -> Error {
-        Error {
-            error: None,
-        }
+impl Default for Duration {
+    fn default() -> Self {
+        Self::Number(Default::default())
     }
 }
 

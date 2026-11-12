@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**user** | Option<[**models::UserOrgRequest1**](UserOrgRequest1.md)> |  | [optional]
 **state** | Option<[**models::AuthV1MembershipApplicationState**](AuthV1MembershipApplicationState.md)> |  | [optional]
 **user_id** | Option<**String**> |  | [optional]
 

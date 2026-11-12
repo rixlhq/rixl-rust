@@ -52,11 +52,8 @@ pub struct GetPlanParams {
 /// struct for passing parameters to the method [`PlansApi::list_plans`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPlansParams {
-    /// The currency query parameter.
     pub currency: Option<String>,
-    /// The interval query parameter.
     pub interval: Option<String>,
-    /// The free query parameter.
     pub free: Option<String>
 }
 
@@ -188,6 +185,7 @@ impl PlansApi for PlansApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPlanError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -195,6 +193,7 @@ pub enum GetPlanError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPlansError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

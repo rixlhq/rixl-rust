@@ -20,6 +20,7 @@ pub struct VideosV1UploadVideoThumbnailRequest {
     pub project_id: Option<String>,
     #[serde(rename = "video_id", skip_serializing_if = "Option::is_none")]
     pub video_id: Option<String>,
+    /// bytes.max_len = 20971520 bytes.min_len = 1 
     #[serde_as(as = "Option<serde_with::base64::Base64>")]
     #[serde(rename = "image", skip_serializing_if = "Option::is_none")]
     pub image: Option<Vec<u8>>,

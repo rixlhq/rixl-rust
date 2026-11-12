@@ -18,7 +18,7 @@ pub struct VideosV1RepackageRequestList {
     pub ids: Option<Vec<String>>,
     /// repackage_requested_at observed per video id; pass it back to ClearVideoRepackage.
     #[serde(rename = "requested_at", skip_serializing_if = "Option::is_none")]
-    pub requested_at: Option<std::collections::HashMap<String, serde_json::Value>>,
+    pub requested_at: Option<std::collections::HashMap<String, chrono::DateTime<chrono::FixedOffset>>>,
 }
 
 impl VideosV1RepackageRequestList {

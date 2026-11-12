@@ -45,24 +45,17 @@ impl HeatmapsApiClient {
 /// struct for passing parameters to the method [`HeatmapsApi::get_hot_segments`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetHotSegmentsParams {
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
 /// struct for passing parameters to the method [`HeatmapsApi::get_video_heatmap`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetVideoHeatmapParams {
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The buckets query parameter.
     pub buckets: Option<i32>,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
@@ -203,6 +196,7 @@ impl HeatmapsApi for HeatmapsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetHotSegmentsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -210,6 +204,7 @@ pub enum GetHotSegmentsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetVideoHeatmapError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

@@ -132,9 +132,7 @@ pub struct CreateDashboardParams {
 /// struct for passing parameters to the method [`DashboardsApi::create_widget`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateWidgetParams {
-    /// The dashboard_id path parameter.
     pub dashboard_id: String,
-    /// The expected_revision query parameter.
     pub expected_revision: i32,
     pub analytics_v1_widget_input: Option<models::AnalyticsV1WidgetInput>
 }
@@ -142,25 +140,20 @@ pub struct CreateWidgetParams {
 /// struct for passing parameters to the method [`DashboardsApi::delete_dashboard`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteDashboardParams {
-    /// The id path parameter.
     pub id: String,
-    /// The expected_revision query parameter.
     pub expected_revision: i32
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::delete_widget`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteWidgetParams {
-    /// The id path parameter.
     pub id: String,
-    /// The expected_revision query parameter.
     pub expected_revision: i32
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::export_dashboard`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ExportDashboardParams {
-    /// The dashboard_id path parameter.
     pub dashboard_id: String,
     pub export_dashboard_request: models::ExportDashboardRequest
 }
@@ -168,34 +161,22 @@ pub struct ExportDashboardParams {
 /// struct for passing parameters to the method [`DashboardsApi::get_dashboard`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDashboardParams {
-    /// The id path parameter.
     pub id: String
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::get_dashboard_stats`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDashboardStatsParams {
-    /// The time_start query parameter.
     pub time_start: String,
-    /// The time_end query parameter.
     pub time_end: String,
-    /// The interval query parameter.
     pub interval: Option<String>,
-    /// The filter.countries query parameter.
     pub filter_countries: Option<Vec<String>>,
-    /// The filter.cities query parameter.
     pub filter_cities: Option<Vec<String>>,
-    /// The filter.devices query parameter.
     pub filter_devices: Option<Vec<String>>,
-    /// The filter.os query parameter.
     pub filter_os: Option<Vec<String>>,
-    /// The filter.languages query parameter.
     pub filter_languages: Option<Vec<String>>,
-    /// The filter.regions query parameter.
     pub filter_regions: Option<Vec<String>>,
-    /// The filter.browsers query parameter.
     pub filter_browsers: Option<Vec<String>>,
-    /// The filter.os_versions query parameter.
     pub filter_os_versions: Option<Vec<String>>
 }
 
@@ -214,9 +195,7 @@ pub struct GetScopeTreeParams {
 /// struct for passing parameters to the method [`DashboardsApi::list_dashboards`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListDashboardsParams {
-    /// The page_size query parameter.
     pub page_size: Option<i32>,
-    /// The page query parameter.
     pub page: Option<i32>
 }
 
@@ -229,14 +208,12 @@ pub struct QueryChartParams {
 /// struct for passing parameters to the method [`DashboardsApi::set_default_dashboard`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct SetDefaultDashboardParams {
-    /// The id path parameter.
     pub id: String
 }
 
 /// struct for passing parameters to the method [`DashboardsApi::update_dashboard`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateDashboardParams {
-    /// The id path parameter.
     pub id: String,
     pub update_dashboard_request: models::UpdateDashboardRequest
 }
@@ -244,7 +221,6 @@ pub struct UpdateDashboardParams {
 /// struct for passing parameters to the method [`DashboardsApi::update_dashboard_layout`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateDashboardLayoutParams {
-    /// The dashboard_id path parameter.
     pub dashboard_id: String,
     pub update_dashboard_layout_request: models::UpdateDashboardLayoutRequest
 }
@@ -252,7 +228,6 @@ pub struct UpdateDashboardLayoutParams {
 /// struct for passing parameters to the method [`DashboardsApi::update_widget`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateWidgetParams {
-    /// The id path parameter.
     pub id: String,
     pub update_widget_request: models::UpdateWidgetRequest
 }
@@ -1271,6 +1246,7 @@ impl DashboardsApi for DashboardsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BatchQueryChartError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1278,6 +1254,7 @@ pub enum BatchQueryChartError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateDashboardError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1285,6 +1262,7 @@ pub enum CreateDashboardError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateWidgetError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1292,6 +1270,7 @@ pub enum CreateWidgetError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteDashboardError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1299,6 +1278,7 @@ pub enum DeleteDashboardError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteWidgetError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1306,6 +1286,7 @@ pub enum DeleteWidgetError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ExportDashboardError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1313,6 +1294,7 @@ pub enum ExportDashboardError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetDashboardError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1320,6 +1302,7 @@ pub enum GetDashboardError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetDashboardStatsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1327,6 +1310,7 @@ pub enum GetDashboardStatsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetFilterOptionsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1334,6 +1318,7 @@ pub enum GetFilterOptionsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetScopeTreeError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1341,6 +1326,7 @@ pub enum GetScopeTreeError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListDashboardsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1348,6 +1334,7 @@ pub enum ListDashboardsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListDatasetsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1355,6 +1342,7 @@ pub enum ListDatasetsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum QueryChartError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1362,6 +1350,7 @@ pub enum QueryChartError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SetDefaultDashboardError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1369,6 +1358,7 @@ pub enum SetDefaultDashboardError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateDashboardError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1376,6 +1366,7 @@ pub enum UpdateDashboardError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateDashboardLayoutError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1383,6 +1374,7 @@ pub enum UpdateDashboardLayoutError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateWidgetError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

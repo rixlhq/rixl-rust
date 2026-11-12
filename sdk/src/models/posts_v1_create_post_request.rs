@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// PostsV1CreatePostRequest : At most one of `image_id`, `video_id` may be set.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PostsV1CreatePostRequest {
     #[serde(rename = "project_id", skip_serializing_if = "Option::is_none")]
@@ -21,18 +22,18 @@ pub struct PostsV1CreatePostRequest {
     pub feed_id: Option<String>,
     #[serde(rename = "creator_id", skip_serializing_if = "Option::is_none")]
     pub creator_id: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<models::CommonV1MediaType>,
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
     #[serde(rename = "image_id", skip_serializing_if = "Option::is_none")]
     pub image_id: Option<String>,
     #[serde(rename = "video_id", skip_serializing_if = "Option::is_none")]
     pub video_id: Option<String>,
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
 }
 
 impl PostsV1CreatePostRequest {
+    /// At most one of `image_id`, `video_id` may be set.
     pub fn new() -> PostsV1CreatePostRequest {
         PostsV1CreatePostRequest {
             project_id: None,
@@ -40,9 +41,9 @@ impl PostsV1CreatePostRequest {
             feed_id: None,
             creator_id: None,
             r#type: None,
-            description: None,
             image_id: None,
             video_id: None,
+            description: None,
         }
     }
 }

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **feed_id** | Option<**String**> |  | [optional]
 **creator_id** | Option<**String**> |  | [optional]
 **description** | Option<**String**> |  | [optional]
-**content_type** | Option<[**models::CommonV1MediaType**](CommonV1MediaType.md)> | enum.defined_only = true  | [optional]
+**content_type** | Option<[**models::CommonV1MediaType**](CommonV1MediaType.md)> |  | [optional]
 **file_name** | Option<**String**> |  | [optional]
 **video_quality** | Option<[**models::CommonV1VideoQuality**](CommonV1VideoQuality.md)> |  | [optional]
 

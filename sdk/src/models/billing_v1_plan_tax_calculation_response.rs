@@ -32,7 +32,7 @@ pub struct BillingV1PlanTaxCalculationResponse {
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<String>,
     #[serde(rename = "tax_percentage", skip_serializing_if = "Option::is_none")]
-    pub tax_percentage: Option<f64>,
+    pub tax_percentage: Option<Box<models::TaxPercentage>>,
     #[serde(rename = "billing_address", skip_serializing_if = "Option::is_none")]
     pub billing_address: Option<Box<models::BillingV1BillingAddress>>,
     /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.

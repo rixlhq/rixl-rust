@@ -19,7 +19,7 @@ ListInvoices
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
+**org_id** | Option<**String**> |  |  |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
 
@@ -49,7 +49,7 @@ UpdateInvoiceStatus
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**invoice_id** | **String** | The invoice_id path parameter. | [required] |
+**invoice_id** | **String** |  | [required] |
 **update_invoice_status_request** | [**UpdateInvoiceStatusRequest**](UpdateInvoiceStatusRequest.md) |  | [required] |
 
 ### Return type

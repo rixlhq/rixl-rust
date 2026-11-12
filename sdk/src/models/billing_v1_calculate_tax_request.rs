@@ -23,7 +23,6 @@ pub struct BillingV1CalculateTaxRequest {
     pub amount: Option<f64>,
     #[serde(rename = "currency")]
     pub currency: String,
-    /// enum.defined_only = true 
     #[serde(rename = "billing_cycle", skip_serializing_if = "Option::is_none")]
     pub billing_cycle: Option<models::BillingV1BillingCycle>,
     #[serde(rename = "interval_count", skip_serializing_if = "Option::is_none")]

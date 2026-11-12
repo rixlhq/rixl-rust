@@ -60,7 +60,6 @@ impl VideosApiClient {
 /// struct for passing parameters to the method [`VideosApi::create_video_upload`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateVideoUploadParams {
-    /// The project_id path parameter.
     pub project_id: String,
     pub create_video_upload_request: models::CreateVideoUploadRequest
 }
@@ -68,40 +67,32 @@ pub struct CreateVideoUploadParams {
 /// struct for passing parameters to the method [`VideosApi::delete_video`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteVideoParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String
 }
 
 /// struct for passing parameters to the method [`VideosApi::get_video`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetVideoParams {
-    /// The video_id path parameter.
     pub video_id: String
 }
 
 /// struct for passing parameters to the method [`VideosApi::list_videos`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListVideosParams {
-    /// The project_id path parameter.
     pub project_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
     /// Number of items to skip before collecting the result set.
     pub pagination_offset: Option<i32>,
-    /// The sort_field query parameter.
     pub sort_field: Option<String>,
-    /// The sort_direction query parameter.
     pub sort_direction: Option<String>
 }
 
 /// struct for passing parameters to the method [`VideosApi::update_video_visibility`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateVideoVisibilityParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
     pub update_video_visibility_request: models::UpdateVideoVisibilityRequest
 }
@@ -407,6 +398,7 @@ impl VideosApi for VideosApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateVideoUploadError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -414,6 +406,7 @@ pub enum CreateVideoUploadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteVideoError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -421,6 +414,7 @@ pub enum DeleteVideoError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetVideoError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -428,6 +422,7 @@ pub enum GetVideoError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListVideosError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -435,6 +430,7 @@ pub enum ListVideosError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateVideoVisibilityError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

@@ -13,6 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ResendInvitationRequest {
+    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
+    pub user: Option<Box<models::ActorOrgRequest1>>,
     #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
     pub user_id: Option<String>,
 }
@@ -20,6 +22,7 @@ pub struct ResendInvitationRequest {
 impl ResendInvitationRequest {
     pub fn new() -> ResendInvitationRequest {
         ResendInvitationRequest {
+            user: None,
             user_id: None,
         }
     }

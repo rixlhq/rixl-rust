@@ -19,9 +19,9 @@ GetPostStats
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**post_id** | **String** | The post_id path parameter. | [required] |
-**range_start** | Option<**String**> | The range.start query parameter. |  |
-**range_end** | Option<**String**> | The range.end query parameter. |  |
+**post_id** | **String** |  | [required] |
+**range_start** | Option<**String**> |  |  |
+**range_end** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -49,10 +49,10 @@ GetTopPosts
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**limit** | Option<**i32**> | The limit query parameter. |  |
-**range_start** | Option<**String**> | The range.start query parameter. |  |
-**range_end** | Option<**String**> | The range.end query parameter. |  |
-**feed_id** | Option<**String**> | The feed_id query parameter. |  |
+**limit** | Option<**i32**> |  |  |
+**range_start** | Option<**String**> |  |  |
+**range_end** | Option<**String**> |  |  |
+**feed_id** | Option<**String**> |  |  |
 
 ### Return type
 

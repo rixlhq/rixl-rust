@@ -90,8 +90,8 @@ CreateWidget
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**dashboard_id** | **String** | The dashboard_id path parameter. | [required] |
-**expected_revision** | **i32** | The expected_revision query parameter. | [required] |
+**dashboard_id** | **String** |  | [required] |
+**expected_revision** | **i32** |  | [required] |
 **analytics_v1_widget_input** | Option<[**AnalyticsV1WidgetInput**](AnalyticsV1WidgetInput.md)> |  |  |
 
 ### Return type
@@ -120,8 +120,8 @@ DeleteDashboard
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | The id path parameter. | [required] |
-**expected_revision** | **i32** | The expected_revision query parameter. | [required] |
+**id** | **String** |  | [required] |
+**expected_revision** | **i32** |  | [required] |
 
 ### Return type
 
@@ -149,8 +149,8 @@ DeleteWidget
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | The id path parameter. | [required] |
-**expected_revision** | **i32** | The expected_revision query parameter. | [required] |
+**id** | **String** |  | [required] |
+**expected_revision** | **i32** |  | [required] |
 
 ### Return type
 
@@ -178,7 +178,7 @@ ExportDashboard
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**dashboard_id** | **String** | The dashboard_id path parameter. | [required] |
+**dashboard_id** | **String** |  | [required] |
 **export_dashboard_request** | [**ExportDashboardRequest**](ExportDashboardRequest.md) |  | [required] |
 
 ### Return type
@@ -207,7 +207,7 @@ GetDashboard
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | The id path parameter. | [required] |
+**id** | **String** |  | [required] |
 
 ### Return type
 
@@ -235,17 +235,17 @@ GetDashboardStats
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**time_start** | **String** | The time_start query parameter. | [required] |
-**time_end** | **String** | The time_end query parameter. | [required] |
-**interval** | Option<**String**> | The interval query parameter. |  |
-**filter_countries** | Option<[**Vec<String>**](String.md)> | The filter.countries query parameter. |  |
-**filter_cities** | Option<[**Vec<String>**](String.md)> | The filter.cities query parameter. |  |
-**filter_devices** | Option<[**Vec<String>**](String.md)> | The filter.devices query parameter. |  |
-**filter_os** | Option<[**Vec<String>**](String.md)> | The filter.os query parameter. |  |
-**filter_languages** | Option<[**Vec<String>**](String.md)> | The filter.languages query parameter. |  |
-**filter_regions** | Option<[**Vec<String>**](String.md)> | The filter.regions query parameter. |  |
-**filter_browsers** | Option<[**Vec<String>**](String.md)> | The filter.browsers query parameter. |  |
-**filter_os_versions** | Option<[**Vec<String>**](String.md)> | The filter.os_versions query parameter. |  |
+**time_start** | **String** |  | [required] |
+**time_end** | **String** |  | [required] |
+**interval** | Option<**String**> |  |  |
+**filter_countries** | Option<[**Vec<String>**](String.md)> |  |  |
+**filter_cities** | Option<[**Vec<String>**](String.md)> |  |  |
+**filter_devices** | Option<[**Vec<String>**](String.md)> |  |  |
+**filter_os** | Option<[**Vec<String>**](String.md)> |  |  |
+**filter_languages** | Option<[**Vec<String>**](String.md)> |  |  |
+**filter_regions** | Option<[**Vec<String>**](String.md)> |  |  |
+**filter_browsers** | Option<[**Vec<String>**](String.md)> |  |  |
+**filter_os_versions** | Option<[**Vec<String>**](String.md)> |  |  |
 
 ### Return type
 
@@ -329,8 +329,8 @@ ListDashboards
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**page_size** | Option<**i32**> | The page_size query parameter. |  |
-**page** | Option<**i32**> | The page query parameter. |  |
+**page_size** | Option<**i32**> |  |  |
+**page** | Option<**i32**> |  |  |
 
 ### Return type
 
@@ -411,7 +411,7 @@ SetDefaultDashboard
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | The id path parameter. | [required] |
+**id** | **String** |  | [required] |
 
 ### Return type
 
@@ -439,7 +439,7 @@ UpdateDashboard
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | The id path parameter. | [required] |
+**id** | **String** |  | [required] |
 **update_dashboard_request** | [**UpdateDashboardRequest**](UpdateDashboardRequest.md) |  | [required] |
 
 ### Return type
@@ -468,7 +468,7 @@ UpdateDashboardLayout
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**dashboard_id** | **String** | The dashboard_id path parameter. | [required] |
+**dashboard_id** | **String** |  | [required] |
 **update_dashboard_layout_request** | [**UpdateDashboardLayoutRequest**](UpdateDashboardLayoutRequest.md) |  | [required] |
 
 ### Return type
@@ -497,7 +497,7 @@ UpdateWidget
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | The id path parameter. | [required] |
+**id** | **String** |  | [required] |
 **update_widget_request** | [**UpdateWidgetRequest**](UpdateWidgetRequest.md) |  | [required] |
 
 ### Return type

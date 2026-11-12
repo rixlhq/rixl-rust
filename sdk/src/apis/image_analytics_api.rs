@@ -45,22 +45,16 @@ impl ImageAnalyticsApiClient {
 /// struct for passing parameters to the method [`ImageAnalyticsApi::get_image_stats`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetImageStatsParams {
-    /// The image_id path parameter.
     pub image_id: String,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
 /// struct for passing parameters to the method [`ImageAnalyticsApi::get_top_images`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTopImagesParams {
-    /// The limit query parameter.
     pub limit: Option<i32>,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
@@ -200,6 +194,7 @@ impl ImageAnalyticsApi for ImageAnalyticsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetImageStatsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -207,6 +202,7 @@ pub enum GetImageStatsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetTopImagesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

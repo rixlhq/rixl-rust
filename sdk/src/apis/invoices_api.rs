@@ -45,7 +45,6 @@ impl InvoicesApiClient {
 /// struct for passing parameters to the method [`InvoicesApi::list_invoices`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListInvoicesParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -56,7 +55,6 @@ pub struct ListInvoicesParams {
 /// struct for passing parameters to the method [`InvoicesApi::update_invoice_status`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateInvoiceStatusParams {
-    /// The invoice_id path parameter.
     pub invoice_id: String,
     pub update_invoice_status_request: models::UpdateInvoiceStatusRequest
 }
@@ -191,6 +189,7 @@ impl InvoicesApi for InvoicesApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListInvoicesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -198,6 +197,7 @@ pub enum ListInvoicesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateInvoiceStatusError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

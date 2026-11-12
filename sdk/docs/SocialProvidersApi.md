@@ -48,8 +48,8 @@ DisconnectProvider
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**provider** | **String** | The provider path parameter. | [required] |
-**user_user_id** | Option<**String**> | The user.user_id query parameter. |  |
+**provider** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -77,7 +77,7 @@ ListProviders
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 

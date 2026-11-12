@@ -47,7 +47,6 @@ impl SupportChatApiClient {
 pub struct ListChatMessagesParams {
     /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.
     pub after: Option<chrono::DateTime<chrono::FixedOffset>>,
-    /// The limit query parameter.
     pub limit: Option<i32>
 }
 
@@ -182,6 +181,7 @@ impl SupportChatApi for SupportChatApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListChatMessagesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -189,6 +189,7 @@ pub enum ListChatMessagesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SendChatMessageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

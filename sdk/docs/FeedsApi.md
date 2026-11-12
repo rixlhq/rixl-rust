@@ -22,7 +22,7 @@ CreateFeed
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **create_feed_request** | [**CreateFeedRequest**](CreateFeedRequest.md) |  | [required] |
 
 ### Return type
@@ -51,8 +51,8 @@ DeleteFeed
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**feed_id** | **String** | The feed_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**feed_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -80,8 +80,8 @@ GetFeed
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**feed_id** | **String** | The feed_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**feed_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -109,7 +109,7 @@ ListFeeds
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
 
@@ -139,8 +139,8 @@ UpdateFeed
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**feed_id** | **String** | The feed_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**feed_id** | **String** |  | [required] |
 **update_feed_request** | [**UpdateFeedRequest**](UpdateFeedRequest.md) |  | [required] |
 
 ### Return type

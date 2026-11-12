@@ -27,8 +27,8 @@ AttachPolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**policy_id** | **String** | The policy_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**policy_id** | **String** |  | [required] |
 **attach_policy_request** | [**AttachPolicyRequest**](AttachPolicyRequest.md) |  | [required] |
 
 ### Return type
@@ -57,7 +57,7 @@ CreatePolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
 **create_policy_request** | [**CreatePolicyRequest**](CreatePolicyRequest.md) |  | [required] |
 
 ### Return type
@@ -78,7 +78,7 @@ Name | Type | Description  | Required | Notes
 
 ## delete_policy
 
-> serde_json::Value delete_policy(user_org_id, policy_id)
+> serde_json::Value delete_policy(user_org_id, policy_id, user_user_id)
 DeletePolicy
 
 ### Parameters
@@ -86,8 +86,9 @@ DeletePolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**policy_id** | **String** | The policy_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**policy_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -107,7 +108,7 @@ Name | Type | Description  | Required | Notes
 
 ## detach_policy
 
-> serde_json::Value detach_policy(user_org_id, attachment_id)
+> serde_json::Value detach_policy(user_org_id, attachment_id, user_user_id)
 DetachPolicy
 
 ### Parameters
@@ -115,8 +116,9 @@ DetachPolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**attachment_id** | **String** | The attachment_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**attachment_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -136,7 +138,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_policy
 
-> models::AuthV1Policy get_policy(user_org_id, policy_id)
+> models::AuthV1Policy get_policy(user_org_id, policy_id, user_user_id)
 GetPolicy
 
 ### Parameters
@@ -144,8 +146,9 @@ GetPolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**policy_id** | **String** | The policy_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**policy_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -165,7 +168,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_permission_registry
 
-> models::AuthV1PermissionRegistryResponse list_permission_registry(user_org_id, types, limit, offset)
+> models::AuthV1PermissionRegistryResponse list_permission_registry(user_org_id, user_user_id, types, limit, offset)
 ListPermissionRegistry
 
 ### Parameters
@@ -173,10 +176,11 @@ ListPermissionRegistry
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**types** | Option<[**Vec<String>**](String.md)> | The types query parameter. |  |
-**limit** | Option<**i32**> | The limit query parameter. |  |
-**offset** | Option<**i32**> | The offset query parameter. |  |
+**user_org_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
+**types** | Option<[**Vec<String>**](String.md)> |  |  |
+**limit** | Option<**i32**> |  |  |
+**offset** | Option<**i32**> |  |  |
 
 ### Return type
 
@@ -204,8 +208,8 @@ ListPolicies
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**org_id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -225,7 +229,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_policy_attachments
 
-> models::AuthV1ListAttachmentsResponse list_policy_attachments(user_org_id, policy_id)
+> models::AuthV1ListAttachmentsResponse list_policy_attachments(user_org_id, policy_id, user_user_id)
 ListPolicyAttachments
 
 ### Parameters
@@ -233,8 +237,9 @@ ListPolicyAttachments
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**policy_id** | **String** | The policy_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**policy_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -254,7 +259,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_user_policies
 
-> models::AuthV1MemberPoliciesResponse list_user_policies(user_org_id, member_id)
+> models::AuthV1MemberPoliciesResponse list_user_policies(user_org_id, member_id, user_user_id)
 ListUserPolicies
 
 ### Parameters
@@ -262,8 +267,9 @@ ListUserPolicies
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**member_id** | **String** | The member_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**member_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -291,8 +297,8 @@ UpdatePolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**policy_id** | **String** | The policy_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**policy_id** | **String** |  | [required] |
 **update_policy_request** | [**UpdatePolicyRequest**](UpdatePolicyRequest.md) |  | [required] |
 
 ### Return type

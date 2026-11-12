@@ -22,7 +22,7 @@ CreateApiKey
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
 **create_api_key_request** | [**CreateApiKeyRequest**](CreateApiKeyRequest.md) |  | [required] |
 
 ### Return type
@@ -51,8 +51,8 @@ DeleteApiKey
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**key_id** | **String** | The key_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**key_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -80,7 +80,7 @@ ListApiKeys
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
 
@@ -110,8 +110,8 @@ RotateApiKey
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**key_id** | **String** | The key_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**key_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -139,8 +139,8 @@ UpdateApiKey
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**key_id** | **String** | The key_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**key_id** | **String** |  | [required] |
 **update_api_key_request** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md) |  | [required] |
 
 ### Return type

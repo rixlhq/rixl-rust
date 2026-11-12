@@ -19,8 +19,9 @@ pub struct ApikeysV1CreateApiKeyRequest {
     pub name: Option<String>,
     #[serde(rename = "project_id", skip_serializing_if = "Option::is_none")]
     pub project_id: Option<String>,
-    #[serde(rename = "expiring_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub expiring_at: Option<Option<Box<chrono::DateTime<chrono::FixedOffset>>>>,
+    /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.
+    #[serde(rename = "expiring_at", skip_serializing_if = "Option::is_none")]
+    pub expiring_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "policy_ids", skip_serializing_if = "Option::is_none")]
     pub policy_ids: Option<Vec<String>>,
 }

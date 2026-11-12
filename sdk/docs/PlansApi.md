@@ -47,9 +47,9 @@ ListPlans
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**currency** | Option<**String**> | The currency query parameter. |  |
-**interval** | Option<**String**> | The interval query parameter. |  |
-**free** | Option<**String**> | The free query parameter. |  |
+**currency** | Option<**String**> |  |  |
+**interval** | Option<**String**> |  |  |
+**free** | Option<**String**> |  |  |
 
 ### Return type
 

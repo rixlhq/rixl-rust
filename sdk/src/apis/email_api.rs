@@ -86,7 +86,6 @@ pub struct AddEmailParams {
 /// struct for passing parameters to the method [`EmailApi::get_user_email_status`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetUserEmailStatusParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
@@ -638,6 +637,7 @@ impl EmailApi for EmailApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AddEmailError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -645,6 +645,7 @@ pub enum AddEmailError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetUserEmailStatusError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -652,6 +653,7 @@ pub enum GetUserEmailStatusError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum InitiateEmailChangeError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -659,6 +661,7 @@ pub enum InitiateEmailChangeError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum LoginError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -666,6 +669,7 @@ pub enum LoginError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RegisterError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -673,6 +677,7 @@ pub enum RegisterError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ResendVerificationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -680,6 +685,7 @@ pub enum ResendVerificationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ResetPasswordError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -687,6 +693,7 @@ pub enum ResetPasswordError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SendPasswordResetError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -694,6 +701,7 @@ pub enum SendPasswordResetError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum VerifyEmailError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

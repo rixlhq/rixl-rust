@@ -14,8 +14,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SupportV1ListChatMessagesRequest {
     /// Return only messages created after this time. Used to poll for new replies.
-    #[serde(rename = "after", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub after: Option<Option<Box<chrono::DateTime<chrono::FixedOffset>>>>,
+    #[serde(rename = "after", skip_serializing_if = "Option::is_none")]
+    pub after: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "limit", skip_serializing_if = "Option::is_none")]
     pub limit: Option<i32>,
 }

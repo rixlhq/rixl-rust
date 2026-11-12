@@ -23,7 +23,7 @@ GetBandwidthUsage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
+**org_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -51,8 +51,8 @@ GetBandwidthUsageHistory
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
-**days** | Option<**i32**> | The days query parameter. |  |
+**org_id** | Option<**String**> |  |  |
+**days** | Option<**i32**> |  |  |
 
 ### Return type
 
@@ -80,7 +80,7 @@ GetStorageUsage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
+**org_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -108,8 +108,8 @@ GetStorageUsageHistory
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
-**days** | Option<**i32**> | The days query parameter. |  |
+**org_id** | Option<**String**> |  |  |
+**days** | Option<**i32**> |  |  |
 
 ### Return type
 
@@ -137,7 +137,7 @@ RefreshBandwidthUsage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
+**org_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -165,7 +165,7 @@ RefreshStorageUsage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | Option<**String**> | The org_id query parameter. |  |
+**org_id** | Option<**String**> |  |  |
 
 ### Return type
 

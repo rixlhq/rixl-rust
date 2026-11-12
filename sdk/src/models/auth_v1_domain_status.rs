@@ -11,22 +11,24 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// AuthV1DomainStatus : At most one of `verified`, `pending` may be set.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1DomainStatus {
     #[serde(rename = "auto_join", skip_serializing_if = "Option::is_none")]
     pub auto_join: Option<bool>,
-    #[serde(rename = "pending", skip_serializing_if = "Option::is_none")]
-    pub pending: Option<Box<models::AuthV1PendingDomain>>,
     #[serde(rename = "verified", skip_serializing_if = "Option::is_none")]
     pub verified: Option<Box<models::AuthV1VerifiedDomain>>,
+    #[serde(rename = "pending", skip_serializing_if = "Option::is_none")]
+    pub pending: Option<Box<models::AuthV1PendingDomain>>,
 }
 
 impl AuthV1DomainStatus {
+    /// At most one of `verified`, `pending` may be set.
     pub fn new() -> AuthV1DomainStatus {
         AuthV1DomainStatus {
             auto_join: None,
-            pending: None,
             verified: None,
+            pending: None,
         }
     }
 }

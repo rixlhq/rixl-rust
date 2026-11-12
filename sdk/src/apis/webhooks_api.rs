@@ -85,7 +85,6 @@ impl WebhooksApiClient {
 /// struct for passing parameters to the method [`WebhooksApi::create_endpoint`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateEndpointParams {
-    /// The project_id path parameter.
     pub project_id: String,
     pub create_endpoint_request: models::CreateEndpointRequest
 }
@@ -93,27 +92,21 @@ pub struct CreateEndpointParams {
 /// struct for passing parameters to the method [`WebhooksApi::delete_endpoint`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteEndpointParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The endpoint_id path parameter.
     pub endpoint_id: String
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::get_endpoint`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetEndpointParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The endpoint_id path parameter.
     pub endpoint_id: String
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::list_endpoint_attempts`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListEndpointAttemptsParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The endpoint_id path parameter.
     pub endpoint_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -124,7 +117,6 @@ pub struct ListEndpointAttemptsParams {
 /// struct for passing parameters to the method [`WebhooksApi::list_endpoints`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListEndpointsParams {
-    /// The project_id path parameter.
     pub project_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -135,7 +127,6 @@ pub struct ListEndpointsParams {
 /// struct for passing parameters to the method [`WebhooksApi::list_events`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListEventsParams {
-    /// The project_id path parameter.
     pub project_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -146,38 +137,29 @@ pub struct ListEventsParams {
 /// struct for passing parameters to the method [`WebhooksApi::replay_event`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ReplayEventParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The endpoint_id path parameter.
     pub endpoint_id: String,
-    /// The event_id path parameter.
     pub event_id: String
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::rotate_endpoint_secret`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RotateEndpointSecretParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The endpoint_id path parameter.
     pub endpoint_id: String
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::send_test_event`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct SendTestEventParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The endpoint_id path parameter.
     pub endpoint_id: String
 }
 
 /// struct for passing parameters to the method [`WebhooksApi::update_endpoint`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateEndpointParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The endpoint_id path parameter.
     pub endpoint_id: String,
     pub update_endpoint_request: models::UpdateEndpointRequest
 }
@@ -772,6 +754,7 @@ impl WebhooksApi for WebhooksApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateEndpointError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -779,6 +762,7 @@ pub enum CreateEndpointError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteEndpointError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -786,6 +770,7 @@ pub enum DeleteEndpointError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetEndpointError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -793,6 +778,7 @@ pub enum GetEndpointError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListEndpointAttemptsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -800,6 +786,7 @@ pub enum ListEndpointAttemptsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListEndpointsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -807,6 +794,7 @@ pub enum ListEndpointsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListEventsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -814,6 +802,7 @@ pub enum ListEventsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ReplayEventError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -821,6 +810,7 @@ pub enum ReplayEventError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RotateEndpointSecretError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -828,6 +818,7 @@ pub enum RotateEndpointSecretError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SendTestEventError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -835,6 +826,7 @@ pub enum SendTestEventError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateEndpointError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

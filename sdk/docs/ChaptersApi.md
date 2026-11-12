@@ -21,9 +21,9 @@ DeleteVideoChapter
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
-**start_time_sec** | **String** | The start_time_sec path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
+**start_time_sec** | **String** |  | [required] |
 
 ### Return type
 
@@ -51,8 +51,8 @@ GetVideoChapters
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -80,8 +80,8 @@ UpdateVideoChapters
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
 **update_video_chapters_request** | [**UpdateVideoChaptersRequest**](UpdateVideoChaptersRequest.md) |  | [required] |
 
 ### Return type
@@ -110,10 +110,10 @@ UpdateVideoChapters
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
-**chapters_title** | Option<**String**> | The chapters.title query parameter. |  |
-**chapters_start_time_sec** | Option<**f64**> | The chapters.start_time_sec query parameter. |  |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
+**chapters_title** | Option<**String**> |  |  |
+**chapters_start_time_sec** | Option<**f64**> |  |  |
 
 ### Return type
 

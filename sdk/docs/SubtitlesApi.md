@@ -22,8 +22,8 @@ CreateSubtitleUpload
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
 **create_track_upload_request1** | [**CreateTrackUploadRequest1**](CreateTrackUploadRequest1.md) |  | [required] |
 
 ### Return type
@@ -52,8 +52,8 @@ DeleteAllSubtitles
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -81,9 +81,9 @@ DeleteSubtitle
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
-**subtitle_id** | **String** | The subtitle_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
+**subtitle_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -111,9 +111,9 @@ DeleteSubtitlesByLanguage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
-**language_code** | **String** | The language_code path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
+**language_code** | **String** |  | [required] |
 
 ### Return type
 
@@ -141,7 +141,7 @@ ListSubtitles
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**video_id** | **String** | The video_id path parameter. | [required] |
+**video_id** | **String** |  | [required] |
 
 ### Return type
 

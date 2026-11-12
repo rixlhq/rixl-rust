@@ -75,16 +75,13 @@ impl PasskeysApiClient {
 /// struct for passing parameters to the method [`PasskeysApi::delete_passkey`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePasskeyParams {
-    /// The id path parameter.
     pub id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PasskeysApi::list_passkeys`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPasskeysParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
@@ -115,7 +112,6 @@ pub struct PasskeyRegisterFinishParams {
 /// struct for passing parameters to the method [`PasskeysApi::rename_passkey`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RenamePasskeyParams {
-    /// The id path parameter.
     pub id: String,
     pub rename_passkey_request: models::RenamePasskeyRequest
 }
@@ -581,6 +577,7 @@ impl PasskeysApi for PasskeysApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeletePasskeyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -588,6 +585,7 @@ pub enum DeletePasskeyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPasskeysError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -595,6 +593,7 @@ pub enum ListPasskeysError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PasskeyLoginBeginError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -602,6 +601,7 @@ pub enum PasskeyLoginBeginError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PasskeyLoginFinishError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -609,6 +609,7 @@ pub enum PasskeyLoginFinishError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PasskeyRegisterBeginError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -616,6 +617,7 @@ pub enum PasskeyRegisterBeginError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PasskeyRegisterFinishError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -623,6 +625,7 @@ pub enum PasskeyRegisterFinishError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RenamePasskeyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -630,6 +633,7 @@ pub enum RenamePasskeyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum VerifyPasskeyForLoginError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

@@ -13,6 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InviteMemberRequest {
+    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
+    pub user: Option<Box<models::ActorOrgRequest>>,
     #[serde(rename = "username", skip_serializing_if = "Option::is_none")]
     pub username: Option<String>,
     #[serde(rename = "role", skip_serializing_if = "Option::is_none")]
@@ -22,6 +24,7 @@ pub struct InviteMemberRequest {
 impl InviteMemberRequest {
     pub fn new() -> InviteMemberRequest {
         InviteMemberRequest {
+            user: None,
             username: None,
             role: None,
         }

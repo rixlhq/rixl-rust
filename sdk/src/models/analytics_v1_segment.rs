@@ -26,7 +26,6 @@ pub struct AnalyticsV1Segment {
     pub subtitle_language: Option<String>,
     #[serde(rename = "audio_language", skip_serializing_if = "Option::is_none")]
     pub audio_language: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "quality", skip_serializing_if = "Option::is_none")]
     pub quality: Option<models::AnalyticscommonV1VideoQuality>,
     #[serde(rename = "chapter_title", skip_serializing_if = "Option::is_none")]

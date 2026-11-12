@@ -65,28 +65,24 @@ impl OneTimePasscodesApiClient {
 /// struct for passing parameters to the method [`OneTimePasscodesApi::delete_otp`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteOtpParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::get_otp_status`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetOtpStatusParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::regenerate_backup_codes`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RegenerateBackupCodesParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`OneTimePasscodesApi::setup_otp`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct SetupOtpParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
@@ -449,6 +445,7 @@ impl OneTimePasscodesApi for OneTimePasscodesApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteOtpError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -456,6 +453,7 @@ pub enum DeleteOtpError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetOtpStatusError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -463,6 +461,7 @@ pub enum GetOtpStatusError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RegenerateBackupCodesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -470,6 +469,7 @@ pub enum RegenerateBackupCodesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SetupOtpError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -477,6 +477,7 @@ pub enum SetupOtpError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum VerifyOtpError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -484,6 +485,7 @@ pub enum VerifyOtpError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum VerifyTotpForLoginError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

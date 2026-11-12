@@ -22,7 +22,7 @@ CreateVideoUpload
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **create_video_upload_request** | [**CreateVideoUploadRequest**](CreateVideoUploadRequest.md) |  | [required] |
 
 ### Return type
@@ -51,8 +51,8 @@ DeleteVideo
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -80,7 +80,7 @@ GetVideo
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**video_id** | **String** | The video_id path parameter. | [required] |
+**video_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -108,11 +108,11 @@ ListVideos
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
-**sort_field** | Option<**String**> | The sort_field query parameter. |  |
-**sort_direction** | Option<**String**> | The sort_direction query parameter. |  |
+**sort_field** | Option<**String**> |  |  |
+**sort_direction** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -140,8 +140,8 @@ UpdateVideoVisibility
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**video_id** | **String** | The video_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**video_id** | **String** |  | [required] |
 **update_video_visibility_request** | [**UpdateVideoVisibilityRequest**](UpdateVideoVisibilityRequest.md) |  | [required] |
 
 ### Return type

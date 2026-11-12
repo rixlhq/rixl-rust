@@ -54,7 +54,7 @@ GetUserEmailStatus
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 

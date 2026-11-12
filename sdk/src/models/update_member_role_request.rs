@@ -13,6 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UpdateMemberRoleRequest {
+    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
+    pub user: Option<Box<models::ActorOrgRequest1>>,
     #[serde(rename = "role", skip_serializing_if = "Option::is_none")]
     pub role: Option<models::AuthV1MembershipRole>,
 }
@@ -20,6 +22,7 @@ pub struct UpdateMemberRoleRequest {
 impl UpdateMemberRoleRequest {
     pub fn new() -> UpdateMemberRoleRequest {
         UpdateMemberRoleRequest {
+            user: None,
             role: None,
         }
     }

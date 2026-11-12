@@ -60,9 +60,7 @@ impl SubtitlesApiClient {
 /// struct for passing parameters to the method [`SubtitlesApi::create_subtitle_upload`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateSubtitleUploadParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
     pub create_track_upload_request1: models::CreateTrackUploadRequest1
 }
@@ -70,38 +68,29 @@ pub struct CreateSubtitleUploadParams {
 /// struct for passing parameters to the method [`SubtitlesApi::delete_all_subtitles`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteAllSubtitlesParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String
 }
 
 /// struct for passing parameters to the method [`SubtitlesApi::delete_subtitle`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteSubtitleParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The subtitle_id path parameter.
     pub subtitle_id: String
 }
 
 /// struct for passing parameters to the method [`SubtitlesApi::delete_subtitles_by_language`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteSubtitlesByLanguageParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The language_code path parameter.
     pub language_code: String
 }
 
 /// struct for passing parameters to the method [`SubtitlesApi::list_subtitles`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListSubtitlesParams {
-    /// The video_id path parameter.
     pub video_id: String
 }
 
@@ -392,6 +381,7 @@ impl SubtitlesApi for SubtitlesApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateSubtitleUploadError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -399,6 +389,7 @@ pub enum CreateSubtitleUploadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteAllSubtitlesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -406,6 +397,7 @@ pub enum DeleteAllSubtitlesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteSubtitleError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -413,6 +405,7 @@ pub enum DeleteSubtitleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteSubtitlesByLanguageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -420,6 +413,7 @@ pub enum DeleteSubtitlesByLanguageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListSubtitlesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

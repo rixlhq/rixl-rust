@@ -85,9 +85,7 @@ impl AccessPoliciesApiClient {
 /// struct for passing parameters to the method [`AccessPoliciesApi::attach_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct AttachPolicyParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The policy_id path parameter.
     pub policy_id: String,
     pub attach_policy_request: models::AttachPolicyRequest
 }
@@ -95,7 +93,6 @@ pub struct AttachPolicyParams {
 /// struct for passing parameters to the method [`AccessPoliciesApi::create_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreatePolicyParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
     pub create_policy_request: models::CreatePolicyRequest
 }
@@ -103,76 +100,64 @@ pub struct CreatePolicyParams {
 /// struct for passing parameters to the method [`AccessPoliciesApi::delete_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePolicyParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The policy_id path parameter.
-    pub policy_id: String
+    pub policy_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::detach_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DetachPolicyParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The attachment_id path parameter.
-    pub attachment_id: String
+    pub attachment_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::get_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPolicyParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The policy_id path parameter.
-    pub policy_id: String
+    pub policy_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_permission_registry`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPermissionRegistryParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The types query parameter.
+    pub user_user_id: Option<String>,
     pub types: Option<Vec<String>>,
-    /// The limit query parameter.
     pub limit: Option<i32>,
-    /// The offset query parameter.
     pub offset: Option<i32>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_policies`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPoliciesParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_policy_attachments`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPolicyAttachmentsParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The policy_id path parameter.
-    pub policy_id: String
+    pub policy_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_user_policies`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListUserPoliciesParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The member_id path parameter.
-    pub member_id: String
+    pub member_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::update_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdatePolicyParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The policy_id path parameter.
     pub policy_id: String,
     pub update_policy_request: models::UpdatePolicyRequest
 }
@@ -298,6 +283,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let DeletePolicyParams {
             user_org_id,
             policy_id,
+            user_user_id,
         } = params;
         
 
@@ -308,6 +294,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/policies/{policy_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), policy_id=crate::apis::urlencode(policy_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -353,6 +342,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let DetachPolicyParams {
             user_org_id,
             attachment_id,
+            user_user_id,
         } = params;
         
 
@@ -363,6 +353,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/policies/attachments/{attachment_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), attachment_id=crate::apis::urlencode(attachment_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -408,6 +401,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let GetPolicyParams {
             user_org_id,
             policy_id,
+            user_user_id,
         } = params;
         
 
@@ -418,6 +412,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/policies/{policy_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), policy_id=crate::apis::urlencode(policy_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -462,6 +459,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         
         let ListPermissionRegistryParams {
             user_org_id,
+            user_user_id,
             types,
             limit,
             offset,
@@ -475,6 +473,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/policies/permissions", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref param_value) = types {
             local_var_req_builder = match "multi" {
                 "multi" => local_var_req_builder.query(&param_value.into_iter().map(|p| ("types".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
@@ -590,6 +591,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let ListPolicyAttachmentsParams {
             user_org_id,
             policy_id,
+            user_user_id,
         } = params;
         
 
@@ -600,6 +602,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/policies/{policy_id}/attachments", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), policy_id=crate::apis::urlencode(policy_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -645,6 +650,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let ListUserPoliciesParams {
             user_org_id,
             member_id,
+            user_user_id,
         } = params;
         
 
@@ -655,6 +661,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members/{member_id}/policies", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), member_id=crate::apis::urlencode(member_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -758,6 +767,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AttachPolicyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -765,6 +775,7 @@ pub enum AttachPolicyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreatePolicyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -772,6 +783,7 @@ pub enum CreatePolicyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeletePolicyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -779,6 +791,7 @@ pub enum DeletePolicyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DetachPolicyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -786,6 +799,7 @@ pub enum DetachPolicyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPolicyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -793,6 +807,7 @@ pub enum GetPolicyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPermissionRegistryError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -800,6 +815,7 @@ pub enum ListPermissionRegistryError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPoliciesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -807,6 +823,7 @@ pub enum ListPoliciesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPolicyAttachmentsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -814,6 +831,7 @@ pub enum ListPolicyAttachmentsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListUserPoliciesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -821,6 +839,7 @@ pub enum ListUserPoliciesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdatePolicyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

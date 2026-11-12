@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **video_id** | Option<**String**> |  | [optional]
 **resolution** | Option<**String**> |  | [optional]
 **resolution_value** | Option<**String**> |  | [optional]
-**fps** | Option<**f64**> |  | [optional]
+**fps** | Option<[**models::Fps**](Fps.md)> |  | [optional]
 **hdr** | Option<**bool**> |  | [optional]
 **status** | Option<**String**> |  | [optional]
 **bitrate** | Option<**String**> |  | [optional]

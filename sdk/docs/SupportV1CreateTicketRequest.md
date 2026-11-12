@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **topic_id** | Option<**String**> |  | [optional]
 **subject** | Option<**String**> |  | [optional]
 **message** | Option<**String**> |  | [optional]
-**priority** | Option<[**models::SupportV1TicketPriority**](SupportV1TicketPriority.md)> | enum.defined_only = true  | [optional]
+**priority** | Option<[**models::SupportV1TicketPriority**](SupportV1TicketPriority.md)> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

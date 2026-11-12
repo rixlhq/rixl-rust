@@ -60,7 +60,6 @@ impl FeedsApiClient {
 /// struct for passing parameters to the method [`FeedsApi::create_feed`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateFeedParams {
-    /// The project_id path parameter.
     pub project_id: String,
     pub create_feed_request: models::CreateFeedRequest
 }
@@ -68,25 +67,20 @@ pub struct CreateFeedParams {
 /// struct for passing parameters to the method [`FeedsApi::delete_feed`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteFeedParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The feed_id path parameter.
     pub feed_id: String
 }
 
 /// struct for passing parameters to the method [`FeedsApi::get_feed`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetFeedParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The feed_id path parameter.
     pub feed_id: String
 }
 
 /// struct for passing parameters to the method [`FeedsApi::list_feeds`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListFeedsParams {
-    /// The project_id path parameter.
     pub project_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -97,9 +91,7 @@ pub struct ListFeedsParams {
 /// struct for passing parameters to the method [`FeedsApi::update_feed`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateFeedParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The feed_id path parameter.
     pub feed_id: String,
     pub update_feed_request: models::UpdateFeedRequest
 }
@@ -398,6 +390,7 @@ impl FeedsApi for FeedsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateFeedError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -405,6 +398,7 @@ pub enum CreateFeedError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteFeedError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -412,6 +406,7 @@ pub enum DeleteFeedError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetFeedError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -419,6 +414,7 @@ pub enum GetFeedError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListFeedsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -426,6 +422,7 @@ pub enum ListFeedsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateFeedError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

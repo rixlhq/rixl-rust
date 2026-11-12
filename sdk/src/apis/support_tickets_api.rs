@@ -75,7 +75,6 @@ impl SupportTicketsApiClient {
 /// struct for passing parameters to the method [`SupportTicketsApi::add_ticket_message`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct AddTicketMessageParams {
-    /// The ticket_id path parameter.
     pub ticket_id: String,
     pub add_ticket_message_request: models::AddTicketMessageRequest
 }
@@ -83,7 +82,6 @@ pub struct AddTicketMessageParams {
 /// struct for passing parameters to the method [`SupportTicketsApi::close_ticket`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CloseTicketParams {
-    /// The ticket_id path parameter.
     pub ticket_id: String
 }
 
@@ -96,7 +94,6 @@ pub struct CreateTicketParams {
 /// struct for passing parameters to the method [`SupportTicketsApi::get_ticket`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTicketParams {
-    /// The ticket_id path parameter.
     pub ticket_id: String
 }
 
@@ -107,25 +104,20 @@ pub struct ListTicketsParams {
     pub pagination_limit: Option<i32>,
     /// Number of items to skip before collecting the result set.
     pub pagination_offset: Option<i32>,
-    /// enum.defined_only = true 
     pub status: Option<models::SupportV1TicketStatus>
 }
 
 /// struct for passing parameters to the method [`SupportTicketsApi::list_topics`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListTopicsParams {
-    /// The category_id query parameter.
     pub category_id: Option<String>,
-    /// The query query parameter.
     pub query: Option<String>
 }
 
 /// struct for passing parameters to the method [`SupportTicketsApi::list_topics2`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListTopics2Params {
-    /// The category_id path parameter.
     pub category_id: String,
-    /// The query query parameter.
     pub query: Option<String>
 }
 
@@ -591,6 +583,7 @@ impl SupportTicketsApi for SupportTicketsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AddTicketMessageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -598,6 +591,7 @@ pub enum AddTicketMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CloseTicketError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -605,6 +599,7 @@ pub enum CloseTicketError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateTicketError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -612,6 +607,7 @@ pub enum CreateTicketError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetTicketError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -619,6 +615,7 @@ pub enum GetTicketError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListCategoriesError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -626,6 +623,7 @@ pub enum ListCategoriesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListTicketsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -633,6 +631,7 @@ pub enum ListTicketsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListTopicsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -640,6 +639,7 @@ pub enum ListTopicsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListTopics2Error {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

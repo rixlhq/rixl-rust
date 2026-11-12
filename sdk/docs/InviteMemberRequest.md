@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**user** | Option<[**models::ActorOrgRequest**](ActorOrgRequest.md)> |  | [optional]
 **username** | Option<**String**> |  | [optional]
 **role** | Option<[**models::AuthV1MembershipRole**](AuthV1MembershipRole.md)> |  | [optional]
 

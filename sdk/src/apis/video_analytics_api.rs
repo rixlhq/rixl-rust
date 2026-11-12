@@ -45,22 +45,16 @@ impl VideoAnalyticsApiClient {
 /// struct for passing parameters to the method [`VideoAnalyticsApi::get_top_videos`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTopVideosParams {
-    /// The limit query parameter.
     pub limit: Option<i32>,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
 /// struct for passing parameters to the method [`VideoAnalyticsApi::get_video_stats`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetVideoStatsParams {
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
@@ -200,6 +194,7 @@ impl VideoAnalyticsApi for VideoAnalyticsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetTopVideosError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -207,6 +202,7 @@ pub enum GetTopVideosError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetVideoStatsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

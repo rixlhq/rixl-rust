@@ -45,24 +45,17 @@ impl PostAnalyticsApiClient {
 /// struct for passing parameters to the method [`PostAnalyticsApi::get_post_stats`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPostStatsParams {
-    /// The post_id path parameter.
     pub post_id: String,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
 /// struct for passing parameters to the method [`PostAnalyticsApi::get_top_posts`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTopPostsParams {
-    /// The limit query parameter.
     pub limit: Option<i32>,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>,
-    /// The feed_id query parameter.
     pub feed_id: Option<String>
 }
 
@@ -206,6 +199,7 @@ impl PostAnalyticsApi for PostAnalyticsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPostStatsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -213,6 +207,7 @@ pub enum GetPostStatsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetTopPostsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

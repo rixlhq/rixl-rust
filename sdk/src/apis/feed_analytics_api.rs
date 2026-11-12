@@ -45,22 +45,16 @@ impl FeedAnalyticsApiClient {
 /// struct for passing parameters to the method [`FeedAnalyticsApi::get_feed_stats`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetFeedStatsParams {
-    /// The feed_id path parameter.
     pub feed_id: String,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
 /// struct for passing parameters to the method [`FeedAnalyticsApi::get_top_feeds`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetTopFeedsParams {
-    /// The limit query parameter.
     pub limit: Option<i32>,
-    /// The range.start query parameter.
     pub range_start: Option<String>,
-    /// The range.end query parameter.
     pub range_end: Option<String>
 }
 
@@ -200,6 +194,7 @@ impl FeedAnalyticsApi for FeedAnalyticsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetFeedStatsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -207,6 +202,7 @@ pub enum GetFeedStatsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetTopFeedsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

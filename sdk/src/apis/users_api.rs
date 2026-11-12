@@ -65,21 +65,18 @@ impl UsersApiClient {
 /// struct for passing parameters to the method [`UsersApi::create_avatar_upload`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateAvatarUploadParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsersApi::get_user`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetUserParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`UsersApi::get_user_info`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetUserInfoParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
@@ -446,6 +443,7 @@ impl UsersApi for UsersApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateAvatarUploadError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -453,6 +451,7 @@ pub enum CreateAvatarUploadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetUserError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -460,6 +459,7 @@ pub enum GetUserError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetUserInfoError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -467,6 +467,7 @@ pub enum GetUserInfoError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateNameError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -474,6 +475,7 @@ pub enum UpdateNameError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateUserAvatarError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -481,6 +483,7 @@ pub enum UpdateUserAvatarError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateUsernameError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

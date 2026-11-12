@@ -11,17 +11,16 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct SessionStart {
-    #[serde(rename = "session_start", skip_serializing_if = "Option::is_none")]
-    pub session_start: Option<Box<models::AnalyticsV1SessionStartEvent>>,
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum TaxPercentage {
+    Number(f64),
+    String(String),
 }
 
-impl SessionStart {
-    pub fn new() -> SessionStart {
-        SessionStart {
-            session_start: None,
-        }
+impl Default for TaxPercentage {
+    fn default() -> Self {
+        Self::Number(Default::default())
     }
 }
 

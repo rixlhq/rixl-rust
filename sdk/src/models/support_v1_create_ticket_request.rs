@@ -23,7 +23,6 @@ pub struct SupportV1CreateTicketRequest {
     pub subject: Option<String>,
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "priority", skip_serializing_if = "Option::is_none")]
     pub priority: Option<models::SupportV1TicketPriority>,
 }

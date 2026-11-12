@@ -12,15 +12,15 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct Interaction {
-    #[serde(rename = "interaction", skip_serializing_if = "Option::is_none")]
-    pub interaction: Option<Box<models::AnalyticsV1InteractionEvent>>,
+pub struct UserOrgRequest1 {
+    #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
+    pub user_id: Option<String>,
 }
 
-impl Interaction {
-    pub fn new() -> Interaction {
-        Interaction {
-            interaction: None,
+impl UserOrgRequest1 {
+    pub fn new() -> UserOrgRequest1 {
+        UserOrgRequest1 {
+            user_id: None,
         }
     }
 }

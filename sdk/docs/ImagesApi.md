@@ -22,7 +22,7 @@ CreateImageUpload
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **create_image_upload_request** | [**CreateImageUploadRequest**](CreateImageUploadRequest.md) |  | [required] |
 
 ### Return type
@@ -51,8 +51,8 @@ DeleteImage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**image_id** | **String** | The image_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**image_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -80,7 +80,7 @@ GetImage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**image_id** | **String** | The image_id path parameter. | [required] |
+**image_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -108,11 +108,11 @@ ListImages
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
-**sort_field** | Option<**String**> | The sort_field query parameter. |  |
-**sort_direction** | Option<**String**> | The sort_direction query parameter. |  |
+**sort_field** | Option<**String**> |  |  |
+**sort_direction** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -140,8 +140,8 @@ UpdateImageVisibility
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**image_id** | **String** | The image_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**image_id** | **String** |  | [required] |
 **update_image_visibility_request** | [**UpdateImageVisibilityRequest**](UpdateImageVisibilityRequest.md) |  | [required] |
 
 ### Return type

@@ -15,7 +15,6 @@ use serde::{Deserialize, Serialize};
 pub struct SupportV1ListTicketsRequest {
     #[serde(rename = "pagination", skip_serializing_if = "Option::is_none")]
     pub pagination: Option<Box<models::CommonV1Pagination>>,
-    /// enum.defined_only = true 
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::SupportV1TicketStatus>,
 }

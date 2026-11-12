@@ -19,9 +19,9 @@ GetTopVideos
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**limit** | Option<**i32**> | The limit query parameter. |  |
-**range_start** | Option<**String**> | The range.start query parameter. |  |
-**range_end** | Option<**String**> | The range.end query parameter. |  |
+**limit** | Option<**i32**> |  |  |
+**range_start** | Option<**String**> |  |  |
+**range_end** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -49,9 +49,9 @@ GetVideoStats
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**video_id** | **String** | The video_id path parameter. | [required] |
-**range_start** | Option<**String**> | The range.start query parameter. |  |
-**range_end** | Option<**String**> | The range.end query parameter. |  |
+**video_id** | **String** |  | [required] |
+**range_start** | Option<**String**> |  |  |
+**range_end** | Option<**String**> |  |  |
 
 ### Return type
 

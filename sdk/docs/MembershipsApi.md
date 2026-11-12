@@ -37,7 +37,7 @@ AcceptInvitation
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**token** | **String** | The token path parameter. | [required] |
+**token** | **String** |  | [required] |
 
 ### Return type
 
@@ -57,7 +57,7 @@ Name | Type | Description  | Required | Notes
 
 ## cancel_invitation
 
-> serde_json::Value cancel_invitation(user_org_id, user_id)
+> serde_json::Value cancel_invitation(user_org_id, user_id, user_actor_id)
 CancelInvitation
 
 ### Parameters
@@ -65,8 +65,9 @@ CancelInvitation
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**user_id** | **String** | The user_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**user_id** | **String** |  | [required] |
+**user_actor_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -94,8 +95,8 @@ CheckMembership
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**org_id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -123,7 +124,7 @@ DeclineInvitation
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**token** | **String** | The token path parameter. | [required] |
+**token** | **String** |  | [required] |
 
 ### Return type
 
@@ -151,8 +152,8 @@ GetInternalMembershipInfo
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**org_id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -180,7 +181,7 @@ InviteMember
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
 **invite_member_request** | [**InviteMemberRequest**](InviteMemberRequest.md) |  | [required] |
 
 ### Return type
@@ -209,8 +210,8 @@ LeaveOrganization
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**org_id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -238,10 +239,10 @@ ListMembershipApplications
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_user_id** | Option<**String**> | The user.user_id query parameter. |  |
-**limit** | Option<**i32**> | The limit query parameter. |  |
-**offset** | Option<**i32**> | The offset query parameter. |  |
-**state** | Option<[**models::AuthV1MembershipApplicationState**](Models__AuthV1MembershipApplicationState.md)> | The state query parameter. |  |
+**user_user_id** | Option<**String**> |  |  |
+**limit** | Option<**i32**> |  |  |
+**offset** | Option<**i32**> |  |  |
+**state** | Option<[**models::AuthV1MembershipApplicationState**](Models__AuthV1MembershipApplicationState.md)> |  |  |
 
 ### Return type
 
@@ -269,10 +270,10 @@ ListMemberships
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_user_id** | Option<**String**> | The user.user_id query parameter. |  |
-**limit** | Option<**i32**> | The limit query parameter. |  |
-**offset** | Option<**i32**> | The offset query parameter. |  |
-**state** | Option<[**models::AuthV1MembershipState**](Models__AuthV1MembershipState.md)> | The state query parameter. |  |
+**user_user_id** | Option<**String**> |  |  |
+**limit** | Option<**i32**> |  |  |
+**offset** | Option<**i32**> |  |  |
+**state** | Option<[**models::AuthV1MembershipState**](Models__AuthV1MembershipState.md)> |  |  |
 
 ### Return type
 
@@ -292,7 +293,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_organization_members
 
-> models::AuthV1ListOrgMembersResponse list_organization_members(user_org_id, limit, offset)
+> models::AuthV1ListOrgMembersResponse list_organization_members(user_org_id, user_user_id, limit, offset)
 ListOrganizationMembers
 
 ### Parameters
@@ -300,9 +301,10 @@ ListOrganizationMembers
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**limit** | Option<**i32**> | The limit query parameter. |  |
-**offset** | Option<**i32**> | The offset query parameter. |  |
+**user_org_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
+**limit** | Option<**i32**> |  |  |
+**offset** | Option<**i32**> |  |  |
 
 ### Return type
 
@@ -322,7 +324,7 @@ Name | Type | Description  | Required | Notes
 
 ## reactivate_member
 
-> models::AuthV1MembershipMutation reactivate_member(user_org_id, user_id)
+> models::AuthV1MembershipMutation reactivate_member(user_org_id, user_id, user_actor_id)
 ReactivateMember
 
 ### Parameters
@@ -330,8 +332,9 @@ ReactivateMember
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**user_id** | **String** | The user_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**user_id** | **String** |  | [required] |
+**user_actor_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -351,7 +354,7 @@ Name | Type | Description  | Required | Notes
 
 ## remove_member
 
-> serde_json::Value remove_member(user_org_id, user_id)
+> serde_json::Value remove_member(user_org_id, user_id, user_actor_id)
 RemoveMember
 
 ### Parameters
@@ -359,8 +362,9 @@ RemoveMember
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**user_id** | **String** | The user_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**user_id** | **String** |  | [required] |
+**user_actor_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -388,7 +392,7 @@ ResendInvitation
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
 **resend_invitation_request** | [**ResendInvitationRequest**](ResendInvitationRequest.md) |  | [required] |
 
 ### Return type
@@ -417,7 +421,7 @@ RespondToMembershipApplication
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
 **respond_to_membership_application_request** | [**RespondToMembershipApplicationRequest**](RespondToMembershipApplicationRequest.md) |  | [required] |
 
 ### Return type
@@ -438,7 +442,7 @@ Name | Type | Description  | Required | Notes
 
 ## suspend_member
 
-> models::AuthV1MembershipMutation suspend_member(user_org_id, user_id)
+> models::AuthV1MembershipMutation suspend_member(user_org_id, user_id, user_actor_id)
 SuspendMember
 
 ### Parameters
@@ -446,8 +450,9 @@ SuspendMember
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**user_id** | **String** | The user_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**user_id** | **String** |  | [required] |
+**user_actor_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -503,8 +508,8 @@ UpdateMemberRole
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
-**user_id** | **String** | The user_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
+**user_id** | **String** |  | [required] |
 **update_member_role_request** | [**UpdateMemberRoleRequest**](UpdateMemberRoleRequest.md) |  | [required] |
 
 ### Return type
@@ -533,7 +538,7 @@ UpdateMembershipState
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
 **update_membership_state_request** | [**UpdateMembershipStateRequest**](UpdateMembershipStateRequest.md) |  | [required] |
 
 ### Return type
@@ -562,7 +567,7 @@ UpdateOrgName
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
 **update_org_name_request** | [**UpdateOrgNameRequest**](UpdateOrgNameRequest.md) |  | [required] |
 
 ### Return type
@@ -591,7 +596,7 @@ UpdateOrgUsername
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
 **update_org_username_request** | [**UpdateOrgUsernameRequest**](UpdateOrgUsernameRequest.md) |  | [required] |
 
 ### Return type

@@ -21,7 +21,7 @@ pub struct VideosV1RenditionInput {
     #[serde(rename = "resolution_value", skip_serializing_if = "Option::is_none")]
     pub resolution_value: Option<String>,
     #[serde(rename = "fps", skip_serializing_if = "Option::is_none")]
-    pub fps: Option<f64>,
+    pub fps: Option<Box<models::Fps>>,
     #[serde(rename = "hdr", skip_serializing_if = "Option::is_none")]
     pub hdr: Option<bool>,
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]

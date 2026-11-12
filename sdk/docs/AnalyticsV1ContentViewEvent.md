@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **content_id** | Option<**String**> |  | [optional]
-**content_type** | Option<[**models::AnalyticscommonV1MediaType**](AnalyticscommonV1MediaType.md)> | enum.defined_only = true  | [optional]
+**content_type** | Option<[**models::AnalyticscommonV1MediaType**](AnalyticscommonV1MediaType.md)> |  | [optional]
 **feed_id** | Option<**String**> |  | [optional]
 **post_id** | Option<**String**> |  | [optional]
 **view_type** | Option<**ViewType**> |  (enum: start, watch, end) | [optional]
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **country** | Option<**String**> |  | [optional]
 **subtitle_language** | Option<**String**> |  | [optional]
 **audio_language** | Option<**String**> |  | [optional]
-**quality** | Option<[**models::AnalyticscommonV1VideoQuality**](AnalyticscommonV1VideoQuality.md)> | enum.defined_only = true  | [optional]
+**quality** | Option<[**models::AnalyticscommonV1VideoQuality**](AnalyticscommonV1VideoQuality.md)> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

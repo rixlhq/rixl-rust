@@ -60,9 +60,7 @@ impl AudioTracksApiClient {
 /// struct for passing parameters to the method [`AudioTracksApi::create_audio_track_upload`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateAudioTrackUploadParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
     pub create_track_upload_request: models::CreateTrackUploadRequest
 }
@@ -70,38 +68,29 @@ pub struct CreateAudioTrackUploadParams {
 /// struct for passing parameters to the method [`AudioTracksApi::delete_all_audio_tracks`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteAllAudioTracksParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String
 }
 
 /// struct for passing parameters to the method [`AudioTracksApi::delete_audio_track`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteAudioTrackParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The track_id path parameter.
     pub track_id: String
 }
 
 /// struct for passing parameters to the method [`AudioTracksApi::delete_audio_tracks_by_language`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteAudioTracksByLanguageParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The language_code path parameter.
     pub language_code: String
 }
 
 /// struct for passing parameters to the method [`AudioTracksApi::list_audio_tracks`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListAudioTracksParams {
-    /// The video_id path parameter.
     pub video_id: String
 }
 
@@ -392,6 +381,7 @@ impl AudioTracksApi for AudioTracksApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateAudioTrackUploadError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -399,6 +389,7 @@ pub enum CreateAudioTrackUploadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteAllAudioTracksError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -406,6 +397,7 @@ pub enum DeleteAllAudioTracksError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteAudioTrackError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -413,6 +405,7 @@ pub enum DeleteAudioTrackError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteAudioTracksByLanguageError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -420,6 +413,7 @@ pub enum DeleteAudioTracksByLanguageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListAudioTracksError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

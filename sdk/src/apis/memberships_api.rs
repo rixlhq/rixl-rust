@@ -135,48 +135,40 @@ impl MembershipsApiClient {
 /// struct for passing parameters to the method [`MembershipsApi::accept_invitation`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct AcceptInvitationParams {
-    /// The token path parameter.
     pub token: String
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::cancel_invitation`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CancelInvitationParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The user_id path parameter.
-    pub user_id: String
+    pub user_id: String,
+    pub user_actor_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::check_membership`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CheckMembershipParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::decline_invitation`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeclineInvitationParams {
-    /// The token path parameter.
     pub token: String
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::get_internal_membership_info`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetInternalMembershipInfoParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::invite_member`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct InviteMemberParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
     pub invite_member_request: models::InviteMemberRequest
 }
@@ -184,71 +176,56 @@ pub struct InviteMemberParams {
 /// struct for passing parameters to the method [`MembershipsApi::leave_organization`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct LeaveOrganizationParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::list_membership_applications`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListMembershipApplicationsParams {
-    /// The user.user_id query parameter.
     pub user_user_id: Option<String>,
-    /// The limit query parameter.
     pub limit: Option<i32>,
-    /// The offset query parameter.
     pub offset: Option<i32>,
-    /// The state query parameter.
     pub state: Option<models::AuthV1MembershipApplicationState>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::list_memberships`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListMembershipsParams {
-    /// The user.user_id query parameter.
     pub user_user_id: Option<String>,
-    /// The limit query parameter.
     pub limit: Option<i32>,
-    /// The offset query parameter.
     pub offset: Option<i32>,
-    /// The state query parameter.
     pub state: Option<models::AuthV1MembershipState>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::list_organization_members`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListOrganizationMembersParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The limit query parameter.
+    pub user_user_id: Option<String>,
     pub limit: Option<i32>,
-    /// The offset query parameter.
     pub offset: Option<i32>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::reactivate_member`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ReactivateMemberParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The user_id path parameter.
-    pub user_id: String
+    pub user_id: String,
+    pub user_actor_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::remove_member`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RemoveMemberParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The user_id path parameter.
-    pub user_id: String
+    pub user_id: String,
+    pub user_actor_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::resend_invitation`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ResendInvitationParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
     pub resend_invitation_request: models::ResendInvitationRequest
 }
@@ -256,7 +233,6 @@ pub struct ResendInvitationParams {
 /// struct for passing parameters to the method [`MembershipsApi::respond_to_membership_application`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RespondToMembershipApplicationParams {
-    /// The org_id path parameter.
     pub org_id: String,
     pub respond_to_membership_application_request: models::RespondToMembershipApplicationRequest
 }
@@ -264,10 +240,9 @@ pub struct RespondToMembershipApplicationParams {
 /// struct for passing parameters to the method [`MembershipsApi::suspend_member`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct SuspendMemberParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The user_id path parameter.
-    pub user_id: String
+    pub user_id: String,
+    pub user_actor_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::update_active_membership`]
@@ -279,9 +254,7 @@ pub struct UpdateActiveMembershipParams {
 /// struct for passing parameters to the method [`MembershipsApi::update_member_role`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateMemberRoleParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
-    /// The user_id path parameter.
     pub user_id: String,
     pub update_member_role_request: models::UpdateMemberRoleRequest
 }
@@ -289,7 +262,6 @@ pub struct UpdateMemberRoleParams {
 /// struct for passing parameters to the method [`MembershipsApi::update_membership_state`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateMembershipStateParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
     pub update_membership_state_request: models::UpdateMembershipStateRequest
 }
@@ -297,7 +269,6 @@ pub struct UpdateMembershipStateParams {
 /// struct for passing parameters to the method [`MembershipsApi::update_org_name`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateOrgNameParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
     pub update_org_name_request: models::UpdateOrgNameRequest
 }
@@ -305,7 +276,6 @@ pub struct UpdateOrgNameParams {
 /// struct for passing parameters to the method [`MembershipsApi::update_org_username`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateOrgUsernameParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
     pub update_org_username_request: models::UpdateOrgUsernameRequest
 }
@@ -372,6 +342,7 @@ impl MembershipsApi for MembershipsApiClient {
         let CancelInvitationParams {
             user_org_id,
             user_id,
+            user_actor_id,
         } = params;
         
 
@@ -382,6 +353,9 @@ impl MembershipsApi for MembershipsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/invite/{user_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_actor_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.actor_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -848,6 +822,7 @@ impl MembershipsApi for MembershipsApiClient {
         
         let ListOrganizationMembersParams {
             user_org_id,
+            user_user_id,
             limit,
             offset,
         } = params;
@@ -860,6 +835,9 @@ impl MembershipsApi for MembershipsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref param_value) = limit {
             local_var_req_builder = local_var_req_builder.query(&[("limit", &param_value.to_string())]);
         }
@@ -911,6 +889,7 @@ impl MembershipsApi for MembershipsApiClient {
         let ReactivateMemberParams {
             user_org_id,
             user_id,
+            user_actor_id,
         } = params;
         
 
@@ -921,6 +900,9 @@ impl MembershipsApi for MembershipsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members/{user_id}/reactivate", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_actor_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.actor_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -966,6 +948,7 @@ impl MembershipsApi for MembershipsApiClient {
         let RemoveMemberParams {
             user_org_id,
             user_id,
+            user_actor_id,
         } = params;
         
 
@@ -976,6 +959,9 @@ impl MembershipsApi for MembershipsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members/{user_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_actor_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.actor_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -1133,6 +1119,7 @@ impl MembershipsApi for MembershipsApiClient {
         let SuspendMemberParams {
             user_org_id,
             user_id,
+            user_actor_id,
         } = params;
         
 
@@ -1143,6 +1130,9 @@ impl MembershipsApi for MembershipsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members/{user_id}/suspend", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_actor_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.actor_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -1469,6 +1459,7 @@ impl MembershipsApi for MembershipsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AcceptInvitationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1476,6 +1467,7 @@ pub enum AcceptInvitationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CancelInvitationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1483,6 +1475,7 @@ pub enum CancelInvitationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CheckMembershipError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1490,6 +1483,7 @@ pub enum CheckMembershipError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeclineInvitationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1497,6 +1491,7 @@ pub enum DeclineInvitationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetInternalMembershipInfoError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1504,6 +1499,7 @@ pub enum GetInternalMembershipInfoError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum InviteMemberError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1511,6 +1507,7 @@ pub enum InviteMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum LeaveOrganizationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1518,6 +1515,7 @@ pub enum LeaveOrganizationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListMembershipApplicationsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1525,6 +1523,7 @@ pub enum ListMembershipApplicationsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListMembershipsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1532,6 +1531,7 @@ pub enum ListMembershipsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListOrganizationMembersError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1539,6 +1539,7 @@ pub enum ListOrganizationMembersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ReactivateMemberError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1546,6 +1547,7 @@ pub enum ReactivateMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RemoveMemberError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1553,6 +1555,7 @@ pub enum RemoveMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ResendInvitationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1560,6 +1563,7 @@ pub enum ResendInvitationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RespondToMembershipApplicationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1567,6 +1571,7 @@ pub enum RespondToMembershipApplicationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SuspendMemberError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1574,6 +1579,7 @@ pub enum SuspendMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateActiveMembershipError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1581,6 +1587,7 @@ pub enum UpdateActiveMembershipError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateMemberRoleError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1588,6 +1595,7 @@ pub enum UpdateMemberRoleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateMembershipStateError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1595,6 +1603,7 @@ pub enum UpdateMembershipStateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateOrgNameError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -1602,6 +1611,7 @@ pub enum UpdateOrgNameError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateOrgUsernameError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

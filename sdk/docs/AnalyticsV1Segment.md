@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **speed** | Option<**f64**> |  | [optional]
 **subtitle_language** | Option<**String**> | Unset fields inherit the value the view was opened with. | [optional]
 **audio_language** | Option<**String**> |  | [optional]
-**quality** | Option<[**models::AnalyticscommonV1VideoQuality**](AnalyticscommonV1VideoQuality.md)> | enum.defined_only = true  | [optional]
+**quality** | Option<[**models::AnalyticscommonV1VideoQuality**](AnalyticscommonV1VideoQuality.md)> |  | [optional]
 **chapter_title** | Option<**String**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -23,8 +23,8 @@ CheckDomainVerification
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**org_id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -52,7 +52,7 @@ CreateDomainVerification
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
 **create_domain_request** | [**CreateDomainRequest**](CreateDomainRequest.md) |  | [required] |
 
 ### Return type
@@ -81,8 +81,8 @@ GetDomainAutoJoin
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**org_id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -110,8 +110,8 @@ GetDomainStatus
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**org_id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -139,8 +139,8 @@ RemoveDomain
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**org_id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -168,7 +168,7 @@ SetDomainAutoJoin
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** | The user.org_id path parameter. | [required] |
+**user_org_id** | **String** |  | [required] |
 **set_auto_join_request** | [**SetAutoJoinRequest**](SetAutoJoinRequest.md) |  | [required] |
 
 ### Return type

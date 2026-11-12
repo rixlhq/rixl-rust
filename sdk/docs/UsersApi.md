@@ -23,7 +23,7 @@ CreateAvatarUpload
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -51,7 +51,7 @@ GetUser
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -79,7 +79,7 @@ GetUserInfo
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 

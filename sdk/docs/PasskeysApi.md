@@ -25,8 +25,8 @@ DeletePasskey
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | The id path parameter. | [required] |
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**id** | **String** |  | [required] |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -54,7 +54,7 @@ ListPasskeys
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> | The user_id query parameter. |  |
+**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -194,7 +194,7 @@ RenamePasskey
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | The id path parameter. | [required] |
+**id** | **String** |  | [required] |
 **rename_passkey_request** | [**RenamePasskeyRequest**](RenamePasskeyRequest.md) |  | [required] |
 
 ### Return type

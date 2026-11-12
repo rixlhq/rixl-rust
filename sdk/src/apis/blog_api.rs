@@ -60,7 +60,6 @@ impl BlogApiClient {
 /// struct for passing parameters to the method [`BlogApi::get_blog_subscription`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetBlogSubscriptionParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
@@ -73,14 +72,12 @@ pub struct SendBlogBroadcastParams {
 /// struct for passing parameters to the method [`BlogApi::subscribe_blog`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct SubscribeBlogParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`BlogApi::unsubscribe_blog`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UnsubscribeBlogParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
@@ -380,6 +377,7 @@ impl BlogApi for BlogApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetBlogSubscriptionError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -387,6 +385,7 @@ pub enum GetBlogSubscriptionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SendBlogBroadcastError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -394,6 +393,7 @@ pub enum SendBlogBroadcastError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SubscribeBlogError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -401,6 +401,7 @@ pub enum SubscribeBlogError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UnsubscribeBlogError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -408,6 +409,7 @@ pub enum UnsubscribeBlogError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UnsubscribeBlogByEmailError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

@@ -17,7 +17,6 @@ pub struct ImagesV1UpdateImageVisibilityRequest {
     pub project_id: Option<String>,
     #[serde(rename = "image_id", skip_serializing_if = "Option::is_none")]
     pub image_id: Option<String>,
-    /// enum.defined_only = true 
     #[serde(rename = "visibility", skip_serializing_if = "Option::is_none")]
     pub visibility: Option<models::CommonV1Visibility>,
 }

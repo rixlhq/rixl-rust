@@ -61,7 +61,6 @@ pub struct CreateClientCredentialParams {
 /// struct for passing parameters to the method [`ClientCredentialsApi::list_client_credentials`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListClientCredentialsParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -78,9 +77,7 @@ pub struct MintClientTokenParams {
 /// struct for passing parameters to the method [`ClientCredentialsApi::revoke_client_credential`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RevokeClientCredentialParams {
-    /// The credential_id path parameter.
     pub credential_id: String,
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
@@ -326,6 +323,7 @@ impl ClientCredentialsApi for ClientCredentialsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateClientCredentialError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -333,6 +331,7 @@ pub enum CreateClientCredentialError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListClientCredentialsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -340,6 +339,7 @@ pub enum ListClientCredentialsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum MintClientTokenError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -347,6 +347,7 @@ pub enum MintClientTokenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RevokeClientCredentialError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

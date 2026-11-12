@@ -17,6 +17,7 @@ pub struct UploadV1ReceiveStorageEventRequest {
     pub bucket: Option<String>,
     #[serde(rename = "object_key", skip_serializing_if = "Option::is_none")]
     pub object_key: Option<String>,
+    /// int64.gte = 0 
     #[serde(rename = "object_size", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub object_size: Option<Option<String>>,
 }

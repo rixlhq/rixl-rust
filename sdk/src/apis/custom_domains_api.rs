@@ -65,16 +65,13 @@ impl CustomDomainsApiClient {
 /// struct for passing parameters to the method [`CustomDomainsApi::check_domain_verification`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CheckDomainVerificationParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::create_domain_verification`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateDomainVerificationParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
     pub create_domain_request: models::CreateDomainRequest
 }
@@ -82,34 +79,27 @@ pub struct CreateDomainVerificationParams {
 /// struct for passing parameters to the method [`CustomDomainsApi::get_domain_auto_join`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDomainAutoJoinParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::get_domain_status`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDomainStatusParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::remove_domain`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RemoveDomainParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::set_domain_auto_join`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct SetDomainAutoJoinParams {
-    /// The user.org_id path parameter.
     pub user_org_id: String,
     pub set_auto_join_request: models::SetAutoJoinRequest
 }
@@ -467,6 +457,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CheckDomainVerificationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -474,6 +465,7 @@ pub enum CheckDomainVerificationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateDomainVerificationError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -481,6 +473,7 @@ pub enum CreateDomainVerificationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetDomainAutoJoinError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -488,6 +481,7 @@ pub enum GetDomainAutoJoinError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetDomainStatusError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -495,6 +489,7 @@ pub enum GetDomainStatusError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RemoveDomainError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -502,6 +497,7 @@ pub enum RemoveDomainError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SetDomainAutoJoinError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

@@ -60,7 +60,6 @@ impl ApiKeysApiClient {
 /// struct for passing parameters to the method [`ApiKeysApi::create_api_key`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateApiKeyParams {
-    /// The org_id path parameter.
     pub org_id: String,
     pub create_api_key_request: models::CreateApiKeyRequest
 }
@@ -68,16 +67,13 @@ pub struct CreateApiKeyParams {
 /// struct for passing parameters to the method [`ApiKeysApi::delete_api_key`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteApiKeyParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The key_id path parameter.
     pub key_id: String
 }
 
 /// struct for passing parameters to the method [`ApiKeysApi::list_api_keys`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListApiKeysParams {
-    /// The org_id path parameter.
     pub org_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -88,18 +84,14 @@ pub struct ListApiKeysParams {
 /// struct for passing parameters to the method [`ApiKeysApi::rotate_api_key`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RotateApiKeyParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The key_id path parameter.
     pub key_id: String
 }
 
 /// struct for passing parameters to the method [`ApiKeysApi::update_api_key`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateApiKeyParams {
-    /// The org_id path parameter.
     pub org_id: String,
-    /// The key_id path parameter.
     pub key_id: String,
     pub update_api_key_request: models::UpdateApiKeyRequest
 }
@@ -398,6 +390,7 @@ impl ApiKeysApi for ApiKeysApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateApiKeyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -405,6 +398,7 @@ pub enum CreateApiKeyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteApiKeyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -412,6 +406,7 @@ pub enum DeleteApiKeyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListApiKeysError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -419,6 +414,7 @@ pub enum ListApiKeysError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RotateApiKeyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -426,6 +422,7 @@ pub enum RotateApiKeyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateApiKeyError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

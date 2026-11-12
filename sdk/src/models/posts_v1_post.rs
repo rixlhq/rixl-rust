@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// PostsV1Post : At most one of `image`, `video` may be set.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PostsV1Post {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
@@ -33,6 +34,7 @@ pub struct PostsV1Post {
 }
 
 impl PostsV1Post {
+    /// At most one of `image`, `video` may be set.
     pub fn new() -> PostsV1Post {
         PostsV1Post {
             id: None,

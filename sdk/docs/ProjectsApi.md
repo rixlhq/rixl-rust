@@ -26,7 +26,7 @@ CreateProject
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
 **create_project_request** | [**CreateProjectRequest**](CreateProjectRequest.md) |  | [required] |
 
 ### Return type
@@ -55,8 +55,8 @@ DeleteProject
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**project_id** | **String** | The project_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**project_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -84,8 +84,8 @@ GetProject
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**project_id** | **String** | The project_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**project_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -113,7 +113,7 @@ ListProjects
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -141,8 +141,8 @@ MoveProject
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**project_id** | **String** | The project_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**project_id** | **String** |  | [required] |
 **move_project_request** | [**MoveProjectRequest**](MoveProjectRequest.md) |  | [required] |
 
 ### Return type
@@ -171,8 +171,8 @@ RemoveCustomDomain
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**project_id** | **String** | The project_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**project_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -200,8 +200,8 @@ SetCustomDomain
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**project_id** | **String** | The project_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**project_id** | **String** |  | [required] |
 **set_custom_domain_request** | [**SetCustomDomainRequest**](SetCustomDomainRequest.md) |  | [required] |
 
 ### Return type
@@ -230,8 +230,8 @@ UpdateProjectName
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**project_id** | **String** | The project_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**project_id** | **String** |  | [required] |
 **update_project_name_request** | [**UpdateProjectNameRequest**](UpdateProjectNameRequest.md) |  | [required] |
 
 ### Return type
@@ -260,8 +260,8 @@ UpdateVideoQuality
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** | The org_id path parameter. | [required] |
-**project_id** | **String** | The project_id path parameter. | [required] |
+**org_id** | **String** |  | [required] |
+**project_id** | **String** |  | [required] |
 **update_video_quality_request** | [**UpdateVideoQualityRequest**](UpdateVideoQualityRequest.md) |  | [required] |
 
 ### Return type

@@ -12,15 +12,15 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ImageId {
-    #[serde(rename = "image_id", skip_serializing_if = "Option::is_none")]
-    pub image_id: Option<String>,
+pub struct ActorOrgRequest {
+    #[serde(rename = "actor_id", skip_serializing_if = "Option::is_none")]
+    pub actor_id: Option<String>,
 }
 
-impl ImageId {
-    pub fn new() -> ImageId {
-        ImageId {
-            image_id: None,
+impl ActorOrgRequest {
+    pub fn new() -> ActorOrgRequest {
+        ActorOrgRequest {
+            actor_id: None,
         }
     }
 }

@@ -29,7 +29,7 @@ CreateEndpoint registers a new HTTPS endpoint and returns its signing  secret ex
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **create_endpoint_request** | [**CreateEndpointRequest**](CreateEndpointRequest.md) |  | [required] |
 
 ### Return type
@@ -58,8 +58,8 @@ DeleteEndpoint
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**endpoint_id** | **String** | The endpoint_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**endpoint_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -87,8 +87,8 @@ GetEndpoint
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**endpoint_id** | **String** | The endpoint_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**endpoint_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -118,8 +118,8 @@ ListEndpointAttempts returns the delivery history for one endpoint,  newest firs
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**endpoint_id** | **String** | The endpoint_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**endpoint_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
 
@@ -149,7 +149,7 @@ ListEndpoints
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
 
@@ -179,7 +179,7 @@ ListEvents
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
 
@@ -211,9 +211,9 @@ ReplayEvent re-delivers one event to one endpoint with the same  webhook-id so c
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**endpoint_id** | **String** | The endpoint_id path parameter. | [required] |
-**event_id** | **String** | The event_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**endpoint_id** | **String** |  | [required] |
+**event_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -243,8 +243,8 @@ RotateEndpointSecret installs a fresh signing secret. For 24h deliveries  are si
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**endpoint_id** | **String** | The endpoint_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**endpoint_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -274,8 +274,8 @@ SendTestEvent delivers one synthetic webhook.test event to the endpoint.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**endpoint_id** | **String** | The endpoint_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**endpoint_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -303,8 +303,8 @@ UpdateEndpoint
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** | The project_id path parameter. | [required] |
-**endpoint_id** | **String** | The endpoint_id path parameter. | [required] |
+**project_id** | **String** |  | [required] |
+**endpoint_id** | **String** |  | [required] |
 **update_endpoint_request** | [**UpdateEndpointRequest**](UpdateEndpointRequest.md) |  | [required] |
 
 ### Return type

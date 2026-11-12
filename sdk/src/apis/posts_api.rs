@@ -90,9 +90,7 @@ impl PostsApiClient {
 /// struct for passing parameters to the method [`PostsApi::create_post`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreatePostParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The feed_id path parameter.
     pub feed_id: String,
     pub create_post_request: models::CreatePostRequest
 }
@@ -100,9 +98,7 @@ pub struct CreatePostParams {
 /// struct for passing parameters to the method [`PostsApi::create_post_upload`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreatePostUploadParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The feed_id path parameter.
     pub feed_id: String,
     pub create_post_upload_request: models::CreatePostUploadRequest
 }
@@ -110,9 +106,7 @@ pub struct CreatePostUploadParams {
 /// struct for passing parameters to the method [`PostsApi::delete_post`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePostParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The post_id path parameter.
     pub post_id: String,
     /// feed_id is accepted from the feed-scoped delete path but not used by the  backend (deletion is keyed by post_id).
     pub feed_id: Option<String>
@@ -121,20 +115,16 @@ pub struct DeletePostParams {
 /// struct for passing parameters to the method [`PostsApi::delete_post2`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePost2Params {
-    /// The project_id path parameter.
     pub project_id: String,
     /// feed_id is accepted from the feed-scoped delete path but not used by the  backend (deletion is keyed by post_id).
     pub feed_id: String,
-    /// The post_id path parameter.
     pub post_id: String
 }
 
 /// struct for passing parameters to the method [`PostsApi::get_post`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPostParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The post_id path parameter.
     pub post_id: String,
     /// Populated from feed-scoped routes; the handler resolves by post_id, so this  is used only for path binding / optional validation.
     pub feed_id: Option<String>
@@ -143,11 +133,9 @@ pub struct GetPostParams {
 /// struct for passing parameters to the method [`PostsApi::get_post2`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPost2Params {
-    /// The project_id path parameter.
     pub project_id: String,
     /// Populated from feed-scoped routes; the handler resolves by post_id, so this  is used only for path binding / optional validation.
     pub feed_id: String,
-    /// The post_id path parameter.
     pub post_id: String
 }
 
@@ -156,35 +144,27 @@ pub struct GetPost2Params {
 pub struct GetPost3Params {
     /// Populated from feed-scoped routes; the handler resolves by post_id, so this  is used only for path binding / optional validation.
     pub feed_id: String,
-    /// The post_id path parameter.
     pub post_id: String,
-    /// The project_id query parameter.
     pub project_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PostsApi::list_posts`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPostsParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The feed_id path parameter.
     pub feed_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
     /// Number of items to skip before collecting the result set.
     pub pagination_offset: Option<i32>,
-    /// The creator_id query parameter.
     pub creator_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PostsApi::list_posts2`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPosts2Params {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The feed_id path parameter.
     pub feed_id: String,
-    /// The creator_id path parameter.
     pub creator_id: String,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -195,26 +175,20 @@ pub struct ListPosts2Params {
 /// struct for passing parameters to the method [`PostsApi::list_posts3`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPosts3Params {
-    /// The feed_id path parameter.
     pub feed_id: String,
-    /// The project_id query parameter.
     pub project_id: Option<String>,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
     /// Number of items to skip before collecting the result set.
     pub pagination_offset: Option<i32>,
-    /// The creator_id query parameter.
     pub creator_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`PostsApi::list_posts4`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPosts4Params {
-    /// The feed_id path parameter.
     pub feed_id: String,
-    /// The creator_id path parameter.
     pub creator_id: String,
-    /// The project_id query parameter.
     pub project_id: Option<String>,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -902,6 +876,7 @@ impl PostsApi for PostsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreatePostError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -909,6 +884,7 @@ pub enum CreatePostError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreatePostUploadError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -916,6 +892,7 @@ pub enum CreatePostUploadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeletePostError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -923,6 +900,7 @@ pub enum DeletePostError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeletePost2Error {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -930,6 +908,7 @@ pub enum DeletePost2Error {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPostError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -937,6 +916,7 @@ pub enum GetPostError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPost2Error {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -944,6 +924,7 @@ pub enum GetPost2Error {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPost3Error {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -951,6 +932,7 @@ pub enum GetPost3Error {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPostsError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -958,6 +940,7 @@ pub enum ListPostsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPosts2Error {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -965,6 +948,7 @@ pub enum ListPosts2Error {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPosts3Error {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -972,6 +956,7 @@ pub enum ListPosts3Error {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPosts4Error {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

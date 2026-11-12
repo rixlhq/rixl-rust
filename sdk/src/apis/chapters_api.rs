@@ -55,29 +55,22 @@ impl ChaptersApiClient {
 /// struct for passing parameters to the method [`ChaptersApi::delete_video_chapter`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeleteVideoChapterParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The start_time_sec path parameter.
     pub start_time_sec: String
 }
 
 /// struct for passing parameters to the method [`ChaptersApi::get_video_chapters`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetVideoChaptersParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String
 }
 
 /// struct for passing parameters to the method [`ChaptersApi::update_video_chapters`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateVideoChaptersParams {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
     pub update_video_chapters_request: models::UpdateVideoChaptersRequest
 }
@@ -85,13 +78,9 @@ pub struct UpdateVideoChaptersParams {
 /// struct for passing parameters to the method [`ChaptersApi::update_video_chapters2`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateVideoChapters2Params {
-    /// The project_id path parameter.
     pub project_id: String,
-    /// The video_id path parameter.
     pub video_id: String,
-    /// The chapters.title query parameter.
     pub chapters_title: Option<String>,
-    /// The chapters.start_time_sec query parameter.
     pub chapters_start_time_sec: Option<f64>
 }
 
@@ -335,6 +324,7 @@ impl ChaptersApi for ChaptersApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteVideoChapterError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -342,6 +332,7 @@ pub enum DeleteVideoChapterError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetVideoChaptersError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -349,6 +340,7 @@ pub enum GetVideoChaptersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateVideoChaptersError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -356,6 +348,7 @@ pub enum UpdateVideoChaptersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateVideoChapters2Error {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

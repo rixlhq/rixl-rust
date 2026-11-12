@@ -60,7 +60,6 @@ impl SubscriptionsApiClient {
 /// struct for passing parameters to the method [`SubscriptionsApi::cancel_subscription`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CancelSubscriptionParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
@@ -73,14 +72,12 @@ pub struct CreateSubscriptionParams {
 /// struct for passing parameters to the method [`SubscriptionsApi::get_subscription`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetSubscriptionParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`SubscriptionsApi::get_subscription_history`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetSubscriptionHistoryParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>,
     /// Maximum number of items to return.
     pub pagination_limit: Option<i32>,
@@ -91,7 +88,6 @@ pub struct GetSubscriptionHistoryParams {
 /// struct for passing parameters to the method [`SubscriptionsApi::reactivate_subscription`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ReactivateSubscriptionParams {
-    /// The org_id query parameter.
     pub org_id: Option<String>
 }
 
@@ -395,6 +391,7 @@ impl SubscriptionsApi for SubscriptionsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CancelSubscriptionError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -402,6 +399,7 @@ pub enum CancelSubscriptionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateSubscriptionError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -409,6 +407,7 @@ pub enum CreateSubscriptionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetSubscriptionError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -416,6 +415,7 @@ pub enum GetSubscriptionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetSubscriptionHistoryError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -423,6 +423,7 @@ pub enum GetSubscriptionHistoryError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ReactivateSubscriptionError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

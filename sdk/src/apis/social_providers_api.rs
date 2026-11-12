@@ -56,16 +56,13 @@ pub struct ConnectProviderParams {
 /// struct for passing parameters to the method [`SocialProvidersApi::disconnect_provider`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DisconnectProviderParams {
-    /// The provider path parameter.
     pub provider: String,
-    /// The user.user_id query parameter.
     pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`SocialProvidersApi::list_providers`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListProvidersParams {
-    /// The user_id query parameter.
     pub user_id: Option<String>
 }
 
@@ -248,6 +245,7 @@ impl SocialProvidersApi for SocialProvidersApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ConnectProviderError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -255,6 +253,7 @@ pub enum ConnectProviderError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DisconnectProviderError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 
@@ -262,6 +261,7 @@ pub enum DisconnectProviderError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListProvidersError {
+    DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
 

@@ -13,7 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UpdateVideoQualityRequest {
-    /// enum.defined_only = true 
     #[serde(rename = "video_quality")]
     pub video_quality: models::CommonV1VideoQuality,
 }

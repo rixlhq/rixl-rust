@@ -25,7 +25,7 @@ AddTicketMessage
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**ticket_id** | **String** | The ticket_id path parameter. | [required] |
+**ticket_id** | **String** |  | [required] |
 **add_ticket_message_request** | [**AddTicketMessageRequest**](AddTicketMessageRequest.md) |  | [required] |
 
 ### Return type
@@ -54,7 +54,7 @@ CloseTicket
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**ticket_id** | **String** | The ticket_id path parameter. | [required] |
+**ticket_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -110,7 +110,7 @@ GetTicket
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**ticket_id** | **String** | The ticket_id path parameter. | [required] |
+**ticket_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -165,7 +165,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **pagination_limit** | Option<**i32**> | Maximum number of items to return. |  |[default to 25]
 **pagination_offset** | Option<**i32**> | Number of items to skip before collecting the result set. |  |[default to 0]
-**status** | Option<[**models::SupportV1TicketStatus**](Models__SupportV1TicketStatus.md)> | enum.defined_only = true  |  |
+**status** | Option<[**models::SupportV1TicketStatus**](Models__SupportV1TicketStatus.md)> |  |  |
 
 ### Return type
 
@@ -193,8 +193,8 @@ ListTopics
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**category_id** | Option<**String**> | The category_id query parameter. |  |
-**query** | Option<**String**> | The query query parameter. |  |
+**category_id** | Option<**String**> |  |  |
+**query** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -222,8 +222,8 @@ ListTopics
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**category_id** | **String** | The category_id path parameter. | [required] |
-**query** | Option<**String**> | The query query parameter. |  |
+**category_id** | **String** |  | [required] |
+**query** | Option<**String**> |  |  |
 
 ### Return type
 
