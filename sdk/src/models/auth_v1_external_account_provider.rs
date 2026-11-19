@@ -26,6 +26,8 @@ pub enum AuthV1ExternalAccountProvider {
     ExternalAccountProviderFacebook,
     #[serde(rename = "EXTERNAL_ACCOUNT_PROVIDER_TELEGRAM")]
     ExternalAccountProviderTelegram,
+    #[serde(rename = "EXTERNAL_ACCOUNT_PROVIDER_GITHUB")]
+    ExternalAccountProviderGithub,
 
 }
 
@@ -38,6 +40,7 @@ impl std::fmt::Display for AuthV1ExternalAccountProvider {
             Self::ExternalAccountProviderMicrosoft => write!(f, "EXTERNAL_ACCOUNT_PROVIDER_MICROSOFT"),
             Self::ExternalAccountProviderFacebook => write!(f, "EXTERNAL_ACCOUNT_PROVIDER_FACEBOOK"),
             Self::ExternalAccountProviderTelegram => write!(f, "EXTERNAL_ACCOUNT_PROVIDER_TELEGRAM"),
+            Self::ExternalAccountProviderGithub => write!(f, "EXTERNAL_ACCOUNT_PROVIDER_GITHUB"),
         }
     }
 }

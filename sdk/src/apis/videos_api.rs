@@ -61,7 +61,9 @@ impl VideosApiClient {
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateVideoUploadParams {
     pub project_id: String,
-    pub create_video_upload_request: models::CreateVideoUploadRequest
+    pub create_video_upload_request: models::CreateVideoUploadRequest,
+    /// Optional key (1-255 visible ASCII characters) that makes the request safe to retry. The first successful response is stored for 24 hours and a retry with the same key and payload is replayed verbatim — same IDs, URLs and expiry — with the response header `Idempotent-Replayed: true`. Reusing the key with a different payload fails with `400`; while the first request is still in flight a retry fails with `409` and a `Retry-After` header. A request that fails stores nothing, so the key can be reused. Replayed responses still count as billed API requests.
+    pub idempotency_key: Option<String>
 }
 
 /// struct for passing parameters to the method [`VideosApi::delete_video`]
@@ -105,6 +107,7 @@ impl VideosApi for VideosApiClient {
         let CreateVideoUploadParams {
             project_id,
             create_video_upload_request,
+            idempotency_key,
         } = params;
         
 
@@ -117,6 +120,9 @@ impl VideosApi for VideosApiClient {
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(local_var_param_value) = idempotency_key {
+            local_var_req_builder = local_var_req_builder.header("Idempotency-Key", local_var_param_value.to_string());
         }
         if let Some(ref local_var_apikey) = local_var_configuration.api_key {
             let local_var_key = local_var_apikey.key.clone();

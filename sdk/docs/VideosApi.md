@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## create_video_upload
 
-> models::VideosV1VideoUpload create_video_upload(project_id, create_video_upload_request)
+> models::VideosV1VideoUpload create_video_upload(project_id, create_video_upload_request, idempotency_key)
 CreateVideoUpload
 
 ### Parameters
@@ -24,6 +24,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **project_id** | **String** |  | [required] |
 **create_video_upload_request** | [**CreateVideoUploadRequest**](CreateVideoUploadRequest.md) |  | [required] |
+**idempotency_key** | Option<**String**> | Optional key (1-255 visible ASCII characters) that makes the request safe to retry. The first successful response is stored for 24 hours and a retry with the same key and payload is replayed verbatim — same IDs, URLs and expiry — with the response header `Idempotent-Replayed: true`. Reusing the key with a different payload fails with `400`; while the first request is still in flight a retry fails with `409` and a `Retry-After` header. A request that fails stores nothing, so the key can be reused. Replayed responses still count as billed API requests. |  |
 
 ### Return type
 

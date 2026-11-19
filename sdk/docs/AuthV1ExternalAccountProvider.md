@@ -10,6 +10,7 @@
 | ExternalAccountProviderMicrosoft | EXTERNAL_ACCOUNT_PROVIDER_MICROSOFT |
 | ExternalAccountProviderFacebook | EXTERNAL_ACCOUNT_PROVIDER_FACEBOOK |
 | ExternalAccountProviderTelegram | EXTERNAL_ACCOUNT_PROVIDER_TELEGRAM |
+| ExternalAccountProviderGithub | EXTERNAL_ACCOUNT_PROVIDER_GITHUB |
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
