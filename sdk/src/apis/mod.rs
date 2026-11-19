@@ -126,7 +126,6 @@ pub mod feeds_api;
 pub mod funnels_api;
 pub mod heatmaps_api;
 pub mod image_analytics_api;
-pub mod image_conversion_api;
 pub mod images_api;
 pub mod invoices_api;
 pub mod languages_api;
@@ -150,7 +149,6 @@ pub mod support_tickets_api;
 pub mod usage_api;
 pub mod users_api;
 pub mod video_analytics_api;
-pub mod video_conversion_api;
 pub mod videos_api;
 pub mod webhooks_api;
 
@@ -174,7 +172,6 @@ pub trait Api {
     fn funnels_api(&self) -> &dyn funnels_api::FunnelsApi;
     fn heatmaps_api(&self) -> &dyn heatmaps_api::HeatmapsApi;
     fn image_analytics_api(&self) -> &dyn image_analytics_api::ImageAnalyticsApi;
-    fn image_conversion_api(&self) -> &dyn image_conversion_api::ImageConversionApi;
     fn images_api(&self) -> &dyn images_api::ImagesApi;
     fn invoices_api(&self) -> &dyn invoices_api::InvoicesApi;
     fn languages_api(&self) -> &dyn languages_api::LanguagesApi;
@@ -198,7 +195,6 @@ pub trait Api {
     fn usage_api(&self) -> &dyn usage_api::UsageApi;
     fn users_api(&self) -> &dyn users_api::UsersApi;
     fn video_analytics_api(&self) -> &dyn video_analytics_api::VideoAnalyticsApi;
-    fn video_conversion_api(&self) -> &dyn video_conversion_api::VideoConversionApi;
     fn videos_api(&self) -> &dyn videos_api::VideosApi;
     fn webhooks_api(&self) -> &dyn webhooks_api::WebhooksApi;
 }
@@ -219,7 +215,6 @@ pub struct ApiClient {
     funnels_api: Box<dyn funnels_api::FunnelsApi>,
     heatmaps_api: Box<dyn heatmaps_api::HeatmapsApi>,
     image_analytics_api: Box<dyn image_analytics_api::ImageAnalyticsApi>,
-    image_conversion_api: Box<dyn image_conversion_api::ImageConversionApi>,
     images_api: Box<dyn images_api::ImagesApi>,
     invoices_api: Box<dyn invoices_api::InvoicesApi>,
     languages_api: Box<dyn languages_api::LanguagesApi>,
@@ -243,7 +238,6 @@ pub struct ApiClient {
     usage_api: Box<dyn usage_api::UsageApi>,
     users_api: Box<dyn users_api::UsersApi>,
     video_analytics_api: Box<dyn video_analytics_api::VideoAnalyticsApi>,
-    video_conversion_api: Box<dyn video_conversion_api::VideoConversionApi>,
     videos_api: Box<dyn videos_api::VideosApi>,
     webhooks_api: Box<dyn webhooks_api::WebhooksApi>,
 }
@@ -266,7 +260,6 @@ impl ApiClient {
             funnels_api: Box::new(funnels_api::FunnelsApiClient::new(configuration.clone())),
             heatmaps_api: Box::new(heatmaps_api::HeatmapsApiClient::new(configuration.clone())),
             image_analytics_api: Box::new(image_analytics_api::ImageAnalyticsApiClient::new(configuration.clone())),
-            image_conversion_api: Box::new(image_conversion_api::ImageConversionApiClient::new(configuration.clone())),
             images_api: Box::new(images_api::ImagesApiClient::new(configuration.clone())),
             invoices_api: Box::new(invoices_api::InvoicesApiClient::new(configuration.clone())),
             languages_api: Box::new(languages_api::LanguagesApiClient::new(configuration.clone())),
@@ -290,7 +283,6 @@ impl ApiClient {
             usage_api: Box::new(usage_api::UsageApiClient::new(configuration.clone())),
             users_api: Box::new(users_api::UsersApiClient::new(configuration.clone())),
             video_analytics_api: Box::new(video_analytics_api::VideoAnalyticsApiClient::new(configuration.clone())),
-            video_conversion_api: Box::new(video_conversion_api::VideoConversionApiClient::new(configuration.clone())),
             videos_api: Box::new(videos_api::VideosApiClient::new(configuration.clone())),
             webhooks_api: Box::new(webhooks_api::WebhooksApiClient::new(configuration.clone())),
         }
@@ -342,9 +334,6 @@ impl Api for ApiClient {
     }
     fn image_analytics_api(&self) -> &dyn image_analytics_api::ImageAnalyticsApi {
         self.image_analytics_api.as_ref()
-    }
-    fn image_conversion_api(&self) -> &dyn image_conversion_api::ImageConversionApi {
-        self.image_conversion_api.as_ref()
     }
     fn images_api(&self) -> &dyn images_api::ImagesApi {
         self.images_api.as_ref()
@@ -414,9 +403,6 @@ impl Api for ApiClient {
     }
     fn video_analytics_api(&self) -> &dyn video_analytics_api::VideoAnalyticsApi {
         self.video_analytics_api.as_ref()
-    }
-    fn video_conversion_api(&self) -> &dyn video_conversion_api::VideoConversionApi {
-        self.video_conversion_api.as_ref()
     }
     fn videos_api(&self) -> &dyn videos_api::VideosApi {
         self.videos_api.as_ref()
