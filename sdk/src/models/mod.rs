@@ -636,6 +636,8 @@ pub mod create_video_upload_request;
 pub use self::create_video_upload_request::CreateVideoUploadRequest;
 pub mod duration;
 pub use self::duration::Duration;
+pub mod error;
+pub use self::error::Error;
 pub mod export_dashboard_request;
 pub use self::export_dashboard_request::ExportDashboardRequest;
 pub mod feeds_v1_create_feed_request;
