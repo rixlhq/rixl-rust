@@ -48,7 +48,7 @@ pub trait DashboardsApi: Send + Sync {
     /// POST /analytics/v1/dashboards/{dashboard_id}/export
     ///
     /// 
-    async fn export_dashboard(&self,  params: ExportDashboardParams ) -> Result<models::AnalyticsV1ExportDashboardResponse, Error<ExportDashboardError>>;
+    async fn export_dashboard(&self,  params: ExportDashboardParams ) -> Result<models::GoogleApiHttpBody, Error<ExportDashboardError>>;
 
     /// GET /analytics/v1/dashboards/{id}
     ///
@@ -515,7 +515,7 @@ impl DashboardsApi for DashboardsApiClient {
         }
     }
 
-    async fn export_dashboard(&self,  params: ExportDashboardParams ) -> Result<models::AnalyticsV1ExportDashboardResponse, Error<ExportDashboardError>> {
+    async fn export_dashboard(&self,  params: ExportDashboardParams ) -> Result<models::GoogleApiHttpBody, Error<ExportDashboardError>> {
         
         let ExportDashboardParams {
             dashboard_id,
@@ -561,8 +561,8 @@ impl DashboardsApi for DashboardsApiClient {
         if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
             match local_var_content_type {
                 ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AnalyticsV1ExportDashboardResponse`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AnalyticsV1ExportDashboardResponse`")))),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GoogleApiHttpBody`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::GoogleApiHttpBody`")))),
             }
         } else {
             let local_var_entity: Option<ExportDashboardError> = serde_json::from_str(&local_var_content).ok();

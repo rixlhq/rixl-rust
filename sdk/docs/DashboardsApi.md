@@ -170,7 +170,7 @@ Name | Type | Description  | Required | Notes
 
 ## export_dashboard
 
-> models::AnalyticsV1ExportDashboardResponse export_dashboard(dashboard_id, export_dashboard_request)
+> models::GoogleApiHttpBody export_dashboard(dashboard_id, export_dashboard_request)
 ExportDashboard
 
 ### Parameters
@@ -183,7 +183,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::AnalyticsV1ExportDashboardResponse**](analytics.v1.ExportDashboardResponse.md)
+[**models::GoogleApiHttpBody**](google.api.HttpBody.md)
 
 ### Authorization
 
