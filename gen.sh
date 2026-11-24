@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate the Rust SDK from the upstream RIXL OpenAPI
+# Regenerate the Rust SDK from the upstream Rixl OpenAPI
 #brew install openapi-generator openjdk
 set -e
 

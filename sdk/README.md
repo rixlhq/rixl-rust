@@ -4,7 +4,7 @@
 [![Documentation](https://docs.rs/rixl/badge.svg)](https://docs.rs/rixl)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Official Rust SDK for the [RIXL](https://rixl.com) API platform.
+Official Rust SDK for the [Rixl](https://rixl.com) API platform.
 
 ## Install
 
