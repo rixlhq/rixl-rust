@@ -13,8 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1CreateDomainRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::AuthV1UserOrgRequest>>,
+    #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
+    pub org_id: Option<String>,
     #[serde(rename = "domain", skip_serializing_if = "Option::is_none")]
     pub domain: Option<String>,
 }
@@ -22,7 +22,7 @@ pub struct AuthV1CreateDomainRequest {
 impl AuthV1CreateDomainRequest {
     pub fn new() -> AuthV1CreateDomainRequest {
         AuthV1CreateDomainRequest {
-            user: None,
+            org_id: None,
             domain: None,
         }
     }

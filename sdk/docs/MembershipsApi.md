@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**check_current_membership**](MembershipsApi.md#check_current_membership) | **GET** /auth/v1/organizations/{org_id}/members/current/check | CheckCurrentMembership
 [**leave_organization**](MembershipsApi.md#leave_organization) | **DELETE** /auth/v1/organizations/{org_id}/members/current | LeaveOrganization
 [**list_memberships**](MembershipsApi.md#list_memberships) | **GET** /auth/v1/users/current/memberships | ListMemberships
-[**list_organization_members**](MembershipsApi.md#list_organization_members) | **GET** /auth/v1/organizations/{user_org_id}/members | ListOrganizationMembers
+[**list_organization_members**](MembershipsApi.md#list_organization_members) | **GET** /auth/v1/organizations/{org_id}/members | ListOrganizationMembers
 [**remove_member**](MembershipsApi.md#remove_member) | **DELETE** /auth/v1/organizations/{org_id}/members/{user_id} | RemoveMember
 [**update_member**](MembershipsApi.md#update_member) | **PATCH** /auth/v1/organizations/{org_id}/members/{user_id} | UpdateMember
 
@@ -102,7 +102,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_organization_members
 
-> models::AuthV1ListOrgMembersResponse list_organization_members(user_org_id, user_user_id, limit, offset)
+> models::AuthV1ListOrgMembersResponse list_organization_members(org_id, limit, offset)
 ListOrganizationMembers
 
 ### Parameters
@@ -110,8 +110,7 @@ ListOrganizationMembers
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** |  | [required] |
-**user_user_id** | Option<**String**> |  |  |
+**org_id** | **String** |  | [required] |
 **limit** | Option<**i32**> |  |  |
 **offset** | Option<**i32**> |  |  |
 

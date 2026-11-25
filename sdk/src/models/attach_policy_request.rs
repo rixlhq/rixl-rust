@@ -13,8 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AttachPolicyRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::UserOrgRequest1>>,
     #[serde(rename = "identity_type", skip_serializing_if = "Option::is_none")]
     pub identity_type: Option<models::AuthV1PolicyIdentityType>,
     #[serde(rename = "identity_id", skip_serializing_if = "Option::is_none")]
@@ -24,7 +22,6 @@ pub struct AttachPolicyRequest {
 impl AttachPolicyRequest {
     pub fn new() -> AttachPolicyRequest {
         AttachPolicyRequest {
-            user: None,
             identity_type: None,
             identity_id: None,
         }

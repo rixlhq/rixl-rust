@@ -13,8 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SetSuggestJoinRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::UserOrgRequest1>>,
     #[serde(rename = "enabled", skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
 }
@@ -22,7 +20,6 @@ pub struct SetSuggestJoinRequest {
 impl SetSuggestJoinRequest {
     pub fn new() -> SetSuggestJoinRequest {
         SetSuggestJoinRequest {
-            user: None,
             enabled: None,
         }
     }
