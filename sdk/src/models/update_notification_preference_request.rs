@@ -13,8 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UpdateNotificationPreferenceRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::UserOrgRequest1>>,
     #[serde(rename = "category", skip_serializing_if = "Option::is_none")]
     pub category: Option<models::AuthV1NotificationCategory>,
     #[serde(rename = "email_enabled", skip_serializing_if = "Option::is_none")]
@@ -24,7 +22,6 @@ pub struct UpdateNotificationPreferenceRequest {
 impl UpdateNotificationPreferenceRequest {
     pub fn new() -> UpdateNotificationPreferenceRequest {
         UpdateNotificationPreferenceRequest {
-            user: None,
             category: None,
             email_enabled: None,
         }

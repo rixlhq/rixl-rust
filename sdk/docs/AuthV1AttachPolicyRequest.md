@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user** | Option<[**models::AuthV1UserOrgRequest**](AuthV1UserOrgRequest.md)> |  | [optional]
+**org_id** | Option<**String**> |  | [optional]
 **policy_id** | Option<**String**> |  | [optional]
 **identity_type** | Option<[**models::AuthV1PolicyIdentityType**](AuthV1PolicyIdentityType.md)> |  | [optional]
 **identity_id** | Option<**String**> |  | [optional]

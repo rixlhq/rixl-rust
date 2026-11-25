@@ -35,7 +35,7 @@ pub trait MembershipsApi: Send + Sync {
     /// 
     async fn list_memberships(&self,  params: ListMembershipsParams ) -> Result<models::AuthV1ListMembershipsResponse, Error<ListMembershipsError>>;
 
-    /// GET /auth/v1/organizations/{user_org_id}/members
+    /// GET /auth/v1/organizations/{org_id}/members
     ///
     /// 
     async fn list_organization_members(&self,  params: ListOrganizationMembersParams ) -> Result<models::AuthV1ListOrgMembersResponse, Error<ListOrganizationMembersError>>;
@@ -86,8 +86,7 @@ pub struct ListMembershipsParams {
 /// struct for passing parameters to the method [`MembershipsApi::list_organization_members`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListOrganizationMembersParams {
-    pub user_org_id: String,
-    pub user_user_id: Option<String>,
+    pub org_id: String,
     pub limit: Option<i32>,
     pub offset: Option<i32>
 }
@@ -290,8 +289,7 @@ impl MembershipsApi for MembershipsApiClient {
     async fn list_organization_members(&self,  params: ListOrganizationMembersParams ) -> Result<models::AuthV1ListOrgMembersResponse, Error<ListOrganizationMembersError>> {
         
         let ListOrganizationMembersParams {
-            user_org_id,
-            user_user_id,
+            org_id,
             limit,
             offset,
         } = params;
@@ -301,12 +299,9 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/members", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/members", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
-        }
         if let Some(ref param_value) = limit {
             local_var_req_builder = local_var_req_builder.query(&[("limit", &param_value.to_string())]);
         }

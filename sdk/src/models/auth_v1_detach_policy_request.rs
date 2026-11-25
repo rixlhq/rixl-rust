@@ -13,8 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1DetachPolicyRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::AuthV1UserOrgRequest>>,
+    #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
+    pub org_id: Option<String>,
     #[serde(rename = "attachment_id", skip_serializing_if = "Option::is_none")]
     pub attachment_id: Option<String>,
 }
@@ -22,7 +22,7 @@ pub struct AuthV1DetachPolicyRequest {
 impl AuthV1DetachPolicyRequest {
     pub fn new() -> AuthV1DetachPolicyRequest {
         AuthV1DetachPolicyRequest {
-            user: None,
+            org_id: None,
             attachment_id: None,
         }
     }

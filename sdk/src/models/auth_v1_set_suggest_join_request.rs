@@ -13,8 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1SetSuggestJoinRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::AuthV1UserOrgRequest>>,
+    #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
+    pub org_id: Option<String>,
     #[serde(rename = "enabled", skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
 }
@@ -22,7 +22,7 @@ pub struct AuthV1SetSuggestJoinRequest {
 impl AuthV1SetSuggestJoinRequest {
     pub fn new() -> AuthV1SetSuggestJoinRequest {
         AuthV1SetSuggestJoinRequest {
-            user: None,
+            org_id: None,
             enabled: None,
         }
     }

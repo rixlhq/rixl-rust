@@ -13,8 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreatePolicyRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::UserOrgRequest1>>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
@@ -26,7 +24,6 @@ pub struct CreatePolicyRequest {
 impl CreatePolicyRequest {
     pub fn new() -> CreatePolicyRequest {
         CreatePolicyRequest {
-            user: None,
             name: None,
             description: None,
             permissions: None,

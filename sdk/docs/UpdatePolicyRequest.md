@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user** | Option<[**models::UserOrgRequest1**](UserOrgRequest1.md)> |  | [optional]
 **name** | Option<**String**> |  | [optional]
 **description** | Option<**String**> |  | [optional]
 **permissions** | Option<**Vec<String>**> |  | [optional]
