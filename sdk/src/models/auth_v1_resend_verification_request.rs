@@ -15,12 +15,16 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1ResendVerificationRequest {
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
+    /// verification_id names the pending sign-up to resend, as returned by  Register. A pending sign-up is never looked up by email alone.
+    #[serde(rename = "verification_id", skip_serializing_if = "Option::is_none")]
+    pub verification_id: Option<String>,
 }
 
 impl AuthV1ResendVerificationRequest {
     pub fn new() -> AuthV1ResendVerificationRequest {
         AuthV1ResendVerificationRequest {
             email: None,
+            verification_id: None,
         }
     }
 }

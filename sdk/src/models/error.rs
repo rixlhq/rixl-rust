@@ -16,12 +16,16 @@ pub struct Error {
     /// Human-readable message. Not stable; branch on the HTTP status.
     #[serde(rename = "error")]
     pub error: String,
+    /// Machine-readable reason for some 4xx errors, such as `ORG_DELETED`, `MEMBERSHIP_SUSPENDED`, `NOT_A_MEMBER` or `STEP_UP_REQUIRED`. Absent when there is none, and always absent on 5xx.
+    #[serde(rename = "reason", skip_serializing_if = "Option::is_none")]
+    pub reason: Option<String>,
 }
 
 impl Error {
     pub fn new(error: String) -> Error {
         Error {
             error,
+            reason: None,
         }
     }
 }

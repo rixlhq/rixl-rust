@@ -13,17 +13,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1ResendInvitationRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::AuthV1ActorOrgRequest>>,
-    #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
-    pub user_id: Option<String>,
+    #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
+    pub org_id: Option<String>,
+    #[serde(rename = "invitation_id", skip_serializing_if = "Option::is_none")]
+    pub invitation_id: Option<String>,
 }
 
 impl AuthV1ResendInvitationRequest {
     pub fn new() -> AuthV1ResendInvitationRequest {
         AuthV1ResendInvitationRequest {
-            user: None,
-            user_id: None,
+            org_id: None,
+            invitation_id: None,
         }
     }
 }

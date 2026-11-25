@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**reset_password**](EmailApi.md#reset_password) | **POST** /auth/v1/password/reset/confirm | ResetPassword
 [**send_password_reset**](EmailApi.md#send_password_reset) | **POST** /auth/v1/password/reset | SendPasswordReset
 [**verify_email**](EmailApi.md#verify_email) | **POST** /auth/v1/email/verify | VerifyEmail
+[**verify_email_change**](EmailApi.md#verify_email_change) | **POST** /auth/v1/users/current/emails/verify | VerifyEmailChange
 
 
 
@@ -20,6 +21,8 @@ Method | HTTP request | Description
 
 > models::AuthV1VerificationSentResponse add_email(auth_v1_add_email_request)
 AddEmail
+
+Requests adding an email. Nothing is stored on the account until the  address is verified with VerifyEmailChange.
 
 ### Parameters
 
@@ -76,6 +79,8 @@ Name | Type | Description  | Required | Notes
 
 > models::AuthV1VerificationSentResponse initiate_email_change(auth_v1_initiate_email_change_request)
 InitiateEmailChange
+
+Requests changing the email. The account keeps its address until the new  one is verified with VerifyEmailChange.
 
 ### Parameters
 
@@ -251,6 +256,36 @@ VerifyEmail
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **auth_v1_verify_email_request** | [**AuthV1VerifyEmailRequest**](AuthV1VerifyEmailRequest.md) |  | [required] |
+
+### Return type
+
+[**models::AuthV1VerifyEmailResponse**](auth.v1.VerifyEmailResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## verify_email_change
+
+> models::AuthV1VerifyEmailResponse verify_email_change(auth_v1_verify_email_change_request)
+VerifyEmailChange
+
+Verifies the caller's own pending email and moves it onto the account. The  tokens are reissued within the caller's sign-in.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**auth_v1_verify_email_change_request** | [**AuthV1VerifyEmailChangeRequest**](AuthV1VerifyEmailChangeRequest.md) |  | [required] |
 
 ### Return type
 

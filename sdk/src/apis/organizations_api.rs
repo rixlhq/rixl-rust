@@ -20,6 +20,16 @@ use crate::apis::ContentType;
 #[async_trait]
 pub trait OrganizationsApi: Send + Sync {
 
+    /// POST /auth/v1/organizations/{org_id}/convert-to-team
+    ///
+    /// 
+    async fn convert_to_team_organization(&self,  params: ConvertToTeamOrganizationParams ) -> Result<models::AuthV1ConvertToTeamOrganizationResponse, Error<ConvertToTeamOrganizationError>>;
+
+    /// POST /auth/v1/organizations
+    ///
+    /// 
+    async fn create_organization(&self,  params: CreateOrganizationParams ) -> Result<models::AuthV1Organization, Error<CreateOrganizationError>>;
+
     /// POST /auth/v1/organizations/{org_id}/avatar/upload
     ///
     /// 
@@ -40,6 +50,11 @@ pub trait OrganizationsApi: Send + Sync {
     /// 
     async fn list_organizations(&self,  params: ListOrganizationsParams ) -> Result<models::AuthV1ListOrganizationsResponse, Error<ListOrganizationsError>>;
 
+    /// POST /auth/v1/organizations/{org_id}/transfer-ownership
+    ///
+    /// 
+    async fn transfer_ownership(&self,  params: TransferOwnershipParams ) -> Result<models::AuthV1Organization, Error<TransferOwnershipError>>;
+
     /// PATCH /auth/v1/organizations/{org_id}
     ///
     /// 
@@ -56,6 +71,18 @@ impl OrganizationsApiClient {
     }
 }
 
+
+/// struct for passing parameters to the method [`OrganizationsApi::convert_to_team_organization`]
+#[derive(Clone, Debug, ::bon::Builder)]
+pub struct ConvertToTeamOrganizationParams {
+    pub org_id: String
+}
+
+/// struct for passing parameters to the method [`OrganizationsApi::create_organization`]
+#[derive(Clone, Debug, ::bon::Builder)]
+pub struct CreateOrganizationParams {
+    pub auth_v1_create_organization_request: models::AuthV1CreateOrganizationRequest
+}
 
 /// struct for passing parameters to the method [`OrganizationsApi::create_organization_avatar_upload`]
 #[derive(Clone, Debug, ::bon::Builder)]
@@ -82,8 +109,15 @@ pub struct ListOrganizationAuditEventsParams {
 pub struct ListOrganizationsParams {
     pub page_size: Option<i32>,
     pub page_token: Option<String>,
-    /// Includes deleted organizations visible to their owners once lifecycle adds deletion.
+    /// Includes deleted organizations visible to their retained active owners.
     pub show_deleted: Option<bool>
+}
+
+/// struct for passing parameters to the method [`OrganizationsApi::transfer_ownership`]
+#[derive(Clone, Debug, ::bon::Builder)]
+pub struct TransferOwnershipParams {
+    pub org_id: String,
+    pub transfer_ownership_request: models::TransferOwnershipRequest
 }
 
 /// struct for passing parameters to the method [`OrganizationsApi::update_organization`]
@@ -96,6 +130,115 @@ pub struct UpdateOrganizationParams {
 
 #[async_trait]
 impl OrganizationsApi for OrganizationsApiClient {
+    async fn convert_to_team_organization(&self,  params: ConvertToTeamOrganizationParams ) -> Result<models::AuthV1ConvertToTeamOrganizationResponse, Error<ConvertToTeamOrganizationError>> {
+        
+        let ConvertToTeamOrganizationParams {
+            org_id,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/convert-to-team", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1ConvertToTeamOrganizationResponse`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1ConvertToTeamOrganizationResponse`")))),
+            }
+        } else {
+            let local_var_entity: Option<ConvertToTeamOrganizationError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    async fn create_organization(&self,  params: CreateOrganizationParams ) -> Result<models::AuthV1Organization, Error<CreateOrganizationError>> {
+        
+        let CreateOrganizationParams {
+            auth_v1_create_organization_request,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/auth/v1/organizations", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+        local_var_req_builder = local_var_req_builder.json(&auth_v1_create_organization_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1Organization`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1Organization`")))),
+            }
+        } else {
+            let local_var_entity: Option<CreateOrganizationError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
     async fn create_organization_avatar_upload(&self,  params: CreateOrganizationAvatarUploadParams ) -> Result<models::AuthV1CreateAvatarUploadResponse, Error<CreateOrganizationAvatarUploadError>> {
         
         let CreateOrganizationAvatarUploadParams {
@@ -331,6 +474,62 @@ impl OrganizationsApi for OrganizationsApiClient {
         }
     }
 
+    async fn transfer_ownership(&self,  params: TransferOwnershipParams ) -> Result<models::AuthV1Organization, Error<TransferOwnershipError>> {
+        
+        let TransferOwnershipParams {
+            org_id,
+            transfer_ownership_request,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/transfer-ownership", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+        local_var_req_builder = local_var_req_builder.json(&transfer_ownership_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1Organization`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1Organization`")))),
+            }
+        } else {
+            let local_var_entity: Option<TransferOwnershipError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
     async fn update_organization(&self,  params: UpdateOrganizationParams ) -> Result<models::AuthV1Organization, Error<UpdateOrganizationError>> {
         
         let UpdateOrganizationParams {
@@ -389,6 +588,22 @@ impl OrganizationsApi for OrganizationsApiClient {
 
 }
 
+/// struct for typed errors of method [`OrganizationsApi::convert_to_team_organization`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum ConvertToTeamOrganizationError {
+    DefaultResponse(models::GoogleRpcStatus),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`OrganizationsApi::create_organization`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum CreateOrganizationError {
+    DefaultResponse(models::GoogleRpcStatus),
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`OrganizationsApi::create_organization_avatar_upload`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -417,6 +632,14 @@ pub enum ListOrganizationAuditEventsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListOrganizationsError {
+    DefaultResponse(models::GoogleRpcStatus),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`OrganizationsApi::transfer_ownership`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum TransferOwnershipError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }

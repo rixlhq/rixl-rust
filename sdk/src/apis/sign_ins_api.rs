@@ -23,7 +23,7 @@ pub trait SignInsApi: Send + Sync {
     /// GET /auth/v1/sign-ins
     ///
     /// Lists the caller's sign-ins, most recently used first.
-    async fn list_sign_ins(&self,  params: ListSignInsParams ) -> Result<models::AuthV1ListSignInsResponse, Error<ListSignInsError>>;
+    async fn list_sign_ins(&self, ) -> Result<models::AuthV1ListSignInsResponse, Error<ListSignInsError>>;
 
     /// POST /auth/v1/logout
     ///
@@ -33,7 +33,7 @@ pub trait SignInsApi: Send + Sync {
     /// POST /auth/v1/logout/all
     ///
     /// Revokes all of the caller's sign-ins and invalidates their tokens.
-    async fn logout_all(&self,  params: LogoutAllParams ) -> Result<serde_json::Value, Error<LogoutAllError>>;
+    async fn logout_all(&self, ) -> Result<serde_json::Value, Error<LogoutAllError>>;
 
     /// POST /auth/v1/token
     ///
@@ -43,7 +43,7 @@ pub trait SignInsApi: Send + Sync {
     /// POST /auth/v1/sign-ins/revoke-others
     ///
     /// Revokes all of the caller's sign-ins except the current one.
-    async fn revoke_other_sign_ins(&self,  params: RevokeOtherSignInsParams ) -> Result<serde_json::Value, Error<RevokeOtherSignInsError>>;
+    async fn revoke_other_sign_ins(&self, ) -> Result<serde_json::Value, Error<RevokeOtherSignInsError>>;
 
     /// DELETE /auth/v1/sign-ins/{sign_in_id}
     ///
@@ -62,22 +62,10 @@ impl SignInsApiClient {
 }
 
 
-/// struct for passing parameters to the method [`SignInsApi::list_sign_ins`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct ListSignInsParams {
-    pub user_id: Option<String>
-}
-
 /// struct for passing parameters to the method [`SignInsApi::logout`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct LogoutParams {
     pub auth_v1_logout_request: models::AuthV1LogoutRequest
-}
-
-/// struct for passing parameters to the method [`SignInsApi::logout_all`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct LogoutAllParams {
-    pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`SignInsApi::refresh_token`]
@@ -86,28 +74,17 @@ pub struct RefreshTokenParams {
     pub auth_v1_refresh_token_request: models::AuthV1RefreshTokenRequest
 }
 
-/// struct for passing parameters to the method [`SignInsApi::revoke_other_sign_ins`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct RevokeOtherSignInsParams {
-    pub user_id: Option<String>
-}
-
 /// struct for passing parameters to the method [`SignInsApi::revoke_sign_in`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RevokeSignInParams {
-    pub sign_in_id: String,
-    pub user_user_id: Option<String>
+    pub sign_in_id: String
 }
 
 
 #[async_trait]
 impl SignInsApi for SignInsApiClient {
     /// Lists the caller's sign-ins, most recently used first.
-    async fn list_sign_ins(&self,  params: ListSignInsParams ) -> Result<models::AuthV1ListSignInsResponse, Error<ListSignInsError>> {
-        
-        let ListSignInsParams {
-            user_id,
-        } = params;
+    async fn list_sign_ins(&self, ) -> Result<models::AuthV1ListSignInsResponse, Error<ListSignInsError>> {
         
 
         let local_var_configuration = &self.configuration;
@@ -117,9 +94,6 @@ impl SignInsApi for SignInsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/sign-ins", local_var_configuration.base_path);
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user_id", &param_value.to_string())]);
-        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -216,11 +190,7 @@ impl SignInsApi for SignInsApiClient {
     }
 
     /// Revokes all of the caller's sign-ins and invalidates their tokens.
-    async fn logout_all(&self,  params: LogoutAllParams ) -> Result<serde_json::Value, Error<LogoutAllError>> {
-        
-        let LogoutAllParams {
-            user_id,
-        } = params;
+    async fn logout_all(&self, ) -> Result<serde_json::Value, Error<LogoutAllError>> {
         
 
         let local_var_configuration = &self.configuration;
@@ -230,9 +200,6 @@ impl SignInsApi for SignInsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/logout/all", local_var_configuration.base_path);
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user_id", &param_value.to_string())]);
-        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -329,11 +296,7 @@ impl SignInsApi for SignInsApiClient {
     }
 
     /// Revokes all of the caller's sign-ins except the current one.
-    async fn revoke_other_sign_ins(&self,  params: RevokeOtherSignInsParams ) -> Result<serde_json::Value, Error<RevokeOtherSignInsError>> {
-        
-        let RevokeOtherSignInsParams {
-            user_id,
-        } = params;
+    async fn revoke_other_sign_ins(&self, ) -> Result<serde_json::Value, Error<RevokeOtherSignInsError>> {
         
 
         let local_var_configuration = &self.configuration;
@@ -343,9 +306,6 @@ impl SignInsApi for SignInsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/sign-ins/revoke-others", local_var_configuration.base_path);
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user_id", &param_value.to_string())]);
-        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -391,7 +351,6 @@ impl SignInsApi for SignInsApiClient {
         
         let RevokeSignInParams {
             sign_in_id,
-            user_user_id,
         } = params;
         
 
@@ -402,9 +361,6 @@ impl SignInsApi for SignInsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/sign-ins/{sign_in_id}", local_var_configuration.base_path, sign_in_id=crate::apis::urlencode(sign_in_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
-        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }

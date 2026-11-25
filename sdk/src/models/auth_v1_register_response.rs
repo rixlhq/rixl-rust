@@ -15,8 +15,6 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1RegisterResponse {
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
-    #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
-    pub user_id: Option<String>,
     #[serde(rename = "email_verification_sent", skip_serializing_if = "Option::is_none")]
     pub email_verification_sent: Option<bool>,
     #[serde(rename = "verification_id", skip_serializing_if = "Option::is_none")]
@@ -27,7 +25,6 @@ impl AuthV1RegisterResponse {
     pub fn new() -> AuthV1RegisterResponse {
         AuthV1RegisterResponse {
             message: None,
-            user_id: None,
             email_verification_sent: None,
             verification_id: None,
         }

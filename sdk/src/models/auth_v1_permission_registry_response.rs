@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1PermissionRegistryResponse {
     #[serde(rename = "permissions", skip_serializing_if = "Option::is_none")]
-    pub permissions: Option<Vec<models::AuthV1PermissionOffset>>,
+    pub permissions: Option<Vec<models::AuthV1RegisteredPermission>>,
     #[serde(rename = "total", skip_serializing_if = "Option::is_none")]
     pub total: Option<i32>,
 }

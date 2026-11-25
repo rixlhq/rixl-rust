@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message** | Option<**String**> |  | [optional]
-**user_id** | Option<**String**> |  | [optional]
 **email_verification_sent** | Option<**bool**> |  | [optional]
 **verification_id** | Option<**String**> |  | [optional]
 

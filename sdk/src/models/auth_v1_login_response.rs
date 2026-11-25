@@ -16,7 +16,7 @@ use serde_with::serde_as;
 #[serde_as]
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1LoginResponse {
-    /// \"ok\" | \"2fa_required\" | \"email_not_verified\"
+    /// \"ok\" | \"2fa_required\"
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
     #[serde(rename = "challenge_id", skip_serializing_if = "Option::is_none")]

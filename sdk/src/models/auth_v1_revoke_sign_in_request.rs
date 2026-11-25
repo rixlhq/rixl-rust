@@ -13,8 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1RevokeSignInRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::AuthV1UserRequest>>,
     #[serde(rename = "sign_in_id", skip_serializing_if = "Option::is_none")]
     pub sign_in_id: Option<String>,
 }
@@ -22,7 +20,6 @@ pub struct AuthV1RevokeSignInRequest {
 impl AuthV1RevokeSignInRequest {
     pub fn new() -> AuthV1RevokeSignInRequest {
         AuthV1RevokeSignInRequest {
-            user: None,
             sign_in_id: None,
         }
     }

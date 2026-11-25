@@ -15,17 +15,14 @@ Method | HTTP request | Description
 
 ## list_sign_ins
 
-> models::AuthV1ListSignInsResponse list_sign_ins(user_id)
+> models::AuthV1ListSignInsResponse list_sign_ins()
 ListSignIns
 
 Lists the caller's sign-ins, most recently used first.
 
 ### Parameters
 
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> |  |  |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -73,17 +70,14 @@ Name | Type | Description  | Required | Notes
 
 ## logout_all
 
-> serde_json::Value logout_all(user_id)
+> serde_json::Value logout_all()
 LogoutAll
 
 Revokes all of the caller's sign-ins and invalidates their tokens.
 
 ### Parameters
 
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> |  |  |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -131,17 +125,14 @@ Name | Type | Description  | Required | Notes
 
 ## revoke_other_sign_ins
 
-> serde_json::Value revoke_other_sign_ins(user_id)
+> serde_json::Value revoke_other_sign_ins()
 RevokeOtherSignIns
 
 Revokes all of the caller's sign-ins except the current one.
 
 ### Parameters
 
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**user_id** | Option<**String**> |  |  |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -161,7 +152,7 @@ Name | Type | Description  | Required | Notes
 
 ## revoke_sign_in
 
-> serde_json::Value revoke_sign_in(sign_in_id, user_user_id)
+> serde_json::Value revoke_sign_in(sign_in_id)
 RevokeSignIn
 
 Revokes one of the caller's sign-ins and invalidates its tokens.
@@ -172,7 +163,6 @@ Revokes one of the caller's sign-ins and invalidates its tokens.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **sign_in_id** | **String** |  | [required] |
-**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 

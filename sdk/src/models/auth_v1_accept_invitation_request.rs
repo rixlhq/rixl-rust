@@ -11,16 +11,21 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// AuthV1AcceptInvitationRequest : At most one of `token`, `invitation_id` may be set.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1AcceptInvitationRequest {
     #[serde(rename = "token", skip_serializing_if = "Option::is_none")]
     pub token: Option<String>,
+    #[serde(rename = "invitation_id", skip_serializing_if = "Option::is_none")]
+    pub invitation_id: Option<String>,
 }
 
 impl AuthV1AcceptInvitationRequest {
+    /// At most one of `token`, `invitation_id` may be set.
     pub fn new() -> AuthV1AcceptInvitationRequest {
         AuthV1AcceptInvitationRequest {
             token: None,
+            invitation_id: None,
         }
     }
 }

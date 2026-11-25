@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | Option<**String**> | \"ok\" | \"2fa_required\" | \"email_not_verified\" | [optional]
+**status** | Option<**String**> | \"ok\" | \"2fa_required\" | [optional]
 **challenge_id** | Option<**String**> |  | [optional]
 **email** | Option<**String**> |  | [optional]
 **access_token** | Option<**String**> |  | [optional]

@@ -20,40 +20,15 @@ use crate::apis::ContentType;
 #[async_trait]
 pub trait MembershipsApi: Send + Sync {
 
-    /// POST /auth/v1/invitations/{token}/accept
-    ///
-    /// 
-    async fn accept_invitation(&self,  params: AcceptInvitationParams ) -> Result<models::AuthV1AcceptInvitationResponse, Error<AcceptInvitationError>>;
-
-    /// DELETE /auth/v1/organizations/{user_org_id}/invite/{user_id}
-    ///
-    /// 
-    async fn cancel_invitation(&self,  params: CancelInvitationParams ) -> Result<serde_json::Value, Error<CancelInvitationError>>;
-
     /// GET /auth/v1/organizations/{org_id}/members/current/check
     ///
     /// 
     async fn check_current_membership(&self,  params: CheckCurrentMembershipParams ) -> Result<models::AuthV1CheckMembershipResponse, Error<CheckCurrentMembershipError>>;
 
-    /// POST /auth/v1/invitations/{token}/decline
-    ///
-    /// 
-    async fn decline_invitation(&self,  params: DeclineInvitationParams ) -> Result<serde_json::Value, Error<DeclineInvitationError>>;
-
-    /// POST /auth/v1/organizations/{user_org_id}/invite
-    ///
-    /// 
-    async fn invite_member(&self,  params: InviteMemberParams ) -> Result<models::AuthV1MembershipApplication, Error<InviteMemberError>>;
-
     /// DELETE /auth/v1/organizations/{org_id}/members/current
     ///
     /// 
     async fn leave_organization(&self,  params: LeaveOrganizationParams ) -> Result<serde_json::Value, Error<LeaveOrganizationError>>;
-
-    /// GET /auth/v1/membership-applications
-    ///
-    /// 
-    async fn list_membership_applications(&self,  params: ListMembershipApplicationsParams ) -> Result<models::AuthV1ListMembershipApplicationsResponse, Error<ListMembershipApplicationsError>>;
 
     /// GET /auth/v1/users/current/memberships
     ///
@@ -70,25 +45,10 @@ pub trait MembershipsApi: Send + Sync {
     /// 
     async fn remove_member(&self,  params: RemoveMemberParams ) -> Result<serde_json::Value, Error<RemoveMemberError>>;
 
-    /// POST /auth/v1/organizations/{user_org_id}/invite/resend
-    ///
-    /// 
-    async fn resend_invitation(&self,  params: ResendInvitationParams ) -> Result<serde_json::Value, Error<ResendInvitationError>>;
-
-    /// PATCH /auth/v1/membership-applications/{org_id}/state
-    ///
-    /// 
-    async fn respond_to_membership_application(&self,  params: RespondToMembershipApplicationParams ) -> Result<models::AuthV1MembershipMutation, Error<RespondToMembershipApplicationError>>;
-
     /// PATCH /auth/v1/organizations/{org_id}/members/{user_id}
     ///
     /// 
     async fn update_member(&self,  params: UpdateMemberParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMemberError>>;
-
-    /// PATCH /auth/v1/organizations/{user_org_id}/membership-applications/{user_id}
-    ///
-    /// 
-    async fn update_membership_state(&self,  params: UpdateMembershipStateParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMembershipStateError>>;
 }
 
 pub struct MembershipsApiClient {
@@ -102,37 +62,10 @@ impl MembershipsApiClient {
 }
 
 
-/// struct for passing parameters to the method [`MembershipsApi::accept_invitation`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct AcceptInvitationParams {
-    pub token: String
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::cancel_invitation`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct CancelInvitationParams {
-    pub user_org_id: String,
-    pub user_id: String,
-    pub user_actor_id: Option<String>
-}
-
 /// struct for passing parameters to the method [`MembershipsApi::check_current_membership`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CheckCurrentMembershipParams {
     pub org_id: String
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::decline_invitation`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct DeclineInvitationParams {
-    pub token: String
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::invite_member`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct InviteMemberParams {
-    pub user_org_id: String,
-    pub invite_member_request: models::InviteMemberRequest
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::leave_organization`]
@@ -140,14 +73,6 @@ pub struct InviteMemberParams {
 pub struct LeaveOrganizationParams {
     pub org_id: String,
     pub user_id: Option<String>
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::list_membership_applications`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct ListMembershipApplicationsParams {
-    pub limit: Option<i32>,
-    pub offset: Option<i32>,
-    pub state: Option<models::AuthV1MembershipApplicationState>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::list_memberships`]
@@ -174,20 +99,6 @@ pub struct RemoveMemberParams {
     pub user_id: String
 }
 
-/// struct for passing parameters to the method [`MembershipsApi::resend_invitation`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct ResendInvitationParams {
-    pub user_org_id: String,
-    pub resend_invitation_request: models::ResendInvitationRequest
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::respond_to_membership_application`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct RespondToMembershipApplicationParams {
-    pub org_id: String,
-    pub respond_to_membership_application_request: models::RespondToMembershipApplicationRequest
-}
-
 /// struct for passing parameters to the method [`MembershipsApi::update_member`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateMemberParams {
@@ -196,130 +107,9 @@ pub struct UpdateMemberParams {
     pub update_member_request: models::UpdateMemberRequest
 }
 
-/// struct for passing parameters to the method [`MembershipsApi::update_membership_state`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct UpdateMembershipStateParams {
-    pub user_org_id: String,
-    pub user_id: String,
-    pub update_membership_state_request: models::UpdateMembershipStateRequest
-}
-
 
 #[async_trait]
 impl MembershipsApi for MembershipsApiClient {
-    async fn accept_invitation(&self,  params: AcceptInvitationParams ) -> Result<models::AuthV1AcceptInvitationResponse, Error<AcceptInvitationError>> {
-        
-        let AcceptInvitationParams {
-            token,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/invitations/{token}/accept", local_var_configuration.base_path, token=crate::apis::urlencode(token));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1AcceptInvitationResponse`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1AcceptInvitationResponse`")))),
-            }
-        } else {
-            let local_var_entity: Option<AcceptInvitationError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    async fn cancel_invitation(&self,  params: CancelInvitationParams ) -> Result<serde_json::Value, Error<CancelInvitationError>> {
-        
-        let CancelInvitationParams {
-            user_org_id,
-            user_id,
-            user_actor_id,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/invite/{user_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
-
-        if let Some(ref param_value) = user_actor_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user.actor_id", &param_value.to_string())]);
-        }
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
-            }
-        } else {
-            let local_var_entity: Option<CancelInvitationError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
     async fn check_current_membership(&self,  params: CheckCurrentMembershipParams ) -> Result<models::AuthV1CheckMembershipResponse, Error<CheckCurrentMembershipError>> {
         
         let CheckCurrentMembershipParams {
@@ -369,116 +159,6 @@ impl MembershipsApi for MembershipsApiClient {
             }
         } else {
             let local_var_entity: Option<CheckCurrentMembershipError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    async fn decline_invitation(&self,  params: DeclineInvitationParams ) -> Result<serde_json::Value, Error<DeclineInvitationError>> {
-        
-        let DeclineInvitationParams {
-            token,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/invitations/{token}/decline", local_var_configuration.base_path, token=crate::apis::urlencode(token));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
-            }
-        } else {
-            let local_var_entity: Option<DeclineInvitationError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    async fn invite_member(&self,  params: InviteMemberParams ) -> Result<models::AuthV1MembershipApplication, Error<InviteMemberError>> {
-        
-        let InviteMemberParams {
-            user_org_id,
-            invite_member_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/invite", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-        local_var_req_builder = local_var_req_builder.json(&invite_member_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1MembershipApplication`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1MembershipApplication`")))),
-            }
-        } else {
-            let local_var_entity: Option<InviteMemberError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -537,71 +217,6 @@ impl MembershipsApi for MembershipsApiClient {
             }
         } else {
             let local_var_entity: Option<LeaveOrganizationError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    async fn list_membership_applications(&self,  params: ListMembershipApplicationsParams ) -> Result<models::AuthV1ListMembershipApplicationsResponse, Error<ListMembershipApplicationsError>> {
-        
-        let ListMembershipApplicationsParams {
-            limit,
-            offset,
-            state,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/membership-applications", local_var_configuration.base_path);
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
-
-        if let Some(ref param_value) = limit {
-            local_var_req_builder = local_var_req_builder.query(&[("limit", &param_value.to_string())]);
-        }
-        if let Some(ref param_value) = offset {
-            local_var_req_builder = local_var_req_builder.query(&[("offset", &param_value.to_string())]);
-        }
-        if let Some(ref param_value) = state {
-            local_var_req_builder = local_var_req_builder.query(&[("state", &param_value.to_string())]);
-        }
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1ListMembershipApplicationsResponse`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1ListMembershipApplicationsResponse`")))),
-            }
-        } else {
-            let local_var_entity: Option<ListMembershipApplicationsError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -793,118 +408,6 @@ impl MembershipsApi for MembershipsApiClient {
         }
     }
 
-    async fn resend_invitation(&self,  params: ResendInvitationParams ) -> Result<serde_json::Value, Error<ResendInvitationError>> {
-        
-        let ResendInvitationParams {
-            user_org_id,
-            resend_invitation_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/invite/resend", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-        local_var_req_builder = local_var_req_builder.json(&resend_invitation_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
-            }
-        } else {
-            let local_var_entity: Option<ResendInvitationError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    async fn respond_to_membership_application(&self,  params: RespondToMembershipApplicationParams ) -> Result<models::AuthV1MembershipMutation, Error<RespondToMembershipApplicationError>> {
-        
-        let RespondToMembershipApplicationParams {
-            org_id,
-            respond_to_membership_application_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/membership-applications/{org_id}/state", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-        local_var_req_builder = local_var_req_builder.json(&respond_to_membership_application_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1MembershipMutation`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1MembershipMutation`")))),
-            }
-        } else {
-            let local_var_entity: Option<RespondToMembershipApplicationError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
     async fn update_member(&self,  params: UpdateMemberParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMemberError>> {
         
         let UpdateMemberParams {
@@ -962,79 +465,6 @@ impl MembershipsApi for MembershipsApiClient {
         }
     }
 
-    async fn update_membership_state(&self,  params: UpdateMembershipStateParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMembershipStateError>> {
-        
-        let UpdateMembershipStateParams {
-            user_org_id,
-            user_id,
-            update_membership_state_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/membership-applications/{user_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-        local_var_req_builder = local_var_req_builder.json(&update_membership_state_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1MembershipMutation`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1MembershipMutation`")))),
-            }
-        } else {
-            let local_var_entity: Option<UpdateMembershipStateError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-}
-
-/// struct for typed errors of method [`MembershipsApi::accept_invitation`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum AcceptInvitationError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::cancel_invitation`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CancelInvitationError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
 }
 
 /// struct for typed errors of method [`MembershipsApi::check_current_membership`]
@@ -1045,34 +475,10 @@ pub enum CheckCurrentMembershipError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`MembershipsApi::decline_invitation`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum DeclineInvitationError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::invite_member`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum InviteMemberError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`MembershipsApi::leave_organization`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum LeaveOrganizationError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::list_membership_applications`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ListMembershipApplicationsError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
@@ -1101,34 +507,10 @@ pub enum RemoveMemberError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`MembershipsApi::resend_invitation`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ResendInvitationError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::respond_to_membership_application`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum RespondToMembershipApplicationError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`MembershipsApi::update_member`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateMemberError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::update_membership_state`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum UpdateMembershipStateError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }

@@ -17,7 +17,7 @@ pub struct AuthV1ListOrganizationsRequest {
     pub page_size: Option<i32>,
     #[serde(rename = "page_token", skip_serializing_if = "Option::is_none")]
     pub page_token: Option<String>,
-    /// Includes deleted organizations visible to their owners once lifecycle adds deletion.
+    /// Includes deleted organizations visible to their retained active owners.
     #[serde(rename = "show_deleted", skip_serializing_if = "Option::is_none")]
     pub show_deleted: Option<bool>,
 }

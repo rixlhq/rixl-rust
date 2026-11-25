@@ -28,6 +28,14 @@ pub struct AuthV1Organization {
     /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.
     #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
     pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
+    #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
+    pub state: Option<models::AuthV1OrganizationState>,
+    /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.
+    #[serde(rename = "delete_time", skip_serializing_if = "Option::is_none")]
+    pub delete_time: Option<chrono::DateTime<chrono::FixedOffset>>,
+    /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.
+    #[serde(rename = "purge_time", skip_serializing_if = "Option::is_none")]
+    pub purge_time: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 
 impl AuthV1Organization {
@@ -40,6 +48,9 @@ impl AuthV1Organization {
             personal: None,
             internal: None,
             created_at: None,
+            state: None,
+            delete_time: None,
+            purge_time: None,
         }
     }
 }

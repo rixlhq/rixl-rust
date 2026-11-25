@@ -127,6 +127,7 @@ pub mod funnels_api;
 pub mod heatmaps_api;
 pub mod image_analytics_api;
 pub mod images_api;
+pub mod invitations_api;
 pub mod invoices_api;
 pub mod languages_api;
 pub mod memberships_api;
@@ -175,6 +176,7 @@ pub trait Api {
     fn heatmaps_api(&self) -> &dyn heatmaps_api::HeatmapsApi;
     fn image_analytics_api(&self) -> &dyn image_analytics_api::ImageAnalyticsApi;
     fn images_api(&self) -> &dyn images_api::ImagesApi;
+    fn invitations_api(&self) -> &dyn invitations_api::InvitationsApi;
     fn invoices_api(&self) -> &dyn invoices_api::InvoicesApi;
     fn languages_api(&self) -> &dyn languages_api::LanguagesApi;
     fn memberships_api(&self) -> &dyn memberships_api::MembershipsApi;
@@ -220,6 +222,7 @@ pub struct ApiClient {
     heatmaps_api: Box<dyn heatmaps_api::HeatmapsApi>,
     image_analytics_api: Box<dyn image_analytics_api::ImageAnalyticsApi>,
     images_api: Box<dyn images_api::ImagesApi>,
+    invitations_api: Box<dyn invitations_api::InvitationsApi>,
     invoices_api: Box<dyn invoices_api::InvoicesApi>,
     languages_api: Box<dyn languages_api::LanguagesApi>,
     memberships_api: Box<dyn memberships_api::MembershipsApi>,
@@ -267,6 +270,7 @@ impl ApiClient {
             heatmaps_api: Box::new(heatmaps_api::HeatmapsApiClient::new(configuration.clone())),
             image_analytics_api: Box::new(image_analytics_api::ImageAnalyticsApiClient::new(configuration.clone())),
             images_api: Box::new(images_api::ImagesApiClient::new(configuration.clone())),
+            invitations_api: Box::new(invitations_api::InvitationsApiClient::new(configuration.clone())),
             invoices_api: Box::new(invoices_api::InvoicesApiClient::new(configuration.clone())),
             languages_api: Box::new(languages_api::LanguagesApiClient::new(configuration.clone())),
             memberships_api: Box::new(memberships_api::MembershipsApiClient::new(configuration.clone())),
@@ -345,6 +349,9 @@ impl Api for ApiClient {
     }
     fn images_api(&self) -> &dyn images_api::ImagesApi {
         self.images_api.as_ref()
+    }
+    fn invitations_api(&self) -> &dyn invitations_api::InvitationsApi {
+        self.invitations_api.as_ref()
     }
     fn invoices_api(&self) -> &dyn invoices_api::InvoicesApi {
         self.invoices_api.as_ref()

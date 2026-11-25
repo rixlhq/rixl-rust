@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_avatar_upload**](UsersApi.md#create_avatar_upload) | **POST** /auth/v1/users/current/avatar/upload | CreateAvatarUpload
 [**get_user**](UsersApi.md#get_user) | **GET** /auth/v1/users/current | GetUser
+[**get_user_deletion_preview**](UsersApi.md#get_user_deletion_preview) | **GET** /auth/v1/users/current/deletion-preview | GetUserDeletionPreview
 [**get_user_info**](UsersApi.md#get_user_info) | **GET** /auth/v1/userinfo | GetUserInfo
 [**update_name**](UsersApi.md#update_name) | **PATCH** /auth/v1/users/current/name | UpdateName
 [**update_user_avatar**](UsersApi.md#update_user_avatar) | **PATCH** /auth/v1/users/current/avatar | UpdateUserAvatar
@@ -56,6 +57,35 @@ Name | Type | Description  | Required | Notes
 ### Return type
 
 [**models::AuthV1GetUserResponse**](auth.v1.GetUserResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_user_deletion_preview
+
+> models::AuthV1GetUserDeletionPreviewResponse get_user_deletion_preview(page_size, page_token)
+GetUserDeletionPreview
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**page_size** | Option<**i32**> |  |  |
+**page_token** | Option<**String**> |  |  |
+
+### Return type
+
+[**models::AuthV1GetUserDeletionPreviewResponse**](auth.v1.GetUserDeletionPreviewResponse.md)
 
 ### Authorization
 

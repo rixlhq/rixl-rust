@@ -23,9 +23,6 @@ pub struct AuthV1SendOrganizationNoticeRequest {
     pub data: Option<std::collections::HashMap<String, String>>,
     #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
     pub idempotency_key: Option<String>,
-    /// owners_mandatory is ignored: auth-api decides which notices owners always receive.
-    #[serde(rename = "owners_mandatory", skip_serializing_if = "Option::is_none")]
-    pub owners_mandatory: Option<bool>,
 }
 
 impl AuthV1SendOrganizationNoticeRequest {
@@ -36,7 +33,6 @@ impl AuthV1SendOrganizationNoticeRequest {
             template: None,
             data: None,
             idempotency_key: None,
-            owners_mandatory: None,
         }
     }
 }

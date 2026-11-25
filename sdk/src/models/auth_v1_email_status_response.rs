@@ -17,8 +17,6 @@ pub struct AuthV1EmailStatusResponse {
     pub has_email: Option<bool>,
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
-    #[serde(rename = "verified", skip_serializing_if = "Option::is_none")]
-    pub verified: Option<bool>,
 }
 
 impl AuthV1EmailStatusResponse {
@@ -26,7 +24,6 @@ impl AuthV1EmailStatusResponse {
         AuthV1EmailStatusResponse {
             has_email: None,
             email: None,
-            verified: None,
         }
     }
 }
