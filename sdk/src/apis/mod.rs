@@ -130,7 +130,9 @@ pub mod images_api;
 pub mod invoices_api;
 pub mod languages_api;
 pub mod memberships_api;
+pub mod notification_preferences_api;
 pub mod one_time_passcodes_api;
+pub mod organizations_api;
 pub mod passkeys_api;
 pub mod payments_api;
 pub mod plans_api;
@@ -140,7 +142,7 @@ pub mod posts_api;
 pub mod projects_api;
 pub mod realtime_api;
 pub mod sales_api;
-pub mod sessions_api;
+pub mod sign_ins_api;
 pub mod social_providers_api;
 pub mod subscriptions_api;
 pub mod subtitles_api;
@@ -176,7 +178,9 @@ pub trait Api {
     fn invoices_api(&self) -> &dyn invoices_api::InvoicesApi;
     fn languages_api(&self) -> &dyn languages_api::LanguagesApi;
     fn memberships_api(&self) -> &dyn memberships_api::MembershipsApi;
+    fn notification_preferences_api(&self) -> &dyn notification_preferences_api::NotificationPreferencesApi;
     fn one_time_passcodes_api(&self) -> &dyn one_time_passcodes_api::OneTimePasscodesApi;
+    fn organizations_api(&self) -> &dyn organizations_api::OrganizationsApi;
     fn passkeys_api(&self) -> &dyn passkeys_api::PasskeysApi;
     fn payments_api(&self) -> &dyn payments_api::PaymentsApi;
     fn plans_api(&self) -> &dyn plans_api::PlansApi;
@@ -186,7 +190,7 @@ pub trait Api {
     fn projects_api(&self) -> &dyn projects_api::ProjectsApi;
     fn realtime_api(&self) -> &dyn realtime_api::RealtimeApi;
     fn sales_api(&self) -> &dyn sales_api::SalesApi;
-    fn sessions_api(&self) -> &dyn sessions_api::SessionsApi;
+    fn sign_ins_api(&self) -> &dyn sign_ins_api::SignInsApi;
     fn social_providers_api(&self) -> &dyn social_providers_api::SocialProvidersApi;
     fn subscriptions_api(&self) -> &dyn subscriptions_api::SubscriptionsApi;
     fn subtitles_api(&self) -> &dyn subtitles_api::SubtitlesApi;
@@ -219,7 +223,9 @@ pub struct ApiClient {
     invoices_api: Box<dyn invoices_api::InvoicesApi>,
     languages_api: Box<dyn languages_api::LanguagesApi>,
     memberships_api: Box<dyn memberships_api::MembershipsApi>,
+    notification_preferences_api: Box<dyn notification_preferences_api::NotificationPreferencesApi>,
     one_time_passcodes_api: Box<dyn one_time_passcodes_api::OneTimePasscodesApi>,
+    organizations_api: Box<dyn organizations_api::OrganizationsApi>,
     passkeys_api: Box<dyn passkeys_api::PasskeysApi>,
     payments_api: Box<dyn payments_api::PaymentsApi>,
     plans_api: Box<dyn plans_api::PlansApi>,
@@ -229,7 +235,7 @@ pub struct ApiClient {
     projects_api: Box<dyn projects_api::ProjectsApi>,
     realtime_api: Box<dyn realtime_api::RealtimeApi>,
     sales_api: Box<dyn sales_api::SalesApi>,
-    sessions_api: Box<dyn sessions_api::SessionsApi>,
+    sign_ins_api: Box<dyn sign_ins_api::SignInsApi>,
     social_providers_api: Box<dyn social_providers_api::SocialProvidersApi>,
     subscriptions_api: Box<dyn subscriptions_api::SubscriptionsApi>,
     subtitles_api: Box<dyn subtitles_api::SubtitlesApi>,
@@ -264,7 +270,9 @@ impl ApiClient {
             invoices_api: Box::new(invoices_api::InvoicesApiClient::new(configuration.clone())),
             languages_api: Box::new(languages_api::LanguagesApiClient::new(configuration.clone())),
             memberships_api: Box::new(memberships_api::MembershipsApiClient::new(configuration.clone())),
+            notification_preferences_api: Box::new(notification_preferences_api::NotificationPreferencesApiClient::new(configuration.clone())),
             one_time_passcodes_api: Box::new(one_time_passcodes_api::OneTimePasscodesApiClient::new(configuration.clone())),
+            organizations_api: Box::new(organizations_api::OrganizationsApiClient::new(configuration.clone())),
             passkeys_api: Box::new(passkeys_api::PasskeysApiClient::new(configuration.clone())),
             payments_api: Box::new(payments_api::PaymentsApiClient::new(configuration.clone())),
             plans_api: Box::new(plans_api::PlansApiClient::new(configuration.clone())),
@@ -274,7 +282,7 @@ impl ApiClient {
             projects_api: Box::new(projects_api::ProjectsApiClient::new(configuration.clone())),
             realtime_api: Box::new(realtime_api::RealtimeApiClient::new(configuration.clone())),
             sales_api: Box::new(sales_api::SalesApiClient::new(configuration.clone())),
-            sessions_api: Box::new(sessions_api::SessionsApiClient::new(configuration.clone())),
+            sign_ins_api: Box::new(sign_ins_api::SignInsApiClient::new(configuration.clone())),
             social_providers_api: Box::new(social_providers_api::SocialProvidersApiClient::new(configuration.clone())),
             subscriptions_api: Box::new(subscriptions_api::SubscriptionsApiClient::new(configuration.clone())),
             subtitles_api: Box::new(subtitles_api::SubtitlesApiClient::new(configuration.clone())),
@@ -347,8 +355,14 @@ impl Api for ApiClient {
     fn memberships_api(&self) -> &dyn memberships_api::MembershipsApi {
         self.memberships_api.as_ref()
     }
+    fn notification_preferences_api(&self) -> &dyn notification_preferences_api::NotificationPreferencesApi {
+        self.notification_preferences_api.as_ref()
+    }
     fn one_time_passcodes_api(&self) -> &dyn one_time_passcodes_api::OneTimePasscodesApi {
         self.one_time_passcodes_api.as_ref()
+    }
+    fn organizations_api(&self) -> &dyn organizations_api::OrganizationsApi {
+        self.organizations_api.as_ref()
     }
     fn passkeys_api(&self) -> &dyn passkeys_api::PasskeysApi {
         self.passkeys_api.as_ref()
@@ -377,8 +391,8 @@ impl Api for ApiClient {
     fn sales_api(&self) -> &dyn sales_api::SalesApi {
         self.sales_api.as_ref()
     }
-    fn sessions_api(&self) -> &dyn sessions_api::SessionsApi {
-        self.sessions_api.as_ref()
+    fn sign_ins_api(&self) -> &dyn sign_ins_api::SignInsApi {
+        self.sign_ins_api.as_ref()
     }
     fn social_providers_api(&self) -> &dyn social_providers_api::SocialProvidersApi {
         self.social_providers_api.as_ref()

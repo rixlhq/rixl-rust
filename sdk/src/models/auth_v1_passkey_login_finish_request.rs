@@ -16,8 +16,8 @@ use serde_with::serde_as;
 #[serde_as]
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1PasskeyLoginFinishRequest {
-    #[serde(rename = "session_id", skip_serializing_if = "Option::is_none")]
-    pub session_id: Option<String>,
+    #[serde(rename = "challenge_id", skip_serializing_if = "Option::is_none")]
+    pub challenge_id: Option<String>,
     #[serde_as(as = "Option<serde_with::base64::Base64>")]
     #[serde(rename = "credential", skip_serializing_if = "Option::is_none")]
     pub credential: Option<Vec<u8>>,
@@ -26,7 +26,7 @@ pub struct AuthV1PasskeyLoginFinishRequest {
 impl AuthV1PasskeyLoginFinishRequest {
     pub fn new() -> AuthV1PasskeyLoginFinishRequest {
         AuthV1PasskeyLoginFinishRequest {
-            session_id: None,
+            challenge_id: None,
             credential: None,
         }
     }

@@ -25,32 +25,27 @@ pub trait MembershipsApi: Send + Sync {
     /// 
     async fn accept_invitation(&self,  params: AcceptInvitationParams ) -> Result<models::AuthV1AcceptInvitationResponse, Error<AcceptInvitationError>>;
 
-    /// DELETE /auth/v1/memberships/{user_org_id}/invite/{user_id}
+    /// DELETE /auth/v1/organizations/{user_org_id}/invite/{user_id}
     ///
     /// 
     async fn cancel_invitation(&self,  params: CancelInvitationParams ) -> Result<serde_json::Value, Error<CancelInvitationError>>;
 
-    /// GET /auth/v1/memberships/{org_id}/check
+    /// GET /auth/v1/organizations/{org_id}/members/current/check
     ///
     /// 
-    async fn check_membership(&self,  params: CheckMembershipParams ) -> Result<models::AuthV1CheckMembershipResponse, Error<CheckMembershipError>>;
+    async fn check_current_membership(&self,  params: CheckCurrentMembershipParams ) -> Result<models::AuthV1CheckMembershipResponse, Error<CheckCurrentMembershipError>>;
 
     /// POST /auth/v1/invitations/{token}/decline
     ///
     /// 
     async fn decline_invitation(&self,  params: DeclineInvitationParams ) -> Result<serde_json::Value, Error<DeclineInvitationError>>;
 
-    /// GET /auth/v1/memberships/{org_id}/info
-    ///
-    /// 
-    async fn get_internal_membership_info(&self,  params: GetInternalMembershipInfoParams ) -> Result<models::AuthV1GetInternalMembershipInfoResponse, Error<GetInternalMembershipInfoError>>;
-
-    /// POST /auth/v1/memberships/{user_org_id}/invite
+    /// POST /auth/v1/organizations/{user_org_id}/invite
     ///
     /// 
     async fn invite_member(&self,  params: InviteMemberParams ) -> Result<models::AuthV1MembershipApplication, Error<InviteMemberError>>;
 
-    /// POST /auth/v1/memberships/{org_id}/leave
+    /// DELETE /auth/v1/organizations/{org_id}/members/current
     ///
     /// 
     async fn leave_organization(&self,  params: LeaveOrganizationParams ) -> Result<serde_json::Value, Error<LeaveOrganizationError>>;
@@ -60,27 +55,22 @@ pub trait MembershipsApi: Send + Sync {
     /// 
     async fn list_membership_applications(&self,  params: ListMembershipApplicationsParams ) -> Result<models::AuthV1ListMembershipApplicationsResponse, Error<ListMembershipApplicationsError>>;
 
-    /// GET /auth/v1/memberships
+    /// GET /auth/v1/users/current/memberships
     ///
     /// 
     async fn list_memberships(&self,  params: ListMembershipsParams ) -> Result<models::AuthV1ListMembershipsResponse, Error<ListMembershipsError>>;
 
-    /// GET /auth/v1/memberships/{user_org_id}/members
+    /// GET /auth/v1/organizations/{user_org_id}/members
     ///
     /// 
     async fn list_organization_members(&self,  params: ListOrganizationMembersParams ) -> Result<models::AuthV1ListOrgMembersResponse, Error<ListOrganizationMembersError>>;
 
-    /// PATCH /auth/v1/memberships/{user_org_id}/members/{user_id}/reactivate
-    ///
-    /// 
-    async fn reactivate_member(&self,  params: ReactivateMemberParams ) -> Result<models::AuthV1MembershipMutation, Error<ReactivateMemberError>>;
-
-    /// DELETE /auth/v1/memberships/{user_org_id}/members/{user_id}
+    /// DELETE /auth/v1/organizations/{org_id}/members/{user_id}
     ///
     /// 
     async fn remove_member(&self,  params: RemoveMemberParams ) -> Result<serde_json::Value, Error<RemoveMemberError>>;
 
-    /// POST /auth/v1/memberships/{user_org_id}/invite/resend
+    /// POST /auth/v1/organizations/{user_org_id}/invite/resend
     ///
     /// 
     async fn resend_invitation(&self,  params: ResendInvitationParams ) -> Result<serde_json::Value, Error<ResendInvitationError>>;
@@ -90,35 +80,15 @@ pub trait MembershipsApi: Send + Sync {
     /// 
     async fn respond_to_membership_application(&self,  params: RespondToMembershipApplicationParams ) -> Result<models::AuthV1MembershipMutation, Error<RespondToMembershipApplicationError>>;
 
-    /// PATCH /auth/v1/memberships/{user_org_id}/members/{user_id}/suspend
+    /// PATCH /auth/v1/organizations/{org_id}/members/{user_id}
     ///
     /// 
-    async fn suspend_member(&self,  params: SuspendMemberParams ) -> Result<models::AuthV1MembershipMutation, Error<SuspendMemberError>>;
+    async fn update_member(&self,  params: UpdateMemberParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMemberError>>;
 
-    /// PATCH /auth/v1/memberships/active
-    ///
-    /// 
-    async fn update_active_membership(&self,  params: UpdateActiveMembershipParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateActiveMembershipError>>;
-
-    /// PATCH /auth/v1/memberships/{user_org_id}/members/{user_id}/role
-    ///
-    /// 
-    async fn update_member_role(&self,  params: UpdateMemberRoleParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMemberRoleError>>;
-
-    /// PATCH /auth/v1/memberships/{user_org_id}/state
+    /// PATCH /auth/v1/organizations/{user_org_id}/membership-applications/{user_id}
     ///
     /// 
     async fn update_membership_state(&self,  params: UpdateMembershipStateParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMembershipStateError>>;
-
-    /// PATCH /auth/v1/memberships/{user_org_id}/name
-    ///
-    /// 
-    async fn update_org_name(&self,  params: UpdateOrgNameParams ) -> Result<models::AuthV1UpdateOrgNameResponse, Error<UpdateOrgNameError>>;
-
-    /// PATCH /auth/v1/memberships/{user_org_id}/username
-    ///
-    /// 
-    async fn update_org_username(&self,  params: UpdateOrgUsernameParams ) -> Result<models::AuthV1UpdateOrgUsernameResponse, Error<UpdateOrgUsernameError>>;
 }
 
 pub struct MembershipsApiClient {
@@ -146,24 +116,16 @@ pub struct CancelInvitationParams {
     pub user_actor_id: Option<String>
 }
 
-/// struct for passing parameters to the method [`MembershipsApi::check_membership`]
+/// struct for passing parameters to the method [`MembershipsApi::check_current_membership`]
 #[derive(Clone, Debug, ::bon::Builder)]
-pub struct CheckMembershipParams {
-    pub org_id: String,
-    pub user_id: Option<String>
+pub struct CheckCurrentMembershipParams {
+    pub org_id: String
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::decline_invitation`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeclineInvitationParams {
     pub token: String
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::get_internal_membership_info`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct GetInternalMembershipInfoParams {
-    pub org_id: String,
-    pub user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::invite_member`]
@@ -183,7 +145,6 @@ pub struct LeaveOrganizationParams {
 /// struct for passing parameters to the method [`MembershipsApi::list_membership_applications`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListMembershipApplicationsParams {
-    pub user_user_id: Option<String>,
     pub limit: Option<i32>,
     pub offset: Option<i32>,
     pub state: Option<models::AuthV1MembershipApplicationState>
@@ -192,7 +153,6 @@ pub struct ListMembershipApplicationsParams {
 /// struct for passing parameters to the method [`MembershipsApi::list_memberships`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListMembershipsParams {
-    pub user_user_id: Option<String>,
     pub limit: Option<i32>,
     pub offset: Option<i32>,
     pub state: Option<models::AuthV1MembershipState>
@@ -207,20 +167,11 @@ pub struct ListOrganizationMembersParams {
     pub offset: Option<i32>
 }
 
-/// struct for passing parameters to the method [`MembershipsApi::reactivate_member`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct ReactivateMemberParams {
-    pub user_org_id: String,
-    pub user_id: String,
-    pub user_actor_id: Option<String>
-}
-
 /// struct for passing parameters to the method [`MembershipsApi::remove_member`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct RemoveMemberParams {
-    pub user_org_id: String,
-    pub user_id: String,
-    pub user_actor_id: Option<String>
+    pub org_id: String,
+    pub user_id: String
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::resend_invitation`]
@@ -237,47 +188,20 @@ pub struct RespondToMembershipApplicationParams {
     pub respond_to_membership_application_request: models::RespondToMembershipApplicationRequest
 }
 
-/// struct for passing parameters to the method [`MembershipsApi::suspend_member`]
+/// struct for passing parameters to the method [`MembershipsApi::update_member`]
 #[derive(Clone, Debug, ::bon::Builder)]
-pub struct SuspendMemberParams {
-    pub user_org_id: String,
+pub struct UpdateMemberParams {
+    pub org_id: String,
     pub user_id: String,
-    pub user_actor_id: Option<String>
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::update_active_membership`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct UpdateActiveMembershipParams {
-    pub auth_v1_update_active_membership_request: models::AuthV1UpdateActiveMembershipRequest
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::update_member_role`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct UpdateMemberRoleParams {
-    pub user_org_id: String,
-    pub user_id: String,
-    pub update_member_role_request: models::UpdateMemberRoleRequest
+    pub update_member_request: models::UpdateMemberRequest
 }
 
 /// struct for passing parameters to the method [`MembershipsApi::update_membership_state`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateMembershipStateParams {
     pub user_org_id: String,
+    pub user_id: String,
     pub update_membership_state_request: models::UpdateMembershipStateRequest
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::update_org_name`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct UpdateOrgNameParams {
-    pub user_org_id: String,
-    pub update_org_name_request: models::UpdateOrgNameRequest
-}
-
-/// struct for passing parameters to the method [`MembershipsApi::update_org_username`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct UpdateOrgUsernameParams {
-    pub user_org_id: String,
-    pub update_org_username_request: models::UpdateOrgUsernameRequest
 }
 
 
@@ -350,7 +274,7 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/invite/{user_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/invite/{user_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
         if let Some(ref param_value) = user_actor_id {
@@ -396,11 +320,10 @@ impl MembershipsApi for MembershipsApiClient {
         }
     }
 
-    async fn check_membership(&self,  params: CheckMembershipParams ) -> Result<models::AuthV1CheckMembershipResponse, Error<CheckMembershipError>> {
+    async fn check_current_membership(&self,  params: CheckCurrentMembershipParams ) -> Result<models::AuthV1CheckMembershipResponse, Error<CheckCurrentMembershipError>> {
         
-        let CheckMembershipParams {
+        let CheckCurrentMembershipParams {
             org_id,
-            user_id,
         } = params;
         
 
@@ -408,12 +331,9 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{org_id}/check", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/members/current/check", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user_id", &param_value.to_string())]);
-        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -448,7 +368,7 @@ impl MembershipsApi for MembershipsApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1CheckMembershipResponse`")))),
             }
         } else {
-            let local_var_entity: Option<CheckMembershipError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<CheckCurrentMembershipError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -508,64 +428,6 @@ impl MembershipsApi for MembershipsApiClient {
         }
     }
 
-    async fn get_internal_membership_info(&self,  params: GetInternalMembershipInfoParams ) -> Result<models::AuthV1GetInternalMembershipInfoResponse, Error<GetInternalMembershipInfoError>> {
-        
-        let GetInternalMembershipInfoParams {
-            org_id,
-            user_id,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{org_id}/info", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
-
-        if let Some(ref param_value) = user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user_id", &param_value.to_string())]);
-        }
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1GetInternalMembershipInfoResponse`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1GetInternalMembershipInfoResponse`")))),
-            }
-        } else {
-            let local_var_entity: Option<GetInternalMembershipInfoError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
     async fn invite_member(&self,  params: InviteMemberParams ) -> Result<models::AuthV1MembershipApplication, Error<InviteMemberError>> {
         
         let InviteMemberParams {
@@ -578,7 +440,7 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/invite", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/invite", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -634,8 +496,8 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{org_id}/leave", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/members/current", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
         if let Some(ref param_value) = user_id {
             local_var_req_builder = local_var_req_builder.query(&[("user_id", &param_value.to_string())]);
@@ -683,7 +545,6 @@ impl MembershipsApi for MembershipsApiClient {
     async fn list_membership_applications(&self,  params: ListMembershipApplicationsParams ) -> Result<models::AuthV1ListMembershipApplicationsResponse, Error<ListMembershipApplicationsError>> {
         
         let ListMembershipApplicationsParams {
-            user_user_id,
             limit,
             offset,
             state,
@@ -697,9 +558,6 @@ impl MembershipsApi for MembershipsApiClient {
         let local_var_uri_str = format!("{}/auth/v1/membership-applications", local_var_configuration.base_path);
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
-        }
         if let Some(ref param_value) = limit {
             local_var_req_builder = local_var_req_builder.query(&[("limit", &param_value.to_string())]);
         }
@@ -752,7 +610,6 @@ impl MembershipsApi for MembershipsApiClient {
     async fn list_memberships(&self,  params: ListMembershipsParams ) -> Result<models::AuthV1ListMembershipsResponse, Error<ListMembershipsError>> {
         
         let ListMembershipsParams {
-            user_user_id,
             limit,
             offset,
             state,
@@ -763,12 +620,9 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships", local_var_configuration.base_path);
+        let local_var_uri_str = format!("{}/auth/v1/users/current/memberships", local_var_configuration.base_path);
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
-        }
         if let Some(ref param_value) = limit {
             local_var_req_builder = local_var_req_builder.query(&[("limit", &param_value.to_string())]);
         }
@@ -832,7 +686,7 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/members", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
         if let Some(ref param_value) = user_user_id {
@@ -884,71 +738,11 @@ impl MembershipsApi for MembershipsApiClient {
         }
     }
 
-    async fn reactivate_member(&self,  params: ReactivateMemberParams ) -> Result<models::AuthV1MembershipMutation, Error<ReactivateMemberError>> {
-        
-        let ReactivateMemberParams {
-            user_org_id,
-            user_id,
-            user_actor_id,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members/{user_id}/reactivate", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
-
-        if let Some(ref param_value) = user_actor_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user.actor_id", &param_value.to_string())]);
-        }
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1MembershipMutation`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1MembershipMutation`")))),
-            }
-        } else {
-            let local_var_entity: Option<ReactivateMemberError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
     async fn remove_member(&self,  params: RemoveMemberParams ) -> Result<serde_json::Value, Error<RemoveMemberError>> {
         
         let RemoveMemberParams {
-            user_org_id,
+            org_id,
             user_id,
-            user_actor_id,
         } = params;
         
 
@@ -956,12 +750,9 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members/{user_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/members/{user_id}", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), user_id=crate::apis::urlencode(user_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_actor_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user.actor_id", &param_value.to_string())]);
-        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -1014,7 +805,7 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/invite/resend", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/invite/resend", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -1114,12 +905,12 @@ impl MembershipsApi for MembershipsApiClient {
         }
     }
 
-    async fn suspend_member(&self,  params: SuspendMemberParams ) -> Result<models::AuthV1MembershipMutation, Error<SuspendMemberError>> {
+    async fn update_member(&self,  params: UpdateMemberParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMemberError>> {
         
-        let SuspendMemberParams {
-            user_org_id,
+        let UpdateMemberParams {
+            org_id,
             user_id,
-            user_actor_id,
+            update_member_request,
         } = params;
         
 
@@ -1127,12 +918,9 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members/{user_id}/suspend", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/members/{user_id}", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), user_id=crate::apis::urlencode(user_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
 
-        if let Some(ref param_value) = user_actor_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user.actor_id", &param_value.to_string())]);
-        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -1147,6 +935,7 @@ impl MembershipsApi for MembershipsApiClient {
         if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
             local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
         };
+        local_var_req_builder = local_var_req_builder.json(&update_member_request);
 
         let local_var_req = local_var_req_builder.build()?;
         let local_var_resp = local_var_client.execute(local_var_req).await?;
@@ -1167,119 +956,7 @@ impl MembershipsApi for MembershipsApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1MembershipMutation`")))),
             }
         } else {
-            let local_var_entity: Option<SuspendMemberError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    async fn update_active_membership(&self,  params: UpdateActiveMembershipParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateActiveMembershipError>> {
-        
-        let UpdateActiveMembershipParams {
-            auth_v1_update_active_membership_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/memberships/active", local_var_configuration.base_path);
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-        local_var_req_builder = local_var_req_builder.json(&auth_v1_update_active_membership_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1MembershipMutation`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1MembershipMutation`")))),
-            }
-        } else {
-            let local_var_entity: Option<UpdateActiveMembershipError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    async fn update_member_role(&self,  params: UpdateMemberRoleParams ) -> Result<models::AuthV1MembershipMutation, Error<UpdateMemberRoleError>> {
-        
-        let UpdateMemberRoleParams {
-            user_org_id,
-            user_id,
-            update_member_role_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/members/{user_id}/role", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-        local_var_req_builder = local_var_req_builder.json(&update_member_role_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1MembershipMutation`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1MembershipMutation`")))),
-            }
-        } else {
-            let local_var_entity: Option<UpdateMemberRoleError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<UpdateMemberError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -1289,6 +966,7 @@ impl MembershipsApi for MembershipsApiClient {
         
         let UpdateMembershipStateParams {
             user_org_id,
+            user_id,
             update_membership_state_request,
         } = params;
         
@@ -1297,7 +975,7 @@ impl MembershipsApi for MembershipsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/state", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/membership-applications/{user_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), user_id=crate::apis::urlencode(user_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -1341,118 +1019,6 @@ impl MembershipsApi for MembershipsApiClient {
         }
     }
 
-    async fn update_org_name(&self,  params: UpdateOrgNameParams ) -> Result<models::AuthV1UpdateOrgNameResponse, Error<UpdateOrgNameError>> {
-        
-        let UpdateOrgNameParams {
-            user_org_id,
-            update_org_name_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/name", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-        local_var_req_builder = local_var_req_builder.json(&update_org_name_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1UpdateOrgNameResponse`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1UpdateOrgNameResponse`")))),
-            }
-        } else {
-            let local_var_entity: Option<UpdateOrgNameError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
-    async fn update_org_username(&self,  params: UpdateOrgUsernameParams ) -> Result<models::AuthV1UpdateOrgUsernameResponse, Error<UpdateOrgUsernameError>> {
-        
-        let UpdateOrgUsernameParams {
-            user_org_id,
-            update_org_username_request,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/username", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
-
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-        local_var_req_builder = local_var_req_builder.json(&update_org_username_request);
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1UpdateOrgUsernameResponse`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1UpdateOrgUsernameResponse`")))),
-            }
-        } else {
-            let local_var_entity: Option<UpdateOrgUsernameError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
 }
 
 /// struct for typed errors of method [`MembershipsApi::accept_invitation`]
@@ -1471,10 +1037,10 @@ pub enum CancelInvitationError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`MembershipsApi::check_membership`]
+/// struct for typed errors of method [`MembershipsApi::check_current_membership`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum CheckMembershipError {
+pub enum CheckCurrentMembershipError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
@@ -1483,14 +1049,6 @@ pub enum CheckMembershipError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeclineInvitationError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::get_internal_membership_info`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum GetInternalMembershipInfoError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
@@ -1535,14 +1093,6 @@ pub enum ListOrganizationMembersError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`MembershipsApi::reactivate_member`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ReactivateMemberError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`MembershipsApi::remove_member`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -1567,26 +1117,10 @@ pub enum RespondToMembershipApplicationError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`MembershipsApi::suspend_member`]
+/// struct for typed errors of method [`MembershipsApi::update_member`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum SuspendMemberError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::update_active_membership`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum UpdateActiveMembershipError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::update_member_role`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum UpdateMemberRoleError {
+pub enum UpdateMemberError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
@@ -1595,22 +1129,6 @@ pub enum UpdateMemberRoleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateMembershipStateError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::update_org_name`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum UpdateOrgNameError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`MembershipsApi::update_org_username`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum UpdateOrgUsernameError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }

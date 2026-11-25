@@ -13,8 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1VerifyTotpForLoginRequest {
-    #[serde(rename = "session_id", skip_serializing_if = "Option::is_none")]
-    pub session_id: Option<String>,
+    #[serde(rename = "challenge_id", skip_serializing_if = "Option::is_none")]
+    pub challenge_id: Option<String>,
     #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
     pub code: Option<String>,
 }
@@ -22,7 +22,7 @@ pub struct AuthV1VerifyTotpForLoginRequest {
 impl AuthV1VerifyTotpForLoginRequest {
     pub fn new() -> AuthV1VerifyTotpForLoginRequest {
         AuthV1VerifyTotpForLoginRequest {
-            session_id: None,
+            challenge_id: None,
             code: None,
         }
     }

@@ -4,16 +4,16 @@ All URIs are relative to *https://api.rixl.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**attach_policy**](AccessPoliciesApi.md#attach_policy) | **POST** /auth/v1/memberships/{user_org_id}/policies/{policy_id}/attachments | AttachPolicy
-[**create_policy**](AccessPoliciesApi.md#create_policy) | **POST** /auth/v1/memberships/{user_org_id}/policies | CreatePolicy
-[**delete_policy**](AccessPoliciesApi.md#delete_policy) | **DELETE** /auth/v1/memberships/{user_org_id}/policies/{policy_id} | DeletePolicy
-[**detach_policy**](AccessPoliciesApi.md#detach_policy) | **DELETE** /auth/v1/memberships/{user_org_id}/policies/attachments/{attachment_id} | DetachPolicy
-[**get_policy**](AccessPoliciesApi.md#get_policy) | **GET** /auth/v1/memberships/{user_org_id}/policies/{policy_id} | GetPolicy
-[**list_permission_registry**](AccessPoliciesApi.md#list_permission_registry) | **GET** /auth/v1/memberships/{user_org_id}/policies/permissions | ListPermissionRegistry
-[**list_policies**](AccessPoliciesApi.md#list_policies) | **GET** /auth/v1/memberships/{org_id}/policies | ListPolicies
-[**list_policy_attachments**](AccessPoliciesApi.md#list_policy_attachments) | **GET** /auth/v1/memberships/{user_org_id}/policies/{policy_id}/attachments | ListPolicyAttachments
-[**list_user_policies**](AccessPoliciesApi.md#list_user_policies) | **GET** /auth/v1/memberships/{user_org_id}/members/{member_id}/policies | ListUserPolicies
-[**update_policy**](AccessPoliciesApi.md#update_policy) | **PUT** /auth/v1/memberships/{user_org_id}/policies/{policy_id} | UpdatePolicy
+[**attach_policy**](AccessPoliciesApi.md#attach_policy) | **POST** /auth/v1/organizations/{user_org_id}/policies/{policy_id}/attachments | AttachPolicy
+[**create_policy**](AccessPoliciesApi.md#create_policy) | **POST** /auth/v1/organizations/{user_org_id}/policies | CreatePolicy
+[**delete_policy**](AccessPoliciesApi.md#delete_policy) | **DELETE** /auth/v1/organizations/{user_org_id}/policies/{policy_id} | DeletePolicy
+[**detach_policy**](AccessPoliciesApi.md#detach_policy) | **DELETE** /auth/v1/organizations/{user_org_id}/policies/attachments/{attachment_id} | DetachPolicy
+[**get_policy**](AccessPoliciesApi.md#get_policy) | **GET** /auth/v1/organizations/{user_org_id}/policies/{policy_id} | GetPolicy
+[**list_permission_registry**](AccessPoliciesApi.md#list_permission_registry) | **GET** /auth/v1/organizations/{user_org_id}/policies/permissions | ListPermissionRegistry
+[**list_policies**](AccessPoliciesApi.md#list_policies) | **GET** /auth/v1/organizations/{org_id}/policies | ListPolicies
+[**list_policy_attachments**](AccessPoliciesApi.md#list_policy_attachments) | **GET** /auth/v1/organizations/{user_org_id}/policies/{policy_id}/attachments | ListPolicyAttachments
+[**list_user_policies**](AccessPoliciesApi.md#list_user_policies) | **GET** /auth/v1/organizations/{user_org_id}/members/{member_id}/policies | ListUserPolicies
+[**update_policy**](AccessPoliciesApi.md#update_policy) | **PUT** /auth/v1/organizations/{user_org_id}/policies/{policy_id} | UpdatePolicy
 
 
 

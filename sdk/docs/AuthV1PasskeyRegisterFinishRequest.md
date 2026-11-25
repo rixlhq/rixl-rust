@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **user_id** | Option<**String**> |  | [optional]
-**session_id** | Option<**String**> |  | [optional]
+**challenge_id** | Option<**String**> |  | [optional]
 **name** | Option<**String**> |  | [optional]
 **credential** | Option<**String**> |  | [optional]
 

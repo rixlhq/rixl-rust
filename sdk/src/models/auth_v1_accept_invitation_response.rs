@@ -15,18 +15,18 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1AcceptInvitationResponse {
     #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
     pub org_id: Option<String>,
-    #[serde(rename = "org_name", skip_serializing_if = "Option::is_none")]
-    pub org_name: Option<String>,
     #[serde(rename = "role", skip_serializing_if = "Option::is_none")]
     pub role: Option<models::AuthV1MembershipRole>,
+    #[serde(rename = "organization", skip_serializing_if = "Option::is_none")]
+    pub organization: Option<Box<models::AuthV1Organization>>,
 }
 
 impl AuthV1AcceptInvitationResponse {
     pub fn new() -> AuthV1AcceptInvitationResponse {
         AuthV1AcceptInvitationResponse {
             org_id: None,
-            org_name: None,
             role: None,
+            organization: None,
         }
     }
 }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auto_join** | Option<**bool**> |  | [optional]
+**suggest_join** | Option<**bool**> |  | [optional]
 **verified** | Option<[**models::AuthV1VerifiedDomain**](AuthV1VerifiedDomain.md)> |  | [optional]
 **pending** | Option<[**models::AuthV1PendingDomain**](AuthV1PendingDomain.md)> |  | [optional]
 

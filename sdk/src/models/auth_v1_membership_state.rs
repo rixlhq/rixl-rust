@@ -20,10 +20,6 @@ pub enum AuthV1MembershipState {
     MembershipStateActive,
     #[serde(rename = "MEMBERSHIP_STATE_SUSPENDED")]
     MembershipStateSuspended,
-    #[serde(rename = "MEMBERSHIP_STATE_LEFT")]
-    MembershipStateLeft,
-    #[serde(rename = "MEMBERSHIP_STATE_REMOVED")]
-    MembershipStateRemoved,
 
 }
 
@@ -33,8 +29,6 @@ impl std::fmt::Display for AuthV1MembershipState {
             Self::MembershipStateUnspecified => write!(f, "MEMBERSHIP_STATE_UNSPECIFIED"),
             Self::MembershipStateActive => write!(f, "MEMBERSHIP_STATE_ACTIVE"),
             Self::MembershipStateSuspended => write!(f, "MEMBERSHIP_STATE_SUSPENDED"),
-            Self::MembershipStateLeft => write!(f, "MEMBERSHIP_STATE_LEFT"),
-            Self::MembershipStateRemoved => write!(f, "MEMBERSHIP_STATE_REMOVED"),
         }
     }
 }

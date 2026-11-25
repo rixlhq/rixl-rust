@@ -21,11 +21,11 @@ pub struct AuthV1MembershipMutation {
     pub role: Option<models::AuthV1MembershipRole>,
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::AuthV1MembershipState>,
-    #[serde(rename = "org_name", skip_serializing_if = "Option::is_none")]
-    pub org_name: Option<String>,
     /// A point in time in RFC 3339 format, with up to nanosecond precision. Output uses UTC (`Z`); input may use an offset from UTC.
     #[serde(rename = "joined_at", skip_serializing_if = "Option::is_none")]
     pub joined_at: Option<chrono::DateTime<chrono::FixedOffset>>,
+    #[serde(rename = "organization", skip_serializing_if = "Option::is_none")]
+    pub organization: Option<Box<models::AuthV1Organization>>,
 }
 
 impl AuthV1MembershipMutation {
@@ -35,8 +35,8 @@ impl AuthV1MembershipMutation {
             org_id: None,
             role: None,
             state: None,
-            org_name: None,
             joined_at: None,
+            organization: None,
         }
     }
 }

@@ -25,6 +25,8 @@ pub struct AuthV1RefreshTokenRequest {
     pub code_verifier: Option<String>,
     #[serde(rename = "redirect_uri", skip_serializing_if = "Option::is_none")]
     pub redirect_uri: Option<String>,
+    #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
+    pub org_id: Option<String>,
 }
 
 impl AuthV1RefreshTokenRequest {
@@ -36,6 +38,7 @@ impl AuthV1RefreshTokenRequest {
             origin: None,
             code_verifier: None,
             redirect_uri: None,
+            org_id: None,
         }
     }
 }

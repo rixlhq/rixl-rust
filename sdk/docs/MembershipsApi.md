@@ -5,25 +5,19 @@ All URIs are relative to *https://api.rixl.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**accept_invitation**](MembershipsApi.md#accept_invitation) | **POST** /auth/v1/invitations/{token}/accept | AcceptInvitation
-[**cancel_invitation**](MembershipsApi.md#cancel_invitation) | **DELETE** /auth/v1/memberships/{user_org_id}/invite/{user_id} | CancelInvitation
-[**check_membership**](MembershipsApi.md#check_membership) | **GET** /auth/v1/memberships/{org_id}/check | CheckMembership
+[**cancel_invitation**](MembershipsApi.md#cancel_invitation) | **DELETE** /auth/v1/organizations/{user_org_id}/invite/{user_id} | CancelInvitation
+[**check_current_membership**](MembershipsApi.md#check_current_membership) | **GET** /auth/v1/organizations/{org_id}/members/current/check | CheckCurrentMembership
 [**decline_invitation**](MembershipsApi.md#decline_invitation) | **POST** /auth/v1/invitations/{token}/decline | DeclineInvitation
-[**get_internal_membership_info**](MembershipsApi.md#get_internal_membership_info) | **GET** /auth/v1/memberships/{org_id}/info | GetInternalMembershipInfo
-[**invite_member**](MembershipsApi.md#invite_member) | **POST** /auth/v1/memberships/{user_org_id}/invite | InviteMember
-[**leave_organization**](MembershipsApi.md#leave_organization) | **POST** /auth/v1/memberships/{org_id}/leave | LeaveOrganization
+[**invite_member**](MembershipsApi.md#invite_member) | **POST** /auth/v1/organizations/{user_org_id}/invite | InviteMember
+[**leave_organization**](MembershipsApi.md#leave_organization) | **DELETE** /auth/v1/organizations/{org_id}/members/current | LeaveOrganization
 [**list_membership_applications**](MembershipsApi.md#list_membership_applications) | **GET** /auth/v1/membership-applications | ListMembershipApplications
-[**list_memberships**](MembershipsApi.md#list_memberships) | **GET** /auth/v1/memberships | ListMemberships
-[**list_organization_members**](MembershipsApi.md#list_organization_members) | **GET** /auth/v1/memberships/{user_org_id}/members | ListOrganizationMembers
-[**reactivate_member**](MembershipsApi.md#reactivate_member) | **PATCH** /auth/v1/memberships/{user_org_id}/members/{user_id}/reactivate | ReactivateMember
-[**remove_member**](MembershipsApi.md#remove_member) | **DELETE** /auth/v1/memberships/{user_org_id}/members/{user_id} | RemoveMember
-[**resend_invitation**](MembershipsApi.md#resend_invitation) | **POST** /auth/v1/memberships/{user_org_id}/invite/resend | ResendInvitation
+[**list_memberships**](MembershipsApi.md#list_memberships) | **GET** /auth/v1/users/current/memberships | ListMemberships
+[**list_organization_members**](MembershipsApi.md#list_organization_members) | **GET** /auth/v1/organizations/{user_org_id}/members | ListOrganizationMembers
+[**remove_member**](MembershipsApi.md#remove_member) | **DELETE** /auth/v1/organizations/{org_id}/members/{user_id} | RemoveMember
+[**resend_invitation**](MembershipsApi.md#resend_invitation) | **POST** /auth/v1/organizations/{user_org_id}/invite/resend | ResendInvitation
 [**respond_to_membership_application**](MembershipsApi.md#respond_to_membership_application) | **PATCH** /auth/v1/membership-applications/{org_id}/state | RespondToMembershipApplication
-[**suspend_member**](MembershipsApi.md#suspend_member) | **PATCH** /auth/v1/memberships/{user_org_id}/members/{user_id}/suspend | SuspendMember
-[**update_active_membership**](MembershipsApi.md#update_active_membership) | **PATCH** /auth/v1/memberships/active | UpdateActiveMembership
-[**update_member_role**](MembershipsApi.md#update_member_role) | **PATCH** /auth/v1/memberships/{user_org_id}/members/{user_id}/role | UpdateMemberRole
-[**update_membership_state**](MembershipsApi.md#update_membership_state) | **PATCH** /auth/v1/memberships/{user_org_id}/state | UpdateMembershipState
-[**update_org_name**](MembershipsApi.md#update_org_name) | **PATCH** /auth/v1/memberships/{user_org_id}/name | UpdateOrgName
-[**update_org_username**](MembershipsApi.md#update_org_username) | **PATCH** /auth/v1/memberships/{user_org_id}/username | UpdateOrgUsername
+[**update_member**](MembershipsApi.md#update_member) | **PATCH** /auth/v1/organizations/{org_id}/members/{user_id} | UpdateMember
+[**update_membership_state**](MembershipsApi.md#update_membership_state) | **PATCH** /auth/v1/organizations/{user_org_id}/membership-applications/{user_id} | UpdateMembershipState
 
 
 
@@ -85,10 +79,10 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## check_membership
+## check_current_membership
 
-> models::AuthV1CheckMembershipResponse check_membership(org_id, user_id)
-CheckMembership
+> models::AuthV1CheckMembershipResponse check_current_membership(org_id)
+CheckCurrentMembership
 
 ### Parameters
 
@@ -96,7 +90,6 @@ CheckMembership
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **org_id** | **String** |  | [required] |
-**user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -129,35 +122,6 @@ Name | Type | Description  | Required | Notes
 ### Return type
 
 [**serde_json::Value**](serde_json::Value.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## get_internal_membership_info
-
-> models::AuthV1GetInternalMembershipInfoResponse get_internal_membership_info(org_id, user_id)
-GetInternalMembershipInfo
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
-**user_id** | Option<**String**> |  |  |
-
-### Return type
-
-[**models::AuthV1GetInternalMembershipInfoResponse**](auth.v1.GetInternalMembershipInfoResponse.md)
 
 ### Authorization
 
@@ -231,7 +195,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_membership_applications
 
-> models::AuthV1ListMembershipApplicationsResponse list_membership_applications(user_user_id, limit, offset, state)
+> models::AuthV1ListMembershipApplicationsResponse list_membership_applications(limit, offset, state)
 ListMembershipApplications
 
 ### Parameters
@@ -239,7 +203,6 @@ ListMembershipApplications
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_user_id** | Option<**String**> |  |  |
 **limit** | Option<**i32**> |  |  |
 **offset** | Option<**i32**> |  |  |
 **state** | Option<[**models::AuthV1MembershipApplicationState**](Models__AuthV1MembershipApplicationState.md)> |  |  |
@@ -262,7 +225,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_memberships
 
-> models::AuthV1ListMembershipsResponse list_memberships(user_user_id, limit, offset, state)
+> models::AuthV1ListMembershipsResponse list_memberships(limit, offset, state)
 ListMemberships
 
 ### Parameters
@@ -270,7 +233,6 @@ ListMemberships
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_user_id** | Option<**String**> |  |  |
 **limit** | Option<**i32**> |  |  |
 **offset** | Option<**i32**> |  |  |
 **state** | Option<[**models::AuthV1MembershipState**](Models__AuthV1MembershipState.md)> |  |  |
@@ -322,39 +284,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## reactivate_member
-
-> models::AuthV1MembershipMutation reactivate_member(user_org_id, user_id, user_actor_id)
-ReactivateMember
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** |  | [required] |
-**user_id** | **String** |  | [required] |
-**user_actor_id** | Option<**String**> |  |  |
-
-### Return type
-
-[**models::AuthV1MembershipMutation**](auth.v1.MembershipMutation.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
 ## remove_member
 
-> serde_json::Value remove_member(user_org_id, user_id, user_actor_id)
+> serde_json::Value remove_member(org_id, user_id)
 RemoveMember
 
 ### Parameters
@@ -362,9 +294,8 @@ RemoveMember
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** |  | [required] |
+**org_id** | **String** |  | [required] |
 **user_id** | **String** |  | [required] |
-**user_actor_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -440,77 +371,19 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## suspend_member
+## update_member
 
-> models::AuthV1MembershipMutation suspend_member(user_org_id, user_id, user_actor_id)
-SuspendMember
+> models::AuthV1MembershipMutation update_member(org_id, user_id, update_member_request)
+UpdateMember
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** |  | [required] |
+**org_id** | **String** |  | [required] |
 **user_id** | **String** |  | [required] |
-**user_actor_id** | Option<**String**> |  |  |
-
-### Return type
-
-[**models::AuthV1MembershipMutation**](auth.v1.MembershipMutation.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## update_active_membership
-
-> models::AuthV1MembershipMutation update_active_membership(auth_v1_update_active_membership_request)
-UpdateActiveMembership
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**auth_v1_update_active_membership_request** | [**AuthV1UpdateActiveMembershipRequest**](AuthV1UpdateActiveMembershipRequest.md) |  | [required] |
-
-### Return type
-
-[**models::AuthV1MembershipMutation**](auth.v1.MembershipMutation.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## update_member_role
-
-> models::AuthV1MembershipMutation update_member_role(user_org_id, user_id, update_member_role_request)
-UpdateMemberRole
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** |  | [required] |
-**user_id** | **String** |  | [required] |
-**update_member_role_request** | [**UpdateMemberRoleRequest**](UpdateMemberRoleRequest.md) |  | [required] |
+**update_member_request** | [**UpdateMemberRequest**](UpdateMemberRequest.md) |  | [required] |
 
 ### Return type
 
@@ -530,7 +403,7 @@ Name | Type | Description  | Required | Notes
 
 ## update_membership_state
 
-> models::AuthV1MembershipMutation update_membership_state(user_org_id, update_membership_state_request)
+> models::AuthV1MembershipMutation update_membership_state(user_org_id, user_id, update_membership_state_request)
 UpdateMembershipState
 
 ### Parameters
@@ -539,69 +412,12 @@ UpdateMembershipState
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **user_org_id** | **String** |  | [required] |
+**user_id** | **String** |  | [required] |
 **update_membership_state_request** | [**UpdateMembershipStateRequest**](UpdateMembershipStateRequest.md) |  | [required] |
 
 ### Return type
 
 [**models::AuthV1MembershipMutation**](auth.v1.MembershipMutation.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## update_org_name
-
-> models::AuthV1UpdateOrgNameResponse update_org_name(user_org_id, update_org_name_request)
-UpdateOrgName
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** |  | [required] |
-**update_org_name_request** | [**UpdateOrgNameRequest**](UpdateOrgNameRequest.md) |  | [required] |
-
-### Return type
-
-[**models::AuthV1UpdateOrgNameResponse**](auth.v1.UpdateOrgNameResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## update_org_username
-
-> models::AuthV1UpdateOrgUsernameResponse update_org_username(user_org_id, update_org_username_request)
-UpdateOrgUsername
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**user_org_id** | **String** |  | [required] |
-**update_org_username_request** | [**UpdateOrgUsernameRequest**](UpdateOrgUsernameRequest.md) |  | [required] |
-
-### Return type
-
-[**models::AuthV1UpdateOrgUsernameResponse**](auth.v1.UpdateOrgUsernameResponse.md)
 
 ### Authorization
 

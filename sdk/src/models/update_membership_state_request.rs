@@ -17,8 +17,6 @@ pub struct UpdateMembershipStateRequest {
     pub user: Option<Box<models::UserOrgRequest1>>,
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::AuthV1MembershipApplicationState>,
-    #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
-    pub user_id: Option<String>,
 }
 
 impl UpdateMembershipStateRequest {
@@ -26,7 +24,6 @@ impl UpdateMembershipStateRequest {
         UpdateMembershipStateRequest {
             user: None,
             state: None,
-            user_id: None,
         }
     }
 }

@@ -23,6 +23,14 @@ pub struct AuthV1TokenResponse {
     pub token_type: Option<String>,
     #[serde(rename = "requires_action", skip_serializing_if = "Option::is_none")]
     pub requires_action: Option<String>,
+    #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
+    pub org_id: Option<String>,
+    #[serde(rename = "role", skip_serializing_if = "Option::is_none")]
+    pub role: Option<String>,
+    #[serde(rename = "last_active_org_id", skip_serializing_if = "Option::is_none")]
+    pub last_active_org_id: Option<String>,
+    #[serde(rename = "domain_join_suggestions", skip_serializing_if = "Option::is_none")]
+    pub domain_join_suggestions: Option<Vec<models::AuthV1Organization>>,
 }
 
 impl AuthV1TokenResponse {
@@ -33,6 +41,10 @@ impl AuthV1TokenResponse {
             expires_in: None,
             token_type: None,
             requires_action: None,
+            org_id: None,
+            role: None,
+            last_active_org_id: None,
+            domain_join_suggestions: None,
         }
     }
 }

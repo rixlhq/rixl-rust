@@ -13,6 +13,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1ResolveIdentityPermissionsResponse {
+    #[serde(rename = "active", skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
+    /// Empty when active. Otherwise MEMBERSHIP_SUSPENDED, ORG_DELETED or NOT_A_MEMBER.
+    #[serde(rename = "inactive_reason", skip_serializing_if = "Option::is_none")]
+    pub inactive_reason: Option<String>,
     #[serde(rename = "permissions", skip_serializing_if = "Option::is_none")]
     pub permissions: Option<Vec<String>>,
 }
@@ -20,6 +25,8 @@ pub struct AuthV1ResolveIdentityPermissionsResponse {
 impl AuthV1ResolveIdentityPermissionsResponse {
     pub fn new() -> AuthV1ResolveIdentityPermissionsResponse {
         AuthV1ResolveIdentityPermissionsResponse {
+            active: None,
+            inactive_reason: None,
             permissions: None,
         }
     }

@@ -19,8 +19,8 @@ pub struct AuthV1LoginResponse {
     /// \"ok\" | \"2fa_required\" | \"email_not_verified\"
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
-    #[serde(rename = "session_id", skip_serializing_if = "Option::is_none")]
-    pub session_id: Option<String>,
+    #[serde(rename = "challenge_id", skip_serializing_if = "Option::is_none")]
+    pub challenge_id: Option<String>,
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
     #[serde(rename = "access_token", skip_serializing_if = "Option::is_none")]
@@ -40,13 +40,19 @@ pub struct AuthV1LoginResponse {
     #[serde_as(as = "Option<serde_with::base64::Base64>")]
     #[serde(rename = "passkey_options", skip_serializing_if = "Option::is_none")]
     pub passkey_options: Option<Vec<u8>>,
+    #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
+    pub org_id: Option<String>,
+    #[serde(rename = "role", skip_serializing_if = "Option::is_none")]
+    pub role: Option<String>,
+    #[serde(rename = "last_active_org_id", skip_serializing_if = "Option::is_none")]
+    pub last_active_org_id: Option<String>,
 }
 
 impl AuthV1LoginResponse {
     pub fn new() -> AuthV1LoginResponse {
         AuthV1LoginResponse {
             status: None,
-            session_id: None,
+            challenge_id: None,
             email: None,
             access_token: None,
             refresh_token: None,
@@ -55,6 +61,9 @@ impl AuthV1LoginResponse {
             requires_action: None,
             authentication: None,
             passkey_options: None,
+            org_id: None,
+            role: None,
+            last_active_org_id: None,
         }
     }
 }

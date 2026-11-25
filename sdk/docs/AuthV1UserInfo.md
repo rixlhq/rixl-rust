@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **image_id** | Option<**String**> |  | [optional]
 **language_code** | Option<**String**> |  | [optional]
 **country_code** | Option<**String**> |  | [optional]
-**active_org_id** | Option<**String**> |  | [optional]
+**last_active_org_id** | Option<**String**> |  | [optional]
 **policies** | Option<[**Vec<models::AuthV1Policy>**](AuthV1Policy.md)> |  | [optional]
 **permissions** | Option<**Vec<String>**> |  | [optional]
 

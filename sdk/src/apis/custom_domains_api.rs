@@ -20,35 +20,45 @@ use crate::apis::ContentType;
 #[async_trait]
 pub trait CustomDomainsApi: Send + Sync {
 
-    /// POST /auth/v1/memberships/{org_id}/domain/verify
+    /// POST /auth/v1/organizations/{org_id}/domain/verify
     ///
     /// 
     async fn check_domain_verification(&self,  params: CheckDomainVerificationParams ) -> Result<models::AuthV1DomainResponse, Error<CheckDomainVerificationError>>;
 
-    /// POST /auth/v1/memberships/{user_org_id}/domain
+    /// POST /auth/v1/organizations/{user_org_id}/domain
     ///
     /// 
     async fn create_domain_verification(&self,  params: CreateDomainVerificationParams ) -> Result<models::AuthV1DomainResponse, Error<CreateDomainVerificationError>>;
 
-    /// GET /auth/v1/memberships/{org_id}/domain/auto-join
-    ///
-    /// 
-    async fn get_domain_auto_join(&self,  params: GetDomainAutoJoinParams ) -> Result<models::AuthV1AutoJoinSetting, Error<GetDomainAutoJoinError>>;
-
-    /// GET /auth/v1/memberships/{org_id}/domain
+    /// GET /auth/v1/organizations/{org_id}/domain
     ///
     /// 
     async fn get_domain_status(&self,  params: GetDomainStatusParams ) -> Result<models::AuthV1DomainResponse, Error<GetDomainStatusError>>;
 
-    /// DELETE /auth/v1/memberships/{org_id}/domain
+    /// GET /auth/v1/organizations/{org_id}/domain/suggest-join
+    ///
+    /// 
+    async fn get_domain_suggest_join(&self,  params: GetDomainSuggestJoinParams ) -> Result<models::AuthV1SuggestJoinSetting, Error<GetDomainSuggestJoinError>>;
+
+    /// POST /auth/v1/users/current/domain-join-suggestions/join
+    ///
+    /// 
+    async fn join_suggested_organization(&self,  params: JoinSuggestedOrganizationParams ) -> Result<serde_json::Value, Error<JoinSuggestedOrganizationError>>;
+
+    /// GET /auth/v1/users/current/domain-join-suggestions
+    ///
+    /// 
+    async fn list_domain_join_suggestions(&self,  params: ListDomainJoinSuggestionsParams ) -> Result<models::AuthV1ListDomainJoinSuggestionsResponse, Error<ListDomainJoinSuggestionsError>>;
+
+    /// DELETE /auth/v1/organizations/{org_id}/domain
     ///
     /// 
     async fn remove_domain(&self,  params: RemoveDomainParams ) -> Result<serde_json::Value, Error<RemoveDomainError>>;
 
-    /// PUT /auth/v1/memberships/{user_org_id}/domain/auto-join
+    /// PUT /auth/v1/organizations/{user_org_id}/domain/suggest-join
     ///
     /// 
-    async fn set_domain_auto_join(&self,  params: SetDomainAutoJoinParams ) -> Result<models::AuthV1AutoJoinSetting, Error<SetDomainAutoJoinError>>;
+    async fn set_domain_suggest_join(&self,  params: SetDomainSuggestJoinParams ) -> Result<models::AuthV1SuggestJoinSetting, Error<SetDomainSuggestJoinError>>;
 }
 
 pub struct CustomDomainsApiClient {
@@ -76,18 +86,31 @@ pub struct CreateDomainVerificationParams {
     pub create_domain_request: models::CreateDomainRequest
 }
 
-/// struct for passing parameters to the method [`CustomDomainsApi::get_domain_auto_join`]
-#[derive(Clone, Debug, ::bon::Builder)]
-pub struct GetDomainAutoJoinParams {
-    pub org_id: String,
-    pub user_id: Option<String>
-}
-
 /// struct for passing parameters to the method [`CustomDomainsApi::get_domain_status`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetDomainStatusParams {
     pub org_id: String,
     pub user_id: Option<String>
+}
+
+/// struct for passing parameters to the method [`CustomDomainsApi::get_domain_suggest_join`]
+#[derive(Clone, Debug, ::bon::Builder)]
+pub struct GetDomainSuggestJoinParams {
+    pub org_id: String,
+    pub user_id: Option<String>
+}
+
+/// struct for passing parameters to the method [`CustomDomainsApi::join_suggested_organization`]
+#[derive(Clone, Debug, ::bon::Builder)]
+pub struct JoinSuggestedOrganizationParams {
+    pub auth_v1_join_suggested_organization_request: models::AuthV1JoinSuggestedOrganizationRequest
+}
+
+/// struct for passing parameters to the method [`CustomDomainsApi::list_domain_join_suggestions`]
+#[derive(Clone, Debug, ::bon::Builder)]
+pub struct ListDomainJoinSuggestionsParams {
+    pub page_size: Option<i32>,
+    pub page_token: Option<String>
 }
 
 /// struct for passing parameters to the method [`CustomDomainsApi::remove_domain`]
@@ -97,11 +120,11 @@ pub struct RemoveDomainParams {
     pub user_id: Option<String>
 }
 
-/// struct for passing parameters to the method [`CustomDomainsApi::set_domain_auto_join`]
+/// struct for passing parameters to the method [`CustomDomainsApi::set_domain_suggest_join`]
 #[derive(Clone, Debug, ::bon::Builder)]
-pub struct SetDomainAutoJoinParams {
+pub struct SetDomainSuggestJoinParams {
     pub user_org_id: String,
-    pub set_auto_join_request: models::SetAutoJoinRequest
+    pub set_suggest_join_request: models::SetSuggestJoinRequest
 }
 
 
@@ -119,7 +142,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{org_id}/domain/verify", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/domain/verify", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref param_value) = user_id {
@@ -177,7 +200,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/domain", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/domain", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -221,64 +244,6 @@ impl CustomDomainsApi for CustomDomainsApiClient {
         }
     }
 
-    async fn get_domain_auto_join(&self,  params: GetDomainAutoJoinParams ) -> Result<models::AuthV1AutoJoinSetting, Error<GetDomainAutoJoinError>> {
-        
-        let GetDomainAutoJoinParams {
-            org_id,
-            user_id,
-        } = params;
-        
-
-        let local_var_configuration = &self.configuration;
-
-        let local_var_client = &local_var_configuration.client;
-
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{org_id}/domain/auto-join", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
-        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
-
-        if let Some(ref param_value) = user_id {
-            local_var_req_builder = local_var_req_builder.query(&[("user_id", &param_value.to_string())]);
-        }
-        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-        }
-        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
-            let local_var_key = local_var_apikey.key.clone();
-            let local_var_value = match local_var_apikey.prefix {
-                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-                None => local_var_key,
-            };
-            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
-        };
-        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-        };
-
-        let local_var_req = local_var_req_builder.build()?;
-        let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-        let local_var_status = local_var_resp.status();
-        let local_var_content_type = local_var_resp
-            .headers()
-            .get("content-type")
-            .and_then(|v| v.to_str().ok())
-            .unwrap_or("application/octet-stream");
-        let local_var_content_type = super::ContentType::from(local_var_content_type);
-        let local_var_content = local_var_resp.text().await?;
-
-        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-            match local_var_content_type {
-                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1AutoJoinSetting`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1AutoJoinSetting`")))),
-            }
-        } else {
-            let local_var_entity: Option<GetDomainAutoJoinError> = serde_json::from_str(&local_var_content).ok();
-            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-            Err(Error::ResponseError(local_var_error))
-        }
-    }
-
     async fn get_domain_status(&self,  params: GetDomainStatusParams ) -> Result<models::AuthV1DomainResponse, Error<GetDomainStatusError>> {
         
         let GetDomainStatusParams {
@@ -291,7 +256,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{org_id}/domain", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/domain", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
         if let Some(ref param_value) = user_id {
@@ -337,6 +302,180 @@ impl CustomDomainsApi for CustomDomainsApiClient {
         }
     }
 
+    async fn get_domain_suggest_join(&self,  params: GetDomainSuggestJoinParams ) -> Result<models::AuthV1SuggestJoinSetting, Error<GetDomainSuggestJoinError>> {
+        
+        let GetDomainSuggestJoinParams {
+            org_id,
+            user_id,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/domain/suggest-join", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+        if let Some(ref param_value) = user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user_id", &param_value.to_string())]);
+        }
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1SuggestJoinSetting`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1SuggestJoinSetting`")))),
+            }
+        } else {
+            let local_var_entity: Option<GetDomainSuggestJoinError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    async fn join_suggested_organization(&self,  params: JoinSuggestedOrganizationParams ) -> Result<serde_json::Value, Error<JoinSuggestedOrganizationError>> {
+        
+        let JoinSuggestedOrganizationParams {
+            auth_v1_join_suggested_organization_request,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/auth/v1/users/current/domain-join-suggestions/join", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+        local_var_req_builder = local_var_req_builder.json(&auth_v1_join_suggested_organization_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            }
+        } else {
+            let local_var_entity: Option<JoinSuggestedOrganizationError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    async fn list_domain_join_suggestions(&self,  params: ListDomainJoinSuggestionsParams ) -> Result<models::AuthV1ListDomainJoinSuggestionsResponse, Error<ListDomainJoinSuggestionsError>> {
+        
+        let ListDomainJoinSuggestionsParams {
+            page_size,
+            page_token,
+        } = params;
+        
+
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/auth/v1/users/current/domain-join-suggestions", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+        if let Some(ref param_value) = page_size {
+            local_var_req_builder = local_var_req_builder.query(&[("page_size", &param_value.to_string())]);
+        }
+        if let Some(ref param_value) = page_token {
+            local_var_req_builder = local_var_req_builder.query(&[("page_token", &param_value.to_string())]);
+        }
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("X-API-Key", local_var_value);
+        };
+        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1ListDomainJoinSuggestionsResponse`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1ListDomainJoinSuggestionsResponse`")))),
+            }
+        } else {
+            let local_var_entity: Option<ListDomainJoinSuggestionsError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
     async fn remove_domain(&self,  params: RemoveDomainParams ) -> Result<serde_json::Value, Error<RemoveDomainError>> {
         
         let RemoveDomainParams {
@@ -349,7 +488,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{org_id}/domain", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/domain", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
         if let Some(ref param_value) = user_id {
@@ -395,11 +534,11 @@ impl CustomDomainsApi for CustomDomainsApiClient {
         }
     }
 
-    async fn set_domain_auto_join(&self,  params: SetDomainAutoJoinParams ) -> Result<models::AuthV1AutoJoinSetting, Error<SetDomainAutoJoinError>> {
+    async fn set_domain_suggest_join(&self,  params: SetDomainSuggestJoinParams ) -> Result<models::AuthV1SuggestJoinSetting, Error<SetDomainSuggestJoinError>> {
         
-        let SetDomainAutoJoinParams {
+        let SetDomainSuggestJoinParams {
             user_org_id,
-            set_auto_join_request,
+            set_suggest_join_request,
         } = params;
         
 
@@ -407,7 +546,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/memberships/{user_org_id}/domain/auto-join", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/domain/suggest-join", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::PUT, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -424,7 +563,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
         if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
             local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
         };
-        local_var_req_builder = local_var_req_builder.json(&set_auto_join_request);
+        local_var_req_builder = local_var_req_builder.json(&set_suggest_join_request);
 
         let local_var_req = local_var_req_builder.build()?;
         let local_var_resp = local_var_client.execute(local_var_req).await?;
@@ -441,11 +580,11 @@ impl CustomDomainsApi for CustomDomainsApiClient {
         if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
             match local_var_content_type {
                 ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1AutoJoinSetting`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1AutoJoinSetting`")))),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AuthV1SuggestJoinSetting`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::AuthV1SuggestJoinSetting`")))),
             }
         } else {
-            let local_var_entity: Option<SetDomainAutoJoinError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<SetDomainSuggestJoinError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -469,18 +608,34 @@ pub enum CreateDomainVerificationError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`CustomDomainsApi::get_domain_auto_join`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum GetDomainAutoJoinError {
-    DefaultResponse(models::GoogleRpcStatus),
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`CustomDomainsApi::get_domain_status`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetDomainStatusError {
+    DefaultResponse(models::GoogleRpcStatus),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`CustomDomainsApi::get_domain_suggest_join`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetDomainSuggestJoinError {
+    DefaultResponse(models::GoogleRpcStatus),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`CustomDomainsApi::join_suggested_organization`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum JoinSuggestedOrganizationError {
+    DefaultResponse(models::GoogleRpcStatus),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`CustomDomainsApi::list_domain_join_suggestions`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum ListDomainJoinSuggestionsError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }
@@ -493,10 +648,10 @@ pub enum RemoveDomainError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`CustomDomainsApi::set_domain_auto_join`]
+/// struct for typed errors of method [`CustomDomainsApi::set_domain_suggest_join`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum SetDomainAutoJoinError {
+pub enum SetDomainSuggestJoinError {
     DefaultResponse(models::GoogleRpcStatus),
     UnknownValue(serde_json::Value),
 }

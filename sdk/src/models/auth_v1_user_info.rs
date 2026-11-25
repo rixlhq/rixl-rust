@@ -33,8 +33,8 @@ pub struct AuthV1UserInfo {
     pub language_code: Option<String>,
     #[serde(rename = "country_code", skip_serializing_if = "Option::is_none")]
     pub country_code: Option<String>,
-    #[serde(rename = "active_org_id", skip_serializing_if = "Option::is_none")]
-    pub active_org_id: Option<String>,
+    #[serde(rename = "last_active_org_id", skip_serializing_if = "Option::is_none")]
+    pub last_active_org_id: Option<String>,
     #[serde(rename = "policies", skip_serializing_if = "Option::is_none")]
     pub policies: Option<Vec<models::AuthV1Policy>>,
     #[serde(rename = "permissions", skip_serializing_if = "Option::is_none")]
@@ -54,7 +54,7 @@ impl AuthV1UserInfo {
             image_id: None,
             language_code: None,
             country_code: None,
-            active_org_id: None,
+            last_active_org_id: None,
             policies: None,
             permissions: None,
         }

@@ -13,8 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1ListMembershipApplicationsRequest {
-    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Box<models::AuthV1UserRequest>>,
     #[serde(rename = "limit", skip_serializing_if = "Option::is_none")]
     pub limit: Option<i32>,
     #[serde(rename = "offset", skip_serializing_if = "Option::is_none")]
@@ -26,7 +24,6 @@ pub struct AuthV1ListMembershipApplicationsRequest {
 impl AuthV1ListMembershipApplicationsRequest {
     pub fn new() -> AuthV1ListMembershipApplicationsRequest {
         AuthV1ListMembershipApplicationsRequest {
-            user: None,
             limit: None,
             offset: None,
             state: None,

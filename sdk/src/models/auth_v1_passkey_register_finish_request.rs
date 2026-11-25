@@ -18,8 +18,8 @@ use serde_with::serde_as;
 pub struct AuthV1PasskeyRegisterFinishRequest {
     #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
     pub user_id: Option<String>,
-    #[serde(rename = "session_id", skip_serializing_if = "Option::is_none")]
-    pub session_id: Option<String>,
+    #[serde(rename = "challenge_id", skip_serializing_if = "Option::is_none")]
+    pub challenge_id: Option<String>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     #[serde_as(as = "Option<serde_with::base64::Base64>")]
@@ -31,7 +31,7 @@ impl AuthV1PasskeyRegisterFinishRequest {
     pub fn new() -> AuthV1PasskeyRegisterFinishRequest {
         AuthV1PasskeyRegisterFinishRequest {
             user_id: None,
-            session_id: None,
+            challenge_id: None,
             name: None,
             credential: None,
         }
