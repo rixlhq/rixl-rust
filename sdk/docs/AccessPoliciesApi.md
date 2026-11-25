@@ -4,22 +4,22 @@ All URIs are relative to *https://api.rixl.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**attach_policy**](AccessPoliciesApi.md#attach_policy) | **POST** /auth/v1/organizations/{org_id}/policies/{policy_id}/attachments | AttachPolicy
-[**create_policy**](AccessPoliciesApi.md#create_policy) | **POST** /auth/v1/organizations/{org_id}/policies | CreatePolicy
-[**delete_policy**](AccessPoliciesApi.md#delete_policy) | **DELETE** /auth/v1/organizations/{org_id}/policies/{policy_id} | DeletePolicy
-[**detach_policy**](AccessPoliciesApi.md#detach_policy) | **DELETE** /auth/v1/organizations/{org_id}/policies/attachments/{attachment_id} | DetachPolicy
-[**get_policy**](AccessPoliciesApi.md#get_policy) | **GET** /auth/v1/organizations/{org_id}/policies/{policy_id} | GetPolicy
-[**list_permission_registry**](AccessPoliciesApi.md#list_permission_registry) | **GET** /auth/v1/organizations/{org_id}/policies/permissions | ListPermissionRegistry
+[**attach_policy**](AccessPoliciesApi.md#attach_policy) | **POST** /auth/v1/organizations/{user_org_id}/policies/{policy_id}/attachments | AttachPolicy
+[**create_policy**](AccessPoliciesApi.md#create_policy) | **POST** /auth/v1/organizations/{user_org_id}/policies | CreatePolicy
+[**delete_policy**](AccessPoliciesApi.md#delete_policy) | **DELETE** /auth/v1/organizations/{user_org_id}/policies/{policy_id} | DeletePolicy
+[**detach_policy**](AccessPoliciesApi.md#detach_policy) | **DELETE** /auth/v1/organizations/{user_org_id}/policies/attachments/{attachment_id} | DetachPolicy
+[**get_policy**](AccessPoliciesApi.md#get_policy) | **GET** /auth/v1/organizations/{user_org_id}/policies/{policy_id} | GetPolicy
+[**list_permission_registry**](AccessPoliciesApi.md#list_permission_registry) | **GET** /auth/v1/organizations/{user_org_id}/policies/permissions | ListPermissionRegistry
 [**list_policies**](AccessPoliciesApi.md#list_policies) | **GET** /auth/v1/organizations/{org_id}/policies | ListPolicies
-[**list_policy_attachments**](AccessPoliciesApi.md#list_policy_attachments) | **GET** /auth/v1/organizations/{org_id}/policies/{policy_id}/attachments | ListPolicyAttachments
-[**list_user_policies**](AccessPoliciesApi.md#list_user_policies) | **GET** /auth/v1/organizations/{org_id}/members/{member_id}/policies | ListUserPolicies
-[**update_policy**](AccessPoliciesApi.md#update_policy) | **PUT** /auth/v1/organizations/{org_id}/policies/{policy_id} | UpdatePolicy
+[**list_policy_attachments**](AccessPoliciesApi.md#list_policy_attachments) | **GET** /auth/v1/organizations/{user_org_id}/policies/{policy_id}/attachments | ListPolicyAttachments
+[**list_user_policies**](AccessPoliciesApi.md#list_user_policies) | **GET** /auth/v1/organizations/{user_org_id}/members/{member_id}/policies | ListUserPolicies
+[**update_policy**](AccessPoliciesApi.md#update_policy) | **PUT** /auth/v1/organizations/{user_org_id}/policies/{policy_id} | UpdatePolicy
 
 
 
 ## attach_policy
 
-> models::AuthV1PolicyAttachment attach_policy(org_id, policy_id, attach_policy_request)
+> models::AuthV1PolicyAttachment attach_policy(user_org_id, policy_id, attach_policy_request)
 AttachPolicy
 
 ### Parameters
@@ -27,7 +27,7 @@ AttachPolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **policy_id** | **String** |  | [required] |
 **attach_policy_request** | [**AttachPolicyRequest**](AttachPolicyRequest.md) |  | [required] |
 
@@ -49,7 +49,7 @@ Name | Type | Description  | Required | Notes
 
 ## create_policy
 
-> models::AuthV1Policy create_policy(org_id, create_policy_request)
+> models::AuthV1Policy create_policy(user_org_id, create_policy_request)
 CreatePolicy
 
 ### Parameters
@@ -57,7 +57,7 @@ CreatePolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **create_policy_request** | [**CreatePolicyRequest**](CreatePolicyRequest.md) |  | [required] |
 
 ### Return type
@@ -78,7 +78,7 @@ Name | Type | Description  | Required | Notes
 
 ## delete_policy
 
-> serde_json::Value delete_policy(org_id, policy_id)
+> serde_json::Value delete_policy(user_org_id, policy_id, user_user_id)
 DeletePolicy
 
 ### Parameters
@@ -86,8 +86,9 @@ DeletePolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **policy_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -107,7 +108,7 @@ Name | Type | Description  | Required | Notes
 
 ## detach_policy
 
-> serde_json::Value detach_policy(org_id, attachment_id)
+> serde_json::Value detach_policy(user_org_id, attachment_id, user_user_id)
 DetachPolicy
 
 ### Parameters
@@ -115,8 +116,9 @@ DetachPolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **attachment_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -136,7 +138,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_policy
 
-> models::AuthV1Policy get_policy(org_id, policy_id)
+> models::AuthV1Policy get_policy(user_org_id, policy_id, user_user_id)
 GetPolicy
 
 ### Parameters
@@ -144,8 +146,9 @@ GetPolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **policy_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -165,7 +168,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_permission_registry
 
-> models::AuthV1PermissionRegistryResponse list_permission_registry(org_id, types, limit, offset)
+> models::AuthV1PermissionRegistryResponse list_permission_registry(user_org_id, user_user_id, types, limit, offset)
 ListPermissionRegistry
 
 ### Parameters
@@ -173,7 +176,8 @@ ListPermissionRegistry
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 **types** | Option<[**Vec<String>**](String.md)> |  |  |
 **limit** | Option<**i32**> |  |  |
 **offset** | Option<**i32**> |  |  |
@@ -225,7 +229,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_policy_attachments
 
-> models::AuthV1ListAttachmentsResponse list_policy_attachments(org_id, policy_id)
+> models::AuthV1ListAttachmentsResponse list_policy_attachments(user_org_id, policy_id, user_user_id)
 ListPolicyAttachments
 
 ### Parameters
@@ -233,8 +237,9 @@ ListPolicyAttachments
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **policy_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -254,7 +259,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_user_policies
 
-> models::AuthV1MemberPoliciesResponse list_user_policies(org_id, member_id)
+> models::AuthV1MemberPoliciesResponse list_user_policies(user_org_id, member_id, user_user_id)
 ListUserPolicies
 
 ### Parameters
@@ -262,8 +267,9 @@ ListUserPolicies
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **member_id** | **String** |  | [required] |
+**user_user_id** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -283,7 +289,7 @@ Name | Type | Description  | Required | Notes
 
 ## update_policy
 
-> models::AuthV1Policy update_policy(org_id, policy_id, update_policy_request)
+> models::AuthV1Policy update_policy(user_org_id, policy_id, update_policy_request)
 UpdatePolicy
 
 ### Parameters
@@ -291,7 +297,7 @@ UpdatePolicy
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **policy_id** | **String** |  | [required] |
 **update_policy_request** | [**UpdatePolicyRequest**](UpdatePolicyRequest.md) |  | [required] |
 

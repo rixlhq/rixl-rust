@@ -13,8 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthV1ListPermissionRegistryRequest {
-    #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
-    pub org_id: Option<String>,
+    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
+    pub user: Option<Box<models::AuthV1UserOrgRequest>>,
     #[serde(rename = "types", skip_serializing_if = "Option::is_none")]
     pub types: Option<Vec<String>>,
     #[serde(rename = "limit", skip_serializing_if = "Option::is_none")]
@@ -26,7 +26,7 @@ pub struct AuthV1ListPermissionRegistryRequest {
 impl AuthV1ListPermissionRegistryRequest {
     pub fn new() -> AuthV1ListPermissionRegistryRequest {
         AuthV1ListPermissionRegistryRequest {
-            org_id: None,
+            user: None,
             types: None,
             limit: None,
             offset: None,

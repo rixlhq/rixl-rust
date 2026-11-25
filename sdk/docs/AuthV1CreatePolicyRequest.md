@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**org_id** | Option<**String**> |  | [optional]
+**user** | Option<[**models::AuthV1UserOrgRequest**](AuthV1UserOrgRequest.md)> |  | [optional]
 **name** | Option<**String**> |  | [optional]
 **description** | Option<**String**> |  | [optional]
 **permissions** | Option<**Vec<String>**> |  | [optional]

@@ -25,7 +25,7 @@ pub trait CustomDomainsApi: Send + Sync {
     /// 
     async fn check_domain_verification(&self,  params: CheckDomainVerificationParams ) -> Result<models::AuthV1DomainResponse, Error<CheckDomainVerificationError>>;
 
-    /// POST /auth/v1/organizations/{org_id}/domain
+    /// POST /auth/v1/organizations/{user_org_id}/domain
     ///
     /// 
     async fn create_domain_verification(&self,  params: CreateDomainVerificationParams ) -> Result<models::AuthV1DomainResponse, Error<CreateDomainVerificationError>>;
@@ -55,7 +55,7 @@ pub trait CustomDomainsApi: Send + Sync {
     /// 
     async fn remove_domain(&self,  params: RemoveDomainParams ) -> Result<serde_json::Value, Error<RemoveDomainError>>;
 
-    /// PUT /auth/v1/organizations/{org_id}/domain/suggest-join
+    /// PUT /auth/v1/organizations/{user_org_id}/domain/suggest-join
     ///
     /// 
     async fn set_domain_suggest_join(&self,  params: SetDomainSuggestJoinParams ) -> Result<models::AuthV1SuggestJoinSetting, Error<SetDomainSuggestJoinError>>;
@@ -82,7 +82,7 @@ pub struct CheckDomainVerificationParams {
 /// struct for passing parameters to the method [`CustomDomainsApi::create_domain_verification`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreateDomainVerificationParams {
-    pub org_id: String,
+    pub user_org_id: String,
     pub create_domain_request: models::CreateDomainRequest
 }
 
@@ -123,7 +123,7 @@ pub struct RemoveDomainParams {
 /// struct for passing parameters to the method [`CustomDomainsApi::set_domain_suggest_join`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct SetDomainSuggestJoinParams {
-    pub org_id: String,
+    pub user_org_id: String,
     pub set_suggest_join_request: models::SetSuggestJoinRequest
 }
 
@@ -191,7 +191,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
     async fn create_domain_verification(&self,  params: CreateDomainVerificationParams ) -> Result<models::AuthV1DomainResponse, Error<CreateDomainVerificationError>> {
         
         let CreateDomainVerificationParams {
-            org_id,
+            user_org_id,
             create_domain_request,
         } = params;
         
@@ -200,7 +200,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/domain", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/domain", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -537,7 +537,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
     async fn set_domain_suggest_join(&self,  params: SetDomainSuggestJoinParams ) -> Result<models::AuthV1SuggestJoinSetting, Error<SetDomainSuggestJoinError>> {
         
         let SetDomainSuggestJoinParams {
-            org_id,
+            user_org_id,
             set_suggest_join_request,
         } = params;
         
@@ -546,7 +546,7 @@ impl CustomDomainsApi for CustomDomainsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/domain/suggest-join", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/domain/suggest-join", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::PUT, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {

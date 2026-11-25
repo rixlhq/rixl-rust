@@ -20,32 +20,32 @@ use crate::apis::ContentType;
 #[async_trait]
 pub trait AccessPoliciesApi: Send + Sync {
 
-    /// POST /auth/v1/organizations/{org_id}/policies/{policy_id}/attachments
+    /// POST /auth/v1/organizations/{user_org_id}/policies/{policy_id}/attachments
     ///
     /// 
     async fn attach_policy(&self,  params: AttachPolicyParams ) -> Result<models::AuthV1PolicyAttachment, Error<AttachPolicyError>>;
 
-    /// POST /auth/v1/organizations/{org_id}/policies
+    /// POST /auth/v1/organizations/{user_org_id}/policies
     ///
     /// 
     async fn create_policy(&self,  params: CreatePolicyParams ) -> Result<models::AuthV1Policy, Error<CreatePolicyError>>;
 
-    /// DELETE /auth/v1/organizations/{org_id}/policies/{policy_id}
+    /// DELETE /auth/v1/organizations/{user_org_id}/policies/{policy_id}
     ///
     /// 
     async fn delete_policy(&self,  params: DeletePolicyParams ) -> Result<serde_json::Value, Error<DeletePolicyError>>;
 
-    /// DELETE /auth/v1/organizations/{org_id}/policies/attachments/{attachment_id}
+    /// DELETE /auth/v1/organizations/{user_org_id}/policies/attachments/{attachment_id}
     ///
     /// 
     async fn detach_policy(&self,  params: DetachPolicyParams ) -> Result<serde_json::Value, Error<DetachPolicyError>>;
 
-    /// GET /auth/v1/organizations/{org_id}/policies/{policy_id}
+    /// GET /auth/v1/organizations/{user_org_id}/policies/{policy_id}
     ///
     /// 
     async fn get_policy(&self,  params: GetPolicyParams ) -> Result<models::AuthV1Policy, Error<GetPolicyError>>;
 
-    /// GET /auth/v1/organizations/{org_id}/policies/permissions
+    /// GET /auth/v1/organizations/{user_org_id}/policies/permissions
     ///
     /// 
     async fn list_permission_registry(&self,  params: ListPermissionRegistryParams ) -> Result<models::AuthV1PermissionRegistryResponse, Error<ListPermissionRegistryError>>;
@@ -55,17 +55,17 @@ pub trait AccessPoliciesApi: Send + Sync {
     /// 
     async fn list_policies(&self,  params: ListPoliciesParams ) -> Result<models::AuthV1ListPoliciesResponse, Error<ListPoliciesError>>;
 
-    /// GET /auth/v1/organizations/{org_id}/policies/{policy_id}/attachments
+    /// GET /auth/v1/organizations/{user_org_id}/policies/{policy_id}/attachments
     ///
     /// 
     async fn list_policy_attachments(&self,  params: ListPolicyAttachmentsParams ) -> Result<models::AuthV1ListAttachmentsResponse, Error<ListPolicyAttachmentsError>>;
 
-    /// GET /auth/v1/organizations/{org_id}/members/{member_id}/policies
+    /// GET /auth/v1/organizations/{user_org_id}/members/{member_id}/policies
     ///
     /// 
     async fn list_user_policies(&self,  params: ListUserPoliciesParams ) -> Result<models::AuthV1MemberPoliciesResponse, Error<ListUserPoliciesError>>;
 
-    /// PUT /auth/v1/organizations/{org_id}/policies/{policy_id}
+    /// PUT /auth/v1/organizations/{user_org_id}/policies/{policy_id}
     ///
     /// 
     async fn update_policy(&self,  params: UpdatePolicyParams ) -> Result<models::AuthV1Policy, Error<UpdatePolicyError>>;
@@ -85,7 +85,7 @@ impl AccessPoliciesApiClient {
 /// struct for passing parameters to the method [`AccessPoliciesApi::attach_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct AttachPolicyParams {
-    pub org_id: String,
+    pub user_org_id: String,
     pub policy_id: String,
     pub attach_policy_request: models::AttachPolicyRequest
 }
@@ -93,35 +93,39 @@ pub struct AttachPolicyParams {
 /// struct for passing parameters to the method [`AccessPoliciesApi::create_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct CreatePolicyParams {
-    pub org_id: String,
+    pub user_org_id: String,
     pub create_policy_request: models::CreatePolicyRequest
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::delete_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DeletePolicyParams {
-    pub org_id: String,
-    pub policy_id: String
+    pub user_org_id: String,
+    pub policy_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::detach_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct DetachPolicyParams {
-    pub org_id: String,
-    pub attachment_id: String
+    pub user_org_id: String,
+    pub attachment_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::get_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct GetPolicyParams {
-    pub org_id: String,
-    pub policy_id: String
+    pub user_org_id: String,
+    pub policy_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_permission_registry`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPermissionRegistryParams {
-    pub org_id: String,
+    pub user_org_id: String,
+    pub user_user_id: Option<String>,
     pub types: Option<Vec<String>>,
     pub limit: Option<i32>,
     pub offset: Option<i32>
@@ -137,21 +141,23 @@ pub struct ListPoliciesParams {
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_policy_attachments`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListPolicyAttachmentsParams {
-    pub org_id: String,
-    pub policy_id: String
+    pub user_org_id: String,
+    pub policy_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::list_user_policies`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct ListUserPoliciesParams {
-    pub org_id: String,
-    pub member_id: String
+    pub user_org_id: String,
+    pub member_id: String,
+    pub user_user_id: Option<String>
 }
 
 /// struct for passing parameters to the method [`AccessPoliciesApi::update_policy`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdatePolicyParams {
-    pub org_id: String,
+    pub user_org_id: String,
     pub policy_id: String,
     pub update_policy_request: models::UpdatePolicyRequest
 }
@@ -162,7 +168,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn attach_policy(&self,  params: AttachPolicyParams ) -> Result<models::AuthV1PolicyAttachment, Error<AttachPolicyError>> {
         
         let AttachPolicyParams {
-            org_id,
+            user_org_id,
             policy_id,
             attach_policy_request,
         } = params;
@@ -172,7 +178,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/policies/{policy_id}/attachments", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), policy_id=crate::apis::urlencode(policy_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/policies/{policy_id}/attachments", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), policy_id=crate::apis::urlencode(policy_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -219,7 +225,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn create_policy(&self,  params: CreatePolicyParams ) -> Result<models::AuthV1Policy, Error<CreatePolicyError>> {
         
         let CreatePolicyParams {
-            org_id,
+            user_org_id,
             create_policy_request,
         } = params;
         
@@ -228,7 +234,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/policies", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/policies", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -275,8 +281,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn delete_policy(&self,  params: DeletePolicyParams ) -> Result<serde_json::Value, Error<DeletePolicyError>> {
         
         let DeletePolicyParams {
-            org_id,
+            user_org_id,
             policy_id,
+            user_user_id,
         } = params;
         
 
@@ -284,9 +291,12 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/policies/{policy_id}", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), policy_id=crate::apis::urlencode(policy_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/policies/{policy_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), policy_id=crate::apis::urlencode(policy_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -330,8 +340,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn detach_policy(&self,  params: DetachPolicyParams ) -> Result<serde_json::Value, Error<DetachPolicyError>> {
         
         let DetachPolicyParams {
-            org_id,
+            user_org_id,
             attachment_id,
+            user_user_id,
         } = params;
         
 
@@ -339,9 +350,12 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/policies/attachments/{attachment_id}", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), attachment_id=crate::apis::urlencode(attachment_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/policies/attachments/{attachment_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), attachment_id=crate::apis::urlencode(attachment_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -385,8 +399,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn get_policy(&self,  params: GetPolicyParams ) -> Result<models::AuthV1Policy, Error<GetPolicyError>> {
         
         let GetPolicyParams {
-            org_id,
+            user_org_id,
             policy_id,
+            user_user_id,
         } = params;
         
 
@@ -394,9 +409,12 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/policies/{policy_id}", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), policy_id=crate::apis::urlencode(policy_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/policies/{policy_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), policy_id=crate::apis::urlencode(policy_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -440,7 +458,8 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn list_permission_registry(&self,  params: ListPermissionRegistryParams ) -> Result<models::AuthV1PermissionRegistryResponse, Error<ListPermissionRegistryError>> {
         
         let ListPermissionRegistryParams {
-            org_id,
+            user_org_id,
+            user_user_id,
             types,
             limit,
             offset,
@@ -451,9 +470,12 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/policies/permissions", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/policies/permissions", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref param_value) = types {
             local_var_req_builder = match "multi" {
                 "multi" => local_var_req_builder.query(&param_value.into_iter().map(|p| ("types".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
@@ -567,8 +589,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn list_policy_attachments(&self,  params: ListPolicyAttachmentsParams ) -> Result<models::AuthV1ListAttachmentsResponse, Error<ListPolicyAttachmentsError>> {
         
         let ListPolicyAttachmentsParams {
-            org_id,
+            user_org_id,
             policy_id,
+            user_user_id,
         } = params;
         
 
@@ -576,9 +599,12 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/policies/{policy_id}/attachments", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), policy_id=crate::apis::urlencode(policy_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/policies/{policy_id}/attachments", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), policy_id=crate::apis::urlencode(policy_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -622,8 +648,9 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn list_user_policies(&self,  params: ListUserPoliciesParams ) -> Result<models::AuthV1MemberPoliciesResponse, Error<ListUserPoliciesError>> {
         
         let ListUserPoliciesParams {
-            org_id,
+            user_org_id,
             member_id,
+            user_user_id,
         } = params;
         
 
@@ -631,9 +658,12 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/members/{member_id}/policies", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), member_id=crate::apis::urlencode(member_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/members/{member_id}/policies", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), member_id=crate::apis::urlencode(member_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref param_value) = user_user_id {
+            local_var_req_builder = local_var_req_builder.query(&[("user.user_id", &param_value.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
         }
@@ -677,7 +707,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
     async fn update_policy(&self,  params: UpdatePolicyParams ) -> Result<models::AuthV1Policy, Error<UpdatePolicyError>> {
         
         let UpdatePolicyParams {
-            org_id,
+            user_org_id,
             policy_id,
             update_policy_request,
         } = params;
@@ -687,7 +717,7 @@ impl AccessPoliciesApi for AccessPoliciesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/organizations/{org_id}/policies/{policy_id}", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id), policy_id=crate::apis::urlencode(policy_id));
+        let local_var_uri_str = format!("{}/auth/v1/organizations/{user_org_id}/policies/{policy_id}", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id), policy_id=crate::apis::urlencode(policy_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::PUT, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {

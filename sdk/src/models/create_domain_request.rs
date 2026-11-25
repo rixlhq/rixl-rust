@@ -13,6 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateDomainRequest {
+    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
+    pub user: Option<Box<models::UserOrgRequest>>,
     #[serde(rename = "domain", skip_serializing_if = "Option::is_none")]
     pub domain: Option<String>,
 }
@@ -20,6 +22,7 @@ pub struct CreateDomainRequest {
 impl CreateDomainRequest {
     pub fn new() -> CreateDomainRequest {
         CreateDomainRequest {
+            user: None,
             domain: None,
         }
     }

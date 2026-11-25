@@ -25,7 +25,7 @@ pub trait NotificationPreferencesApi: Send + Sync {
     /// 
     async fn get_notification_preferences(&self,  params: GetNotificationPreferencesParams ) -> Result<models::AuthV1NotificationPreferences, Error<GetNotificationPreferencesError>>;
 
-    /// PATCH /auth/v1/notifications/{org_id}/preferences
+    /// PATCH /auth/v1/notifications/{user_org_id}/preferences
     ///
     /// 
     async fn update_notification_preference(&self,  params: UpdateNotificationPreferenceParams ) -> Result<models::AuthV1NotificationPreference, Error<UpdateNotificationPreferenceError>>;
@@ -52,7 +52,7 @@ pub struct GetNotificationPreferencesParams {
 /// struct for passing parameters to the method [`NotificationPreferencesApi::update_notification_preference`]
 #[derive(Clone, Debug, ::bon::Builder)]
 pub struct UpdateNotificationPreferenceParams {
-    pub org_id: String,
+    pub user_org_id: String,
     pub update_notification_preference_request: models::UpdateNotificationPreferenceRequest
 }
 
@@ -120,7 +120,7 @@ impl NotificationPreferencesApi for NotificationPreferencesApiClient {
     async fn update_notification_preference(&self,  params: UpdateNotificationPreferenceParams ) -> Result<models::AuthV1NotificationPreference, Error<UpdateNotificationPreferenceError>> {
         
         let UpdateNotificationPreferenceParams {
-            org_id,
+            user_org_id,
             update_notification_preference_request,
         } = params;
         
@@ -129,7 +129,7 @@ impl NotificationPreferencesApi for NotificationPreferencesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/auth/v1/notifications/{org_id}/preferences", local_var_configuration.base_path, org_id=crate::apis::urlencode(org_id));
+        let local_var_uri_str = format!("{}/auth/v1/notifications/{user_org_id}/preferences", local_var_configuration.base_path, user_org_id=crate::apis::urlencode(user_org_id));
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {

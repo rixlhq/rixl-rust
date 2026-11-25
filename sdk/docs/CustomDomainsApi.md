@@ -5,13 +5,13 @@ All URIs are relative to *https://api.rixl.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**check_domain_verification**](CustomDomainsApi.md#check_domain_verification) | **POST** /auth/v1/organizations/{org_id}/domain/verify | CheckDomainVerification
-[**create_domain_verification**](CustomDomainsApi.md#create_domain_verification) | **POST** /auth/v1/organizations/{org_id}/domain | CreateDomainVerification
+[**create_domain_verification**](CustomDomainsApi.md#create_domain_verification) | **POST** /auth/v1/organizations/{user_org_id}/domain | CreateDomainVerification
 [**get_domain_status**](CustomDomainsApi.md#get_domain_status) | **GET** /auth/v1/organizations/{org_id}/domain | GetDomainStatus
 [**get_domain_suggest_join**](CustomDomainsApi.md#get_domain_suggest_join) | **GET** /auth/v1/organizations/{org_id}/domain/suggest-join | GetDomainSuggestJoin
 [**join_suggested_organization**](CustomDomainsApi.md#join_suggested_organization) | **POST** /auth/v1/users/current/domain-join-suggestions/join | JoinSuggestedOrganization
 [**list_domain_join_suggestions**](CustomDomainsApi.md#list_domain_join_suggestions) | **GET** /auth/v1/users/current/domain-join-suggestions | ListDomainJoinSuggestions
 [**remove_domain**](CustomDomainsApi.md#remove_domain) | **DELETE** /auth/v1/organizations/{org_id}/domain | RemoveDomain
-[**set_domain_suggest_join**](CustomDomainsApi.md#set_domain_suggest_join) | **PUT** /auth/v1/organizations/{org_id}/domain/suggest-join | SetDomainSuggestJoin
+[**set_domain_suggest_join**](CustomDomainsApi.md#set_domain_suggest_join) | **PUT** /auth/v1/organizations/{user_org_id}/domain/suggest-join | SetDomainSuggestJoin
 
 
 
@@ -46,7 +46,7 @@ Name | Type | Description  | Required | Notes
 
 ## create_domain_verification
 
-> models::AuthV1DomainResponse create_domain_verification(org_id, create_domain_request)
+> models::AuthV1DomainResponse create_domain_verification(user_org_id, create_domain_request)
 CreateDomainVerification
 
 ### Parameters
@@ -54,7 +54,7 @@ CreateDomainVerification
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **create_domain_request** | [**CreateDomainRequest**](CreateDomainRequest.md) |  | [required] |
 
 ### Return type
@@ -219,7 +219,7 @@ Name | Type | Description  | Required | Notes
 
 ## set_domain_suggest_join
 
-> models::AuthV1SuggestJoinSetting set_domain_suggest_join(org_id, set_suggest_join_request)
+> models::AuthV1SuggestJoinSetting set_domain_suggest_join(user_org_id, set_suggest_join_request)
 SetDomainSuggestJoin
 
 ### Parameters
@@ -227,7 +227,7 @@ SetDomainSuggestJoin
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**org_id** | **String** |  | [required] |
+**user_org_id** | **String** |  | [required] |
 **set_suggest_join_request** | [**SetSuggestJoinRequest**](SetSuggestJoinRequest.md) |  | [required] |
 
 ### Return type

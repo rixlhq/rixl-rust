@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**user** | Option<[**models::UserOrgRequest1**](UserOrgRequest1.md)> |  | [optional]
 **category** | Option<[**models::AuthV1NotificationCategory**](AuthV1NotificationCategory.md)> |  | [optional]
 **email_enabled** | Option<**bool**> |  | [optional]
 
