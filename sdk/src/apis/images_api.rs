@@ -398,7 +398,7 @@ impl ImagesApi for ImagesApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateImageUploadError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -406,7 +406,7 @@ pub enum CreateImageUploadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteImageError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -414,7 +414,7 @@ pub enum DeleteImageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetImageError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -422,7 +422,7 @@ pub enum GetImageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListImagesError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -430,7 +430,7 @@ pub enum ListImagesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateImageVisibilityError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

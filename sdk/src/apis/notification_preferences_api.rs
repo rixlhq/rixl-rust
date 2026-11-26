@@ -179,7 +179,7 @@ impl NotificationPreferencesApi for NotificationPreferencesApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetNotificationPreferencesError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -187,7 +187,7 @@ pub enum GetNotificationPreferencesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateNotificationPreferenceError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

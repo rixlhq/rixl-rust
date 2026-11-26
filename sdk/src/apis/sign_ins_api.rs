@@ -407,7 +407,7 @@ impl SignInsApi for SignInsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListSignInsError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -415,7 +415,7 @@ pub enum ListSignInsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum LogoutError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -423,7 +423,7 @@ pub enum LogoutError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum LogoutAllError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -431,7 +431,7 @@ pub enum LogoutAllError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RefreshTokenError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -439,7 +439,7 @@ pub enum RefreshTokenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RevokeOtherSignInsError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -447,7 +447,7 @@ pub enum RevokeOtherSignInsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RevokeSignInError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

@@ -107,7 +107,7 @@ impl EventsApi for EventsApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum TrackEventsError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

@@ -754,7 +754,7 @@ impl WebhooksApi for WebhooksApiClient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateEndpointError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -762,7 +762,7 @@ pub enum CreateEndpointError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteEndpointError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -770,7 +770,7 @@ pub enum DeleteEndpointError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetEndpointError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -778,7 +778,7 @@ pub enum GetEndpointError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListEndpointAttemptsError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -786,7 +786,7 @@ pub enum ListEndpointAttemptsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListEndpointsError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -794,7 +794,7 @@ pub enum ListEndpointsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListEventsError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -802,7 +802,7 @@ pub enum ListEventsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ReplayEventError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -810,7 +810,7 @@ pub enum ReplayEventError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum RotateEndpointSecretError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -818,7 +818,7 @@ pub enum RotateEndpointSecretError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SendTestEventError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -826,7 +826,7 @@ pub enum SendTestEventError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateEndpointError {
-    DefaultResponse(models::GoogleRpcStatus),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

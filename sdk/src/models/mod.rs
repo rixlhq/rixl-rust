@@ -722,8 +722,6 @@ pub mod fps;
 pub use self::fps::Fps;
 pub mod google_protobuf_any;
 pub use self::google_protobuf_any::GoogleProtobufAny;
-pub mod google_rpc_status;
-pub use self::google_rpc_status::GoogleRpcStatus;
 pub mod images_v1_create_image_upload_request;
 pub use self::images_v1_create_image_upload_request::ImagesV1CreateImageUploadRequest;
 pub mod images_v1_delete_image_request;
