@@ -274,6 +274,8 @@ pub mod auth_v1_identity_policies;
 pub use self::auth_v1_identity_policies::AuthV1IdentityPolicies;
 pub mod auth_v1_initiate_email_change_request;
 pub use self::auth_v1_initiate_email_change_request::AuthV1InitiateEmailChangeRequest;
+pub mod auth_v1_internal_org_ids_response;
+pub use self::auth_v1_internal_org_ids_response::AuthV1InternalOrgIdsResponse;
 pub mod auth_v1_invitation;
 pub use self::auth_v1_invitation::AuthV1Invitation;
 pub mod auth_v1_invitation_inviter;

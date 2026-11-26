@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1CreateInvitationRequest {
     #[serde(rename = "org_id", skip_serializing_if = "Option::is_none")]
     pub org_id: Option<String>,
+    /// Trimmed and lowercased before validation as a bare email address. The normalized address must be nonempty and at most 254 UTF-8 bytes, with a local part of at most 64 bytes and a domain containing a dot that is neither leading nor trailing.
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
     #[serde(rename = "role", skip_serializing_if = "Option::is_none")]

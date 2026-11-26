@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1RegisterRequest {
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
+    /// Must contain at least 8 UTF-8 bytes (not 8 characters).
     #[serde(rename = "password", skip_serializing_if = "Option::is_none")]
     pub password: Option<String>,
     #[serde(rename = "country_code", skip_serializing_if = "Option::is_none")]

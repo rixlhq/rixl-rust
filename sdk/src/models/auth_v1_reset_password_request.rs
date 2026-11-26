@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1ResetPasswordRequest {
     #[serde(rename = "token", skip_serializing_if = "Option::is_none")]
     pub token: Option<String>,
+    /// Must contain at least 8 UTF-8 bytes (not 8 characters).
     #[serde(rename = "new_password", skip_serializing_if = "Option::is_none")]
     pub new_password: Option<String>,
 }

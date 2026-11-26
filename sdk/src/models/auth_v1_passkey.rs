@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1Passkey {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// At most 64 UTF-8 bytes.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     #[serde(rename = "credential_id", skip_serializing_if = "Option::is_none")]

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | Option<**String**> |  | [optional]
-**name** | Option<**String**> |  | [optional]
+**name** | Option<**String**> | At most 64 UTF-8 bytes. | [optional]
 **credential_id** | Option<**String**> |  | [optional]
 **aaguid** | Option<**String**> |  | [optional]
 **transports** | Option<**Vec<String>**> |  | [optional]

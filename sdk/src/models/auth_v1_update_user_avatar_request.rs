@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1UpdateUserAvatarRequest {
     #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
     pub user_id: Option<String>,
+    /// Trimmed before validation. Empty clears the avatar; otherwise must be a valid base62 image ID.
     #[serde(rename = "image_id", skip_serializing_if = "Option::is_none")]
     pub image_id: Option<String>,
 }

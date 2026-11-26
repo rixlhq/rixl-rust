@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1UpdateUsernameRequest {
     #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
     pub user_id: Option<String>,
+    /// Trimmed and lowercased before validation. The normalized value may contain at most 24 Unicode characters; an empty value is allowed.
     #[serde(rename = "username", skip_serializing_if = "Option::is_none")]
     pub username: Option<String>,
 }

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | Option<**String**> |  | [optional]
-**password** | Option<**String**> |  | [optional]
+**password** | Option<**String**> | Must contain at least 8 UTF-8 bytes (not 8 characters). | [optional]
 **country_code** | Option<**String**> |  | [optional]
 **subscribe_to_blog** | Option<**bool**> |  | [optional]
 

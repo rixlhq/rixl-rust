@@ -20,6 +20,7 @@ pub struct AuthV1PasskeyRegisterFinishRequest {
     pub user_id: Option<String>,
     #[serde(rename = "challenge_id", skip_serializing_if = "Option::is_none")]
     pub challenge_id: Option<String>,
+    /// At most 64 UTF-8 bytes. When renaming, whitespace is trimmed before validation and the result must be nonempty.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     #[serde_as(as = "Option<serde_with::base64::Base64>")]
