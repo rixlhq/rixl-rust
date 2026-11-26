@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | Option<**String**> |  | [optional]
 **email** | Option<**String**> |  | [optional]
-**username** | Option<**String**> |  | [optional]
 **first_name** | Option<**String**> |  | [optional]
 **last_name** | Option<**String**> |  | [optional]
 **email_verified** | Option<**bool**> |  | [optional]

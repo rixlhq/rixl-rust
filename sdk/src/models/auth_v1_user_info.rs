@@ -15,8 +15,6 @@ use serde::{Deserialize, Serialize};
 pub struct AuthV1UserInfo {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    #[serde(rename = "username", skip_serializing_if = "Option::is_none")]
-    pub username: Option<String>,
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
     #[serde(rename = "email_verified", skip_serializing_if = "Option::is_none")]
@@ -45,7 +43,6 @@ impl AuthV1UserInfo {
     pub fn new() -> AuthV1UserInfo {
         AuthV1UserInfo {
             id: None,
-            username: None,
             email: None,
             email_verified: None,
             first_name: None,

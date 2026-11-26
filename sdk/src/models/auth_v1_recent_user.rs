@@ -17,8 +17,6 @@ pub struct AuthV1RecentUser {
     pub id: Option<String>,
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
-    #[serde(rename = "username", skip_serializing_if = "Option::is_none")]
-    pub username: Option<String>,
     #[serde(rename = "first_name", skip_serializing_if = "Option::is_none")]
     pub first_name: Option<String>,
     #[serde(rename = "last_name", skip_serializing_if = "Option::is_none")]
@@ -38,7 +36,6 @@ impl AuthV1RecentUser {
         AuthV1RecentUser {
             id: None,
             email: None,
-            username: None,
             first_name: None,
             last_name: None,
             email_verified: None,

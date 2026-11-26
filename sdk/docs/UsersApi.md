@@ -10,7 +10,6 @@ Method | HTTP request | Description
 [**get_user_info**](UsersApi.md#get_user_info) | **GET** /auth/v1/userinfo | GetUserInfo
 [**update_name**](UsersApi.md#update_name) | **PATCH** /auth/v1/users/current/name | UpdateName
 [**update_user_avatar**](UsersApi.md#update_user_avatar) | **PATCH** /auth/v1/users/current/avatar | UpdateUserAvatar
-[**update_username**](UsersApi.md#update_username) | **PATCH** /auth/v1/users/current/username | UpdateUsername
 
 
 
@@ -170,34 +169,6 @@ Name | Type | Description  | Required | Notes
 ### Return type
 
 [**models::AuthV1UpdateUserAvatarResponse**](auth.v1.UpdateUserAvatarResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## update_username
-
-> models::AuthV1UpdateUsernameResponse update_username(auth_v1_update_username_request)
-UpdateUsername
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**auth_v1_update_username_request** | [**AuthV1UpdateUsernameRequest**](AuthV1UpdateUsernameRequest.md) |  | [required] |
-
-### Return type
-
-[**models::AuthV1UpdateUsernameResponse**](auth.v1.UpdateUsernameResponse.md)
 
 ### Authorization
 

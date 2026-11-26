@@ -22,8 +22,9 @@ pub struct AuthV1UserDeletionPlanEntry {
     /// Set when another member will lose access to the personal org.
     #[serde(rename = "affected_user_id", skip_serializing_if = "Option::is_none")]
     pub affected_user_id: Option<String>,
-    #[serde(rename = "affected_username", skip_serializing_if = "Option::is_none")]
-    pub affected_username: Option<String>,
+    /// The affected member's full name.
+    #[serde(rename = "affected_name", skip_serializing_if = "Option::is_none")]
+    pub affected_name: Option<String>,
 }
 
 impl AuthV1UserDeletionPlanEntry {
@@ -33,7 +34,7 @@ impl AuthV1UserDeletionPlanEntry {
             org_id: None,
             org_name: None,
             affected_user_id: None,
-            affected_username: None,
+            affected_name: None,
         }
     }
 }
